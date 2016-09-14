@@ -1,5 +1,5 @@
 Current:
--set up Include and Source directories
+-confirm that setup works for Release
 -set up one test
 -maybe skim the SFML book
 -plan out C++ classes; try to have many small classes and as little big ones as

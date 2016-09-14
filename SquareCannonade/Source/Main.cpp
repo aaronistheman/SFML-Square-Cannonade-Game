@@ -1,7 +1,12 @@
 #include <SFML/Graphics.hpp>
 
+#include <Game/Test.hpp>
+
 int main()
 {
+  Test test;
+  test.print();
+
   sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
   sf::CircleShape shape(100.f);
   shape.setFillColor(sf::Color::Blue);
