@@ -1,4 +1,5 @@
 Current:
+-try a second test file
 -confirm that setup works for Release
 -set up one test
 -maybe skim the SFML book
