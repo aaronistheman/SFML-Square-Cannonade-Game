@@ -1,0 +1,7 @@
+Current:
+-set up SFML
+-set up one test
+-maybe skim the SFML book
+-plan out C++ classes; try to have many small classes and as little big ones as
+practical
+-figure out implementation steps
