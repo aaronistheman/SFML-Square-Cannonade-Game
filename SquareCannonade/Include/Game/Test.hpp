@@ -4,4 +4,5 @@ class Test
 {
 public:
   void print();
+  int getTwo();
 };
