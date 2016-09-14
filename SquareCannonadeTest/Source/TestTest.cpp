@@ -1,4 +1,4 @@
-#include "Catch.hpp"
+#include <Catch/Catch.hpp>
 #include <Game/Test.hpp>
 
 TEST_CASE("Factorials are computed", "[factorial]") {

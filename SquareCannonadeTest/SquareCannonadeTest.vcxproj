@@ -74,7 +74,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\SquareCannonade\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Include\;..\SquareCannonade\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -94,7 +94,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\SquareCannonade\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Include\;..\SquareCannonade\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -117,11 +117,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\SquareCannonade\Source\Test.cpp" />
-    <ClCompile Include="Setup.cpp" />
-    <ClCompile Include="TestTest.cpp" />
+    <ClCompile Include="Source\Setup.cpp" />
+    <ClCompile Include="Source\TestTest.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Catch.hpp" />
+    <ClInclude Include="Include\Catch.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
