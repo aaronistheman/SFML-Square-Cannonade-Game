@@ -23,9 +23,8 @@ int main()
     {
       if (event.type == sf::Event::Closed)
         window.close();
-      else if (event.type == sf::Event::KeyPressed)
+      /*else if (event.type == sf::Event::KeyPressed)
       {
-        sf::Vector2f position = player.getPosition();
         switch (event.key.code)
         {
         case sf::Keyboard::Left:
@@ -41,9 +40,20 @@ int main()
           position.y += 1.f;
           break;
         }
-        player.setPosition(position);
-      }
+      }*/
     }
+
+    sf::Vector2f position = player.getPosition();
+    float change = 1.f;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+      position.x -= change;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+      position.x += change;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+      position.y -= change;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+      position.y += change;
+    player.setPosition(position);
 
     window.clear();
     window.draw(player);
