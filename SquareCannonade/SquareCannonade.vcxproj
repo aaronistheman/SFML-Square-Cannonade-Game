@@ -127,11 +127,13 @@
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Test.cpp" />
     <ClCompile Include="Source\Test2.cpp" />
+    <ClCompile Include="Source\TitleState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Controllers\Controller.hpp" />
     <ClInclude Include="Include\Game\Test.hpp" />
     <ClInclude Include="Include\Game\Test2.hpp" />
+    <ClInclude Include="Include\Models\TitleState.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />

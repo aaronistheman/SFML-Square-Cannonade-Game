@@ -4,10 +4,15 @@ TRY TO JUST FOCUS ON THE BELOW STEPS, ONE AT A TIME
 
 -fixed time step
 -state stack?
-	-maybe just two states?
-		-1) some explanation of how to play
-		-2) game
-			-however, is option to pause; just disables controller
+	-make TitleState model class with accessible drawables
+		-some explanation of how to move/pause
+	-forfeit the MVC folder organization; readme note;
+	still keep controller separated (just not folder-wise)
+	-make general abstract State; TitleState IS-A State
+	-GameState
+		-move the square when appropriate
+		-pause:
+			-controller stops doing anything
 	-end result: can go from junk title screen to junk
 	game screen
 -figure out MVC

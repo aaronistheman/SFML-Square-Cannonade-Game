@@ -2,12 +2,13 @@
 
 #include <iostream>
 
-void Controller::handleRealTimeInput()
+void Controller::handleRealTimeInput(TitleState &titleState)
 {
-  std::cout << "Controller::handleRealTimeInput()\n";
+  //std::cout << "Controller::handleRealTimeInput()\n";
+  titleState.draw();
 }
 
-void Controller::handleEvent()
+void Controller::handleEvent(TitleState &titleState)
 {
-  std::cout << "Controller::handleEvent()\n";
+  //std::cout << "Controller::handleEvent()\n";
 }

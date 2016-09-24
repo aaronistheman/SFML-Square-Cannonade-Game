@@ -71,9 +71,10 @@ int main()
   handleEvent(currentState);
   */
 
+  TitleState titleState;
   Controller controller;
-  controller.handleRealTimeInput();
-  controller.handleEvent();
+  controller.handleRealTimeInput(titleState);
+  controller.handleEvent(titleState);
 
   int a;
   std::cin >> a;

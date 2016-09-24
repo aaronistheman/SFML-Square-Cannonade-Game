@@ -1,8 +1,10 @@
 #pragma once
 
+#include <Models/TitleState.hpp>
+
 class Controller
 {
 public:
-  void handleRealTimeInput();
-  void handleEvent();
+  void handleRealTimeInput(TitleState &titleState);
+  void handleEvent(TitleState &titleState);
 };
