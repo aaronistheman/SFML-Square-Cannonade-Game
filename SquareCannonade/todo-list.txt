@@ -1,5 +1,26 @@
 Current:
--maybe skim the SFML book
--plan out C++ classes; try to have many small classes and as little big ones as
-practical
--figure out implementation steps
+-make sure the order of the below steps makes sense
+-fixed time step
+-state stack?
+	-maybe just two states?
+		-1) some explanation of how to play
+		-2) game
+-figure out MVC
+	-where does ResourceHandler (give credit) go?
+-SceneNode (probably without parent-child system)
+-scene layers (probably not in the way the book does it)
+-set up static (unmoving) view
+-background (below the platform): texture repeating/scrolling
+-draw/update
+-process movement
+
+Eventually:
+-delete the sample files at some point
+
+OOP Classes (incomplete):
+ResourceHandler
+Application/Game
+Entity
+	Coin
+	Cannon
+	Square
