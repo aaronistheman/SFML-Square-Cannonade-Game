@@ -1,5 +1,8 @@
 Current:
--make sure the order of the below steps makes sense
+
+TRY TO JUST FOCUS ON THE BELOW STEPS, ONE AT A TIME
+
+-set up readme
 -fixed time step
 -state stack?
 	-maybe just two states?
