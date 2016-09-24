@@ -2,14 +2,18 @@ Current:
 
 TRY TO JUST FOCUS ON THE BELOW STEPS, ONE AT A TIME
 
--set up readme
 -fixed time step
 -state stack?
 	-maybe just two states?
 		-1) some explanation of how to play
 		-2) game
+			-however, is option to pause; just disables controller
+	-end result: can go from junk title screen to junk
+	game screen
 -figure out MVC
-	-where does ResourceHandler (give credit) go?
+	-maybe use the basic square example to start making GameView
+	and World classes, then can work on things like
+	separating out the key bindings to other classes
 -SceneNode (probably without parent-child system)
 -scene layers (probably not in the way the book does it)
 -set up static (unmoving) view
