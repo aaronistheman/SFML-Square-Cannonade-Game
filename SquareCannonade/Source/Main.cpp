@@ -2,8 +2,11 @@
 
 #include <Game/Test.hpp>
 #include <Game/Test2.hpp>
+#include <Controllers/Controller.hpp>
 
-int main()
+#include <iostream>
+
+void testPlayer()
 {
   /*Test test;
   test.print();
@@ -25,21 +28,21 @@ int main()
         window.close();
       /*else if (event.type == sf::Event::KeyPressed)
       {
-        switch (event.key.code)
-        {
-        case sf::Keyboard::Left:
-          position.x -= 1.f;
-          break;
-        case sf::Keyboard::Right:
-          position.x += 1.f;
-          break;
-        case sf::Keyboard::Up:
-          position.y -= 1.f;
-          break;
-        case sf::Keyboard::Down:
-          position.y += 1.f;
-          break;
-        }
+      switch (event.key.code)
+      {
+      case sf::Keyboard::Left:
+      position.x -= 1.f;
+      break;
+      case sf::Keyboard::Right:
+      position.x += 1.f;
+      break;
+      case sf::Keyboard::Up:
+      position.y -= 1.f;
+      break;
+      case sf::Keyboard::Down:
+      position.y += 1.f;
+      break;
+      }
       }*/
     }
 
@@ -59,6 +62,21 @@ int main()
     window.draw(player);
     window.display();
   }
+}
+
+int main()
+{
+  /*
+  handleRealTimeInput(currentState);
+  handleEvent(currentState);
+  */
+
+  Controller controller;
+  controller.handleRealTimeInput();
+  controller.handleEvent();
+
+  int a;
+  std::cin >> a;
 
   return 0;
 }
