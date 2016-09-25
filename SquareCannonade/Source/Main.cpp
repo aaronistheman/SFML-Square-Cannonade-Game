@@ -71,13 +71,27 @@ int main()
   handleEvent(currentState);
   */
 
-  TitleState titleState;
+  sf::RenderWindow window(sf::VideoMode(1200, 600), "Square Cannonade");
+
+  /*
+  TitleState titleState(window);
   Controller controller;
   controller.handleRealTimeInput(titleState);
   controller.handleEvent(titleState);
+  */
 
-  int a;
-  std::cin >> a;
+  while (window.isOpen())
+  {
+    sf::Event event;
+    while (window.pollEvent(event))
+    {
+      if (event.type == sf::Event::Closed)
+        window.close();
+    }
+
+    window.clear();
+    window.display();
+  }
 
   return 0;
 }
