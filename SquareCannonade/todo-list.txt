@@ -5,6 +5,7 @@ TRY TO JUST FOCUS ON THE BELOW STEPS, ONE AT A TIME
 -fixed time step
 -state stack?
 	-make TitleState model class with accessible drawables
+		-give the junk text a font
 		-some explanation of how to move/pause
 	-forfeit the MVC folder organization; readme note;
 	still keep controller separated (just not folder-wise)
