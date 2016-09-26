@@ -15,9 +15,13 @@ class TitleState
 
   sf::Texture mBackgroundTexture;
   sf::Sprite mBackgroundSprite;
-  sf::Font mFont;
-  sf::Text mText;
 
+  sf::Font mFont;
+
+  // Instructional texts
+  sf::Text mInstruction1;
+  sf::Text mInstruction2;
+  sf::Text mInstruction3;
 public:
   TitleState(sf::RenderWindow &window);
 

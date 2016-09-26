@@ -1,9 +1,6 @@
 Current:
 --------
 -state stack?
-	-make a serious TitleState
-		-some explanation of how to move/pause
-			-see Tanks game for help
 	-make general abstract State; TitleState IS-A State
 	-GameState
 		-move the square when appropriate

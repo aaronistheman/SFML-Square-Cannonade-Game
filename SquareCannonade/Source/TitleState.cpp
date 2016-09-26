@@ -9,7 +9,9 @@
 
 TitleState::TitleState(sf::RenderWindow &window)
   : mWindow(&window)
-  , mText()
+  , mInstruction1()
+  , mInstruction2()
+  , mInstruction3()
 {
   if (!mBackgroundTexture.loadFromFile("Media/junk.png"))
     std::cerr << "Uh-oh\n";
@@ -17,14 +19,29 @@ TitleState::TitleState(sf::RenderWindow &window)
 
   if (!mFont.loadFromFile("Media/Sansation.ttf"))
     std::cerr << "Failed load font\n";
-  mText.setFont(mFont);
-  mText.setString("Welcome");
-  centerOrigin(mText);
-  mText.setPosition(window.getView().getSize() / 2.f);
+
+  mInstruction1.setFont(mFont);
+  mInstruction1.setString("Collect coins and dodge obstacles with arrow keys.");
+  centerOrigin(mInstruction1);
+  mInstruction1.setPosition(window.getView().getSize() / 2.f);
+
+  mInstruction2.setFont(mFont);
+  mInstruction2.setString("Pause with the P key.");
+  centerOrigin(mInstruction2);
+  mInstruction2.setPosition(window.getView().getSize() / 2.f
+    + sf::Vector2f(0.f, 30.f));
+
+  mInstruction3.setFont(mFont);
+  mInstruction3.setString("Continue with Enter key.");
+  centerOrigin(mInstruction3);
+  mInstruction3.setPosition(window.getView().getSize() / 2.f
+    + sf::Vector2f(0.f, 60.f));
 }
 
 void TitleState::draw()
 {
-  mWindow->draw(mText);
+  mWindow->draw(mInstruction1);
+  mWindow->draw(mInstruction2);
+  mWindow->draw(mInstruction3);
   // mWindow->draw(mBackgroundSprite);
 }
