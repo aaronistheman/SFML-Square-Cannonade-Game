@@ -1,16 +1,20 @@
 Current:
 --------
--fixed time step
 -state stack?
 	-make a serious TitleState
 		-some explanation of how to move/pause
+			-see Tanks game for help
 	-make general abstract State; TitleState IS-A State
 	-GameState
 		-move the square when appropriate
 		-pause:
 			-controller stops doing anything
-	-end result: can go from junk title screen to junk
-	game screen
+	-add handleEvent() for each state, and make it possible
+	to go from junk title screen to junk game screen
+-ResourceHandler
+	-import classes and cite sources
+	-apply to TitleState, etc.
+-fixed time step
 -figure out (MV)C
 	-maybe use the basic square example to start making GameView
 	and World classes, then can work on things like

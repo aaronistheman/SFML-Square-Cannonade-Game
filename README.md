@@ -47,7 +47,7 @@ No releases yet. Hopefully will be one by the end of October.
 Helpful Resources
 -----------------
 
-* "SFML Game Development" by by Artur Moreira, Henrik Vogelius
+* "SFML Game Development" by Artur Moreira, Henrik Vogelius
 Hansson, and Jan Haller.
 
 Author

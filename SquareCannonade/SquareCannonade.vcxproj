@@ -128,12 +128,14 @@
     <ClCompile Include="Source\Test.cpp" />
     <ClCompile Include="Source\Test2.cpp" />
     <ClCompile Include="Source\TitleState.cpp" />
+    <ClCompile Include="Source\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Controllers\Controller.hpp" />
     <ClInclude Include="Include\Game\Test.hpp" />
     <ClInclude Include="Include\Game\Test2.hpp" />
     <ClInclude Include="Include\Models\TitleState.hpp" />
+    <ClInclude Include="Include\Utility\Utility.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
