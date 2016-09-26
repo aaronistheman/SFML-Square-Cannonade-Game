@@ -1,14 +1,9 @@
 Current:
-
-TRY TO JUST FOCUS ON THE BELOW STEPS, ONE AT A TIME
-
+--------
 -fixed time step
 -state stack?
-	-make TitleState model class with accessible drawables
-		-give the junk text a font
+	-make a serious TitleState
 		-some explanation of how to move/pause
-	-forfeit the MVC folder organization; readme note;
-	still keep controller separated (just not folder-wise)
 	-make general abstract State; TitleState IS-A State
 	-GameState
 		-move the square when appropriate
@@ -16,7 +11,7 @@ TRY TO JUST FOCUS ON THE BELOW STEPS, ONE AT A TIME
 			-controller stops doing anything
 	-end result: can go from junk title screen to junk
 	game screen
--figure out MVC
+-figure out (MV)C
 	-maybe use the basic square example to start making GameView
 	and World classes, then can work on things like
 	separating out the key bindings to other classes
@@ -28,9 +23,11 @@ TRY TO JUST FOCUS ON THE BELOW STEPS, ONE AT A TIME
 -process movement
 
 Eventually:
--delete the sample files at some point
+-----------
+-delete the sample files and Game folder
 
 OOP Classes (incomplete):
+------------------------
 ResourceHandler
 Application/Game
 Entity

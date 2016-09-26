@@ -15,6 +15,7 @@ class TitleState
 
   sf::Texture mBackgroundTexture;
   sf::Sprite mBackgroundSprite;
+  sf::Font mFont;
   sf::Text mText;
 
 public:
