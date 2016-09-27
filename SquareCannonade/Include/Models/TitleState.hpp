@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Models/State.hpp>
+
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
@@ -9,10 +11,8 @@ namespace sf
   class RenderWindow;
 }
 
-class TitleState
+class TitleState : public State
 {
-  sf::RenderWindow* mWindow;
-
   sf::Texture mBackgroundTexture;
   sf::Sprite mBackgroundSprite;
 

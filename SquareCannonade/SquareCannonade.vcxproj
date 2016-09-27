@@ -125,6 +125,7 @@
   <ItemGroup>
     <ClCompile Include="Source\Controller.cpp" />
     <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\State.cpp" />
     <ClCompile Include="Source\Test.cpp" />
     <ClCompile Include="Source\Test2.cpp" />
     <ClCompile Include="Source\TitleState.cpp" />
@@ -134,6 +135,7 @@
     <ClInclude Include="Include\Controllers\Controller.hpp" />
     <ClInclude Include="Include\Game\Test.hpp" />
     <ClInclude Include="Include\Game\Test2.hpp" />
+    <ClInclude Include="Include\Models\State.hpp" />
     <ClInclude Include="Include\Models\TitleState.hpp" />
     <ClInclude Include="Include\Utility\Utility.hpp" />
   </ItemGroup>

@@ -8,7 +8,7 @@
 #include <iostream>
 
 TitleState::TitleState(sf::RenderWindow &window)
-  : mWindow(&window)
+  : State(window)
   , mInstruction1()
   , mInstruction2()
   , mInstruction3()
