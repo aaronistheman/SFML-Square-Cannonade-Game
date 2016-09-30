@@ -4,6 +4,7 @@
 #include <Game/Test2.hpp>
 #include <Controllers/Controller.hpp>
 #include <Models/TitleState.hpp>
+#include <Models/GameState.hpp>
 
 #include <iostream>
 
@@ -74,7 +75,11 @@ int main()
 
   sf::RenderWindow window(sf::VideoMode(1200, 600), "Square Cannonade");
 
-  TitleState titleState(window);
+  State* state = new TitleState(window);
+  delete state;
+  state = new GameState(window);
+  // TitleState titleState(window);
+
   /*
   Controller controller;
   controller.handleRealTimeInput(titleState);
@@ -91,7 +96,7 @@ int main()
     }
 
     window.clear();
-    titleState.draw();
+    state->draw();
     window.display();
   }
 

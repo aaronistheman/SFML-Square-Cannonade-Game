@@ -1,5 +1,3 @@
-#pragma once
-
 #include <Models/TitleState.hpp>
 #include <Utility/Utility.hpp>
 
