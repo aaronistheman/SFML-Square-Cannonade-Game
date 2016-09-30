@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SFML/Window/Event.hpp>
+
 namespace sf {
   class RenderWindow;
 }
@@ -13,4 +15,5 @@ public:
   State(sf::RenderWindow& window);
 
   virtual void draw() = 0;
+  virtual void handleEvent(const sf::Event& event) = 0;
 };

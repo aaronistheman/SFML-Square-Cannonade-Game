@@ -76,8 +76,8 @@ int main()
   sf::RenderWindow window(sf::VideoMode(1200, 600), "Square Cannonade");
 
   State* state = new TitleState(window);
-  delete state;
-  state = new GameState(window);
+  // delete state;
+  // state = new GameState(window);
   // TitleState titleState(window);
 
   /*
@@ -91,6 +91,8 @@ int main()
     sf::Event event;
     while (window.pollEvent(event))
     {
+      state->handleEvent(event);
+
       if (event.type == sf::Event::Closed)
         window.close();
     }

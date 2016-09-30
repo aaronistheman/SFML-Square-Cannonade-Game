@@ -43,3 +43,12 @@ void TitleState::draw()
   mWindow->draw(mInstruction3);
   // mWindow->draw(mBackgroundSprite);
 }
+
+void TitleState::handleEvent(const sf::Event& event)
+{
+  if (event.type == sf::Event::KeyPressed)
+  {
+    if (event.key.code == sf::Keyboard::Return)
+      std::cout << "Enter was pressed\n";
+  }
+}
