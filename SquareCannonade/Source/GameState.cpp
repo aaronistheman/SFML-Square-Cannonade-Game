@@ -24,7 +24,7 @@ void GameState::draw()
   mWindow->draw(mDummyText);
 }
 
-void GameState::handleEvent(const sf::Event& event)
+bool GameState::handleEvent(const sf::Event& event)
 {
-  return;
+  return true;
 }

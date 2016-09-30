@@ -2,13 +2,12 @@ Current:
 --------
 -state stack?
 	-add handleEvent() for each state
-		-TitleState
-			-make it possible to go from junk title screen to junk game screen
 		-GameState
 			-move the square when appropriate
 			-pause:
 				-controller stops doing anything
 	-fix folder organization (e.g. put states in States folder)
+	-put the state management logic in its own class
 -ResourceHandler
 	-import classes and cite sources
 	-apply to TitleState, etc.

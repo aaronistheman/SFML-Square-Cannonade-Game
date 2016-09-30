@@ -1,4 +1,5 @@
 #include <Models/TitleState.hpp>
+#include <Models/GameState.hpp>
 #include <Utility/Utility.hpp>
 
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -44,11 +45,13 @@ void TitleState::draw()
   // mWindow->draw(mBackgroundSprite);
 }
 
-void TitleState::handleEvent(const sf::Event& event)
+bool TitleState::handleEvent(const sf::Event& event)
 {
   if (event.type == sf::Event::KeyPressed)
   {
     if (event.key.code == sf::Keyboard::Return)
-      std::cout << "Enter was pressed\n";
+    {
+      return false;
+    }
   }
 }

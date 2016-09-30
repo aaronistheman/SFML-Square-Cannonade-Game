@@ -13,8 +13,6 @@ namespace sf
 
 class TitleState : public State
 {
-  // State** mCurrentState;
-
   sf::Texture mBackgroundTexture;
   sf::Sprite mBackgroundSprite;
 
@@ -28,5 +26,5 @@ public:
   TitleState(sf::RenderWindow &window);
 
   virtual void draw();
-  virtual void handleEvent(const sf::Event& event);
+  virtual bool handleEvent(const sf::Event& event);
 };

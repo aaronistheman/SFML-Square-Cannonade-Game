@@ -91,7 +91,14 @@ int main()
     sf::Event event;
     while (window.pollEvent(event))
     {
-      state->handleEvent(event);
+      bool keepState = state->handleEvent(event);
+      if (!keepState)
+      {
+        // Delete the TitleState,
+        // then point the current state at a new GameState
+        delete state;
+        state = new GameState(window);
+      }
 
       if (event.type == sf::Event::Closed)
         window.close();
