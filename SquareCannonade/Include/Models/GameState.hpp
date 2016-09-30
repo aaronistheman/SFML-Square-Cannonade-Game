@@ -18,4 +18,5 @@ public:
   GameState(sf::RenderWindow &window);
 
   virtual void draw();
+  virtual void handleEvent(const sf::Event& event);
 };

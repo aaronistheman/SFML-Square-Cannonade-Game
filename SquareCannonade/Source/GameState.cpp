@@ -23,3 +23,8 @@ void GameState::draw()
 {
   mWindow->draw(mDummyText);
 }
+
+void GameState::handleEvent(const sf::Event& event)
+{
+  return;
+}
