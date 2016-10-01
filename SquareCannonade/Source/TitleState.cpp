@@ -55,3 +55,8 @@ bool TitleState::handleEvent(const sf::Event& event)
     }
   }
 }
+
+void TitleState::handleRealTimeInput()
+{
+  return;
+}

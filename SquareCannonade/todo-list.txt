@@ -1,13 +1,9 @@
 Current:
 --------
--state stack?
-	-add handleEvent() for each state
-		-GameState
-			-move the square when appropriate
-			-pause:
-				-controller stops doing anything
-	-fix folder organization (e.g. put states in States folder)
-	-put the state management logic in its own class
+
+-StateManager class
+-fix folder organization (e.g. put states in States folder);
+no MVC (for now); remove from readme
 -ResourceHandler
 	-import classes and cite sources
 	-apply to TitleState, etc.
@@ -25,7 +21,13 @@ Current:
 
 Eventually:
 -----------
+
 -delete the sample files and Game folder
+
+Considerable:
+-------------
+
+-import StateStack classes from "SFML Game Development" book
 
 OOP Classes (incomplete):
 ------------------------

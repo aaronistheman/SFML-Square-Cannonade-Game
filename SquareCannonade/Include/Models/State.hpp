@@ -16,4 +16,5 @@ public:
 
   virtual void draw() = 0;
   virtual bool handleEvent(const sf::Event& event) = 0;
+  virtual void handleRealTimeInput() = 0;
 };
