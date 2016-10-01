@@ -11,8 +11,18 @@ a square as he/she tries to grab all the coins in a level before
 being defeated by cannons that shoot squares.
 This isn't meant to be a big game.
 
-Features
---------
+Implementation-Specific Features
+--------------------------------
+
+* Separation of controller logic from model/view logic.
+ * I did not separate model logic and view logic, because this would have
+  arguably made the code more messy for not enough benefit.
+  (SFML expects the draw functions to take models as arguments,
+  but those models end up needing draw methods for this to work,
+  so I did not want to force an awkward separation.)
+
+Gameplay-Specific Features
+--------------------------
 
 To be announced.
 
@@ -37,7 +47,7 @@ No releases yet. Hopefully will be one by the end of October.
 Helpful Resources
 -----------------
 
-* "SFML Game Development" by by Artur Moreira, Henrik Vogelius
+* "SFML Game Development" by Artur Moreira, Henrik Vogelius
 Hansson, and Jan Haller.
 
 Author

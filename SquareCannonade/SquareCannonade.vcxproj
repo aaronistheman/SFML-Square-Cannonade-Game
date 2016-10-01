@@ -123,13 +123,28 @@
     <Text Include="todo-list.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Controller.cpp" />
+    <ClCompile Include="Source\GameState.cpp" />
     <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\State.cpp" />
+    <ClCompile Include="Source\StateManager.cpp" />
     <ClCompile Include="Source\Test.cpp" />
     <ClCompile Include="Source\Test2.cpp" />
+    <ClCompile Include="Source\TitleState.cpp" />
+    <ClCompile Include="Source\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Include\Controllers\Controller.hpp" />
     <ClInclude Include="Include\Game\Test.hpp" />
     <ClInclude Include="Include\Game\Test2.hpp" />
+    <ClInclude Include="Include\Models\GameState.hpp" />
+    <ClInclude Include="Include\Models\State.hpp" />
+    <ClInclude Include="Include\Models\StateManager.hpp" />
+    <ClInclude Include="Include\Models\TitleState.hpp" />
+    <ClInclude Include="Include\Utility\Utility.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

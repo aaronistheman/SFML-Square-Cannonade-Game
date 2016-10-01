@@ -1,16 +1,13 @@
 Current:
+--------
 
-TRY TO JUST FOCUS ON THE BELOW STEPS, ONE AT A TIME
-
+-fix folder organization (e.g. put states in States folder);
+no MVC (for now); remove from readme
+-ResourceHandler
+	-import classes and cite sources
+	-apply to TitleState, etc.
 -fixed time step
--state stack?
-	-maybe just two states?
-		-1) some explanation of how to play
-		-2) game
-			-however, is option to pause; just disables controller
-	-end result: can go from junk title screen to junk
-	game screen
--figure out MVC
+-figure out (MV)C
 	-maybe use the basic square example to start making GameView
 	and World classes, then can work on things like
 	separating out the key bindings to other classes
@@ -22,9 +19,18 @@ TRY TO JUST FOCUS ON THE BELOW STEPS, ONE AT A TIME
 -process movement
 
 Eventually:
--delete the sample files at some point
+-----------
+
+-delete the sample files and Game folder
+-remove unused/stub files
+
+Considerable:
+-------------
+
+-import StateStack classes from "SFML Game Development" book
 
 OOP Classes (incomplete):
+------------------------
 ResourceHandler
 Application/Game
 Entity
