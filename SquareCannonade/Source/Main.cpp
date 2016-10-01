@@ -8,17 +8,9 @@
 
 int main()
 {
-  /*
-  handleRealTimeInput(currentState);
-  handleEvent(currentState);
-  */
-
   sf::RenderWindow window(sf::VideoMode(1200, 600), "Square Cannonade");
 
   State* state = new TitleState(window);
-  // delete state;
-  // state = new GameState(window);
-  // TitleState titleState(window);
 
   /*
   Controller controller;
