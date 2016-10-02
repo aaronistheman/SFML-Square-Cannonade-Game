@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Models/State.hpp>
+#include <States/State.hpp>
 
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/Font.hpp>

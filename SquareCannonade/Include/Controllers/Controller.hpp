@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Models/TitleState.hpp>
+#include <States/TitleState.hpp>
 
 class Controller
 {

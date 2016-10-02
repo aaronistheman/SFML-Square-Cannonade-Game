@@ -3,8 +3,8 @@
 #include <Game/Test.hpp>
 #include <Game/Test2.hpp>
 #include <Controllers/Controller.hpp>
-#include <Models/TitleState.hpp>
-#include <Models/GameState.hpp>
+#include <States/TitleState.hpp>
+#include <States/GameState.hpp>
 
 int main()
 {

@@ -1,4 +1,4 @@
-#include <Models/GameState.hpp>
+#include <States/GameState.hpp>
 #include <Utility/Utility.hpp>
 
 #include <SFML/Graphics/RenderWindow.hpp>

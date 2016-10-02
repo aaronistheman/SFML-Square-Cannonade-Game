@@ -1,8 +1,6 @@
 Current:
 --------
 
--fix folder organization (e.g. put states in States folder);
-no MVC (for now); remove from readme
 -ResourceHandler
 	-import classes and cite sources
 	-apply to TitleState, etc.
