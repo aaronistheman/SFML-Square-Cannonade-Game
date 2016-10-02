@@ -11,10 +11,9 @@
 #include <Utility/ResourceIdentifiers.hpp>
 #include <Utility/ResourceHolder.hpp>
 
+#include <SFML/System/Time.hpp>
 #include <SFML/System/NonCopyable.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics/Texture.hpp>
-#include <SFML/Graphics/Font.hpp>
 
 class Application : private sf::NonCopyable
 {
@@ -26,10 +25,18 @@ public:
 private:
   void processInput();
   void render();
-  
+
+  void  updateStatistics(sf::Time dt);
+
 private:
+  static const sf::Time TimePerFrame;
+
   sf::RenderWindow mWindow;
   TextureHolder mTextures;
   FontHolder mFonts;
   State* mState;
+
+  sf::Text				mStatisticsText;
+  sf::Time				mStatisticsUpdateTime;
+  std::size_t				mStatisticsNumFrames;
 };
