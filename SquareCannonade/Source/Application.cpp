@@ -8,7 +8,7 @@
 const sf::Time Application::TimePerFrame = sf::seconds(1.f / 60.f);
 
 Application::Application()
-  : mWindow(sf::VideoMode(1200, 600), "Square Cannonade")
+  : mWindow(sf::VideoMode(1200, 600), "Square Cannonade", sf::Style::Close)
   , mTextures()
   , mFonts()
   , mStatisticsText()

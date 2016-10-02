@@ -3,8 +3,6 @@ Current:
 
 -other general things
 	-Context class?
-	-remove Controller class/folder?
-	-fix window type
 	-key press lag
 	-etc.
 -SceneNode (probably without parent-child system)

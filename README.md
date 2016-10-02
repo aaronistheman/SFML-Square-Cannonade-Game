@@ -39,8 +39,10 @@ Releases
 No releases yet. Hopefully will be one by the end of October.
 
 
-Helpful Resources
------------------
+Acknowledgements
+----------------
+
+* Developers of the SFML library.
 
 * "SFML Game Development" by Artur Moreira, Henrik Vogelius
 Hansson, and Jan Haller. I borrowed certain classes (e.g.

@@ -5,7 +5,6 @@
  *   Jan Haller
  */
 
-#include <Controllers/Controller.hpp>
 #include <States/TitleState.hpp>
 #include <States/GameState.hpp>
 #include <Utility/ResourceIdentifiers.hpp>
