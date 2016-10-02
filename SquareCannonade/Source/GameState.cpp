@@ -1,18 +1,17 @@
 #include <States/GameState.hpp>
 #include <Utility/Utility.hpp>
+#include <Utility/ResourceHolder.hpp>
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
 #include <iostream>
 
-GameState::GameState(sf::RenderWindow &window)
+GameState::GameState(sf::RenderWindow &window, const TextureHolder &textures)
   : State(window)
-  // , mDummyText()
-  // , mDummyFont()
-  , mPlayer(sf::Vector2f(15, 15))
+  , mPlayer(textures.get(Textures::Test))
   , mIsPaused(false)
 {
-  mPlayer.setFillColor(sf::Color::Blue);
+  mPlayer.setPosition(sf::Vector2f(15, 15));
   /*
   if (!mDummyFont.loadFromFile("Media/Sansation.ttf"))
     std::cerr << "Failed load font\n";

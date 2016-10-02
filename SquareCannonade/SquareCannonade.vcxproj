@@ -124,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
+    <None Include="Include\Utility\ResourceHolder.inl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Controller.cpp" />
@@ -144,6 +145,8 @@
     <ClInclude Include="Include\States\State.hpp" />
     <ClInclude Include="Include\States\StateManager.hpp" />
     <ClInclude Include="Include\States\TitleState.hpp" />
+    <ClInclude Include="Include\Utility\ResourceHolder.hpp" />
+    <ClInclude Include="Include\Utility\ResourceIdentifiers.hpp" />
     <ClInclude Include="Include\Utility\Utility.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

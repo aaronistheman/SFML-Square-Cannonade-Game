@@ -43,7 +43,8 @@ Helpful Resources
 -----------------
 
 * "SFML Game Development" by Artur Moreira, Henrik Vogelius
-Hansson, and Jan Haller.
+Hansson, and Jan Haller. I borrowed the ResourceHolder class
+from the sample source code associated with this book.
 
 Author
 ------

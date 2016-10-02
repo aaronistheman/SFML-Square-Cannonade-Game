@@ -1,36 +1,28 @@
 #include <States/TitleState.hpp>
 #include <States/GameState.hpp>
 #include <Utility/Utility.hpp>
+#include <Utility/ResourceHolder.hpp>
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
 #include <iostream>
 
-TitleState::TitleState(sf::RenderWindow &window)
+TitleState::TitleState(sf::RenderWindow &window, const FontHolder &fonts,
+  const TextureHolder &textures)
   : State(window)
-  , mInstruction1()
-  , mInstruction2()
-  , mInstruction3()
+  , mInstruction1("", fonts.get(Fonts::Main))
+  , mInstruction2("", fonts.get(Fonts::Main))
+  , mInstruction3("", fonts.get(Fonts::Main))
 {
-  if (!mBackgroundTexture.loadFromFile("Media/junk.png"))
-    std::cerr << "Uh-oh\n";
-  mBackgroundSprite.setTexture(mBackgroundTexture);
-
-  if (!mFont.loadFromFile("Media/Sansation.ttf"))
-    std::cerr << "Failed load font\n";
-
-  mInstruction1.setFont(mFont);
   mInstruction1.setString("Collect coins and dodge obstacles with arrow keys.");
   centerOrigin(mInstruction1);
   mInstruction1.setPosition(window.getView().getSize() / 2.f);
 
-  mInstruction2.setFont(mFont);
   mInstruction2.setString("Pause with the P key.");
   centerOrigin(mInstruction2);
   mInstruction2.setPosition(window.getView().getSize() / 2.f
     + sf::Vector2f(0.f, 30.f));
 
-  mInstruction3.setFont(mFont);
   mInstruction3.setString("Continue with Enter key.");
   centerOrigin(mInstruction3);
   mInstruction3.setPosition(window.getView().getSize() / 2.f

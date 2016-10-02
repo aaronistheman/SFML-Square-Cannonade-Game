@@ -5,12 +5,20 @@
 #include <Controllers/Controller.hpp>
 #include <States/TitleState.hpp>
 #include <States/GameState.hpp>
+#include <Utility/ResourceHolder.hpp>
+#include <Utility/ResourceIdentifiers.hpp>
 
 int main()
 {
   sf::RenderWindow window(sf::VideoMode(1200, 600), "Square Cannonade");
 
-  State* state = new TitleState(window);
+  TextureHolder textures;
+  textures.load(Textures::Test, "Media/junk.png");
+
+  FontHolder fonts;
+  fonts.load(Fonts::Main, "Media/Sansation.ttf");
+
+  State* state = new TitleState(window, fonts, textures);
 
   /*
   Controller controller;
@@ -29,7 +37,7 @@ int main()
         // Delete the TitleState,
         // then point the current state at a new GameState
         delete state;
-        state = new GameState(window);
+        state = new GameState(window, textures);
       }
       else
         state->handleRealTimeInput();
