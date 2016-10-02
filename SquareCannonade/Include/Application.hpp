@@ -18,12 +18,18 @@
 
 class Application : private sf::NonCopyable
 {
-  sf::RenderWindow mWindow;
-  TextureHolder mTextures;
-  FontHolder mFonts;
-  State* mState;
 public:
   Application();
 
   void run();
+
+private:
+  void processInput();
+  void render();
+  
+private:
+  sf::RenderWindow mWindow;
+  TextureHolder mTextures;
+  FontHolder mFonts;
+  State* mState;
 };
