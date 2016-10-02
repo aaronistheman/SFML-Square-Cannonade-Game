@@ -1,15 +1,12 @@
-#include <SFML/Graphics.hpp>
-
+#include <Application.hpp>
 #include <Game/Test.hpp>
 #include <Game/Test2.hpp>
-#include <Controllers/Controller.hpp>
-#include <States/TitleState.hpp>
-#include <States/GameState.hpp>
-#include <Utility/ResourceHolder.hpp>
-#include <Utility/ResourceIdentifiers.hpp>
 
 int main()
 {
+  Application app;
+  app.run();
+  /*
   sf::RenderWindow window(sf::VideoMode(1200, 600), "Square Cannonade");
 
   TextureHolder textures;
@@ -19,13 +16,13 @@ int main()
   fonts.load(Fonts::Main, "Media/Sansation.ttf");
 
   State* state = new TitleState(window, fonts, textures);
-
+  */
   /*
   Controller controller;
   controller.handleRealTimeInput(titleState);
   controller.handleEvent(titleState);
   */
-
+  /*
   while (window.isOpen())
   {
     sf::Event event;
@@ -50,6 +47,6 @@ int main()
     state->draw();
     window.display();
   }
-
+  */
   return 0;
 }

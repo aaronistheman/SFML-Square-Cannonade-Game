@@ -2,8 +2,10 @@ Current:
 --------
 
 -other general things
-	-general Application class
-	-fixed time step; update statistics
+	-import Main
+	-rest of Application class
+		-fixed time step; update statistics
+	-key press lag
 	-Context class?
 	-etc.
 -SceneNode (probably without parent-child system)
