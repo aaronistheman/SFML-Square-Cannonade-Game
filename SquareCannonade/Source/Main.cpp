@@ -34,7 +34,7 @@ int main()
         // Delete the TitleState,
         // then point the current state at a new GameState
         delete state;
-        state = new GameState(window);
+        state = new GameState(window, textures);
       }
       else
         state->handleRealTimeInput();
