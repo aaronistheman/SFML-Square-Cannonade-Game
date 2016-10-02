@@ -2,11 +2,11 @@ Current:
 --------
 
 -other general things
-	-import Main
 	-rest of Application class
 		-fixed time step; update statistics
 	-key press lag
 	-Context class?
+	-remove Controller class/folder?
 	-etc.
 -SceneNode (probably without parent-child system)
 -scene layers (probably not in the way the book does it)
