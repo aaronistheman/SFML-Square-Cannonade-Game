@@ -2,12 +2,10 @@ Current:
 --------
 
 -other general things
-	-rest of Application class
-		-fixed time step
-	-key press lag
 	-Context class?
 	-remove Controller class/folder?
 	-fix window type
+	-key press lag
 	-etc.
 -SceneNode (probably without parent-child system)
 -scene layers (probably not in the way the book does it)

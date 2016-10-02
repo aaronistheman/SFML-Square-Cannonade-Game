@@ -36,7 +36,12 @@ void Application::run()
     sf::Time dt = clock.restart();
     timeSinceLastUpdate += dt;
 
-    processInput();
+    while (timeSinceLastUpdate > TimePerFrame)
+    {
+      timeSinceLastUpdate -= TimePerFrame;
+
+      processInput();
+    }
 
     updateStatistics(dt);
     render();
