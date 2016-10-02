@@ -12,10 +12,13 @@ int main()
 {
   sf::RenderWindow window(sf::VideoMode(1200, 600), "Square Cannonade");
 
-  State* state = new TitleState(window);
-
   TextureHolder textures;
   textures.load(Textures::Test, "Media/junk.png");
+
+  FontHolder fonts;
+  fonts.load(Fonts::Main, "Media/Sansation.ttf");
+
+  State* state = new TitleState(window, fonts, textures);
 
   /*
   Controller controller;

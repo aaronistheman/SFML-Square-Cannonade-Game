@@ -1,9 +1,6 @@
 Current:
 --------
 
--ResourceHandler
-	-apply to TitleState, GameState
-	-FontHolder
 -other general things
 	-general Application class
 	-fixed time step; update statistics
