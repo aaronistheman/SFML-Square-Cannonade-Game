@@ -2,13 +2,12 @@ Current:
 --------
 
 -ResourceHandler
-	-import classes and cite sources
-	-apply to TitleState, etc.
--fixed time step
--figure out (MV)C
-	-maybe use the basic square example to start making GameView
-	and World classes, then can work on things like
-	separating out the key bindings to other classes
+	-apply to TitleState, GameState
+	-FontHolder, TextureHolder
+-other general things
+	-general Application class
+	-fixed time step; update statistics
+	-etc.
 -SceneNode (probably without parent-child system)
 -scene layers (probably not in the way the book does it)
 -set up static (unmoving) view

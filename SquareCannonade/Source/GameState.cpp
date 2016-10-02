@@ -7,12 +7,12 @@
 
 GameState::GameState(sf::RenderWindow &window)
   : State(window)
-  // , mDummyText()
-  // , mDummyFont()
-  , mPlayer(sf::Vector2f(15, 15))
   , mIsPaused(false)
 {
-  mPlayer.setFillColor(sf::Color::Blue);
+  if (!mTexture.loadFromFile("Media/junk.png"))
+    std::cerr << "Uh-oh\n";
+  mPlayer.setTexture(mTexture);
+  mPlayer.setPosition(sf::Vector2f(15, 15));
   /*
   if (!mDummyFont.loadFromFile("Media/Sansation.ttf"))
     std::cerr << "Failed load font\n";
