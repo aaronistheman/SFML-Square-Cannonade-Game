@@ -27,6 +27,7 @@ they navigate to the player
 Considerable:
 -------------
 
+-why does State store a pointer--not a reference--to the window?
 -could only render squares within a certain distance of any entity,
 then make the rest dark, so the player would have to be careful to
 avoid holes

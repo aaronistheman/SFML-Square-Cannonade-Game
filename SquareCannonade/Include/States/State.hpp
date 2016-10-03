@@ -9,7 +9,7 @@ namespace sf {
 class State
 {
 protected:
-  sf::RenderWindow* mWindow;
+  sf::RenderWindow* mWindow; // isn't destroyed by State
 
 public:
   State(sf::RenderWindow& window);

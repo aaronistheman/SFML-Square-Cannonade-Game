@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Utility/ResourceIdentifiers.hpp>
+#include <Game/Player.hpp>
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
@@ -16,6 +17,6 @@ public:
 
 private:
   sf::RenderWindow&   mWindow;
-  sf::Sprite mPlayer;
+  Player mPlayer;
   bool mIsPaused;
 };
