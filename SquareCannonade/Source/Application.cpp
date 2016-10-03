@@ -15,6 +15,8 @@ Application::Application()
   , mStatisticsUpdateTime()
   , mStatisticsNumFrames(0)
 {
+  mWindow.setKeyRepeatEnabled(false);
+
   mTextures.load(Textures::Test, "Media/junk.png");
 
   mFonts.load(Fonts::Main, "Media/Sansation.ttf");
@@ -41,6 +43,7 @@ void Application::run()
       timeSinceLastUpdate -= TimePerFrame;
 
       processInput();
+      update();
     }
 
     updateStatistics(dt);
@@ -76,6 +79,11 @@ void Application::render()
   mWindow.draw(mStatisticsText);
   mWindow.display();
 } // render()
+
+void Application::update()
+{
+  mState->update();
+}
 
 void Application::updateStatistics(sf::Time dt)
 {

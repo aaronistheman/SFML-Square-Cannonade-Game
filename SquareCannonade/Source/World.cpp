@@ -16,6 +16,11 @@ void World::draw()
   mWindow.draw(mPlayer);
 }
 
+void World::update()
+{
+  mPlayer.update();
+}
+
 bool World::handleEvent(const sf::Event& event)
 {
   if (event.type == sf::Event::KeyPressed)
@@ -31,17 +36,10 @@ void World::handleRealTimeInput()
 {
   if (!mIsPaused)
   {
-    sf::Vector2f position = mPlayer.getPosition();
-    float change = 1.f;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-      position.x -= change;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-      position.x += change;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-      position.y -= change;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-      position.y += change;
-    mPlayer.setPosition(position);
+    mPlayer.setIsMovingUp(sf::Keyboard::isKeyPressed(sf::Keyboard::Up));
+    mPlayer.setIsMovingDown(sf::Keyboard::isKeyPressed(sf::Keyboard::Down));
+    mPlayer.setIsMovingLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Left));
+    mPlayer.setIsMovingRight(sf::Keyboard::isKeyPressed(sf::Keyboard::Right));
   }
 
   return;

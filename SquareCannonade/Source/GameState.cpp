@@ -4,8 +4,6 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
-#include <iostream>
-
 GameState::GameState(sf::RenderWindow &window, const TextureHolder &textures)
   : State(window)
   , mWorld(window, textures)
@@ -15,6 +13,11 @@ GameState::GameState(sf::RenderWindow &window, const TextureHolder &textures)
 void GameState::draw()
 {
   mWorld.draw();
+}
+
+void GameState::update()
+{
+  mWorld.update();
 }
 
 bool GameState::handleEvent(const sf::Event& event)

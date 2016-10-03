@@ -3,10 +3,8 @@ Current:
 
 -player movement (use my spacecraft game for reference)
 	-transfer input-handling over
-		-set flags in handle input
-		-react to these flags' values in update()
-		-probably need to do the window thing
 		-incorporate TimePerFrame in update()
+		-make player's speed non-local
 	-center player's origin
 -set up static (unmoving) view
 -background (below the platform): texture repeating/scrolling
@@ -18,6 +16,7 @@ Current:
 Eventually:
 -----------
 
+-remove lingering includes of iostream
 -delete the sample files and Game folder
 -remove unused/stub files
 -use A* pathfinding algorithm to have enemies avoid holes as

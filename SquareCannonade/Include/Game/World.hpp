@@ -12,6 +12,7 @@ public:
   World(sf::RenderWindow &window, const TextureHolder &textures);
 
   virtual void draw();
+  virtual void update();
   virtual bool handleEvent(const sf::Event& event);
   virtual void handleRealTimeInput();
 
