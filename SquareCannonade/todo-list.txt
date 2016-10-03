@@ -2,12 +2,11 @@ Current:
 --------
 
 -player movement (use my spacecraft game for reference)
-	-try:
-		-removing Player initializion in World
-		-remove States parameter
 	-transfer input-handling over
 		-set flags in handle input
 		-react to these flags' values in update()
+		-probably need to do the window thing
+		-incorporate TimePerFrame in update()
 	-center player's origin
 -set up static (unmoving) view
 -background (below the platform): texture repeating/scrolling

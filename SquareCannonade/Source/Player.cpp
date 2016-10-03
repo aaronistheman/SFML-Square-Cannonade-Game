@@ -10,8 +10,25 @@ Player::Player()
   mSprite.setFillColor(sf::Color::Blue);
 }
 
-void Player::update()
+void Player::setIsMovingLeft(bool b)
 {
+  mIsMovingLeft = b;
+}
+
+void Player::setIsMovingRight(bool b)
+{
+  mIsMovingRight = b;
+}
+
+void Player::setIsMovingUp(bool b)
+{
+  mIsMovingUp = b;
+}
+
+void Player::setIsMovingDown(bool b)
+{
+  mIsMovingDown = b;
+}
 
 }
 
