@@ -131,6 +131,7 @@
     <ClCompile Include="Source\Entity.cpp" />
     <ClCompile Include="Source\GameState.cpp" />
     <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\State.cpp" />
     <ClCompile Include="Source\StateManager.cpp" />
     <ClCompile Include="Source\Test.cpp" />
@@ -142,6 +143,7 @@
   <ItemGroup>
     <ClInclude Include="Include\Application.hpp" />
     <ClInclude Include="Include\Game\Entity.hpp" />
+    <ClInclude Include="Include\Game\Player.hpp" />
     <ClInclude Include="Include\Game\Test.hpp" />
     <ClInclude Include="Include\Game\Test2.hpp" />
     <ClInclude Include="Include\Game\World.hpp" />

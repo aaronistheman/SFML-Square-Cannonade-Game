@@ -5,7 +5,7 @@
 
 World::World(sf::RenderWindow &window, const TextureHolder &textures)
   : mWindow(window)
-  , mPlayer(textures.get(Textures::Test))
+  , mPlayer()
   , mIsPaused(false)
 {
   mPlayer.setPosition(sf::Vector2f(15, 15));

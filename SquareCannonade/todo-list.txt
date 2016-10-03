@@ -2,10 +2,12 @@ Current:
 --------
 
 -player movement (use my spacecraft game for reference)
-	-add Player (and Entity?) class
-		-change player sprite to square (RectangleShape)
-	-set flags in handle input
-	-react to these flags' values in update()
+	-try:
+		-removing Player initializion in World
+		-remove States parameter
+	-transfer input-handling over
+		-set flags in handle input
+		-react to these flags' values in update()
 	-center player's origin
 -set up static (unmoving) view
 -background (below the platform): texture repeating/scrolling
