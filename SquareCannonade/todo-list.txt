@@ -1,11 +1,9 @@
 Current:
 --------
 
--player movement (use my spacecraft game for reference)
-	-transfer input-handling over
-		-incorporate TimePerFrame in update()
-		-make player's speed non-local
-	-center player's origin
+-more on timesteps
+	-incorporate TimePerFrame in all classes' update() methods
+	-make player's speed non-local
 -set up static (unmoving) view
 -background (below the platform): texture repeating/scrolling
 
@@ -21,6 +19,7 @@ Eventually:
 -remove unused/stub files
 -use A* pathfinding algorithm to have enemies avoid holes as
 they navigate to the player
+	-this logic should be in update() method (or submethod)
 -look into C++ Boost library
 -spritesheets
 

@@ -1,4 +1,5 @@
 #include <Game/Player.hpp>
+#include <Utility/Utility.hpp>
 
 #include <SFML/Graphics/RenderTarget.hpp>
 
@@ -7,6 +8,7 @@ Player::Player()
 {
   mIsMovingDown = mIsMovingLeft = mIsMovingRight = mIsMovingUp = false;
 
+  centerOrigin(mSprite);
   mSprite.setFillColor(sf::Color::Blue);
 }
 
