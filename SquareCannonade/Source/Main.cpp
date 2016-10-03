@@ -1,55 +1,22 @@
-#include <SFML/Graphics.hpp>
+/**
+ * Based on version written by: Artur Moreira, Henrik Vogelius Hansson, and
+ *   Jan Haller
+ */
 
-#include <Game/Test.hpp>
-#include <Game/Test2.hpp>
-#include <Controllers/Controller.hpp>
-#include <States/TitleState.hpp>
-#include <States/GameState.hpp>
-#include <Utility/ResourceHolder.hpp>
-#include <Utility/ResourceIdentifiers.hpp>
+#include <Application.hpp>
+
+#include <stdexcept>
+#include <iostream>
 
 int main()
 {
-  sf::RenderWindow window(sf::VideoMode(1200, 600), "Square Cannonade");
-
-  TextureHolder textures;
-  textures.load(Textures::Test, "Media/junk.png");
-
-  FontHolder fonts;
-  fonts.load(Fonts::Main, "Media/Sansation.ttf");
-
-  State* state = new TitleState(window, fonts, textures);
-
-  /*
-  Controller controller;
-  controller.handleRealTimeInput(titleState);
-  controller.handleEvent(titleState);
-  */
-
-  while (window.isOpen())
+  try
   {
-    sf::Event event;
-    while (window.pollEvent(event))
-    {
-      bool keepState = state->handleEvent(event);
-      if (!keepState)
-      {
-        // Delete the TitleState,
-        // then point the current state at a new GameState
-        delete state;
-        state = new GameState(window, textures);
-      }
-      else
-        state->handleRealTimeInput();
-
-      if (event.type == sf::Event::Closed)
-        window.close();
-    }
-
-    window.clear();
-    state->draw();
-    window.display();
+    Application app;
+    app.run();
   }
-
-  return 0;
+  catch (std::exception& e)
+  {
+    std::cerr << "\nEXCEPTION: " << e.what() << std::endl;
+  }
 }
