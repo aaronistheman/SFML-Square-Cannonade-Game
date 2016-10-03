@@ -32,17 +32,17 @@ void Player::setIsMovingDown(bool b)
 
 void Player::update()
 {
-  sf::Vector2f position = getPosition();
+  sf::Vector2f movement;
   float change = 1.f;
   if (mIsMovingLeft)
-    position.x -= change;
+    movement.x -= change;
   if (mIsMovingRight)
-    position.x += change;
+    movement.x += change;
   if (mIsMovingUp)
-    position.y -= change;
+    movement.y -= change;
   if (mIsMovingDown)
-    position.y += change;
-  setPosition(position);
+    movement.y += change;
+  move(movement);
 }
 
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
