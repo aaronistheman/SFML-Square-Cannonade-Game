@@ -136,11 +136,13 @@
     <ClCompile Include="Source\Test2.cpp" />
     <ClCompile Include="Source\TitleState.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
+    <ClCompile Include="Source\World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Application.hpp" />
     <ClInclude Include="Include\Game\Test.hpp" />
     <ClInclude Include="Include\Game\Test2.hpp" />
+    <ClInclude Include="Include\Game\World.hpp" />
     <ClInclude Include="Include\States\GameState.hpp" />
     <ClInclude Include="Include\States\State.hpp" />
     <ClInclude Include="Include\States\StateManager.hpp" />

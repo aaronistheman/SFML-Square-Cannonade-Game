@@ -1,9 +1,12 @@
 Current:
 --------
 
--player movement (use my spacecraft game fore reference)
+-player movement (use my spacecraft game for reference)
+	-add Player (and Entity?) class
+		-change player sprite to square (RectangleShape)
 	-set flags in handle input
 	-react to these flags' values in update()
+	-center player's origin
 -set up static (unmoving) view
 -background (below the platform): texture repeating/scrolling
 
@@ -30,6 +33,7 @@ avoid holes
 -state management
 	-remove that boolean check for keepState in Application::processInput()
 	-import StateStack classes from "SFML Game Development" book
+-enemies with multiple hitboxes, just for the challenge
 
 OOP Classes (incomplete):
 ------------------------
