@@ -9,12 +9,13 @@ namespace sf {
 class State
 {
 protected:
-  sf::RenderWindow* mWindow;
+  sf::RenderWindow* mWindow; // isn't destroyed by State
 
 public:
   State(sf::RenderWindow& window);
 
   virtual void draw() = 0;
+  virtual void update() = 0;
   virtual bool handleEvent(const sf::Event& event) = 0;
   virtual void handleRealTimeInput() = 0;
 };

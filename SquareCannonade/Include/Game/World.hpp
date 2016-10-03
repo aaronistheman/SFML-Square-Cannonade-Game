@@ -1,19 +1,15 @@
 #pragma once
 
-#include <States/State.hpp>
 #include <Utility/ResourceIdentifiers.hpp>
-#include <Game/World.hpp>
+#include <Game/Player.hpp>
 
+#include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
-namespace sf
-{
-  class RenderWindow;
-}
 
-class GameState : public State
+class World
 {
 public:
-  GameState(sf::RenderWindow &window, const TextureHolder &textures);
+  World(sf::RenderWindow &window, const TextureHolder &textures);
 
   virtual void draw();
   virtual void update();
@@ -21,5 +17,7 @@ public:
   virtual void handleRealTimeInput();
 
 private:
-  World   mWorld;
+  sf::RenderWindow&   mWindow;
+  Player mPlayer;
+  bool mIsPaused;
 };

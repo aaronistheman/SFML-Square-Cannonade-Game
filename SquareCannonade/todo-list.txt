@@ -1,9 +1,9 @@
 Current:
 --------
 
--player movement (use my spacecraft game fore reference)
-	-set flags in handle input
-	-react to these flags' values in update()
+-more on timesteps
+	-incorporate TimePerFrame in all classes' update() methods
+	-make player's speed non-local
 -set up static (unmoving) view
 -background (below the platform): texture repeating/scrolling
 
@@ -14,22 +14,26 @@ Current:
 Eventually:
 -----------
 
+-remove lingering includes of iostream
 -delete the sample files and Game folder
 -remove unused/stub files
 -use A* pathfinding algorithm to have enemies avoid holes as
 they navigate to the player
+	-this logic should be in update() method (or submethod)
 -look into C++ Boost library
 -spritesheets
 
 Considerable:
 -------------
 
+-why does State store a pointer--not a reference--to the window?
 -could only render squares within a certain distance of any entity,
 then make the rest dark, so the player would have to be careful to
 avoid holes
 -state management
 	-remove that boolean check for keepState in Application::processInput()
 	-import StateStack classes from "SFML Game Development" book
+-enemies with multiple hitboxes, just for the challenge
 
 OOP Classes (incomplete):
 ------------------------

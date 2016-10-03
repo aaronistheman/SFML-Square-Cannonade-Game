@@ -37,6 +37,11 @@ void TitleState::draw()
   // mWindow->draw(mBackgroundSprite);
 }
 
+void TitleState::update()
+{
+
+}
+
 bool TitleState::handleEvent(const sf::Event& event)
 {
   if (event.type == sf::Event::KeyPressed)
