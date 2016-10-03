@@ -1,27 +1,35 @@
 Current:
 --------
 
--other general things
-	-Context class?
-	-key press lag
-	-etc.
--SceneNode (probably without parent-child system)
--scene layers (probably not in the way the book does it)
+-player movement (use my spacecraft game fore reference)
+	-set flags in handle input
+	-react to these flags' values in update()
 -set up static (unmoving) view
 -background (below the platform): texture repeating/scrolling
--draw/update
--process movement
+
+-not sure where to put these notes:
+	-SceneNode (probably without parent-child system)
+	-scene layers (probably not in the way the book does it)
 
 Eventually:
 -----------
 
 -delete the sample files and Game folder
 -remove unused/stub files
+-use A* pathfinding algorithm to have enemies avoid holes as
+they navigate to the player
+-look into C++ Boost library
+-spritesheets
 
 Considerable:
 -------------
 
--import StateStack classes from "SFML Game Development" book
+-could only render squares within a certain distance of any entity,
+then make the rest dark, so the player would have to be careful to
+avoid holes
+-state management
+	-remove that boolean check for keepState in Application::processInput()
+	-import StateStack classes from "SFML Game Development" book
 
 OOP Classes (incomplete):
 ------------------------
