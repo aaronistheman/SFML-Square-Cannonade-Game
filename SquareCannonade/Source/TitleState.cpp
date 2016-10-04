@@ -5,8 +5,6 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
-#include <iostream>
-
 TitleState::TitleState(sf::RenderWindow &window, const FontHolder &fonts,
   const TextureHolder &textures)
   : State(window)

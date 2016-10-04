@@ -1,25 +1,37 @@
 Current:
 --------
 
--set up static (unmoving) view
+-(not necessarily complete) basic classes for Coin, Cannon, EnemySquare, etc.
 -background (below the platform): texture repeating/scrolling
-
--not sure where to put these notes:
-	-SceneNode (probably without parent-child system)
-	-scene layers (probably not in the way the book does it)
+-data read from text files
+	-import DataTables' file reader code from my Tanks game
+-holes (should be own type); represent as square(s)
+-dummy (placeholder, perhaps immobile) enemies
+-collision detection
+	-probably use unit tests here
+	-types:
+		-player and hole
+		-player and enemy
+		-player and coin
+-victory
+-game over
+-multiple levels
+-use A* pathfinding algorithm to have enemies avoid holes as
+they navigate to the player
+	-this logic should be in update() method (or submethod)
+		-don't run A* each frame; maybe do each half second
+	-figure out heuristic function
+	-ideas on how:
+		-see memo in my phone
 
 Eventually:
 -----------
 
--remove lingering includes of iostream
--delete the sample files and Game folder
 -remove unused/stub files
--use A* pathfinding algorithm to have enemies avoid holes as
-they navigate to the player
-	-this logic should be in update() method (or submethod)
 -look into C++ Boost library
 -spritesheets
--data read from text files
+-multiplayer mode with SFML's (TCP?) sockets
+	-2 player mode in which both players collect coins
 
 Considerable:
 -------------
