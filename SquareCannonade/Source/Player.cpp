@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics/RenderTarget.hpp>
 
+const float Player::PlayerSpeed = 100.f;
+
 Player::Player()
   : mSprite(sf::RectangleShape(sf::Vector2f(30, 30)))
 {
@@ -32,19 +34,18 @@ void Player::setIsMovingDown(bool b)
   mIsMovingDown = b;
 }
 
-void Player::update()
+void Player::update(sf::Time dt)
 {
   sf::Vector2f movement;
-  float change = 1.f;
   if (mIsMovingLeft)
-    movement.x -= change;
+    movement.x -= PlayerSpeed;
   if (mIsMovingRight)
-    movement.x += change;
+    movement.x += PlayerSpeed;
   if (mIsMovingUp)
-    movement.y -= change;
+    movement.y -= PlayerSpeed;
   if (mIsMovingDown)
-    movement.y += change;
-  move(movement);
+    movement.y += PlayerSpeed;
+  move(movement * dt.asSeconds());
 }
 
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const

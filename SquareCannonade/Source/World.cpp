@@ -16,9 +16,9 @@ void World::draw()
   mWindow.draw(mPlayer);
 }
 
-void World::update()
+void World::update(sf::Time dt)
 {
-  mPlayer.update();
+  mPlayer.update(dt);
 }
 
 bool World::handleEvent(const sf::Event& event)

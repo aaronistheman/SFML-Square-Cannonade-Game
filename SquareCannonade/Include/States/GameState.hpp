@@ -16,7 +16,7 @@ public:
   GameState(sf::RenderWindow &window, const TextureHolder &textures);
 
   virtual void draw();
-  virtual void update();
+  virtual void update(sf::Time dt);
   virtual bool handleEvent(const sf::Event& event);
   virtual void handleRealTimeInput();
 
