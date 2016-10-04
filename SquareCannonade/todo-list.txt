@@ -1,8 +1,6 @@
 Current:
 --------
 
--more on timesteps
-	-make player's speed non-local
 -set up static (unmoving) view
 -background (below the platform): texture repeating/scrolling
 
@@ -21,6 +19,7 @@ they navigate to the player
 	-this logic should be in update() method (or submethod)
 -look into C++ Boost library
 -spritesheets
+-data read from text files
 
 Considerable:
 -------------

@@ -21,6 +21,8 @@ public:
   virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 private:
+  static const float PlayerSpeed;
+
   sf::RectangleShape mSprite;
 
   bool mIsMovingLeft;
