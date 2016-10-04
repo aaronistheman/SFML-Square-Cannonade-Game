@@ -2,8 +2,8 @@ Current:
 --------
 
 -more on timesteps
-	-incorporate TimePerFrame in all classes' update() methods
 	-make player's speed non-local
+	-multipley player's speed by dt
 -set up static (unmoving) view
 -background (below the platform): texture repeating/scrolling
 

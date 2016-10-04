@@ -37,7 +37,7 @@ void TitleState::draw()
   // mWindow->draw(mBackgroundSprite);
 }
 
-void TitleState::update()
+void TitleState::update(sf::Time dt)
 {
 
 }

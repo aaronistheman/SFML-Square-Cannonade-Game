@@ -15,9 +15,9 @@ void GameState::draw()
   mWorld.draw();
 }
 
-void GameState::update()
+void GameState::update(sf::Time dt)
 {
-  mWorld.update();
+  mWorld.update(dt);
 }
 
 bool GameState::handleEvent(const sf::Event& event)

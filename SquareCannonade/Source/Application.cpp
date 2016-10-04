@@ -43,7 +43,7 @@ void Application::run()
       timeSinceLastUpdate -= TimePerFrame;
 
       processInput();
-      update();
+      update(TimePerFrame);
     }
 
     updateStatistics(dt);
@@ -80,9 +80,9 @@ void Application::render()
   mWindow.display();
 } // render()
 
-void Application::update()
+void Application::update(sf::Time dt)
 {
-  mState->update();
+  mState->update(dt);
 }
 
 void Application::updateStatistics(sf::Time dt)

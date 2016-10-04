@@ -32,7 +32,7 @@ void Player::setIsMovingDown(bool b)
   mIsMovingDown = b;
 }
 
-void Player::update()
+void Player::update(sf::Time dt)
 {
   sf::Vector2f movement;
   float change = 1.f;

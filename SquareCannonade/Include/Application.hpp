@@ -24,7 +24,7 @@ public:
 private:
   void processInput();
   void render();
-  void update();
+  void update(sf::Time dt);
 
   void  updateStatistics(sf::Time dt);
 
