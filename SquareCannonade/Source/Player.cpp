@@ -35,7 +35,7 @@ void Player::setIsMovingDown(bool b)
 void Player::update(sf::Time dt)
 {
   sf::Vector2f movement;
-  float change = 1.f;
+  float change = 100.f;
   if (mIsMovingLeft)
     movement.x -= change;
   if (mIsMovingRight)
@@ -44,7 +44,7 @@ void Player::update(sf::Time dt)
     movement.y -= change;
   if (mIsMovingDown)
     movement.y += change;
-  move(movement);
+  move(movement * dt.asSeconds());
 }
 
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const

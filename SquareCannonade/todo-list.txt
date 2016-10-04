@@ -3,7 +3,6 @@ Current:
 
 -more on timesteps
 	-make player's speed non-local
-	-multipley player's speed by dt
 -set up static (unmoving) view
 -background (below the platform): texture repeating/scrolling
 
