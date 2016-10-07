@@ -8,7 +8,7 @@
 namespace sf
 {
   class Text;
-  class RectangleShape;
+  class Shape;
 }
 
 /////////////////////////////////////////////////////////////
@@ -18,4 +18,4 @@ namespace sf
 /////////////////////////////////////////////////////////////
 
 void centerOrigin(sf::Text& text);
-void centerOrigin(sf::RectangleShape& rectangleShape);
+void centerOrigin(sf::Shape& shape);
