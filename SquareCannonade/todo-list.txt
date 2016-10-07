@@ -1,9 +1,9 @@
 Current:
 --------
 
--(not necessarily complete) basic classes for Coin, Cannon, EnemySquare, etc.
-	-for now, just represent Coin with CircleShape
 -background (below the platform): texture repeating/scrolling
+-(not necessarily complete) basic classes for Cannon, EnemySquare, etc.
+	-put the getTransform() logic in one place
 -data read from text files
 	-import DataTables' file reader code from my Tanks game
 -holes (should be own type); represent as square(s)
@@ -45,6 +45,8 @@ avoid holes
 	-remove that boolean check for keepState in Application::processInput()
 	-import StateStack classes from "SFML Game Development" book
 -enemies with multiple hitboxes, just for the challenge
+-grid system for collision detection (not just for pathfinding)
+	-could also restrict movement to obeying this grid system
 
 OOP Classes (incomplete):
 ------------------------

@@ -128,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />
+    <ClCompile Include="Source\Coin.cpp" />
     <ClCompile Include="Source\Entity.cpp" />
     <ClCompile Include="Source\GameState.cpp" />
     <ClCompile Include="Source\Main.cpp" />
@@ -142,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Application.hpp" />
+    <ClInclude Include="Include\Game\Coin.hpp" />
     <ClInclude Include="Include\Game\Entity.hpp" />
     <ClInclude Include="Include\Game\Player.hpp" />
     <ClInclude Include="Include\Game\Test.hpp" />
