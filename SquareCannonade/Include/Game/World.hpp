@@ -2,6 +2,7 @@
 
 #include <Utility/ResourceIdentifiers.hpp>
 #include <Game/Player.hpp>
+#include <Game/Coin.hpp>
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
@@ -18,6 +19,9 @@ public:
 
 private:
   sf::RenderWindow&   mWindow;
-  Player mPlayer;
   bool mIsPaused;
+
+  Player mPlayer;
+  Coin mCoin1;
+  Coin mCoin2;
 };

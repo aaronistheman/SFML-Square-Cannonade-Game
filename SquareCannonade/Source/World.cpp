@@ -5,15 +5,22 @@
 
 World::World(sf::RenderWindow &window, const TextureHolder &textures)
   : mWindow(window)
-  , mPlayer()
   , mIsPaused(false)
+  , mPlayer()
+  , mCoin1()
+  , mCoin2()
 {
   mPlayer.setPosition(sf::Vector2f(15, 15));
+
+  mCoin1.setPosition(sf::Vector2f(30, 30));
+  mCoin2.setPosition(sf::Vector2f(85, 20));
 }
 
 void World::draw()
 {
   mWindow.draw(mPlayer);
+  mWindow.draw(mCoin1);
+  mWindow.draw(mCoin2);
 }
 
 void World::update(sf::Time dt)

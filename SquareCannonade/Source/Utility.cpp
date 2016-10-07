@@ -6,7 +6,7 @@
 #include <Utility/Utility.hpp>
 
 #include <SFML/Graphics/Text.hpp>
-#include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/Graphics/Shape.hpp>
 
 void centerOrigin(sf::Text& text)
 {
@@ -14,9 +14,9 @@ void centerOrigin(sf::Text& text)
   text.setOrigin(std::floor(bounds.width / 2.f), std::floor(bounds.height / 2.f));
 }
 
-void centerOrigin(sf::RectangleShape& rectangleShape)
+void centerOrigin(sf::Shape& shape)
 {
-  sf::FloatRect bounds = rectangleShape.getLocalBounds();
-  rectangleShape.setOrigin(std::floor(bounds.width / 2.f),
+  sf::FloatRect bounds = shape.getLocalBounds();
+  shape.setOrigin(std::floor(bounds.width / 2.f),
     std::floor(bounds.height / 2.f));
 }
