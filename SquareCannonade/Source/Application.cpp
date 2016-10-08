@@ -17,8 +17,6 @@ Application::Application()
 {
   mWindow.setKeyRepeatEnabled(false);
 
-  mTextures.load(Textures::Test, "Media/junk.png");
-
   mFonts.load(Fonts::Main, "Media/Sansation.ttf");
 
   mState = new TitleState(mWindow, mFonts, mTextures);

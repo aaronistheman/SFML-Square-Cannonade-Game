@@ -74,5 +74,5 @@ void World::handleRealTimeInput()
 
 void World::loadTextures()
 {
-  mTextures.load(Textures::Background, "Media/Metal.PNG");
+  mTextures.load(Textures::Background, "Media/background.jpg");
 }
