@@ -1,7 +1,6 @@
 Current:
 --------
 
--basic waypoint AI
 -add some holes
 	-should be snapped to grid to make A* easier?
 -use A* pathfinding algorithm to have enemies avoid holes as

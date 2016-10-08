@@ -49,6 +49,9 @@ void World::update(sf::Time dt)
   mPlayer.update(dt);
 
   mBackgroundSprite.setPosition(mPlayer.getPosition());
+
+  mEnemy1.setWaypoint(mPlayer.getPosition());
+  mEnemy1.update(dt);
 }
 
 bool World::handleEvent(const sf::Event& event)
