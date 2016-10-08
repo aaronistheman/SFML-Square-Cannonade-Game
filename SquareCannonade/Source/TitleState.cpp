@@ -40,6 +40,10 @@ void TitleState::update(sf::Time dt)
 
 }
 
+/**
+ * @return false if the user wants to leave TitleState;
+ * otherwise, true
+ */
 bool TitleState::handleEvent(const sf::Event& event)
 {
   if (event.type == sf::Event::KeyPressed)
@@ -49,6 +53,8 @@ bool TitleState::handleEvent(const sf::Event& event)
       return false;
     }
   }
+
+  return true;
 }
 
 void TitleState::handleRealTimeInput()

@@ -2,10 +2,15 @@ Current:
 --------
 
 -background (below the platform): texture repeating/scrolling
+	-add (static) background (e.g. clouds)
+		-repeating texture?
+	-make background scroll
+	-why is the TextureHolder passed to the World class?
 -(not necessarily complete) basic classes for Cannon, EnemySquare, etc.
 	-put the getTransform() logic in one place
 -data read from text files
 	-import DataTables' file reader code from my Tanks game
+-switch resource ids so they use C++11 enums
 -holes (should be own type); represent as square(s)
 -dummy (placeholder, perhaps immobile) enemies
 -collision detection
