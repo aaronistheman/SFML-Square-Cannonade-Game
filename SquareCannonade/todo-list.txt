@@ -2,7 +2,7 @@ Current:
 --------
 
 -background (below the platform): texture repeating/scrolling
-	-make background scroll
+	-switch to real sprite
 	-why is the TextureHolder passed to the World class?
 -(not necessarily complete) basic classes for Cannon, EnemySquare, etc.
 	-put the getTransform() logic in one place
@@ -50,6 +50,9 @@ avoid holes
 -enemies with multiple hitboxes, just for the challenge
 -grid system for collision detection (not just for pathfinding)
 	-could also restrict movement to obeying this grid system
+-on background scolling:
+	-instead, make the background switch between scrolling left, up, right,
+	and down (based on how far it scrolls out) rather than following player
 
 OOP Classes (incomplete):
 ------------------------
