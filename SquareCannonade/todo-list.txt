@@ -1,6 +1,28 @@
 Current:
 --------
 
+-basic Hunter class
+-basic waypoint AI
+-add some holes
+	-should be snapped to grid to make A* easier?
+-use A* pathfinding algorithm to have enemies avoid holes as
+they navigate to the player
+	-can unit tests help?
+	-can Boost help?
+	-figure out how to make graph
+		-map player to the grid it's closest to
+	-figure out heuristic function
+		-ideas:
+			-use distance from player
+	-make sure enemy doesn't freeze if too close to player
+	while in its grid square:
+		-if enemy and player are in same grid square, set
+		the enemy after the player's position (i.e. apply
+		waypoint-based AI)
+	-don't run A* each frame; maybe do each half second
+	-ideas on how:
+		-see memo in my phone
+
 -(not necessarily complete) basic classes for Cannon, EnemySquare, etc.
 	-put the getTransform() logic in one place
 -data read from text files
@@ -17,13 +39,6 @@ Current:
 -victory
 -game over
 -multiple levels
--use A* pathfinding algorithm to have enemies avoid holes as
-they navigate to the player
-	-this logic should be in update() method (or submethod)
-		-don't run A* each frame; maybe do each half second
-	-figure out heuristic function
-	-ideas on how:
-		-see memo in my phone
 
 Eventually:
 -----------
