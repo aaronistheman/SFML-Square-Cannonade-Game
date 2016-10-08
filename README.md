@@ -49,6 +49,9 @@ Hansson, and Jan Haller. I borrowed certain classes (e.g.
 ResourceHolder) or based certain classes (e.g. Application) on those from the
 source code associated with this book.
 
+* Background image is from:
+http://www.excelmicro.com/wp-content/uploads/2011/10/white-clouds-blue-sky-seamless-background-tile.jpg
+
 Author
 ------
 

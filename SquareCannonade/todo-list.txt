@@ -1,11 +1,11 @@
 Current:
 --------
 
--background (below the platform): texture repeating/scrolling
 -(not necessarily complete) basic classes for Cannon, EnemySquare, etc.
 	-put the getTransform() logic in one place
 -data read from text files
 	-import DataTables' file reader code from my Tanks game
+-switch resource ids so they use C++11 enums
 -holes (should be own type); represent as square(s)
 -dummy (placeholder, perhaps immobile) enemies
 -collision detection
@@ -28,6 +28,7 @@ they navigate to the player
 Eventually:
 -----------
 
+-why is the TextureHolder passed to the World class?
 -remove unused/stub files
 -look into C++ Boost library
 -spritesheets
@@ -47,6 +48,9 @@ avoid holes
 -enemies with multiple hitboxes, just for the challenge
 -grid system for collision detection (not just for pathfinding)
 	-could also restrict movement to obeying this grid system
+-on background scolling:
+	-instead, make the background switch between scrolling left, up, right,
+	and down (based on how far it scrolls out) rather than following player
 
 OOP Classes (incomplete):
 ------------------------

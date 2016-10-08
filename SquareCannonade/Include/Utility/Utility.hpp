@@ -8,6 +8,7 @@
 namespace sf
 {
   class Text;
+  class Sprite;
   class Shape;
 }
 
@@ -18,4 +19,5 @@ namespace sf
 /////////////////////////////////////////////////////////////
 
 void centerOrigin(sf::Text& text);
+void centerOrigin(sf::Sprite& sprite);
 void centerOrigin(sf::Shape& shape);
