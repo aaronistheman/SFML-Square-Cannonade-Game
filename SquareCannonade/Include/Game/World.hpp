@@ -4,6 +4,7 @@
 #include <Utility/ResourceHolder.hpp>
 #include <Game/Player.hpp>
 #include <Game/Coin.hpp>
+#include <Game/Hunter.hpp>
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
@@ -36,4 +37,5 @@ private:
   Player mPlayer;
   Coin mCoin1;
   Coin mCoin2;
+  Hunter mEnemy1;
 };

@@ -30,6 +30,8 @@ World::World(sf::RenderWindow &window, const TextureHolder &textures)
 
   mCoin1.setPosition(sf::Vector2f(30, 30));
   mCoin2.setPosition(sf::Vector2f(85, 20));
+
+  mEnemy1.setPosition(sf::Vector2f(180, 320));
 } // World()
 
 void World::draw()
@@ -39,6 +41,7 @@ void World::draw()
   mWindow.draw(mPlayer);
   mWindow.draw(mCoin1);
   mWindow.draw(mCoin2);
+  mWindow.draw(mEnemy1);
 }
 
 void World::update(sf::Time dt)

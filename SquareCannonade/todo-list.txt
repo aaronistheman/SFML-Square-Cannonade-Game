@@ -1,7 +1,6 @@
 Current:
 --------
 
--basic Hunter class
 -basic waypoint AI
 -add some holes
 	-should be snapped to grid to make A* easier?
