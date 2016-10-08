@@ -1,15 +1,27 @@
 #include <Game/World.hpp>
-#include <Utility/ResourceHolder.hpp>
 
 #include <SFML/Window/Event.hpp>
+
+const float World::BorderWidth = 10.f;
 
 World::World(sf::RenderWindow &window, const TextureHolder &textures)
   : mWindow(window)
   , mIsPaused(false)
+  , mBackgroundSprite()
   , mPlayer()
   , mCoin1()
   , mCoin2()
 {
+  loadTextures();
+
+  // Set up background texture to repeat
+  sf::Texture& backgroundTexture = mTextures.get(Textures::Background);
+  backgroundTexture.setRepeated(true);
+  mBackgroundSprite.setTexture(backgroundTexture);
+  sf::Vector2u windowSize = mWindow.getSize();
+  mBackgroundSprite.setTextureRect(
+    sf::IntRect(0, 0, windowSize.x, windowSize.y));
+
   mPlayer.setPosition(sf::Vector2f(15, 15));
 
   mCoin1.setPosition(sf::Vector2f(30, 30));
@@ -18,6 +30,8 @@ World::World(sf::RenderWindow &window, const TextureHolder &textures)
 
 void World::draw()
 {
+  mWindow.draw(mBackgroundSprite);
+
   mWindow.draw(mPlayer);
   mWindow.draw(mCoin1);
   mWindow.draw(mCoin2);
@@ -50,4 +64,9 @@ void World::handleRealTimeInput()
   }
 
   return;
+}
+
+void World::loadTextures()
+{
+  mTextures.load(Textures::Background, "Media/Metal.PNG");
 }

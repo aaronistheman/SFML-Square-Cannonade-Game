@@ -2,8 +2,6 @@ Current:
 --------
 
 -background (below the platform): texture repeating/scrolling
-	-add (static) background (e.g. clouds)
-		-repeating texture?
 	-make background scroll
 	-why is the TextureHolder passed to the World class?
 -(not necessarily complete) basic classes for Cannon, EnemySquare, etc.
