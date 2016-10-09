@@ -1,17 +1,35 @@
 Current:
 --------
 
--add some holes
-	-should be snapped to grid to make A* easier?
--use A* pathfinding algorithm to have enemies avoid holes as
+-generate graph based on locations of walls
+	-representation of wall
+		-set up grid of tiles
+		-abstract TileSet class
+		-Wall class
+	-first set up tests
+		-just assert numerical values, such as:
+			-number of vertices
+			-number of edges
+			-certain weights
+			-absence of certain diagonal edges
+			-etc.
+	-have way to set up goal vertices
+	-have way to set start vertex and "run the algorithm"
+	(just print a junk statement for now)
+-use A* pathfinding algorithm to have enemies avoid walls as
 they navigate to the player
-	-can unit tests help?
+	-cite helpful sources
+	-unit tests for:
+		-making of the grid graph
+		-accuracy of algorithm
 	-can Boost help?
 	-figure out how to make graph
 		-map player to the grid it's closest to
 	-figure out heuristic function
 		-ideas:
 			-use distance from player
+				-perhaps horizontal distance (to avoid temporal
+				cost in using Pythagoren theorem)
 	-make sure enemy doesn't freeze if too close to player
 	while in its grid square:
 		-if enemy and player are in same grid square, set
@@ -26,14 +44,22 @@ they navigate to the player
 -data read from text files
 	-import DataTables' file reader code from my Tanks game
 -switch resource ids so they use C++11 enums
--holes (should be own type); represent as square(s)
+-walls (should be own type); represent as square(s)
 -dummy (placeholder, perhaps immobile) enemies
 -collision detection
 	-probably use unit tests here
 	-types:
-		-player and hole
+		-player and wall
 		-player and enemy
 		-player and coin
+	-to prevent anyone going through walls:
+		-steps in World.update():
+			-set velocities of each entity
+			-resolve collisions
+				-for an entity that collides with a wall
+					-if a component of velocity would cause the entity
+					to go through the wall, make that component zero
+			-apply velocities (i.e. move the entities)
 -victory
 -game over
 -multiple levels
@@ -47,6 +73,8 @@ Eventually:
 -spritesheets
 -multiplayer mode with SFML's (TCP?) sockets
 	-2 player mode in which both players collect coins
+-tiles of different terrains
+	-in pathfinding graph, apply the costs to the vertices
 
 Considerable:
 -------------
@@ -54,7 +82,7 @@ Considerable:
 -why does State store a pointer--not a reference--to the window?
 -could only render squares within a certain distance of any entity,
 then make the rest dark, so the player would have to be careful to
-avoid holes
+avoid walls
 -state management
 	-remove that boolean check for keepState in Application::processInput()
 	-import StateStack classes from "SFML Game Development" book
