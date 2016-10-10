@@ -2,10 +2,9 @@ Current:
 --------
 
 -generate graph based on locations of walls
-	-DETOUR: remove the boilerplate transform code in the draw methods
-		-should just have to pass the current state (instead of letting
-		the default be passed) in World::draw() to each drawn object
-	-createGrid() should store WallTiles too
+	-createGrid() should store WallTiles in the given vector too
+		-raises question about where to store level data
+		-perhaps add test(s) to reflect this
 	-first set up tests
 		-just assert numerical values, such as:
 			-number of vertices

@@ -48,11 +48,7 @@ void Player::update(sf::Time dt)
   move(movement * dt.asSeconds());
 }
 
-void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void Player::drawSprite(sf::RenderTarget& target, sf::RenderStates states) const
 {
-  // Take the positioning of the player object itself, so it can be
-  // applied to the player's sprite
-  states.transform = getTransform();
-
   target.draw(mSprite, states);
 }

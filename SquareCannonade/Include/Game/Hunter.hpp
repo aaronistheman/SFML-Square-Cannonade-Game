@@ -10,7 +10,8 @@ public:
   Hunter();
 
   virtual void update(sf::Time dt);
-  virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+  virtual void drawSprite(sf::RenderTarget& target, sf::RenderStates states)
+    const;
 
   virtual void setWaypoint(const sf::Vector2f& waypoint);
 
