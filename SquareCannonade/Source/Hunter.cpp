@@ -31,12 +31,8 @@ void Hunter::update(sf::Time dt)
   move(movement * dt.asSeconds());
 }
 
-void Hunter::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void Hunter::drawSprite(sf::RenderTarget& target, sf::RenderStates states) const
 {
-  // Take the positioning of the enemy object itself, so it can be
-  // applied to its sprite
-  states.transform = getTransform();
-
   target.draw(mSprite, states);
 }
 

@@ -14,11 +14,7 @@ void Coin::update(sf::Time dt)
 {
 }
 
-void Coin::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void Coin::drawSprite(sf::RenderTarget& target, sf::RenderStates states) const
 {
-  // Take the positioning of the coin object itself, so it can be
-  // applied to the coin's sprite
-  states.transform = getTransform();
-
   target.draw(mSprite, states);
 }

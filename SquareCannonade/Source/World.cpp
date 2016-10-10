@@ -51,7 +51,7 @@ void World::draw()
   {
     mWindow.draw(*mWallTiles[i]);
   }
-
+  
   mWindow.draw(mPlayer);
   mWindow.draw(mCoin1);
   mWindow.draw(mCoin2);
