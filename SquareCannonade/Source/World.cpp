@@ -3,6 +3,7 @@
 
 #include <SFML/Window/Event.hpp>
 
+const int World::TileLength = 30;
 const float World::BorderWidth = 10.f;
 
 World::World(sf::RenderWindow &window, const TextureHolder &textures)
@@ -14,10 +15,14 @@ World::World(sf::RenderWindow &window, const TextureHolder &textures)
   , mCoin2()
   , mTileGrid()
 {
+  sf::Vector2u windowSize = mWindow.getSize();
+
+  // Ensure window can be completely divided into equally-sized tiles
+  assert(windowSize.x % TileLength == 0);
+  assert(windowSize.y % TileLength == 0);
+
   loadTextures();
   createGrid();
-
-  sf::Vector2u windowSize = mWindow.getSize();
 
   mPlayer.setPosition(sf::Vector2f(windowSize.x / 2, windowSize.y / 2));
 

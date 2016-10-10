@@ -4,11 +4,13 @@
 
 #include <string>
 
-
+const int Application::WindowWidth = 1200;
+const int Application::WindowHeight = 600;
 const sf::Time Application::TimePerFrame = sf::seconds(1.f / 60.f);
 
 Application::Application()
-  : mWindow(sf::VideoMode(1200, 600), "Square Cannonade", sf::Style::Close)
+  : mWindow(sf::VideoMode(WindowWidth, WindowHeight),
+      "Square Cannonade", sf::Style::Close)
   , mTextures()
   , mFonts()
   , mStatisticsText()

@@ -28,9 +28,13 @@ private:
   void createGrid();
 
 private:
+  static const int TileLength;
+
   // Visible width of the holes/edges surrounding the play area
   static const float BorderWidth;
 
+
+private:
   sf::RenderWindow&   mWindow;
   bool mIsPaused;
 
