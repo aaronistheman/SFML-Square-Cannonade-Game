@@ -23,9 +23,13 @@ public:
   virtual bool handleEvent(const sf::Event& event);
   virtual void handleRealTimeInput();
 
+public: // Public static methods
+  // @param area is the area in which tiles can be created
+  static void createGrid(std::vector<Tile::Ptr> &tileGrid,
+    const sf::IntRect &area, int tileLength);
+
 private:
   void loadTextures();
-  void createGrid();
 
 private:
   static const int TileLength;

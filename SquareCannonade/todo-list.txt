@@ -8,10 +8,10 @@ Current:
 			appropriate coordinates
 				-implement the tile-creation loop; test-driven development:
 					-create tests that assert the number of created tiles
-						-move the grid creation into a static, easily
-						testable method
 					-create tests that check the positions of specific tiles
 					(e.g. the fourth tile)
+					-implement the method
+			-merge branch
 		-abstract TileSet class
 		-Wall class
 	-first set up tests

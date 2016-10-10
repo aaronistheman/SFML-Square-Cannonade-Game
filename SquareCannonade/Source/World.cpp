@@ -22,7 +22,6 @@ World::World(sf::RenderWindow &window, const TextureHolder &textures)
   assert(windowSize.y % TileLength == 0);
 
   loadTextures();
-  createGrid();
 
   mPlayer.setPosition(sf::Vector2f(windowSize.x / 2, windowSize.y / 2));
 
@@ -40,11 +39,6 @@ World::World(sf::RenderWindow &window, const TextureHolder &textures)
 
   mEnemy1.setPosition(sf::Vector2f(180, 320));
 } // World()
-
-void World::createGrid()
-{
-  mTileGrid.push_back(Tile::Ptr(new Tile(30, 30, 30, 30)));
-} // createGrid()
 
 void World::draw()
 {
@@ -89,6 +83,15 @@ void World::handleRealTimeInput()
 
   return;
 }
+
+void World::createGrid(std::vector<Tile::Ptr> &tileGrid,
+  const sf::IntRect &area, int tileLength)
+{
+  assert(tileGrid.size() == 0);
+  assert(tileLength > 0);
+
+  tileGrid.push_back(Tile::Ptr(new Tile(30, 30, 30, 30)));
+} // createGrid()
 
 void World::loadTextures()
 {
