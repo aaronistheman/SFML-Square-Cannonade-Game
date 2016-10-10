@@ -6,6 +6,7 @@
 #include <Game/Coin.hpp>
 #include <Game/Hunter.hpp>
 #include <Game/Tile.hpp>
+#include <Game/WallTile.hpp>
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
@@ -31,6 +32,9 @@ public: // Public static methods
 private:
   void loadTextures();
 
+  // For testing
+  void createJunkWallTiles();
+
 private:
   static const int TileLength;
 
@@ -54,4 +58,5 @@ private:
   Hunter mEnemy1;
 
   std::vector<Tile::Ptr> mTileGrid;
+  std::vector<WallTile::Ptr> mWallTiles;
 };

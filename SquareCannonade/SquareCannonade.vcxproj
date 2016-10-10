@@ -141,6 +141,7 @@
     <ClCompile Include="Source\TileSet.cpp" />
     <ClCompile Include="Source\TitleState.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
+    <ClCompile Include="Source\WallTile.cpp" />
     <ClCompile Include="Source\World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +155,7 @@
     <ClInclude Include="Include\Game\Test2.hpp" />
     <ClInclude Include="Include\Game\Tile.hpp" />
     <ClInclude Include="Include\Game\TileSet.hpp" />
+    <ClInclude Include="Include\Game\WallTile.hpp" />
     <ClInclude Include="Include\Game\World.hpp" />
     <ClInclude Include="Include\States\GameState.hpp" />
     <ClInclude Include="Include\States\State.hpp" />
