@@ -4,8 +4,6 @@ Current:
 -generate graph based on locations of walls
 	-representation of wall
 		-set up grid of tiles
-			-for debugging purposes, have tiles be drawable
-				-draw them
 			-have World(?) class set up bunch of tiles with
 			appropriate coordinates
 				-store window coordinates as static variables in Window class;
