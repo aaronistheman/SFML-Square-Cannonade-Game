@@ -9,6 +9,8 @@ Current:
 				-store window coordinates as static variables in Window class;
 				must be multiple of tile length (i.e. 30); use assertion to check?
 				(in Application constructor?)
+				-implement the for loop
+					-create tests that assert the number of created tiles
 		-abstract TileSet class
 		-Wall class
 	-first set up tests

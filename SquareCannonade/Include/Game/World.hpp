@@ -6,11 +6,12 @@
 #include <Game/Coin.hpp>
 #include <Game/Hunter.hpp>
 #include <Game/Tile.hpp>
-#include <Game/DrawableTile.hpp>
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
+
+#include <vector>
 
 class World
 {
@@ -24,6 +25,7 @@ public:
 
 private:
   void loadTextures();
+  void createGrid();
 
 private:
   // Visible width of the holes/edges surrounding the play area
@@ -43,6 +45,5 @@ private:
   Coin mCoin2;
   Hunter mEnemy1;
 
-  // These should eventually be placed in a container
-  DrawableTile::Ptr mTile1;
+  std::vector<Tile::Ptr> mTileGrid;
 };
