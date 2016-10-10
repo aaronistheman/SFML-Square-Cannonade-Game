@@ -119,9 +119,10 @@
     <ClCompile Include="..\SquareCannonade\Source\Test.cpp" />
     <ClCompile Include="Source\Setup.cpp" />
     <ClCompile Include="Source\TestTest.cpp" />
+    <ClCompile Include="Source\TestTest2.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Include\Catch.hpp" />
+    <ClInclude Include="Include\Catch\Catch.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

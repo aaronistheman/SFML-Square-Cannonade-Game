@@ -24,9 +24,12 @@
     <ClCompile Include="Source\TestTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\TestTest2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Include\Catch.hpp">
+    <ClInclude Include="Include\Catch\Catch.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
