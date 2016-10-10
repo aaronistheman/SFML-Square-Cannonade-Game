@@ -3,7 +3,7 @@ Current:
 
 -generate graph based on locations of walls
 	-representation of wall
-		-set up grid of tiles
+		-write readme directions on how to run tests
 		-abstract TileSet class
 		-Wall class
 	-first set up tests

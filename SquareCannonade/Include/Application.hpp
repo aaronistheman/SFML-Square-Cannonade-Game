@@ -29,8 +29,12 @@ private:
   void  updateStatistics(sf::Time dt);
 
 private:
+  static const int WindowWidth;
+  static const int WindowHeight;
+
   static const sf::Time TimePerFrame;
 
+private:
   sf::RenderWindow mWindow;
   TextureHolder mTextures;
   FontHolder mFonts;

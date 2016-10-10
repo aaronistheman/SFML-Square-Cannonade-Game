@@ -3,6 +3,7 @@
 
 #include <SFML/Window/Event.hpp>
 
+const int World::TileLength = 30;
 const float World::BorderWidth = 10.f;
 
 World::World(sf::RenderWindow &window, const TextureHolder &textures)
@@ -12,10 +13,15 @@ World::World(sf::RenderWindow &window, const TextureHolder &textures)
   , mPlayer()
   , mCoin1()
   , mCoin2()
+  , mTileGrid()
 {
-  loadTextures();
-
   sf::Vector2u windowSize = mWindow.getSize();
+
+  // Ensure window can be completely divided into equally-sized tiles
+  assert(windowSize.x % TileLength == 0);
+  assert(windowSize.y % TileLength == 0);
+
+  loadTextures();
 
   mPlayer.setPosition(sf::Vector2f(windowSize.x / 2, windowSize.y / 2));
 
@@ -77,6 +83,26 @@ void World::handleRealTimeInput()
 
   return;
 }
+
+void World::createGrid(std::vector<Tile::Ptr> &tileGrid,
+  const sf::IntRect &area, int tileLength)
+{
+  assert(tileGrid.size() == 0); // no existing tiles
+  assert(tileLength > 0);
+
+  // area has to be entirely divisible into equally-sized tiles
+  assert(area.width % tileLength == 0);
+  assert(area.height % tileLength == 0);
+
+  for (int y = 0; y < area.height; y += tileLength) // for each grid row
+  {
+    for (int x = 0; x < area.width; x += tileLength) // for each tile in row
+    {
+      tileGrid.push_back(Tile::Ptr(
+        new Tile(x, y, tileLength, tileLength)));
+    } 
+  } // for each row of the grid
+} // createGrid()
 
 void World::loadTextures()
 {
