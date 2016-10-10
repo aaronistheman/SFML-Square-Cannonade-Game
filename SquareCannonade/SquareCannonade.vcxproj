@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\Coin.cpp" />
+    <ClCompile Include="Source\DrawableTile.cpp" />
     <ClCompile Include="Source\Entity.cpp" />
     <ClCompile Include="Source\GameState.cpp" />
     <ClCompile Include="Source\Hunter.cpp" />
@@ -138,6 +139,7 @@
     <ClCompile Include="Source\StateManager.cpp" />
     <ClCompile Include="Source\Test.cpp" />
     <ClCompile Include="Source\Test2.cpp" />
+    <ClCompile Include="Source\Tile.cpp" />
     <ClCompile Include="Source\TitleState.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
     <ClCompile Include="Source\World.cpp" />
@@ -145,11 +147,13 @@
   <ItemGroup>
     <ClInclude Include="Include\Application.hpp" />
     <ClInclude Include="Include\Game\Coin.hpp" />
+    <ClInclude Include="Include\Game\DrawableTile.hpp" />
     <ClInclude Include="Include\Game\Hunter.hpp" />
     <ClInclude Include="Include\Game\Entity.hpp" />
     <ClInclude Include="Include\Game\Player.hpp" />
     <ClInclude Include="Include\Game\Test.hpp" />
     <ClInclude Include="Include\Game\Test2.hpp" />
+    <ClInclude Include="Include\Game\Tile.hpp" />
     <ClInclude Include="Include\Game\World.hpp" />
     <ClInclude Include="Include\States\GameState.hpp" />
     <ClInclude Include="Include\States\State.hpp" />

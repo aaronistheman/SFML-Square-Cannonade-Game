@@ -5,6 +5,8 @@
 #include <Game/Player.hpp>
 #include <Game/Coin.hpp>
 #include <Game/Hunter.hpp>
+#include <Game/Tile.hpp>
+#include <Game/DrawableTile.hpp>
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
@@ -35,7 +37,12 @@ private:
   sf::Sprite mBackgroundSprite;
 
   Player mPlayer;
+
+  // These should eventually be placed in a container
   Coin mCoin1;
   Coin mCoin2;
   Hunter mEnemy1;
+
+  // These should eventually be placed in a container
+  DrawableTile::Ptr mTile1;
 };

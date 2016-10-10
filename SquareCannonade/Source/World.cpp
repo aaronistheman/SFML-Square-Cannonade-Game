@@ -12,6 +12,7 @@ World::World(sf::RenderWindow &window, const TextureHolder &textures)
   , mPlayer()
   , mCoin1()
   , mCoin2()
+  , mTile1(new DrawableTile(30, 30, 30, 30))
 {
   loadTextures();
 
@@ -42,6 +43,8 @@ void World::draw()
   mWindow.draw(mCoin1);
   mWindow.draw(mCoin2);
   mWindow.draw(mEnemy1);
+
+  mWindow.draw(*mTile1);
 }
 
 void World::update(sf::Time dt)
