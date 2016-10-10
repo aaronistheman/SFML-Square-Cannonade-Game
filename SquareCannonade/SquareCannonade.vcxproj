@@ -138,6 +138,7 @@
     <ClCompile Include="Source\State.cpp" />
     <ClCompile Include="Source\StateManager.cpp" />
     <ClCompile Include="Source\Tile.cpp" />
+    <ClCompile Include="Source\TileSet.cpp" />
     <ClCompile Include="Source\TitleState.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
     <ClCompile Include="Source\World.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="Include\Game\Test.hpp" />
     <ClInclude Include="Include\Game\Test2.hpp" />
     <ClInclude Include="Include\Game\Tile.hpp" />
+    <ClInclude Include="Include\Game\TileSet.hpp" />
     <ClInclude Include="Include\Game\World.hpp" />
     <ClInclude Include="Include\States\GameState.hpp" />
     <ClInclude Include="Include\States\State.hpp" />

@@ -3,8 +3,8 @@ Current:
 
 -generate graph based on locations of walls
 	-representation of wall
-		-abstract TileSet class
-		-Wall class
+		-WallTile class
+			-had better be drawable! with a sprite!
 	-first set up tests
 		-just assert numerical values, such as:
 			-number of vertices
@@ -75,6 +75,17 @@ Eventually:
 -tiles of different terrains
 	-in pathfinding graph, apply the costs to the vertices
 -test the readme steps for running project/tests
+-see if Visual Studio can check for memory leaks
+-if collision detection is too slow:
+	-join together tiles of similar types to create bigger (rectangular)
+	hitboxes:
+		-somewhere, enforce that a tileset must be rectangular
+			-how to make adding to a TileSet easier?
+				-have a "capture" method that checks for rectangular-ness
+				after adding all the captured tiles
+		-somewhere, enforce that a tile can only be in one set (so walls
+		can't be on top of each other)?
+		-Wall class (that inherits from TileSet)
 
 Considerable:
 -------------
