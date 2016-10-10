@@ -1,6 +1,6 @@
 # SFML-Square-Cannonade-Game (Currently Unfinished)
 
-(Last updated: 09/24/2016)
+(Last updated: 10/10/2016)
 
 About
 -----
@@ -8,13 +8,16 @@ About
 Named "Square Cannonade" until I find a better name, this game, 
 to be programmed in C++ and SFML, will allow the player to control
 a square as he/she tries to grab all the coins in a level before
-being defeated by cannons that shoot squares.
-This isn't meant to be a big game.
+being defeated by cannons that shoot squares. I will use a
+pathfinding algorithm (most likely A*) to create enemies
+that navigate around walls to chase the player.
 
 Implementation-Specific Features
 --------------------------------
 
-To be announced.
+* "Catch" framework for test-driven development where helpful.
+
+More to be announced.
 
 Gameplay-Specific Features
 --------------------------
@@ -24,14 +27,19 @@ To be announced.
 How to Run Application
 ----------------------
 
-(I am using Visual Studio 2015.)
-To be announced.
+(These steps have yet to be tested for absolute correctness.)
+Using Visual Studio 2015, open SquareCannonade.sln.
+Make sure the startup project is set to SquareCannonade.
+Run the project (use F5 or Ctrl+F5).
 
 How to Run Tests
 ----------------
 
-(I'm assuming Visual Studio 2015 is being used.)
-To be announced.
+(These steps have yet to be tested for absolute correctness.)
+Using Visual Studio 2015, open SquareCannonade.sln.
+Make sure the startup project is set to SquareCannonadeTest.
+Run the project (use Ctrl+F5, not F5,
+or else the console window won't stay open).
 
 Releases
 --------
@@ -48,6 +56,9 @@ Acknowledgements
 Hansson, and Jan Haller. I borrowed certain classes (e.g.
 ResourceHolder) or based certain classes (e.g. Application) on those from the
 source code associated with this book.
+
+* Developers of the Catch framework.
+(https://github.com/philsquared/Catch)
 
 * Background image is from:
 http://www.excelmicro.com/wp-content/uploads/2011/10/white-clouds-blue-sky-seamless-background-tile.jpg

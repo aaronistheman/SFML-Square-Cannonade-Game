@@ -3,7 +3,6 @@ Current:
 
 -generate graph based on locations of walls
 	-representation of wall
-		-write readme directions on how to run tests
 		-abstract TileSet class
 		-Wall class
 	-first set up tests
@@ -75,6 +74,7 @@ Eventually:
 	-2 player mode in which both players collect coins
 -tiles of different terrains
 	-in pathfinding graph, apply the costs to the vertices
+-test the readme steps for running project/tests
 
 Considerable:
 -------------
