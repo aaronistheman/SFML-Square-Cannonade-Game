@@ -2,9 +2,10 @@ Current:
 --------
 
 -generate graph based on locations of walls
-	-representation of wall
-		-WallTile class
-			-draw some WallTile instances; apply the transforms
+	-DETOUR: remove the boilerplate transform code in the draw methods
+		-should just have to pass the current state (instead of letting
+		the default be passed) in World::draw() to each drawn object
+	-createGrid() should store WallTiles too
 	-first set up tests
 		-just assert numerical values, such as:
 			-number of vertices
@@ -38,7 +39,6 @@ they navigate to the player
 	-ideas on how:
 		-see memo in my phone
 		
--remove the boilerplate transform code in the draw methods
 -(not necessarily complete) basic classes for Cannon, EnemySquare, etc.
 	-put the getTransform() logic in one place
 -data read from text files

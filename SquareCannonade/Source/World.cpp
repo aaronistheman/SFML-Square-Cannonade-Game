@@ -38,11 +38,19 @@ World::World(sf::RenderWindow &window, const TextureHolder &textures)
   mCoin2.setPosition(sf::Vector2f(85, 20));
 
   mEnemy1.setPosition(sf::Vector2f(180, 320));
+
+  createJunkWallTiles();
 } // World()
 
 void World::draw()
 {
   mWindow.draw(mBackgroundSprite);
+
+  // Draw each wall (for some reason, I couldn't use a foreach loop)
+  for (size_t i = 0; i < mWallTiles.size(); ++i)
+  {
+    mWindow.draw(*mWallTiles[i]);
+  }
 
   mWindow.draw(mPlayer);
   mWindow.draw(mCoin1);
@@ -107,4 +115,9 @@ void World::createGrid(std::vector<Tile::Ptr> &tileGrid,
 void World::loadTextures()
 {
   mTextures.load(Textures::Background, "Media/background.jpg");
+}
+
+void World::createJunkWallTiles()
+{
+  mWallTiles.push_back(WallTile::Ptr(new WallTile(60, 0, 30, 30)));
 }
