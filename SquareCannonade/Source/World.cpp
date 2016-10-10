@@ -87,10 +87,23 @@ void World::handleRealTimeInput()
 void World::createGrid(std::vector<Tile::Ptr> &tileGrid,
   const sf::IntRect &area, int tileLength)
 {
-  assert(tileGrid.size() == 0);
+  assert(tileGrid.size() == 0); // no existing tiles
   assert(tileLength > 0);
 
-  tileGrid.push_back(Tile::Ptr(new Tile(30, 30, 30, 30)));
+  // area has to be entirely divisible into equally-sized tiles
+  assert(area.width % tileLength == 0);
+  assert(area.height % tileLength == 0);
+
+  // tileGrid.push_back(Tile::Ptr(new Tile(30, 30, 30, 30)));
+
+  for (int y = 0; y < area.height; y += tileLength) // for each grid row
+  {
+    for (int x = 0; x < area.width; x += tileLength) // for each tile in row
+    {
+      tileGrid.push_back(Tile::Ptr(
+        new Tile(x, y, tileLength, tileLength)));
+    } 
+  } // for each row of the grid
 } // createGrid()
 
 void World::loadTextures()
