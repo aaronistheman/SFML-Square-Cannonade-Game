@@ -137,7 +137,6 @@
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\State.cpp" />
     <ClCompile Include="Source\StateManager.cpp" />
-    <ClCompile Include="Source\Test.cpp" />
     <ClCompile Include="Source\Tile.cpp" />
     <ClCompile Include="Source\TitleState.cpp" />
     <ClCompile Include="Source\Utility.cpp" />

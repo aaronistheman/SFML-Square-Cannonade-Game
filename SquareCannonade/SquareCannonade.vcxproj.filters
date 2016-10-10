@@ -40,9 +40,6 @@
     <ClCompile Include="Source\StateManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Test.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\TitleState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
