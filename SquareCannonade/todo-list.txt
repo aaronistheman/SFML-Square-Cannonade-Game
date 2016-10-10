@@ -4,7 +4,7 @@ Current:
 -generate graph based on locations of walls
 	-representation of wall
 		-WallTile class
-			-had better be drawable! with a sprite!
+			-draw some WallTile instances; apply the transforms
 	-first set up tests
 		-just assert numerical values, such as:
 			-number of vertices
@@ -37,7 +37,8 @@ they navigate to the player
 	-don't run A* each frame; maybe do each half second
 	-ideas on how:
 		-see memo in my phone
-
+		
+-remove the boilerplate transform code in the draw methods
 -(not necessarily complete) basic classes for Cannon, EnemySquare, etc.
 	-put the getTransform() logic in one place
 -data read from text files
@@ -67,7 +68,8 @@ Eventually:
 -----------
 
 -why is the TextureHolder passed to the World class?
--remove unused/stub files
+-remove unused/stub files; e.g.:
+	-DrawableTile
 -look into C++ Boost library
 -spritesheets
 -multiplayer mode with SFML's (TCP?) sockets
