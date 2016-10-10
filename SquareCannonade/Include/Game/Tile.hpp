@@ -12,6 +12,8 @@ public:
 public:
   Tile(int left, int top, int width, int height);
 
+  sf::IntRect getRect() const;
+
 private:
   sf::IntRect mRect;
 };

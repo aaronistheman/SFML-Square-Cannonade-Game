@@ -7,13 +7,8 @@ Current:
 			-have World(?) class set up bunch of tiles with
 			appropriate coordinates
 				-implement the tile-creation loop; test-driven development:
-					-create tests that assert the number of created tiles
-						-try a junk assertion on the number of tiles (i.e.
-						the vector's size)
-					-create tests that check the positions of specific tiles
-					(e.g. the fourth tile)
-					-write readme directions on how to run tests
 					-implement the method
+					-write readme directions on how to run tests
 			-merge branch
 		-abstract TileSet class
 		-Wall class
