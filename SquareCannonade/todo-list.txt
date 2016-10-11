@@ -2,10 +2,16 @@ Current:
 --------
 
 -generate graph based on locations of walls
-	-createGrid() should store WallTiles in the given vector too
-		-raises question about where to store level data
+	-createGrid() should store WallTiles in the given vector too (or
+	else making the graph becomes more awkward)
 		-perhaps add test(s) to reflect this
-	-first set up tests
+			-pass string that acts like tile map
+				-get old tests to pass, with tile map being processed
+				-add new tests (that use the walls and thus) that fail
+				-implement creation of walls
+		-probably means the vector of specifically wall tiles should
+		be storing dumb/raw pointers
+	-set up tests for generated graph
 		-just assert numerical values, such as:
 			-number of vertices
 			-number of edges
@@ -87,10 +93,12 @@ Eventually:
 		-somewhere, enforce that a tile can only be in one set (so walls
 		can't be on top of each other)?
 		-Wall class (that inherits from TileSet)
+-where information on size is known, turn some vectors into arrays
 
 Considerable:
 -------------
 
+-tile map creator
 -why does State store a pointer--not a reference--to the window?
 -could only render squares within a certain distance of any entity,
 then make the rest dark, so the player would have to be careful to

@@ -25,9 +25,14 @@ public:
   virtual void handleRealTimeInput();
 
 public: // Public static methods
-  // @param area is the area in which tiles can be created
+  /**
+   * @param area is the area in which tiles can be created
+   * @param tileMap is string of chars, where each char says the type
+   * of a tile (e.g. the fourth char describes the fourth tile)
+   */
   static void createGrid(std::vector<Tile::Ptr> &tileGrid,
-    const sf::IntRect &area, int tileLength);
+    const sf::IntRect &area, int tileLength,
+    const std::string &tileMap);
 
 private:
   void loadTextures();

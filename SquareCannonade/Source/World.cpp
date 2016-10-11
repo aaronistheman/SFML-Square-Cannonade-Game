@@ -93,7 +93,8 @@ void World::handleRealTimeInput()
 }
 
 void World::createGrid(std::vector<Tile::Ptr> &tileGrid,
-  const sf::IntRect &area, int tileLength)
+  const sf::IntRect &area, int tileLength,
+  const std::string &tileMap)
 {
   assert(tileGrid.size() == 0); // no existing tiles
   assert(tileLength > 0);
@@ -102,6 +103,11 @@ void World::createGrid(std::vector<Tile::Ptr> &tileGrid,
   assert(area.width % tileLength == 0);
   assert(area.height % tileLength == 0);
 
+  // tile map string must be correct size
+  int numTiles = area.width / tileLength * area.height / tileLength;
+  assert(tileMap.size() == numTiles);
+
+  /*
   for (int y = 0; y < area.height; y += tileLength) // for each grid row
   {
     for (int x = 0; x < area.width; x += tileLength) // for each tile in row
@@ -110,6 +116,7 @@ void World::createGrid(std::vector<Tile::Ptr> &tileGrid,
         new Tile(x, y, tileLength, tileLength)));
     } 
   } // for each row of the grid
+  */
 } // createGrid()
 
 void World::loadTextures()
