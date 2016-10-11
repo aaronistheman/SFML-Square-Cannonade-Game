@@ -18,7 +18,11 @@ std::string createTileMapAllDefault(sf::IntRect area, int tileLength)
   std::string tileMap = "";
 
   for (int i = 0; i < numTiles; ++i)
-    tileMap += TileMap::Default;
+  {
+    // The cast is needed because of the strongly typed enumerator
+    // (isn't technically char, but takes up size of a char)
+    tileMap += (char) TileType::Default;
+  }
 
   return tileMap;
 }

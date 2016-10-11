@@ -66,9 +66,6 @@
     <ClCompile Include="..\SquareCannonade\Source\TileSet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\SquareCannonade\Source\TileMapConstants.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\SquareCannonade\Source\WallTile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

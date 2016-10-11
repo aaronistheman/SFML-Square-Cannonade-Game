@@ -1,5 +1,6 @@
 #include <Game/World.hpp>
 #include <Utility/Utility.hpp>
+#include <Game/TileMapConstants.hpp>
 
 #include <SFML/Window/Event.hpp>
 

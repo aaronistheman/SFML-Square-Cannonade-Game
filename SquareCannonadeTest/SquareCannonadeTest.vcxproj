@@ -130,7 +130,6 @@
     <ClCompile Include="..\SquareCannonade\Source\State.cpp" />
     <ClCompile Include="..\SquareCannonade\Source\StateManager.cpp" />
     <ClCompile Include="..\SquareCannonade\Source\Tile.cpp" />
-    <ClCompile Include="..\SquareCannonade\Source\TileMapConstants.cpp" />
     <ClCompile Include="..\SquareCannonade\Source\TileSet.cpp" />
     <ClCompile Include="..\SquareCannonade\Source\TitleState.cpp" />
     <ClCompile Include="..\SquareCannonade\Source\Utility.cpp" />
