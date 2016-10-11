@@ -76,9 +76,6 @@
     <ClCompile Include="Source\WallTile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TileMapConstants.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Utility\Utility.hpp">

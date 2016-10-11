@@ -6,7 +6,6 @@ Current:
 	else making the graph becomes more awkward)
 		-perhaps add test(s) to reflect this
 			-pass string that acts like tile map
-				-get old tests to pass, with tile map being processed
 				-add new tests (that use the walls and thus) that fail
 				-implement creation of walls
 		-probably means the vector of specifically wall tiles should

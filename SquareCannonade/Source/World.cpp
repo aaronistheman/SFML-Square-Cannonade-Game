@@ -104,20 +104,33 @@ void World::createGrid(std::vector<Tile::Ptr> &tileGrid,
   assert(area.width % tileLength == 0);
   assert(area.height % tileLength == 0);
 
-  // tile map string must be correct size
   int numTiles = area.width / tileLength * area.height / tileLength;
+  int numTilesPerRow = area.width / tileLength;
+
+  // tile map string must be correct size
   assert(tileMap.size() == numTiles);
 
-  /*
-  for (int y = 0; y < area.height; y += tileLength) // for each grid row
+  for (int y = 0, rowIndex = 0; y < area.height;
+    y += tileLength, rowIndex += 1) // for each grid row
   {
-    for (int x = 0; x < area.width; x += tileLength) // for each tile in row
+    for (int x = 0, colIndex = 0; x < area.width;
+      x += tileLength, colIndex += 1) // for each tile in row
     {
-      tileGrid.push_back(Tile::Ptr(
-        new Tile(x, y, tileLength, tileLength)));
+      char tileType = tileMap.at(rowIndex * numTilesPerRow + colIndex);
+
+      switch (tileType)
+      {
+      case (char) TileType::Default:
+        tileGrid.push_back(Tile::Ptr(
+          new Tile(x, y, tileLength, tileLength)));
+        break;
+
+      default:
+        // Invalid tile type
+        assert(false);
+      }
     } 
   } // for each row of the grid
-  */
 } // createGrid()
 
 void World::loadTextures()
