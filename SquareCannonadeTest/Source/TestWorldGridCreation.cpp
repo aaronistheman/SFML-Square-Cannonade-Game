@@ -27,6 +27,18 @@ std::string createTileMapAllDefault(sf::IntRect area, int tileLength)
   return tileMap;
 }
 
+/**
+ * Helpful because I keep changing the parameters of World::createGrid().
+ */
+void runCreateGrid(std::vector<Tile::Ptr> &tileGrid,
+  const sf::IntRect &area, int tileLength,
+  const std::string &tileMap,
+  std::vector<WallTile*> &wallTiles=std::vector<WallTile*>())
+{
+  // World::createGrid(tileGrid, area, tileLength, tileMap, wallTiles);
+  World::createGrid(tileGrid, area, tileLength, tileMap);
+}
+
 TEST_CASE("Created correct number of tiles #1")
 {
   std::vector<Tile::Ptr> tileGrid;
@@ -34,7 +46,7 @@ TEST_CASE("Created correct number of tiles #1")
   int tileLength = 10;
   std::string tileMap = createTileMapAllDefault(rect, tileLength);
 
-  World::createGrid(tileGrid, rect, tileLength, tileMap);
+  runCreateGrid(tileGrid, rect, tileLength, tileMap);
 
   int answer = computeCorrectNumberTiles(rect, tileLength);
   REQUIRE(tileGrid.size() == answer);
@@ -47,7 +59,7 @@ TEST_CASE("Created correct number of tiles #2")
   int tileLength = 30;
   std::string tileMap = createTileMapAllDefault(rect, tileLength);
 
-  World::createGrid(tileGrid, rect, tileLength, tileMap);
+  runCreateGrid(tileGrid, rect, tileLength, tileMap);
 
   int answer = computeCorrectNumberTiles(rect, tileLength);
   REQUIRE(tileGrid.size() == answer);
@@ -60,7 +72,7 @@ TEST_CASE("Created correct number of tiles #3")
   int tileLength = 15;
   std::string tileMap = createTileMapAllDefault(rect, tileLength);
 
-  World::createGrid(tileGrid, rect, tileLength, tileMap);
+  runCreateGrid(tileGrid, rect, tileLength, tileMap);
 
   int answer = computeCorrectNumberTiles(rect, tileLength);
   REQUIRE(tileGrid.size() == answer);
@@ -73,7 +85,7 @@ TEST_CASE("Correct tile x-coordinate #1")
   int tileLength = 10;
   std::string tileMap = createTileMapAllDefault(rect, tileLength);
 
-  World::createGrid(tileGrid, rect, tileLength, tileMap);
+  runCreateGrid(tileGrid, rect, tileLength, tileMap);
 
   // Second tile should be offset from left by tile length
   Tile *tile = tileGrid.at(1).get();
@@ -87,7 +99,7 @@ TEST_CASE("Correct tile y-coordinate #1")
   int tileLength = 10;
   std::string tileMap = createTileMapAllDefault(rect, tileLength);
 
-  World::createGrid(tileGrid, rect, tileLength, tileMap);
+  runCreateGrid(tileGrid, rect, tileLength, tileMap);
 
   // Second tile should still be on first row
   Tile *tile = tileGrid.at(1).get();
@@ -101,7 +113,7 @@ TEST_CASE("Correct tile x-coordinate #2")
   int tileLength = 25;
   std::string tileMap = createTileMapAllDefault(rect, tileLength);
 
-  World::createGrid(tileGrid, rect, tileLength, tileMap);
+  runCreateGrid(tileGrid, rect, tileLength, tileMap);
 
   Tile *tile = tileGrid.at(10).get();
   REQUIRE(tile->getRect().left == 50);
@@ -114,7 +126,7 @@ TEST_CASE("Correct tile y-coordinate #2")
   int tileLength = 25;
   std::string tileMap = createTileMapAllDefault(rect, tileLength);
 
-  World::createGrid(tileGrid, rect, tileLength, tileMap);
+  runCreateGrid(tileGrid, rect, tileLength, tileMap);
 
   Tile *tile = tileGrid.at(6).get();
   REQUIRE(tile->getRect().top == 25);
@@ -127,7 +139,7 @@ TEST_CASE("Correct tile width")
   int tileLength = 25;
   std::string tileMap = createTileMapAllDefault(rect, tileLength);
 
-  World::createGrid(tileGrid, rect, tileLength, tileMap);
+  runCreateGrid(tileGrid, rect, tileLength, tileMap);
 
   Tile *tile = tileGrid.at(8).get(); // random tile
   REQUIRE(tile->getRect().width == tileLength);
@@ -140,7 +152,7 @@ TEST_CASE("Correct tile height")
   int tileLength = 20;
   std::string tileMap = createTileMapAllDefault(rect, tileLength);
 
-  World::createGrid(tileGrid, rect, tileLength, tileMap);
+  runCreateGrid(tileGrid, rect, tileLength, tileMap);
 
   Tile *tile = tileGrid.at(2).get(); // random tile
   REQUIRE(tile->getRect().height == tileLength);

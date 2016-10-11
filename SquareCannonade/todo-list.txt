@@ -7,9 +7,20 @@ Current:
 		-perhaps add test(s) to reflect this
 			-pass string that acts like tile map
 				-add new tests (that use the walls and thus) that fail
+					-how to check number or position of wall tiles?
+						-have createGrid return the vector of wall tile pointers
+							-add the parameter to Wall::createGrid()
 				-implement creation of walls
-		-probably means the vector of specifically wall tiles should
-		be storing dumb/raw pointers
+	-fix tile type system (to make adding tiles of different terrains easier
+	in the future)
+		-each tile should know its type (an enumerator)
+			-Tile has abstract draw method and type member
+			-make Tile folder
+			-have PlatformTile class
+			-adjust WallTile class
+				-adjust tests
+			-adjust createGrid()
+				-adjust tests
 	-set up tests for generated graph
 		-just assert numerical values, such as:
 			-number of vertices
