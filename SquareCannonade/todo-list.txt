@@ -6,14 +6,11 @@ Current:
 	else making the graph becomes more awkward)
 		-perhaps add test(s) to reflect this
 			-pass string that acts like tile map
-				-add new tests (that use the walls and thus) that fail
-					-how to check number or position of wall tiles?
-						-have createGrid return the vector of wall tile pointers
-							-add the parameter to Wall::createGrid()
 				-implement creation of walls
 	-fix tile type system (to make adding tiles of different terrains easier
 	in the future)
-		-each tile should know its type (an enumerator)
+		IDEAS:
+		1) each tile should know its type (an enumerator)
 			-Tile has abstract draw method and type member
 			-make Tile folder
 			-have PlatformTile class
@@ -21,6 +18,9 @@ Current:
 				-adjust tests
 			-adjust createGrid()
 				-adjust tests
+		2) change World::createGrid() so that it returns a map (where the key
+		is a tile type, and the value is a vector of pointers to all tiles
+		of that type)
 	-set up tests for generated graph
 		-just assert numerical values, such as:
 			-number of vertices
@@ -104,6 +104,7 @@ Eventually:
 		can't be on top of each other)?
 		-Wall class (that inherits from TileSet)
 -where information on size is known, turn some vectors into arrays
+-eliminate unneeded inclusions of <iostream>
 
 Considerable:
 -------------

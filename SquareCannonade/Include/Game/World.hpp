@@ -19,6 +19,8 @@ class World
 public:
   World(sf::RenderWindow &window, const TextureHolder &textures);
 
+  // const std::vector<WallTile::Ptr>& getWallTiles() const;
+
   virtual void draw();
   virtual void update(sf::Time dt);
   virtual bool handleEvent(const sf::Event& event);
@@ -32,13 +34,14 @@ public: // Public static methods
    */
   static void createGrid(std::vector<Tile::Ptr> &tileGrid,
     const sf::IntRect &area, int tileLength,
-    const std::string &tileMap);
+    const std::string &tileMap,
+    std::vector<WallTile*> &wallTiles);
 
 private:
   void loadTextures();
 
   // For testing
-  void createJunkWallTiles();
+  // void createJunkWallTiles();
 
 private:
   static const int TileLength;
@@ -63,5 +66,5 @@ private:
   Hunter mEnemy1;
 
   std::vector<Tile::Ptr> mTileGrid;
-  std::vector<WallTile::Ptr> mWallTiles;
+  std::vector<WallTile*> mWallTiles;
 };

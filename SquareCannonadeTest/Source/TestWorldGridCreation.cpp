@@ -5,6 +5,7 @@
 #include <Game/TileMapConstants.hpp>
 
 #include <vector>
+#include <iostream>
 
 int computeCorrectNumberTiles(sf::IntRect rect, int tileLength)
 {
@@ -35,8 +36,7 @@ void runCreateGrid(std::vector<Tile::Ptr> &tileGrid,
   const std::string &tileMap,
   std::vector<WallTile*> &wallTiles=std::vector<WallTile*>())
 {
-  // World::createGrid(tileGrid, area, tileLength, tileMap, wallTiles);
-  World::createGrid(tileGrid, area, tileLength, tileMap);
+  World::createGrid(tileGrid, area, tileLength, tileMap, wallTiles);
 }
 
 TEST_CASE("Created correct number of tiles #1")
@@ -157,3 +157,61 @@ TEST_CASE("Correct tile height")
   Tile *tile = tileGrid.at(2).get(); // random tile
   REQUIRE(tile->getRect().height == tileLength);
 }
+
+/*
+TEST_CASE("Correct number of wall tiles created #1")
+{
+  std::vector<Tile::Ptr> tileGrid;
+  sf::IntRect rect(0, 0, 50, 20);
+  int tileLength = 10;
+  std::vector<WallTile*> wallTiles;
+
+  std::string tileMap = "";
+  tileMap += "000w0";
+  tileMap += "0w0w0";
+
+  runCreateGrid(tileGrid, rect, tileLength, tileMap, wallTiles);
+
+  // Assertion
+  std::cout << "Here\n";
+  size_t a = wallTiles.size();
+  std::cout << "wallTiles.size(): " << a << '\n';
+  // REQUIRE(wallTiles.size() == 3);
+  std::cout << "Here2\n";
+  REQUIRE(2 == 3);
+}
+
+TEST_CASE("Correct number of wall tiles created #2")
+{
+  std::vector<Tile::Ptr> tileGrid;
+  sf::IntRect rect(0, 0, 50, 20);
+  int tileLength = 10;
+  std::vector<WallTile*> wallTiles;
+
+  std::string tileMap = "";
+  tileMap += "00000";
+  tileMap += "00w00";
+
+  runCreateGrid(tileGrid, rect, tileLength, tileMap, wallTiles);
+
+  // Assertion
+  REQUIRE(wallTiles.size() == 1);
+}
+
+TEST_CASE("Correct wall tile x-coordinate #1")
+{
+  std::vector<Tile::Ptr> tileGrid;
+  sf::IntRect rect(0, 0, 50, 20);
+  int tileLength = 10;
+  std::vector<WallTile*> wallTiles;
+
+  std::string tileMap = "";
+  tileMap += "000w0";
+  tileMap += "0w0w0";
+
+  runCreateGrid(tileGrid, rect, tileLength, tileMap, wallTiles);
+
+  // Assertion
+  REQUIRE(wallTiles.at(1)->getRect().left == tileLength);
+}
+*/

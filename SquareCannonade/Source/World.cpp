@@ -4,6 +4,8 @@
 
 #include <SFML/Window/Event.hpp>
 
+#include <iostream>
+
 const int World::TileLength = 30;
 const float World::BorderWidth = 10.f;
 
@@ -40,8 +42,15 @@ World::World(sf::RenderWindow &window, const TextureHolder &textures)
 
   mEnemy1.setPosition(sf::Vector2f(180, 320));
 
-  createJunkWallTiles();
+  // createJunkWallTiles();
 } // World()
+
+/*
+const std::vector<WallTile::Ptr>& World::getWallTiles() const
+{
+  return mWallTiles;
+}
+*/
 
 void World::draw()
 {
@@ -95,7 +104,8 @@ void World::handleRealTimeInput()
 
 void World::createGrid(std::vector<Tile::Ptr> &tileGrid,
   const sf::IntRect &area, int tileLength,
-  const std::string &tileMap)
+  const std::string &tileMap,
+  std::vector<WallTile*> &wallTiles)
 {
   assert(tileGrid.size() == 0); // no existing tiles
   assert(tileLength > 0);
@@ -125,6 +135,12 @@ void World::createGrid(std::vector<Tile::Ptr> &tileGrid,
           new Tile(x, y, tileLength, tileLength)));
         break;
 
+      case (char) TileType::Wall:
+        tileGrid.push_back(WallTile::Ptr(
+          new WallTile(x, y, tileLength, tileLength)));
+        wallTiles.push_back((WallTile*) tileGrid.back().get());
+        break;
+
       default:
         // Invalid tile type
         assert(false);
@@ -138,7 +154,9 @@ void World::loadTextures()
   mTextures.load(Textures::Background, "Media/background.jpg");
 }
 
+/*
 void World::createJunkWallTiles()
 {
   mWallTiles.push_back(WallTile::Ptr(new WallTile(60, 0, 30, 30)));
 }
+*/
