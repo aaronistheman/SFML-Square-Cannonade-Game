@@ -158,7 +158,6 @@ TEST_CASE("Correct tile height")
   REQUIRE(tile->getRect().height == tileLength);
 }
 
-/*
 TEST_CASE("Correct number of wall tiles created #1")
 {
   std::vector<Tile::Ptr> tileGrid;
@@ -171,16 +170,18 @@ TEST_CASE("Correct number of wall tiles created #1")
   tileMap += "0w0w0";
 
   runCreateGrid(tileGrid, rect, tileLength, tileMap, wallTiles);
+  // wallTiles.push_back(NULL); // doesn't cause Catch failure
 
   // Assertion
   std::cout << "Here\n";
   size_t a = wallTiles.size();
   std::cout << "wallTiles.size(): " << a << '\n';
-  // REQUIRE(wallTiles.size() == 3);
+  REQUIRE(a == 3);
   std::cout << "Here2\n";
-  REQUIRE(2 == 3);
+  // REQUIRE(2 == 3);
 }
 
+/*
 TEST_CASE("Correct number of wall tiles created #2")
 {
   std::vector<Tile::Ptr> tileGrid;

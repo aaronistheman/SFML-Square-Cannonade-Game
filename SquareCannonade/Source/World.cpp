@@ -136,9 +136,13 @@ void World::createGrid(std::vector<Tile::Ptr> &tileGrid,
         break;
 
       case (char) TileType::Wall:
+        // THIS LINE CAUSES THE FAILURE: ... :-(
         tileGrid.push_back(WallTile::Ptr(
           new WallTile(x, y, tileLength, tileLength)));
+
+        /*
         wallTiles.push_back((WallTile*) tileGrid.back().get());
+        */
         break;
 
       default:

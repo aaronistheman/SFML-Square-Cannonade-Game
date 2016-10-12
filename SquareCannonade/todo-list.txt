@@ -4,9 +4,15 @@ Current:
 -generate graph based on locations of walls
 	-fix tile type system (to make adding tiles of different terrains easier
 	in the future)
+		(IGNORE THE TEST ISSUE FOR NOW; BE PRODUCTIVE)
 		IDEAS:
 		1) each tile should know its type (an enumerator)
-			-Tile has abstract draw method and type member
+			[
+				-Tile has:
+					-abstract draw method
+					-member: type
+					-member: penalty (correlates to weight in graph)
+			]
 			-make Tile folder
 			-have PlatformTile class
 			-adjust WallTile class
