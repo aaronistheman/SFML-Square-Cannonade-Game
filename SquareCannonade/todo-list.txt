@@ -2,11 +2,6 @@ Current:
 --------
 
 -generate graph based on locations of walls
-	-createGrid() should store WallTiles in the given vector too (or
-	else making the graph becomes more awkward)
-		-perhaps add test(s) to reflect this
-			-pass string that acts like tile map
-				-implement creation of walls
 	-fix tile type system (to make adding tiles of different terrains easier
 	in the future)
 		IDEAS:

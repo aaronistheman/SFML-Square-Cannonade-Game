@@ -157,6 +157,10 @@ void World::loadTextures()
 /*
 void World::createJunkWallTiles()
 {
-  mWallTiles.push_back(WallTile::Ptr(new WallTile(60, 0, 30, 30)));
+  // Poor quality code, since this is just for quick test
+  auto area = sf::IntRect(0, 0, 300, 30);
+  std::string tileMap = "0000w000w0";
+
+  World::createGrid(mTileGrid, area, TileLength, tileMap, mWallTiles);
 }
 */
