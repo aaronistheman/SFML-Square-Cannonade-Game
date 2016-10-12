@@ -135,5 +135,8 @@
     <ClInclude Include="Include\Game\WallTile.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Game\TileMapConstants.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

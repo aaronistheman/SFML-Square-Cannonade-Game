@@ -2,10 +2,21 @@ Current:
 --------
 
 -generate graph based on locations of walls
-	-createGrid() should store WallTiles in the given vector too
-		-raises question about where to store level data
-		-perhaps add test(s) to reflect this
-	-first set up tests
+	-fix tile type system (to make adding tiles of different terrains easier
+	in the future)
+		IDEAS:
+		1) each tile should know its type (an enumerator)
+			-Tile has abstract draw method and type member
+			-make Tile folder
+			-have PlatformTile class
+			-adjust WallTile class
+				-adjust tests
+			-adjust createGrid()
+				-adjust tests
+		2) change World::createGrid() so that it returns a map (where the key
+		is a tile type, and the value is a vector of pointers to all tiles
+		of that type)
+	-set up tests for generated graph
 		-just assert numerical values, such as:
 			-number of vertices
 			-number of edges
@@ -87,10 +98,13 @@ Eventually:
 		-somewhere, enforce that a tile can only be in one set (so walls
 		can't be on top of each other)?
 		-Wall class (that inherits from TileSet)
+-where information on size is known, turn some vectors into arrays
+-eliminate unneeded inclusions of <iostream>
 
 Considerable:
 -------------
 
+-tile map creator
 -why does State store a pointer--not a reference--to the window?
 -could only render squares within a certain distance of any entity,
 then make the rest dark, so the player would have to be careful to

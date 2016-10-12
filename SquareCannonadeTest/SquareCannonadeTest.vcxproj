@@ -133,6 +133,7 @@
     <ClCompile Include="..\SquareCannonade\Source\TileSet.cpp" />
     <ClCompile Include="..\SquareCannonade\Source\TitleState.cpp" />
     <ClCompile Include="..\SquareCannonade\Source\Utility.cpp" />
+    <ClCompile Include="..\SquareCannonade\Source\WallTile.cpp" />
     <ClCompile Include="..\SquareCannonade\Source\World.cpp" />
     <ClCompile Include="Source\Setup.cpp" />
     <ClCompile Include="Source\TestTileSet.cpp" />
