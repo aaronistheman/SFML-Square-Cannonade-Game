@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\Coin.cpp" />
+    <ClCompile Include="Source\DefaultTile.cpp" />
     <ClCompile Include="Source\Entity.cpp" />
     <ClCompile Include="Source\GameState.cpp" />
     <ClCompile Include="Source\Hunter.cpp" />
@@ -154,6 +155,7 @@
     <ClInclude Include="Include\States\State.hpp" />
     <ClInclude Include="Include\States\StateManager.hpp" />
     <ClInclude Include="Include\States\TitleState.hpp" />
+    <ClInclude Include="Include\Tile\DefaultTile.hpp" />
     <ClInclude Include="Include\Tile\Tile.hpp" />
     <ClInclude Include="Include\Tile\TileMapConstants.hpp" />
     <ClInclude Include="Include\Tile\TileSet.hpp" />

@@ -4,7 +4,7 @@
 #include <SFML/Graphics/Transformable.hpp>
 
 WallTile::WallTile(int left, int top, int width, int height)
-  : Tile(left, top, width, height)
+  : Tile(left, top, width, height, TileType::Wall, INT_MAX)
   , mSprite(sf::Vector2f(width, height))
 {
   mSprite.setPosition(left, top);

@@ -9,19 +9,17 @@ Current:
 			[
 				-Tile has:
 					-abstract draw method
-						-move sf::Drawable to Tile
 					-member: type
 					-member: penalty (correlates to weight in graph)
 			]
-			-have PlatformTile class
-			-adjust WallTile class
-				-adjust tests
-			-adjust createGrid()
-				-adjust tests
+			-get main app working again
+			-get the 10 tests working again
+				-adjust createGrid()?
+			-put common subclass source file includes in Tile.hpp
 		2) change World::createGrid() so that it returns a map (where the key
 		is a tile type, and the value is a vector of pointers to all tiles
 		of that type)
-	-set up tests for generated graph
+	-set up tests for generated graph: have new class
 		-just assert numerical values, such as:
 			-number of vertices
 			-number of edges
