@@ -1,4 +1,4 @@
-#include <Game/TileSet.hpp>
+#include <Tile/TileSet.hpp>
 
 TileSet::TileSet()
   : mSet()

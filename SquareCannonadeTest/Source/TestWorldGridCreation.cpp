@@ -1,8 +1,8 @@
 #include <Catch/Catch.hpp>
 
 #include <Game/World.hpp>
-#include <Game/Tile.hpp>
-#include <Game/TileMapConstants.hpp>
+#include <Tile/Tile.hpp>
+#include <Tile/TileMapConstants.hpp>
 
 #include <vector>
 #include <iostream>

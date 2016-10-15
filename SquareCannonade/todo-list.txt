@@ -9,10 +9,10 @@ Current:
 			[
 				-Tile has:
 					-abstract draw method
+						-move sf::Drawable to Tile
 					-member: type
 					-member: penalty (correlates to weight in graph)
 			]
-			-make Tile folder
 			-have PlatformTile class
 			-adjust WallTile class
 				-adjust tests

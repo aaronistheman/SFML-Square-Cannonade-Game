@@ -1,4 +1,4 @@
-#include <Game/WallTile.hpp>
+#include <Tile/WallTile.hpp>
 
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/Transformable.hpp>

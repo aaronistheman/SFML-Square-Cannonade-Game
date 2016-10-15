@@ -5,8 +5,8 @@
 #include <Game/Player.hpp>
 #include <Game/Coin.hpp>
 #include <Game/Hunter.hpp>
-#include <Game/Tile.hpp>
-#include <Game/WallTile.hpp>
+#include <Tile/Tile.hpp>
+#include <Tile/WallTile.hpp>
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>

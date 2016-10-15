@@ -64,27 +64,18 @@
     <ClCompile Include="Source\Hunter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Tile.cpp">
+    <ClCompile Include="Source\WallTile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DrawableTile.cpp">
+    <ClCompile Include="Source\Tile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\TileSet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\WallTile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Utility\Utility.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Game\Test.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Game\Test2.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Include\States\GameState.hpp">
@@ -123,19 +114,16 @@
     <ClInclude Include="Include\Game\Hunter.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Game\Tile.hpp">
+    <ClInclude Include="Include\Tile\Tile.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Game\DrawableTile.hpp">
+    <ClInclude Include="Include\Tile\TileMapConstants.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Game\TileSet.hpp">
+    <ClInclude Include="Include\Tile\TileSet.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Game\WallTile.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\Game\TileMapConstants.hpp">
+    <ClInclude Include="Include\Tile\WallTile.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

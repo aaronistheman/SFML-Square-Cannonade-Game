@@ -1,6 +1,6 @@
 #include <Catch/Catch.hpp>
 
-#include <Game/TileSet.hpp>
+#include <Tile/TileSet.hpp>
 
 TEST_CASE("TileSet::addTile() #1")
 {
