@@ -1,6 +1,7 @@
 #include <Game/World.hpp>
 #include <Utility/Utility.hpp>
 #include <Tile/TileMapConstants.hpp>
+#include <Tile/DefaultTile.hpp>
 
 #include <SFML/Window/Event.hpp>
 
@@ -132,7 +133,7 @@ void World::createGrid(std::vector<Tile::Ptr> &tileGrid,
       {
       case (char) TileType::Default:
         tileGrid.push_back(Tile::Ptr(
-          new Tile(x, y, tileLength, tileLength)));
+          new DefaultTile(x, y, tileLength, tileLength)));
         break;
 
       case (char) TileType::Wall:
