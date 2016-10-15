@@ -122,6 +122,7 @@
   <ItemGroup>
     <ClCompile Include="..\SquareCannonade\Source\Application.cpp" />
     <ClCompile Include="..\SquareCannonade\Source\Coin.cpp" />
+    <ClCompile Include="..\SquareCannonade\Source\DefaultTile.cpp" />
     <ClCompile Include="..\SquareCannonade\Source\Entity.cpp" />
     <ClCompile Include="..\SquareCannonade\Source\GameState.cpp" />
     <ClCompile Include="..\SquareCannonade\Source\Hunter.cpp" />
