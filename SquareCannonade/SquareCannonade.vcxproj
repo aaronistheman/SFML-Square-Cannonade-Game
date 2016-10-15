@@ -134,6 +134,7 @@
     <ClCompile Include="Source\GameState.cpp" />
     <ClCompile Include="Source\Hunter.cpp" />
     <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\PathfindingGraph.cpp" />
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\State.cpp" />
     <ClCompile Include="Source\StateManager.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="Include\Game\Coin.hpp" />
     <ClInclude Include="Include\Game\Hunter.hpp" />
     <ClInclude Include="Include\Game\Entity.hpp" />
+    <ClInclude Include="Include\Game\PathfindingGraph.hpp" />
     <ClInclude Include="Include\Game\Player.hpp" />
     <ClInclude Include="Include\Game\World.hpp" />
     <ClInclude Include="Include\States\GameState.hpp" />

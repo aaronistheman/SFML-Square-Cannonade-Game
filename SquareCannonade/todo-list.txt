@@ -13,6 +13,9 @@ Current:
 	-have way to set up goal vertices
 	-have way to set start vertex and "run the algorithm"
 	(just print a junk statement for now)
+	-set up good tile map for World?
+-apply grid test fixes
+	-figure out why answer works
 -use A* pathfinding algorithm to have enemies avoid walls as
 they navigate to the player
 	-cite helpful sources

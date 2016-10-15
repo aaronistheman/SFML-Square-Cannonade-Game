@@ -136,6 +136,7 @@
     <ClCompile Include="..\SquareCannonade\Source\WallTile.cpp" />
     <ClCompile Include="..\SquareCannonade\Source\World.cpp" />
     <ClCompile Include="Source\Setup.cpp" />
+    <ClCompile Include="Source\TestPathfindingGraph.cpp" />
     <ClCompile Include="Source\TestTileSet.cpp" />
     <ClCompile Include="Source\TestWorldGridCreation.cpp" />
   </ItemGroup>
