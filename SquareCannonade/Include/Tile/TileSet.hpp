@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Game/Tile.hpp>
+#include <Tile/Tile.hpp>
 
 #include <vector>
 

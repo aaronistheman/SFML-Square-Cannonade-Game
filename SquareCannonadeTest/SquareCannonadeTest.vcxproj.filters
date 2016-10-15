@@ -30,9 +30,6 @@
     <ClCompile Include="..\SquareCannonade\Source\Coin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\SquareCannonade\Source\DrawableTile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\SquareCannonade\Source\Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -51,9 +48,6 @@
     <ClCompile Include="..\SquareCannonade\Source\StateManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\SquareCannonade\Source\Tile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\SquareCannonade\Source\TitleState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -63,10 +57,16 @@
     <ClCompile Include="Source\TestTileSet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\SquareCannonade\Source\Tile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\SquareCannonade\Source\TileSet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\SquareCannonade\Source\WallTile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SquareCannonade\Source\DefaultTile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

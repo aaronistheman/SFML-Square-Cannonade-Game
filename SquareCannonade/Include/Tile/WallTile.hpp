@@ -1,13 +1,12 @@
 #pragma once
 
-#include <Game/Tile.hpp>
+#include <Tile/Tile.hpp>
 
-#include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 
 #include <memory>
 
-class WallTile : public Tile, public sf::Drawable
+class WallTile : public Tile
 {
 public:
   typedef std::unique_ptr<WallTile> Ptr;
