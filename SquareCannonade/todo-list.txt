@@ -4,9 +4,8 @@ Current:
 -generate graph based on locations of walls
 	-fix tile type system (to make adding tiles of different terrains easier
 	in the future)
-		(IGNORE THE TEST ISSUE FOR NOW; BE PRODUCTIVE)
 		IDEAS:
-		1) each tile should know its type (an enumerator)
+	PICKED->>>>>1) each tile should know its type (an enumerator)
 			[
 				-Tile has:
 					-abstract draw method
