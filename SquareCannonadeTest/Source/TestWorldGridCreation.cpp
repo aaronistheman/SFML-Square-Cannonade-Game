@@ -173,12 +173,7 @@ TEST_CASE("Correct number of wall tiles created #1")
   runCreateGrid(tileGrid, rect, tileLength, tileMap, wallTiles);
 
   // Assertion
-  std::cout << "Here\n";
-  size_t a = wallTiles.size();
-  std::cout << "wallTiles.size(): " << a << '\n';
-  // REQUIRE(wallTiles.size() == 3);
-  std::cout << "Here2\n";
-  REQUIRE(2 == 3);
+  REQUIRE(wallTiles.size() == 3);
 }
 
 TEST_CASE("Correct number of wall tiles created #2")
