@@ -12,6 +12,9 @@ Current:
 				-diagonal: 14?
 				-non-diagonal: 10?
 	-implement PathfindingGraph constructor in order to pass the test
+		-at first, ignore the concept of walls and edges; make vertices
+		-apply the concept of (and ignore creation of) walls
+		-make edges
 	(-for the subgoals below, it may help to have some function to translate
 	positional coordinates into indices of corresponding vertices in graph)
 	-have way to set up goal vertices
