@@ -158,12 +158,6 @@ TEST_CASE("Correct tile height")
   REQUIRE(tile->getRect().height == tileLength);
 }
 
-/*
-
-The tests in this block comment don't seem to work.
-For more on why, see my (as of now, unanswered) StackOverflow post:
-http://stackoverflow.com/questions/40049866/visual-studio-vector-of-unique-pointers-of-subclasses-crashes
-
 TEST_CASE("Correct number of wall tiles created #1")
 {
   std::vector<Tile::Ptr> tileGrid;
@@ -214,4 +208,3 @@ TEST_CASE("Correct wall tile x-coordinate #1")
   // Assertion
   REQUIRE(wallTiles.at(1)->getRect().left == tileLength);
 }
-*/

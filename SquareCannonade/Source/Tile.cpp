@@ -8,6 +8,10 @@ Tile::Tile(int left, int top, int width, int height, TileType type, int penalty)
 
 }
 
+Tile::~Tile()
+{
+}
+
 sf::IntRect Tile::getRect() const
 {
   return mRect;

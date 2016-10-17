@@ -14,6 +14,7 @@ public:
 
 public:
   Tile(int left, int top, int width, int height, TileType type, int penalty);
+  virtual ~Tile();
 
   sf::IntRect getRect() const;
   int getPenalty() const;

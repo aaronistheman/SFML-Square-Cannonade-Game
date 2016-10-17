@@ -5,17 +5,18 @@ Current:
 	-set up tests for generated graph: have new class
 		-just assert numerical values, such as:
 			-number of vertices
+				-check size of set of Vertex instances
 			-number of edges
 			-certain weights
 			-absence of certain vertices
 			-absence of certain diagonal edges
 			-etc.
+	(-for the subgoals below, it may help to have some function to translate
+	positional coordinates into indices of corresponding vertices in graph)
 	-have way to set up goal vertices
 	-have way to set start vertex and "run the algorithm"
 	(just print a junk statement for now)
 	-set up good tile map for World?
--apply grid test fixes
-	-figure out why answer works
 -use A* pathfinding algorithm to have enemies avoid walls as
 they navigate to the player
 	-cite helpful sources
