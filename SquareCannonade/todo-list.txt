@@ -5,11 +5,12 @@ Current:
 	-add some members for PathfindingGraph, so the tests can assert something
 	-set up tests for generated graph
 		-just assert numerical values, such as:
-			-number of edges
-			-certain weights
-			-absence of certain vertices
-			-absence of certain diagonal edges
-			-etc.
+			-certain weights of edges
+				-how do I access an edge?
+					-access some vertex, then check a diagonal incident edge
+					and a non-diagonal incident edge
+				-diagonal: 14?
+				-non-diagonal: 10?
 	-implement PathfindingGraph constructor in order to pass the test
 	(-for the subgoals below, it may help to have some function to translate
 	positional coordinates into indices of corresponding vertices in graph)

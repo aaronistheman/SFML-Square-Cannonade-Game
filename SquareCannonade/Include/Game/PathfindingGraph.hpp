@@ -17,4 +17,5 @@ public:
   explicit PathfindingGraph(const std::vector<Tile::Ptr> &tileGrid);
 
   int getNumVertices() const;
+  int getNumEdges() const;
 };

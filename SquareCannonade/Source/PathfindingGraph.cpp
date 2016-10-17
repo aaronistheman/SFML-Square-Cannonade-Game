@@ -9,3 +9,8 @@ int PathfindingGraph::getNumVertices() const
 {
   return 0; // to be implemented correctly
 }
+
+int PathfindingGraph::getNumEdges() const
+{
+  return 0; // to be implemented correctly
+}
