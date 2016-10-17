@@ -135,6 +135,7 @@
     <ClCompile Include="..\SquareCannonade\Source\Utility.cpp" />
     <ClCompile Include="..\SquareCannonade\Source\WallTile.cpp" />
     <ClCompile Include="..\SquareCannonade\Source\World.cpp" />
+    <ClCompile Include="Source\GeneralHelpersForTests.cpp" />
     <ClCompile Include="Source\Setup.cpp" />
     <ClCompile Include="Source\TestPathfindingGraph.cpp" />
     <ClCompile Include="Source\TestTileSet.cpp" />
@@ -142,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Catch\Catch.hpp" />
+    <ClInclude Include="Include\GeneralHelpersForTests.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

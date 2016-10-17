@@ -2,7 +2,8 @@ Current:
 --------
 
 -generate graph based on locations of walls
-	-set up tests for generated graph: have new class
+	-add some members for PathfindingGraph, so the tests can assert something
+	-set up tests for generated graph
 		-just assert numerical values, such as:
 			-number of vertices
 				-check size of set of Vertex instances
