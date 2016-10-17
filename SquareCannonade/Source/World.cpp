@@ -43,7 +43,7 @@ World::World(sf::RenderWindow &window, const TextureHolder &textures)
 
   mEnemy1.setPosition(sf::Vector2f(180, 320));
 
-  // createJunkWallTiles();
+  createJunkWallTiles();
 } // World()
 
 /*
@@ -155,7 +155,6 @@ void World::loadTextures()
   mTextures.load(Textures::Background, "Media/background.jpg");
 }
 
-/*
 void World::createJunkWallTiles()
 {
   // Poor quality code, since this is just for quick test
@@ -164,4 +163,3 @@ void World::createJunkWallTiles()
 
   World::createGrid(mTileGrid, area, TileLength, tileMap, mWallTiles);
 }
-*/

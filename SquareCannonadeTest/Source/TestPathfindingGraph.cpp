@@ -1,8 +1,39 @@
 #include <Catch/Catch.hpp>
+#include <GeneralHelpersForTests.hpp>
 
 #include <Game/PathfindingGraph.hpp>
 
-TEST_CASE("blah")
+TEST_CASE("Created correct number of vertices #1")
 {
-  REQUIRE(2 == 3);
+  std::vector<Tile::Ptr> tileGrid;
+  sf::IntRect rect(0, 0, 40, 30);
+  int tileLength = 10;
+
+  // Use tile map with no walls
+  std::string tileMap = createTileMapAllDefault(rect, tileLength);
+
+  runCreateGrid(tileGrid, rect, tileLength, tileMap);
+  PathfindingGraph pg(tileGrid);
+
+  // Assertion
+  REQUIRE(pg.getNumVertices() == 12);
+}
+
+TEST_CASE("Created correct number of vertices #2")
+{
+  std::vector<Tile::Ptr> tileGrid;
+  sf::IntRect rect(0, 0, 40, 30);
+  int tileLength = 10;
+
+  // This tile map has a few walls, which are not translated into vertices
+  std::string tileMap = "";
+  tileMap += "0000";
+  tileMap += "00w0";
+  tileMap += "000w";
+
+  runCreateGrid(tileGrid, rect, tileLength, tileMap);
+  PathfindingGraph pg = PathfindingGraph(tileGrid);
+
+  // Assertion
+  REQUIRE(pg.getNumVertices() == 10);
 }
