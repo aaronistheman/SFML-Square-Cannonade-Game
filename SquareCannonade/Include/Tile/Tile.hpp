@@ -17,7 +17,10 @@ public:
   virtual ~Tile();
 
   sf::IntRect getRect() const;
+  TileType getType() const;
   int getPenalty() const;
+
+  bool isTraversable() const; // can an entity traverse this tile?
 
   virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
 

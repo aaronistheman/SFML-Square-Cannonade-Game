@@ -17,7 +17,22 @@ sf::IntRect Tile::getRect() const
   return mRect;
 }
 
+TileType Tile::getType() const
+{
+  return mType;
+}
+
 int Tile::getPenalty() const
 {
   return mPenalty;
+}
+
+bool Tile::isTraversable() const
+{
+  switch (mType) {
+  case TileType::Wall:
+    return false;
+  default:
+    return true;
+  }
 }

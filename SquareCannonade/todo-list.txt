@@ -2,19 +2,17 @@ Current:
 --------
 
 -generate graph based on locations of walls
-	-add some members for PathfindingGraph, so the tests can assert something
 	-set up tests for generated graph
-		-just assert numerical values, such as:
-			-certain weights of edges
-				-how do I access an edge?
-					-access some vertex, then check a diagonal incident edge
-					and a non-diagonal incident edge
-				-diagonal: 14?
-				-non-diagonal: 10?
+		-certain weights of edges
+			-how do I access an edge?
+				-access some vertex, then check a diagonal incident edge
+				and a non-diagonal incident edge
+			-diagonal: 14?
+			-non-diagonal: 10?
 	-implement PathfindingGraph constructor in order to pass the test
-		-at first, ignore the concept of walls and edges; make vertices
-		-apply the concept of (and ignore creation of) walls
 		-make edges
+
+	-remove C style casts (e.g. in World.cpp)
 	(-for the subgoals below, it may help to have some function to translate
 	positional coordinates into indices of corresponding vertices in graph)
 	-have way to set up goal vertices
