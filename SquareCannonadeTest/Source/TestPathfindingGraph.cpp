@@ -38,7 +38,41 @@ TEST_CASE("Created correct number of vertices #2")
   REQUIRE(pg.getNumVertices() == 10);
 }
 
+// Test for creation of one non-diagonal edge
 TEST_CASE("Created correct number of edges #1")
+{
+  std::vector<Tile::Ptr> tileGrid;
+  sf::IntRect rect(0, 0, 20, 10);
+  int tileLength = 10;
+
+  // Use tile map with no walls
+  std::string tileMap = createTileMapAllDefault(rect, tileLength);
+
+  runCreateGrid(tileGrid, rect, tileLength, tileMap);
+  PathfindingGraph pg(tileGrid);
+
+  // Assertion
+  REQUIRE(pg.getNumEdges() == 1);
+}
+
+// Test for creation of a complete graph
+TEST_CASE("Created correct number of edges #2")
+{
+  std::vector<Tile::Ptr> tileGrid;
+  sf::IntRect rect(0, 0, 20, 20);
+  int tileLength = 10;
+
+  // Use tile map with no walls
+  std::string tileMap = createTileMapAllDefault(rect, tileLength);
+
+  runCreateGrid(tileGrid, rect, tileLength, tileMap);
+  PathfindingGraph pg(tileGrid);
+
+  // Assertion
+  REQUIRE(pg.getNumEdges() == 6);
+}
+
+TEST_CASE("Created correct number of edges #3")
 {
   std::vector<Tile::Ptr> tileGrid;
   sf::IntRect rect(0, 0, 30, 20);
@@ -54,7 +88,7 @@ TEST_CASE("Created correct number of edges #1")
   REQUIRE(pg.getNumEdges() == 10);
 }
 
-TEST_CASE("Created correct number of edges #2")
+TEST_CASE("Created correct number of edges #4")
 {
   std::vector<Tile::Ptr> tileGrid;
   sf::IntRect rect(0, 0, 40, 30);
@@ -73,7 +107,7 @@ TEST_CASE("Created correct number of edges #2")
   REQUIRE(pg.getNumEdges() == 15);
 }
 
-TEST_CASE("Created correct number of edges #3")
+TEST_CASE("Created correct number of edges #5")
 {
   std::vector<Tile::Ptr> tileGrid;
   sf::IntRect rect(0, 0, 30, 30);

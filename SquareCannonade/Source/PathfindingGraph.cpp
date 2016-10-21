@@ -5,6 +5,7 @@ PathfindingGraph::PathfindingGraph(const std::vector<Tile::Ptr> &tileGrid)
   , mNumEdges(0)
 {
   createVertices(tileGrid);
+  createEdges();
 }
 
 int PathfindingGraph::getNumVertices() const
@@ -32,7 +33,19 @@ void PathfindingGraph::createVertices(const std::vector<Tile::Ptr> &tileGrid)
   }
 }
 
+// Creates edges (which are represented in the vertices' adjacency
+// lists) by checking which vertices are adjacent to each other
+// (whether through a possible diagonal edge or non-diagonal edge)
 void PathfindingGraph::createEdges()
 {
-
+  // For each vertex
+    // For each coordinate a tile length to left, above, right, or below
+      // If tile exists there
+        // Add to approriate adjacency lists
+        // Update edge count
+    // For each coordinate diagonally from current vertex
+      // If tile exists there
+        // If there isn't a non-traversable tile in the way
+          // Add to appropriate adjacency lists
+          // Update edge count
 }
