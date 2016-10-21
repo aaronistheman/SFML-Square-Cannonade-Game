@@ -18,6 +18,11 @@ int PathfindingGraph::getNumEdges() const
   return mNumEdges;
 }
 
+PGVertex * PathfindingGraph::getVertex(int rowIndex, int colIndex)
+{
+  return nullptr;
+}
+
 void PathfindingGraph::createVertices(const std::vector<Tile::Ptr> &tileGrid)
 {
   for (auto const& tile : tileGrid)
@@ -38,7 +43,8 @@ void PathfindingGraph::createVertices(const std::vector<Tile::Ptr> &tileGrid)
 // (whether through a possible diagonal edge or non-diagonal edge)
 void PathfindingGraph::createEdges()
 {
-  // For each vertex
+  for (auto & vertex : mVertices)
+  {
     // For each coordinate a tile length to left, above, right, or below
       // If tile exists there
         // Add to approriate adjacency lists
@@ -48,4 +54,5 @@ void PathfindingGraph::createEdges()
         // If there isn't a non-traversable tile in the way
           // Add to appropriate adjacency lists
           // Update edge count
+  }
 }

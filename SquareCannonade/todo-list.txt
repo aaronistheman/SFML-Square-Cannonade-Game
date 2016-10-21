@@ -11,6 +11,8 @@ Current:
 				-diagonal: 14?
 				-non-diagonal: 10?
 		-2) implement PathfindingGraph constructor in order to pass the test
+			-vertex acess
+				-pass in rowIndex and colIndex
 			-"make edges" (i.e. update vertex data),
 			updating the count of edges returned by getNumEdges()
 				-implement PathfindingGraph::createEdges() to align

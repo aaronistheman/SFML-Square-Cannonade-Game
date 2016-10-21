@@ -38,6 +38,44 @@ TEST_CASE("Created correct number of vertices #2")
   REQUIRE(pg.getNumVertices() == 10);
 }
 
+TEST_CASE("Vertex access #1")
+{
+  std::vector<Tile::Ptr> tileGrid;
+  sf::IntRect rect(0, 0, 20, 10);
+  int tileLength = 10;
+
+  // Use tile map with no walls
+  std::string tileMap = createTileMapAllDefault(rect, tileLength);
+
+  runCreateGrid(tileGrid, rect, tileLength, tileMap);
+  PathfindingGraph pg(tileGrid);
+
+  // Assertion
+  PGVertex* vertex = pg.getVertex(0, 1);
+  REQUIRE(vertex);
+  REQUIRE(vertex->tile->getRect().left == 30);
+  REQUIRE(vertex->tile->getRect().top == 0);
+}
+
+TEST_CASE("Vertex access #2")
+{
+  std::vector<Tile::Ptr> tileGrid;
+  sf::IntRect rect(0, 0, 20, 20);
+  int tileLength = 10;
+
+  // Use tile map with no walls
+  std::string tileMap = createTileMapAllDefault(rect, tileLength);
+
+  runCreateGrid(tileGrid, rect, tileLength, tileMap);
+  PathfindingGraph pg(tileGrid);
+
+  // Assertion
+  PGVertex* vertex = pg.getVertex(1, 1);
+  REQUIRE(vertex);
+  REQUIRE(vertex->tile->getRect().left == 30);
+  REQUIRE(vertex->tile->getRect().top == 30);
+}
+
 // Test for creation of one non-diagonal edge
 TEST_CASE("Created correct number of edges #1")
 {

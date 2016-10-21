@@ -34,6 +34,9 @@ public:
   int getNumVertices() const;
   int getNumEdges() const;
 
+  // returns nullptr if fails to find vertex
+  PGVertex* getVertex(int rowIndex, int colIndex);
+
 private:
   void createVertices(const std::vector<Tile::Ptr> &tileGrid);
   void createEdges();
