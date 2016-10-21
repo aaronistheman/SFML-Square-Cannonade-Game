@@ -12,6 +12,16 @@ Tile::~Tile()
 {
 }
 
+sf::Vector2i Tile::getPosition() const
+{
+  return sf::Vector2i(mRect.left, mRect.top);
+}
+
+int Tile::getLength() const
+{
+  return mRect.height;
+}
+
 sf::IntRect Tile::getRect() const
 {
   return mRect;

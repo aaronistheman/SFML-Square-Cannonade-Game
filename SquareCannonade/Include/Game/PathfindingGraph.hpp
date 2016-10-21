@@ -35,11 +35,12 @@ public:
   int getNumEdges() const;
 
   // returns nullptr if fails to find vertex
-  PGVertex* getVertex(int rowIndex, int colIndex);
+  // PGVertex* getVertex(int rowIndex, int colIndex);
+  PGVertex* getVertex(sf::Vector2i position); // locate tile by position
 
 private:
   void createVertices(const std::vector<Tile::Ptr> &tileGrid);
-  void createEdges();
+  void createEdges(int tileLength);
 
 private:
   std::vector<PGVertex::Ptr> mVertices;

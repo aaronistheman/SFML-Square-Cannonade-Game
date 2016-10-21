@@ -2,7 +2,7 @@ Current:
 --------
 
 -generate graph based on locations of walls
-	-alternate between #1 and #2, as appropriate
+	-see #2; (alternate between #1 and #2, as appropriate)
 		-1) set up tests for generated graph
 			-certain weights of edges
 				-how do I access an edge?
@@ -11,13 +11,15 @@ Current:
 				-diagonal: 14?
 				-non-diagonal: 10?
 		-2) implement PathfindingGraph constructor in order to pass the test
-			-vertex acess
-				-pass in rowIndex and colIndex
 			-"make edges" (i.e. update vertex data),
 			updating the count of edges returned by getNumEdges()
 				-implement PathfindingGraph::createEdges() to align
 				with the pseudocode and pass the five currently failing tests
+					-vertex acess by position
 
+	-remove tests and method related to accessing vertex by indices
+	-isn't a Tile necessarily a square? So I just need one length parameter
+	for constructor??
 	-remove C style casts (e.g. in World.cpp)
 	(-for the subgoals below, it may help to have some function to translate
 	positional coordinates into indices of corresponding vertices in graph)
