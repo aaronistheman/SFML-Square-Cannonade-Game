@@ -72,6 +72,7 @@ they navigate to the player
 Eventually:
 -----------
 
+-put for-each loop in World::draw()
 -why is the TextureHolder passed to the World class?
 -remove unused/stub files; e.g.:
 	-DrawableTile
