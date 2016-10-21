@@ -2,6 +2,22 @@
 
 PathfindingGraph::PathfindingGraph(const std::vector<Tile::Ptr> &tileGrid)
   : mVertices()
+  , mNumEdges(0)
+{
+  createVertices(tileGrid);
+}
+
+int PathfindingGraph::getNumVertices() const
+{
+  return mVertices.size();
+}
+
+int PathfindingGraph::getNumEdges() const
+{
+  return mNumEdges;
+}
+
+void PathfindingGraph::createVertices(const std::vector<Tile::Ptr> &tileGrid)
 {
   // Can't seem to use foreach loop here
   for (auto itr = tileGrid.begin(); itr != tileGrid.end(); ++itr)
@@ -19,12 +35,7 @@ PathfindingGraph::PathfindingGraph(const std::vector<Tile::Ptr> &tileGrid)
   }
 }
 
-int PathfindingGraph::getNumVertices() const
+void PathfindingGraph::createEdges()
 {
-  return mVertices.size();
-}
 
-int PathfindingGraph::getNumEdges() const
-{
-  return 0; // to be implemented correctly
 }

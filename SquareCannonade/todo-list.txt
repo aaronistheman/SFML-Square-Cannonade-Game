@@ -2,15 +2,17 @@ Current:
 --------
 
 -generate graph based on locations of walls
-	-set up tests for generated graph
-		-certain weights of edges
-			-how do I access an edge?
-				-access some vertex, then check a diagonal incident edge
-				and a non-diagonal incident edge
-			-diagonal: 14?
-			-non-diagonal: 10?
-	-implement PathfindingGraph constructor in order to pass the test
-		-make edges
+	-alternate between #1 and #2, as appropriate
+		-1) set up tests for generated graph
+			-certain weights of edges
+				-how do I access an edge?
+					-access some vertex, then check a diagonal incident edge
+					and a non-diagonal incident edge
+				-diagonal: 14?
+				-non-diagonal: 10?
+		-2) implement PathfindingGraph constructor in order to pass the test
+			-"make edges" (i.e. update vertex data),
+			updating the count of edges returned by getNumEdges()
 
 	-remove C style casts (e.g. in World.cpp)
 	(-for the subgoals below, it may help to have some function to translate
