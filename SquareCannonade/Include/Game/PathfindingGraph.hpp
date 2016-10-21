@@ -10,7 +10,11 @@
  */
 struct PathfindingGraphVertex
 {
+public: // non-data related; just for cleaner code
   typedef std::unique_ptr<PathfindingGraphVertex> Ptr;
+  sf::Vector2i getPosition() const;
+
+public: // data
 
   // set of references to reachable vertices
 
@@ -36,6 +40,10 @@ public:
 
   // returns nullptr if fails to find vertex
   // PGVertex* getVertex(int rowIndex, int colIndex);
+
+  // returns nullptr if fails to find vertex;
+  // is slow and meant to be used for edge creation (which happens once),
+  // but has to be public to be testable
   PGVertex* getVertex(sf::Vector2i position); // locate tile by position
 
 private:

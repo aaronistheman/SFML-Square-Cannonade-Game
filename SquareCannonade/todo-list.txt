@@ -15,7 +15,6 @@ Current:
 			updating the count of edges returned by getNumEdges()
 				-implement PathfindingGraph::createEdges() to align
 				with the pseudocode and pass the five currently failing tests
-					-vertex acess by position
 
 	-remove tests and method related to accessing vertex by indices
 	-isn't a Tile necessarily a square? So I just need one length parameter

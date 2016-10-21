@@ -2,6 +2,11 @@
 
 #include <cassert>
 
+sf::Vector2i PathfindingGraphVertex::getPosition() const
+{
+  return tile->getPosition();
+}
+
 PathfindingGraph::PathfindingGraph(const std::vector<Tile::Ptr> &tileGrid)
   : mVertices()
   , mNumEdges(0)
@@ -38,6 +43,12 @@ PGVertex * PathfindingGraph::getVertex(int rowIndex, int colIndex)
 
 PGVertex * PathfindingGraph::getVertex(sf::Vector2i position)
 {
+  for (auto & vertex : mVertices)
+  {
+    if (vertex->getPosition() == position)
+      return vertex.get();
+  }
+
   return nullptr;
 }
 
