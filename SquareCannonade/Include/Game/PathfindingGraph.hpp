@@ -16,10 +16,13 @@ public: // non-data related; just for cleaner code
 
 public: // data
 
-  // set of references to reachable vertices
+  std::vector<PathfindingGraphVertex*> adjacentVertices;
 
   // set of references to vertices reachable through non-diagonal edge
+  std::vector<PathfindingGraphVertex*> adjacentNondiagonalVertices;
+
   // set of references to vertices reachable through diagonal edge
+  std::vector<PathfindingGraphVertex*> adjacentDiagonalVertices;
   
   Tile* tile; // each vertex is associated with one tile
 };
@@ -49,6 +52,9 @@ public:
 private:
   void createVertices(const std::vector<Tile::Ptr> &tileGrid);
   void createEdges(int tileLength);
+
+  void createNondiagonalEdges(PGVertex::Ptr &vertex, int tileLength);
+  void createDiagonalEdges(PGVertex::Ptr &vertex, int tileLength);
 
 private:
   std::vector<PGVertex::Ptr> mVertices;

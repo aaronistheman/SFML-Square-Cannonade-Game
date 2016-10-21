@@ -74,14 +74,61 @@ void PathfindingGraph::createEdges(int tileLength)
 {
   for (auto & vertex : mVertices)
   {
-    // For each coordinate a tile length to left, above, right, or below
-      // If tile exists there
-        // Add to approriate adjacency lists
-        // Update edge count
-    // For each coordinate diagonally from current vertex
-      // If tile exists there
-        // If there isn't a non-traversable tile in the way
-          // Add to appropriate adjacency lists
-          // Update edge count
+    createNondiagonalEdges(vertex, tileLength);
   }
+
+  // Edge counter is updated whenever a vertex is added to another
+  // vertex's main adjacency list, so we must correct for double counting
+  // (since each created edge updates the counter twice)
+  assert(mNumEdges % 2 == 0); // should be even number
+  mNumEdges /= 2;
+}
+
+void PathfindingGraph::createNondiagonalEdges(
+  PGVertex::Ptr &vertex, int tileLength)
+{
+  sf::Vector2i position = vertex->getPosition();
+
+  // Offsets to reach left, right, above, or below vertices
+  sf::Vector2i nonDiagonalOffsets[4] = {
+    sf::Vector2i(-tileLength, 0), sf::Vector2i(tileLength, 0),
+    sf::Vector2i(0, -tileLength), sf::Vector2i(0, tileLength)
+  };
+
+  // Check if are adjacent vertices left, right, above, or below
+  // the current vertex
+  for (auto & offset : nonDiagonalOffsets)
+  {
+    // Get the vertex (if any) at that offset
+    sf::Vector2i newPosition = position + offset;
+    PGVertex* adjacentVertex = getVertex(newPosition);
+
+    if (adjacentVertex) // if found a vertex
+    {
+      // Add to appropriate adjacency lists
+      vertex->adjacentVertices.push_back(adjacentVertex);
+      vertex->adjacentNondiagonalVertices.push_back(adjacentVertex);
+
+      mNumEdges++;
+    }
+  }
+}
+
+void PathfindingGraph::createDiagonalEdges(
+  PGVertex::Ptr &vertex, int tileLength)
+{
+  // Offsets to reach top-left, top-right, bottom-left, bottom-right
+  sf::Vector2i diagonalOffsets[4] = {
+    sf::Vector2i(-tileLength, -tileLength),
+    sf::Vector2i(tileLength, -tileLength),
+    sf::Vector2i(-tileLength, tileLength),
+    sf::Vector2i(tileLength, tileLength)
+  };
+  
+  // For each coordinate diagonally from current vertex
+  // ...(use array of offsets)
+  // If tile exists there
+  // If there isn't a non-traversable tile in the way
+  // Add to appropriate adjacency lists
+  // Update edge count
 }
