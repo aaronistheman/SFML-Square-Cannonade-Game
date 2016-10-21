@@ -2,6 +2,9 @@
 
 #include <cassert>
 
+const int PathfindingGraph::NondiagonalEdgeWeight = 10;
+const int PathfindingGraph::DiagonalEdgeWeight = 14;
+
 sf::Vector2i PathfindingGraphVertex::getPosition() const
 {
   return tile->getPosition();
@@ -75,6 +78,7 @@ void PathfindingGraph::createEdges(int tileLength)
   for (auto & vertex : mVertices)
   {
     createNondiagonalEdges(vertex, tileLength);
+    createDiagonalEdges(vertex, tileLength);
   }
 
   // Edge counter is updated whenever a vertex is added to another
@@ -95,7 +99,7 @@ void PathfindingGraph::createNondiagonalEdges(
     sf::Vector2i(0, -tileLength), sf::Vector2i(0, tileLength)
   };
 
-  // Check if are adjacent vertices left, right, above, or below
+  // Check if are adjacent vertices non-diagonally from
   // the current vertex
   for (auto & offset : nonDiagonalOffsets)
   {
@@ -112,11 +116,13 @@ void PathfindingGraph::createNondiagonalEdges(
       mNumEdges++;
     }
   }
-}
+} // createNondiagonalEdges()
 
 void PathfindingGraph::createDiagonalEdges(
   PGVertex::Ptr &vertex, int tileLength)
 {
+  sf::Vector2i position = vertex->getPosition();
+
   // Offsets to reach top-left, top-right, bottom-left, bottom-right
   sf::Vector2i diagonalOffsets[4] = {
     sf::Vector2i(-tileLength, -tileLength),
@@ -124,11 +130,25 @@ void PathfindingGraph::createDiagonalEdges(
     sf::Vector2i(-tileLength, tileLength),
     sf::Vector2i(tileLength, tileLength)
   };
-  
-  // For each coordinate diagonally from current vertex
-  // ...(use array of offsets)
-  // If tile exists there
-  // If there isn't a non-traversable tile in the way
-  // Add to appropriate adjacency lists
-  // Update edge count
-}
+
+  // Check if are adjacent vertices diagonally from
+  // the current vertex
+  for (auto & offset : diagonalOffsets)
+  {
+    // Get the vertex (if any) at that offset
+    sf::Vector2i newPosition = position + offset;
+    PGVertex* adjacentVertex = getVertex(newPosition);
+
+    if (adjacentVertex) // if found a vertex
+    {
+      if (true) // if there isn't a non-traversable tile in the way
+      {
+        // Add to appropriate adjacency lists
+        vertex->adjacentVertices.push_back(adjacentVertex);
+        vertex->adjacentDiagonalVertices.push_back(adjacentVertex);
+
+        mNumEdges++;
+      }
+    }
+  }
+} // createDiagonalEdges()

@@ -50,6 +50,10 @@ public:
   PGVertex* getVertex(sf::Vector2i position); // locate tile by position
 
 private:
+  static const int NondiagonalEdgeWeight;
+  static const int DiagonalEdgeWeight;
+
+private:
   void createVertices(const std::vector<Tile::Ptr> &tileGrid);
   void createEdges(int tileLength);
 

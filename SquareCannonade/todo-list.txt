@@ -2,19 +2,10 @@ Current:
 --------
 
 -generate graph based on locations of walls
-	-see #2; (alternate between #1 and #2, as appropriate)
-		-1) set up tests for generated graph
-			-certain weights of edges
-				-how do I access an edge?
-					-access some vertex, then check a diagonal incident edge
-					and a non-diagonal incident edge
-				-diagonal: 14?
-				-non-diagonal: 10?
-		-2) implement PathfindingGraph constructor in order to pass the test
-			-"make edges" (i.e. update vertex data),
-			updating the count of edges returned by getNumEdges()
-				-implement PathfindingGraph::createEdges() to align
-				with the pseudocode and pass the five currently failing tests
+	-implement PathfindingGraph::createEdges() to align
+	with the pseudocode and pass the four currently failing tests
+		-diagonal edges
+			-how to detect if non-traversable tile is in the way?
 
 	-remove tests and method related to accessing vertex by indices
 	-isn't a Tile necessarily a square? So I just need one length parameter
