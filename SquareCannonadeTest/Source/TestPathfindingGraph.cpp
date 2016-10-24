@@ -179,7 +179,8 @@ TEST_CASE("Created correct number of edges #1")
   REQUIRE(pg.getNumEdges() == 1);
 }
 
-// Test for creation of a complete graph
+// Test for creation of a complete graph ("complete" as in there
+// exists an edge between every pair of vertices)
 TEST_CASE("Created correct number of edges #2")
 {
   std::vector<Tile::Ptr> tileGrid;
@@ -196,7 +197,26 @@ TEST_CASE("Created correct number of edges #2")
   REQUIRE(pg.getNumEdges() == 6);
 }
 
+// Basic test for the exclusion of an edge that would let an entity
+// cut diagonally across a wall
 TEST_CASE("Created correct number of edges #3")
+{
+  std::vector<Tile::Ptr> tileGrid;
+  sf::IntRect rect(0, 0, 20, 20);
+  int tileLength = 10;
+
+  std::string tileMap = "";
+  tileMap += "00";
+  tileMap += "0w";
+
+  runCreateGrid(tileGrid, rect, tileLength, tileMap);
+  PathfindingGraph pg(tileGrid);
+
+  // Assertion
+  REQUIRE(pg.getNumEdges() == 2);
+}
+
+TEST_CASE("Created correct number of edges #4")
 {
   std::vector<Tile::Ptr> tileGrid;
   sf::IntRect rect(0, 0, 30, 20);
@@ -212,7 +232,7 @@ TEST_CASE("Created correct number of edges #3")
   REQUIRE(pg.getNumEdges() == 10);
 }
 
-TEST_CASE("Created correct number of edges #4")
+TEST_CASE("Created correct number of edges #5")
 {
   std::vector<Tile::Ptr> tileGrid;
   sf::IntRect rect(0, 0, 40, 30);
@@ -231,7 +251,7 @@ TEST_CASE("Created correct number of edges #4")
   REQUIRE(pg.getNumEdges() == 15);
 }
 
-TEST_CASE("Created correct number of edges #5")
+TEST_CASE("Created correct number of edges #6")
 {
   std::vector<Tile::Ptr> tileGrid;
   sf::IntRect rect(0, 0, 30, 30);
@@ -248,4 +268,23 @@ TEST_CASE("Created correct number of edges #5")
 
   // Assertion
   REQUIRE(pg.getNumEdges() == 9);
+}
+
+// Another test meant to make sure no edges that would let entities
+// partially cut across walls are created
+TEST_CASE("Created correct number of edges #7")
+{
+  std::vector<Tile::Ptr> tileGrid;
+  sf::IntRect rect(0, 0, 20, 20);
+  int tileLength = 10;
+
+  std::string tileMap = "";
+  tileMap += "w0";
+  tileMap += "0w";
+
+  runCreateGrid(tileGrid, rect, tileLength, tileMap);
+  PathfindingGraph pg(tileGrid);
+
+  // Assertion
+  REQUIRE(pg.getNumEdges() == 0);
 }
