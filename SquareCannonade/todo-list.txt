@@ -6,9 +6,13 @@ Current:
 	with the pseudocode and pass the four currently failing tests
 		-diagonal edges
 			-how to detect if non-traversable tile is in the way?
-			(should pass tests 3 and 7, mainly, but the rest, too)
-				-have a utility function to mask a vector2 onto another one
+			(should pass tests 3 and 7, mainly, but the rest, too);
+			ideas:
+				-THIS ONE: have a utility function to mask a vector2 onto another one
 				(or make a dot product function)
+					-may need to add a helper method
+				-explicitly write checks for each of the four
+				diagonal edge orientations
 
 	-remove tests and method related to accessing vertex by indices
 	-isn't a Tile necessarily a square? So I just need one length parameter

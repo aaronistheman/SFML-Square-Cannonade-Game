@@ -141,7 +141,39 @@ void PathfindingGraph::createDiagonalEdges(
 
     if (adjacentVertex) // if found a vertex
     {
-      if (true) // if there isn't a non-traversable tile in the way
+      /**
+       * Now, we have to check if a non-traversable tile is in the way.
+       * For example, say I have the following tile setup:
+       *     A B
+       *     C D
+       * (where D is a wall tile).
+       * There shouldn't be an edge from B to C, because such an edge
+       * would allow an entity to partially "go through the wall"
+       * represented by D as said entity travels from B directly to C.
+       * The following bool variable is false if there is such a
+       * wall that prevents the creation of a diagonal edge.
+       * (Note that A could also prevent the creation of the edge BC
+       * by being a wall tile.)
+       */
+      bool canTraverseDiagonally = true;
+
+      // The first vertex-to-check is vertically aligned with current vertex
+      // (e.g. like A in the above block comment's example)
+      sf::Vector2i positionToCheck1 = position + sf::Vector2i(0, offset.y);
+      PGVertex* vertexToCheck1 = getVertex(positionToCheck1);
+
+      // The second vertex-to-check is horizontally aligned with the current
+      // vertex (e.g. like D in the above block comment's example)
+      sf::Vector2i positionToCheck2 = position + sf::Vector2i(offset.x, 0);
+      PGVertex* vertexToCheck2 = getVertex(positionToCheck2);
+
+      if (!(vertexToCheck1 && vertexToCheck2)) // if either vertex is
+                                               // non-traversable
+      {
+        canTraverseDiagonally = false;
+      }
+
+      if (canTraverseDiagonally)
       {
         // Add to appropriate adjacency lists
         vertex->adjacentVertices.push_back(adjacentVertex);
