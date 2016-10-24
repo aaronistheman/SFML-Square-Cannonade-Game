@@ -69,9 +69,21 @@
     <ClCompile Include="..\SquareCannonade\Source\DefaultTile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\TestPathfindingGraph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GeneralHelpersForTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SquareCannonade\Source\PathfindingGraph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Catch\Catch.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\GeneralHelpersForTests.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

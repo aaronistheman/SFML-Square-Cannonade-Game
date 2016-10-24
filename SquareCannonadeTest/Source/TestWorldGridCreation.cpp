@@ -1,4 +1,5 @@
 #include <Catch/Catch.hpp>
+#include <GeneralHelpersForTests.hpp>
 
 #include <Game/World.hpp>
 #include <Tile/Tile.hpp>
@@ -6,38 +7,6 @@
 
 #include <vector>
 #include <iostream>
-
-int computeCorrectNumberTiles(sf::IntRect rect, int tileLength)
-{
-  return rect.width / tileLength * rect.height / tileLength;
-}
-
-// For tests that just use default/platform/nonspecial tiles
-std::string createTileMapAllDefault(sf::IntRect area, int tileLength)
-{
-  int numTiles = computeCorrectNumberTiles(area, tileLength);
-  std::string tileMap = "";
-
-  for (int i = 0; i < numTiles; ++i)
-  {
-    // The cast is needed because of the strongly typed enumerator
-    // (isn't technically char, but takes up size of a char)
-    tileMap += (char) TileType::Default;
-  }
-
-  return tileMap;
-}
-
-/**
- * Helpful because I keep changing the parameters of World::createGrid().
- */
-void runCreateGrid(std::vector<Tile::Ptr> &tileGrid,
-  const sf::IntRect &area, int tileLength,
-  const std::string &tileMap,
-  std::vector<WallTile*> &wallTiles=std::vector<WallTile*>())
-{
-  World::createGrid(tileGrid, area, tileLength, tileMap, wallTiles);
-}
 
 TEST_CASE("Created correct number of tiles #1")
 {
@@ -158,12 +127,6 @@ TEST_CASE("Correct tile height")
   REQUIRE(tile->getRect().height == tileLength);
 }
 
-/*
-
-The tests in this block comment don't seem to work.
-For more on why, see my (as of now, unanswered) StackOverflow post:
-http://stackoverflow.com/questions/40049866/visual-studio-vector-of-unique-pointers-of-subclasses-crashes
-
 TEST_CASE("Correct number of wall tiles created #1")
 {
   std::vector<Tile::Ptr> tileGrid;
@@ -214,4 +177,3 @@ TEST_CASE("Correct wall tile x-coordinate #1")
   // Assertion
   REQUIRE(wallTiles.at(1)->getRect().left == tileLength);
 }
-*/

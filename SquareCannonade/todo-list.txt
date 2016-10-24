@@ -1,21 +1,14 @@
 Current:
 --------
 
--generate graph based on locations of walls
-	-set up tests for generated graph: have new class
-		-just assert numerical values, such as:
-			-number of vertices
-			-number of edges
-			-certain weights
-			-absence of certain vertices
-			-absence of certain diagonal edges
-			-etc.
-	-have way to set up goal vertices
-	-have way to set start vertex and "run the algorithm"
-	(just print a junk statement for now)
 -use A* pathfinding algorithm to have enemies avoid walls as
 they navigate to the player
 	-cite helpful sources
+	-set up good tile map for World?
+	-set up algorithm
+		-have way to set up goal vertices
+		-have way to set start vertex and "run the algorithm"
+		(just print a junk statement for now)
 	-unit tests for:
 		-making of the grid graph
 		-accuracy of algorithm
@@ -64,6 +57,7 @@ they navigate to the player
 Eventually:
 -----------
 
+-put for-each loop in World::draw()
 -why is the TextureHolder passed to the World class?
 -remove unused/stub files; e.g.:
 	-DrawableTile

@@ -14,9 +14,15 @@ public:
 
 public:
   Tile(int left, int top, int width, int height, TileType type, int penalty);
+  virtual ~Tile();
 
+  sf::Vector2i getPosition() const;
+  int getLength() const;
   sf::IntRect getRect() const;
+  TileType getType() const;
   int getPenalty() const;
+
+  bool isTraversable() const; // can an entity traverse this tile?
 
   virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
 

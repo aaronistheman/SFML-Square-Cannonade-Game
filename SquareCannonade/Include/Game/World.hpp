@@ -41,7 +41,7 @@ private:
   void loadTextures();
 
   // For testing
-  // void createJunkWallTiles();
+  void createJunkWallTiles();
 
 private:
   static const int TileLength;
