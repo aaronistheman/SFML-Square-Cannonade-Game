@@ -1,32 +1,19 @@
 Current:
 --------
 
--generate graph based on locations of walls
-	-implement PathfindingGraph::createEdges() to align
-	with the pseudocode and pass the four currently failing tests
-		-diagonal edges
-			-how to detect if non-traversable tile is in the way?
-			(should pass tests 3 and 7, mainly, but the rest, too);
-			ideas:
-				-THIS ONE: have a utility function to mask a vector2 onto another one
-				(or make a dot product function)
-					-may need to add a helper method
-				-explicitly write checks for each of the four
-				diagonal edge orientations
-
+-clean up PathfindingGraph
 	-remove tests and method related to accessing vertex by indices
 	-isn't a Tile necessarily a square? So I just need one length parameter
 	for constructor??
 	-remove C style casts (e.g. in World.cpp)
-	(-for the subgoals below, it may help to have some function to translate
-	positional coordinates into indices of corresponding vertices in graph)
-	-have way to set up goal vertices
-	-have way to set start vertex and "run the algorithm"
-	(just print a junk statement for now)
-	-set up good tile map for World?
 -use A* pathfinding algorithm to have enemies avoid walls as
 they navigate to the player
 	-cite helpful sources
+	-set up good tile map for World?
+	-set up algorithm
+		-have way to set up goal vertices
+		-have way to set start vertex and "run the algorithm"
+		(just print a junk statement for now)
 	-unit tests for:
 		-making of the grid graph
 		-accuracy of algorithm

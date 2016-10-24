@@ -229,7 +229,7 @@ TEST_CASE("Created correct number of edges #4")
   PathfindingGraph pg(tileGrid);
 
   // Assertion
-  REQUIRE(pg.getNumEdges() == 10);
+  REQUIRE(pg.getNumEdges() == 11);
 }
 
 TEST_CASE("Created correct number of edges #5")

@@ -181,6 +181,6 @@ void PathfindingGraph::createDiagonalEdges(
 
         mNumEdges++;
       }
-    }
-  }
+    } // if found a vertex
+  } // for each diagonal offset
 } // createDiagonalEdges()
