@@ -129,6 +129,8 @@ void World::createGrid(std::vector<Tile::Ptr> &tileGrid,
     {
       char tileType = tileMap.at(rowIndex * numTilesPerRow + colIndex);
 
+      // The casts are needed because tileType is of type char, rather
+      // than of type TileType
       switch (tileType)
       {
       case (char) TileType::Default:

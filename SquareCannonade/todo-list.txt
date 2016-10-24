@@ -1,11 +1,6 @@
 Current:
 --------
 
--clean up PathfindingGraph
-	-remove tests and method related to accessing vertex by indices
-	-isn't a Tile necessarily a square? So I just need one length parameter
-	for constructor??
-	-remove C style casts (e.g. in World.cpp)
 -use A* pathfinding algorithm to have enemies avoid walls as
 they navigate to the player
 	-cite helpful sources

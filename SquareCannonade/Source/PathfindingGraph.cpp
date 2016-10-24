@@ -31,19 +31,6 @@ int PathfindingGraph::getNumEdges() const
   return mNumEdges;
 }
 
-/*
-PGVertex * PathfindingGraph::getVertex(int rowIndex, int colIndex)
-{
-  // If attempting to access non-existent vertex
-  if (rowIndex *)
-
-  // Compute index for accessing the desired vertex
-  int index = rowIndex * mNumVerticesPerRow + colIndex;
-
-  return mVertices[index].get();
-}
-*/
-
 PGVertex * PathfindingGraph::getVertex(sf::Vector2i position)
 {
   for (auto & vertex : mVertices)

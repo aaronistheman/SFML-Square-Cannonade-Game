@@ -41,9 +41,6 @@ public:
   int getNumVertices() const;
   int getNumEdges() const;
 
-  // returns nullptr if fails to find vertex
-  // PGVertex* getVertex(int rowIndex, int colIndex);
-
   // returns nullptr if fails to find vertex;
   // is slow and meant to be used for edge creation (which happens once),
   // but has to be public to be testable
