@@ -231,3 +231,25 @@ TEST_CASE("Created correct number of edges #7")
   // Assertion
   REQUIRE(pg.getNumEdges() == 0);
 }
+
+TEST_CASE("Found correct path in search #1")
+{
+  std::vector<Tile::Ptr> tileGrid;
+  sf::IntRect rect(0, 0, 30, 20);
+  int tileLength = 10;
+
+  std::string tileMap = "";
+  tileMap += "000";
+  tileMap += "0w0";
+
+  runCreateGrid(tileGrid, rect, tileLength, tileMap);
+  PathfindingGraph pg(tileGrid);
+
+  // Run method-to-test
+  PGVertex** path = pg.generatePath(pg.performAStarSearch());
+
+  // Assertion
+  REQUIRE(path);
+  REQUIRE(path[0]);
+  REQUIRE(path[1]);
+}

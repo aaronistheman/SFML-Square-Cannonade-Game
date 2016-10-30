@@ -42,6 +42,16 @@ PGVertex * PathfindingGraph::getVertex(sf::Vector2i position)
   return nullptr;
 }
 
+int PathfindingGraph::performAStarSearch()
+{
+  return -1; // to be implemented correctly later
+}
+
+PGVertex ** PathfindingGraph::generatePath(int pathEndingVertexId)
+{
+  return nullptr;
+}
+
 void PathfindingGraph::createVertices(const std::vector<Tile::Ptr> &tileGrid)
 {
   for (auto const& tile : tileGrid)

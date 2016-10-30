@@ -46,6 +46,16 @@ public:
   // but has to be public to be testable
   PGVertex* getVertex(sf::Vector2i position); // locate tile by position
 
+  // Perform's the search part of A* algorithm.
+  // Returns index of the path ending vertex (with which the path can
+  // be generated).
+  int performAStarSearch();
+
+  // Generates the path found by the A* algorithm.
+  // Returns said path as an array of pointers to the vertices involved
+  // in the path, where index 0 corresponds to the start of the path.
+  PGVertex** generatePath(int pathEndingVertexId);
+
 private:
   static const int NondiagonalEdgeWeight;
   static const int DiagonalEdgeWeight;

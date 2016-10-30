@@ -1,34 +1,51 @@
 Current:
 --------
 
--use A* pathfinding algorithm to have enemies avoid walls as
-they navigate to the player
-	-cite helpful sources
-	-set up good tile map for World?
+-getting A* to work (passing the tests)
+	(
+		-GENERAL NOTES:
+			-don't worry too much about speed yet; first, get something working
+				-Thus, pick the next vertex in the set of open vertices by
+				looking at the entire set. Change this to use a heap later.
+			-DO something; don't hesitate too much
+	)
+	-write some simple tests and some harder ones, but maybe later
+		-might have to modify the setup of the tests (now or later) to
+		deal with setting up the algorithm (e.g. setting start/end vertices)
+		-test for:
+			-algorithm's solution (using inputs with deterministic outputs)
 	-set up algorithm
-		-have way to set up goal vertices
-		-have way to set start vertex and "run the algorithm"
+		-have way to set start vertex (given an enemy's position)
+		and "run the algorithm"
 		(just print a junk statement for now)
-	-unit tests for:
-		-making of the grid graph
-		-accuracy of algorithm
-	-can Boost help?
-	-figure out how to make graph
-		-map player to the grid it's closest to
+			-setting start vertices should just mean putting them in
+			the priority queue
+		-have way to set up goal vertices (given player's position)
+			-setting goal vertices should just mean having them noted,
+			such that they are checked when determining whether to terminate
+			the algorithm
+	-implement algorithm to pass the tests
+		-translate Wikipedia pseudocode
+		-have set of instances of "VertexData" (not necessarily with that name)
+		-perhaps borrow Weiss' BinaryHeap class
+	-cite helpful sources
+-implementing A*: apply to game
 	-figure out heuristic function
 		-ideas:
-			-use distance from player
-				-perhaps horizontal distance (to avoid temporal
-				cost in using Pythagoren theorem)
-	-make sure enemy doesn't freeze if too close to player
+			-pure distance (i.e. Pythagorean theorem)
+			-perhaps horizontal distance (to avoid temporal
+			cost in using Pythagoren theorem)
+	-CONCERN: make sure enemy doesn't keep going back and forth across the
+	tile it's supposed to be headed to, due to the game's not knowing the
+	enemy officially "reached" the tile (may need some epsilon value)
+	-CONCERN: make sure enemy doesn't freeze if too close to player
 	while in its grid square:
 		-if enemy and player are in same grid square, set
 		the enemy after the player's position (i.e. apply
 		waypoint-based AI)
 	-don't run A* each frame; maybe do each half second
-	-ideas on how:
-		-see memo in my phone
 		
+-set up good tile map for World?
 -(not necessarily complete) basic classes for Cannon, EnemySquare, etc.
 	-put the getTransform() logic in one place
 -data read from text files
