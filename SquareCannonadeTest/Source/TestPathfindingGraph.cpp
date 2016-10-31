@@ -3,6 +3,9 @@
 
 #include <Game/PathfindingGraph.hpp>
 
+#include <cassert>
+
+
 /**
  * There are multiple different test sets involving PathfindingGraph
  * in this file.
@@ -266,29 +269,73 @@ TEST_CASE("Created correct number of edges #7")
  * Tests for setting vertices at which pathfinding search should start
  */
 
-TEST_CASE("Setting pathfinding search's start vertices #1")
+PathfindingGraph* setupPathfindingSearchStartTests(int caseNum)
 {
   std::vector<Tile::Ptr> tileGrid;
-  sf::IntRect rect(0, 0, 50, 40);
-  int tileLength = 10;
+
+  // Set tileLength
+  int tileLength = 0;
+  switch (caseNum)
+  {
+  case 5:
+    tileLength = 5;
+    break;
+  default:
+    tileLength = 10;
+    break;
+  }
   int enemyLength = tileLength;
-  std::string tileMap = createTileMapAllDefault(rect, tileLength);
-  runCreateGrid(tileGrid, rect, tileLength, tileMap);
-  PathfindingGraph pg(tileGrid);
+
+  // Set area rect
+  sf::IntRect area;
+  switch (caseNum)
+  {
+  case 1:
+    area = sf::IntRect(0, 0, 50, 40);
+    break;
+  default:
+    assert(false); // shouldn't be reached
+    break;
+  }
+
+  // Create tile map
+  std::string tileMap = "";
+  switch (caseNum)
+  {
+  default:
+    tileMap = createTileMapAllDefault(area, tileLength);
+    break;
+  }
+
+  // Stuff for every test case
+  runCreateGrid(tileGrid, area, tileLength, tileMap);
+  PathfindingGraph* pg = new PathfindingGraph(tileGrid);
 
   // Run method-to-test
-  pg.setSearchStart(sf::Vector2f(29,18), enemyLength, enemyLength);
+  switch (caseNum)
+  {
+  case 1:
+    pg->setSearchStart(sf::Vector2f(29, 18), enemyLength, enemyLength);
+    break;
+  }
 
-  // Assertion
-  REQUIRE(pg.getNumSearchStartVertices() == 4);
+  return pg;
 }
 
-/*
+TEST_CASE("Setting pathfinding search's start vertices #1")
+{
+  PathfindingGraph* pg = setupPathfindingSearchStartTests(1);
+
+  // Assertion
+  REQUIRE(pg->getNumSearchStartVertices() == 4);
+}
+
 TEST_CASE("Setting pathfinding search's start vertices #2")
 {
 
 }
 
+/*
 TEST_CASE("Setting pathfinding search's start vertices #3")
 {
 

@@ -9,9 +9,7 @@ Current:
 				looking at the entire set. Change this to use a heap later.
 			-DO something; don't hesitate too much
 	)
-	-write some simple tests and some harder ones, but maybe later
-		-might have to modify the setup of the tests (now or later) to
-		deal with setting up the algorithm (e.g. setting start/end vertices)
+	-tests
 		-test for:
 			-means of setting path beginning
 			-means of setting path ending
