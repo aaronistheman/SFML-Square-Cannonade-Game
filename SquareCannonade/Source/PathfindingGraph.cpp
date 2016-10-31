@@ -10,9 +10,15 @@ sf::Vector2i PathfindingGraphVertex::getPosition() const
   return tile->getPosition();
 }
 
+sf::IntRect PathfindingGraphVertex::getRect() const
+{
+  return tile->getRect();
+}
+
 PathfindingGraph::PathfindingGraph(const std::vector<Tile::Ptr> &tileGrid)
   : mVertices()
   , mNumEdges(0)
+  , mSearchStartVertices()
 {
   createVertices(tileGrid);
 
@@ -47,7 +53,7 @@ int PathfindingGraph::getNumSearchStartVertices() const
   return mSearchStartVertices.size();
 }
 
-const std::vector<Tile*>& PathfindingGraph::getSearchStartVertices() const
+const std::vector<PGVertex*>& PathfindingGraph::getSearchStartVertices() const
 {
   return mSearchStartVertices;
 }
@@ -55,8 +61,23 @@ const std::vector<Tile*>& PathfindingGraph::getSearchStartVertices() const
 void PathfindingGraph::setSearchStart(sf::Vector2f centerPosition,
   int width, int height)
 {
+  // Form a rectangle representing the entity's position
+  sf::Vector2i topLeft = sf::Vector2i(
+    (int)centerPosition.x - width / 2,
+    (int)centerPosition.y - height / 2);
+  sf::IntRect entityRect = sf::IntRect(topLeft, sf::Vector2i(width, height));
 
-}
+  // Note each vertex that's area intersects the entity's rectangle
+  for (auto const &ptr : mVertices)
+  {
+
+    if (ptr->getRect().intersects(entityRect))
+    {
+      mSearchStartVertices.push_back(ptr.get());
+
+    }
+  }
+} // setSearchStart()
 
 int PathfindingGraph::performAStarSearch()
 {

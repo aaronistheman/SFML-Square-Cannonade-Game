@@ -371,6 +371,7 @@ TEST_CASE("Setting pathfinding search's start vertices #1")
   REQUIRE(startVertices[3]->getPosition() == sf::Vector2i(30, 20));
 }
 
+/*
 // Involves some random walls that *shouldn't* affect anything
 TEST_CASE("Setting pathfinding search's start vertices #2")
 {
@@ -407,6 +408,7 @@ TEST_CASE("Setting pathfinding search's start vertices #4")
   REQUIRE(startVertices[0]->getPosition() == sf::Vector2i(30, 0));
   REQUIRE(startVertices[1]->getPosition() == sf::Vector2i(30, 30));
 }
+*/
 
 
 

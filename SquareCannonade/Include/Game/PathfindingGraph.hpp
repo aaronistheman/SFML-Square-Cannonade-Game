@@ -13,6 +13,7 @@ struct PathfindingGraphVertex
 public: // non-data related; just for cleaner code
   typedef std::unique_ptr<PathfindingGraphVertex> Ptr;
   sf::Vector2i getPosition() const;
+  sf::IntRect getRect() const;
 
 public: // data
 
@@ -48,7 +49,7 @@ public:
 
   // These are public for testing purposes
   int getNumSearchStartVertices() const;
-  const std::vector<Tile*>& getSearchStartVertices() const;
+  const std::vector<PGVertex*>& getSearchStartVertices() const;
 
   // Based on enemy's location, sets the tiles on which the pathfinding
   // search would start (i.e. which tiles this entity is touching).
@@ -80,5 +81,5 @@ private:
   int mNumEdges;
 
   // A* data
-  std::vector<Tile*> mSearchStartVertices;
+  std::vector<PGVertex*> mSearchStartVertices;
 };
