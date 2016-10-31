@@ -47,6 +47,11 @@ int PathfindingGraph::getNumSearchStartVertices() const
   return mSearchStartVertices.size();
 }
 
+const std::vector<Tile*>& PathfindingGraph::getSearchStartVertices() const
+{
+  return mSearchStartVertices;
+}
+
 void PathfindingGraph::setSearchStart(sf::Vector2f centerPosition,
   int width, int height)
 {

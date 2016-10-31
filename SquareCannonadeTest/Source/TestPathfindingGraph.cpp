@@ -267,6 +267,10 @@ TEST_CASE("Created correct number of edges #7")
 
 /**
  * Tests for setting vertices at which pathfinding search should start
+ *
+ * Note that there is a confusing part in that an enemy's position is
+ * centered, whereas a vertex's position uses its top-left coordinate.
+ * This is a bad design choice on my part.
  */
 
 PathfindingGraph* setupPathfindingSearchStartTests(int caseNum)
@@ -275,16 +279,21 @@ PathfindingGraph* setupPathfindingSearchStartTests(int caseNum)
 
   // Set tileLength
   int tileLength = 0;
+  int enemyLength = 0;
   switch (caseNum)
   {
-  case 5:
-    tileLength = 5;
+  case 2:
+    tileLength = 30;
+    enemyLength = 20;
+    break;
+  case 3: case 4:
+    tileLength = 10;
+    enemyLength = 5;
     break;
   default:
-    tileLength = 10;
+    tileLength = enemyLength = 10;
     break;
   }
-  int enemyLength = tileLength;
 
   // Set area rect
   sf::IntRect area;
@@ -293,8 +302,17 @@ PathfindingGraph* setupPathfindingSearchStartTests(int caseNum)
   case 1:
     area = sf::IntRect(0, 0, 50, 40);
     break;
+  case 2:
+    area = sf::IntRect(0, 0, 150, 150);
+    break;
+  case 3:
+    area = sf::IntRect(0, 0, 20, 20);
+    break;
+  case 4:
+    area = sf::IntRect(0, 0, 30, 20);
+    break;
   default:
-    assert(false); // shouldn't be reached
+    assert(false); // shouldn't be reached; no logical default area
     break;
   }
 
@@ -302,6 +320,13 @@ PathfindingGraph* setupPathfindingSearchStartTests(int caseNum)
   std::string tileMap = "";
   switch (caseNum)
   {
+  case 2: // some random walls
+    tileMap += "00www";
+    tileMap += "w000w";
+    tileMap += "00w00";
+    tileMap += "00000";
+    tileMap += "00ww0";
+    break;
   default:
     tileMap = createTileMapAllDefault(area, tileLength);
     break;
@@ -317,6 +342,17 @@ PathfindingGraph* setupPathfindingSearchStartTests(int caseNum)
   case 1:
     pg->setSearchStart(sf::Vector2f(29, 18), enemyLength, enemyLength);
     break;
+  case 2:
+    pg->setSearchStart(sf::Vector2f(32, 94), enemyLength, enemyLength);
+    break;
+  case 3:
+    pg->setSearchStart(sf::Vector2f(15, 5), enemyLength, enemyLength);
+    break;
+  case 4:
+    pg->setSearchStart(sf::Vector2f(15, 10), enemyLength, enemyLength);
+    break;
+  default:
+    assert(false); // no logical default
   }
 
   return pg;
@@ -328,29 +364,49 @@ TEST_CASE("Setting pathfinding search's start vertices #1")
 
   // Assertion
   REQUIRE(pg->getNumSearchStartVertices() == 4);
+  auto startVertices = pg->getSearchStartVertices();
+  REQUIRE(startVertices[0]->getPosition() == sf::Vector2i(20, 10));
+  REQUIRE(startVertices[1]->getPosition() == sf::Vector2i(30, 10));
+  REQUIRE(startVertices[2]->getPosition() == sf::Vector2i(20, 20));
+  REQUIRE(startVertices[3]->getPosition() == sf::Vector2i(30, 20));
 }
 
+// Involves some random walls that *shouldn't* affect anything
 TEST_CASE("Setting pathfinding search's start vertices #2")
 {
+  PathfindingGraph* pg = setupPathfindingSearchStartTests(2);
 
+  // Assertion
+  REQUIRE(pg->getNumSearchStartVertices() == 4);
+  auto startVertices = pg->getSearchStartVertices();
+  REQUIRE(startVertices[0]->getPosition() == sf::Vector2i(0, 60));
+  REQUIRE(startVertices[1]->getPosition() == sf::Vector2i(30, 60));
+  REQUIRE(startVertices[2]->getPosition() == sf::Vector2i(0, 90));
+  REQUIRE(startVertices[3]->getPosition() == sf::Vector2i(30, 90));
 }
 
-/*
+// Enemy completely fits in one tile
 TEST_CASE("Setting pathfinding search's start vertices #3")
 {
+  PathfindingGraph* pg = setupPathfindingSearchStartTests(3);
 
+  // Assertion
+  REQUIRE(pg->getNumSearchStartVertices() == 1);
+  auto startVertices = pg->getSearchStartVertices();
+  REQUIRE(startVertices[0]->getPosition() == sf::Vector2i(30, 0));
 }
 
+// Enemy completely fits in two tiles
 TEST_CASE("Setting pathfinding search's start vertices #4")
 {
+  PathfindingGraph* pg = setupPathfindingSearchStartTests(4);
 
+  // Assertion
+  REQUIRE(pg->getNumSearchStartVertices() == 2);
+  auto startVertices = pg->getSearchStartVertices();
+  REQUIRE(startVertices[0]->getPosition() == sf::Vector2i(30, 0));
+  REQUIRE(startVertices[1]->getPosition() == sf::Vector2i(30, 30));
 }
-
-TEST_CASE("Setting pathfinding search's start vertices #5")
-{
-
-}
-*/
 
 
 

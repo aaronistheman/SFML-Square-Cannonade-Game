@@ -11,7 +11,6 @@ Current:
 	)
 	-tests
 		-test for:
-			-means of setting path beginning
 			-means of setting path ending
 			-correct path ending vertex (tests performAStarSearch)
 				-requires a means of setting path beginnings and endings
@@ -33,6 +32,7 @@ Current:
 		-have set of instances of "VertexData" (not necessarily with that name)
 		-perhaps borrow Weiss' BinaryHeap class
 	-cite helpful sources
+-somewhere, enforce that an enemy can't be bigger than a tile
 -implementing A*: apply to game
 	-figure out heuristic function
 		-ideas:

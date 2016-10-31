@@ -46,9 +46,9 @@ public:
   // but has to be public to be testable
   PGVertex* getVertex(sf::Vector2i position); // locate tile by position
 
-  // Is public so that I could test that the correct number of start
-  // vertices was set up for the search.
+  // These are public for testing purposes
   int getNumSearchStartVertices() const;
+  const std::vector<Tile*>& getSearchStartVertices() const;
 
   // Based on enemy's location, sets the tiles on which the pathfinding
   // search would start (i.e. which tiles this entity is touching).
