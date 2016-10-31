@@ -3,6 +3,18 @@
 
 #include <Game/PathfindingGraph.hpp>
 
+/**
+ * There are multiple different test sets involving PathfindingGraph
+ * in this file.
+ */
+
+
+
+
+/**
+ * Tests for creation of correct number of vertices
+ */
+
 TEST_CASE("Created correct number of vertices #1")
 {
   std::vector<Tile::Ptr> tileGrid;
@@ -37,6 +49,13 @@ TEST_CASE("Created correct number of vertices #2")
   // Assertion
   REQUIRE(pg.getNumVertices() == 10);
 }
+
+
+
+
+/**
+ * Tests for accessing vertex by position
+ */
 
 TEST_CASE("Vertex access by position #1: successful find")
 {
@@ -104,6 +123,14 @@ TEST_CASE("Vertex access by position #3: fail to find")
   // Assertion
   REQUIRE(!vertex);
 }
+
+
+
+
+
+/**
+ * Tests for creation of correct number of edges
+ */
 
 // Test for creation of one non-diagonal edge
 TEST_CASE("Created correct number of edges #1")
@@ -232,6 +259,60 @@ TEST_CASE("Created correct number of edges #7")
   REQUIRE(pg.getNumEdges() == 0);
 }
 
+
+
+
+/**
+ * Tests for setting vertices at which pathfinding search should start
+ */
+
+TEST_CASE("Setting pathfinding search's start vertices #1")
+{
+  std::vector<Tile::Ptr> tileGrid;
+  sf::IntRect rect(0, 0, 50, 40);
+  int tileLength = 10;
+  int enemyLength = tileLength;
+  std::string tileMap = createTileMapAllDefault(rect, tileLength);
+  runCreateGrid(tileGrid, rect, tileLength, tileMap);
+  PathfindingGraph pg(tileGrid);
+
+  // Run method-to-test
+  pg.setSearchStart(sf::Vector2f(29,18), enemyLength, enemyLength);
+
+  // Assertion
+  REQUIRE(pg.getNumSearchStartVertices() == 4);
+}
+
+/*
+TEST_CASE("Setting pathfinding search's start vertices #2")
+{
+
+}
+
+TEST_CASE("Setting pathfinding search's start vertices #3")
+{
+
+}
+
+TEST_CASE("Setting pathfinding search's start vertices #4")
+{
+
+}
+
+TEST_CASE("Setting pathfinding search's start vertices #5")
+{
+
+}
+*/
+
+
+
+
+/**
+ * Tests for finding the correct path with pathfinding algorithm
+ */
+
+/*
 TEST_CASE("Found correct path in search #1")
 {
   std::vector<Tile::Ptr> tileGrid;
@@ -253,3 +334,4 @@ TEST_CASE("Found correct path in search #1")
   REQUIRE(path[0]);
   REQUIRE(path[1]);
 }
+*/

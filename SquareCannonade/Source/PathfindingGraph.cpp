@@ -42,6 +42,17 @@ PGVertex * PathfindingGraph::getVertex(sf::Vector2i position)
   return nullptr;
 }
 
+int PathfindingGraph::getNumSearchStartVertices() const
+{
+  return mSearchStartVertices.size();
+}
+
+void PathfindingGraph::setSearchStart(sf::Vector2f centerPosition,
+  int width, int height)
+{
+
+}
+
 int PathfindingGraph::performAStarSearch()
 {
   return -1; // to be implemented correctly later

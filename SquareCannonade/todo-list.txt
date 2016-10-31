@@ -13,7 +13,12 @@ Current:
 		-might have to modify the setup of the tests (now or later) to
 		deal with setting up the algorithm (e.g. setting start/end vertices)
 		-test for:
+			-means of setting path beginning
+			-means of setting path ending
+			-correct path ending vertex (tests performAStarSearch)
+				-requires a means of setting path beginnings and endings
 			-algorithm's solution (using inputs with deterministic outputs)
+			(tests generatePath)
 	-set up algorithm
 		-have way to set start vertex (given an enemy's position)
 		and "run the algorithm"
@@ -24,6 +29,7 @@ Current:
 			-setting goal vertices should just mean having them noted,
 			such that they are checked when determining whether to terminate
 			the algorithm
+		-for now, could set heuristic function to zero
 	-implement algorithm to pass the tests
 		-translate Wikipedia pseudocode
 		-have set of instances of "VertexData" (not necessarily with that name)
@@ -116,6 +122,7 @@ avoid walls
 -on background scolling:
 	-instead, make the background switch between scrolling left, up, right,
 	and down (based on how far it scrolls out) rather than following player
+-edit the tests to separate the setup out of the cases, for reusability
 
 OOP Classes (incomplete):
 ------------------------

@@ -41,10 +41,18 @@ public:
   int getNumVertices() const;
   int getNumEdges() const;
 
-  // returns nullptr if fails to find vertex;
-  // is slow and meant to be used for edge creation (which happens once),
+  // Returns nullptr if fails to find vertex.
+  // Is slow and meant to be used for edge creation (which happens once),
   // but has to be public to be testable
   PGVertex* getVertex(sf::Vector2i position); // locate tile by position
+
+  // Is public so that I could test that the correct number of start
+  // vertices was set up for the search.
+  int getNumSearchStartVertices() const;
+
+  // Based on enemy's location, sets the tiles on which the pathfinding
+  // search would start (i.e. which tiles this entity is touching).
+  void setSearchStart(sf::Vector2f centerPosition, int width, int height);
 
   // Perform's the search part of A* algorithm.
   // Returns index of the path ending vertex (with which the path can
@@ -70,4 +78,7 @@ private:
 private:
   std::vector<PGVertex::Ptr> mVertices;
   int mNumEdges;
+
+  // A* data
+  std::vector<Tile*> mSearchStartVertices;
 };
