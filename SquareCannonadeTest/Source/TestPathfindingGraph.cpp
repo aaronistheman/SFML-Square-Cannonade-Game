@@ -271,12 +271,15 @@ TEST_CASE("Created correct number of edges #7")
  * Note that there is a confusing part in that an enemy's position is
  * centered, whereas a vertex's position uses its top-left coordinate.
  * This is a bad design choice on my part.
+ *
+ * tileGrid can't be local to this function because the generated
+ * PathfindingGraph instance has vertices that reference the tiles
+ * in tileGrid.
  */
 
-PathfindingGraph* setupPathfindingSearchStartTests(int caseNum)
+std::unique_ptr<PathfindingGraph> setupPathfindingSearchStartTests(
+  int caseNum, std::vector<Tile::Ptr>& tileGrid)
 {
-  std::vector<Tile::Ptr> tileGrid;
-
   // Set tileLength
   int tileLength = 0;
   int enemyLength = 0;
@@ -334,7 +337,8 @@ PathfindingGraph* setupPathfindingSearchStartTests(int caseNum)
 
   // Stuff for every test case
   runCreateGrid(tileGrid, area, tileLength, tileMap);
-  PathfindingGraph* pg = new PathfindingGraph(tileGrid);
+  std::unique_ptr<PathfindingGraph> pg =
+    std::unique_ptr<PathfindingGraph>(new PathfindingGraph(tileGrid));
 
   // Run method-to-test
   switch (caseNum)
@@ -360,7 +364,9 @@ PathfindingGraph* setupPathfindingSearchStartTests(int caseNum)
 
 TEST_CASE("Setting pathfinding search's start vertices #1")
 {
-  PathfindingGraph* pg = setupPathfindingSearchStartTests(1);
+  std::vector<Tile::Ptr> tileGrid;
+  std::unique_ptr<PathfindingGraph> pg =
+    setupPathfindingSearchStartTests(1, tileGrid);
 
   // Assertion
   REQUIRE(pg->getNumSearchStartVertices() == 4);
@@ -371,11 +377,11 @@ TEST_CASE("Setting pathfinding search's start vertices #1")
   REQUIRE(startVertices[3]->getPosition() == sf::Vector2i(30, 20));
 }
 
-/*
 // Involves some random walls that *shouldn't* affect anything
 TEST_CASE("Setting pathfinding search's start vertices #2")
 {
-  PathfindingGraph* pg = setupPathfindingSearchStartTests(2);
+  std::vector<Tile::Ptr> tileGrid;
+  auto pg = setupPathfindingSearchStartTests(2, tileGrid);
 
   // Assertion
   REQUIRE(pg->getNumSearchStartVertices() == 4);
@@ -389,7 +395,8 @@ TEST_CASE("Setting pathfinding search's start vertices #2")
 // Enemy completely fits in one tile
 TEST_CASE("Setting pathfinding search's start vertices #3")
 {
-  PathfindingGraph* pg = setupPathfindingSearchStartTests(3);
+  std::vector<Tile::Ptr> tileGrid;
+  auto pg = setupPathfindingSearchStartTests(3, tileGrid);
 
   // Assertion
   REQUIRE(pg->getNumSearchStartVertices() == 1);
@@ -400,7 +407,8 @@ TEST_CASE("Setting pathfinding search's start vertices #3")
 // Enemy completely fits in two tiles
 TEST_CASE("Setting pathfinding search's start vertices #4")
 {
-  PathfindingGraph* pg = setupPathfindingSearchStartTests(4);
+  std::vector<Tile::Ptr> tileGrid;
+  auto pg = setupPathfindingSearchStartTests(4, tileGrid);
 
   // Assertion
   REQUIRE(pg->getNumSearchStartVertices() == 2);
@@ -408,7 +416,6 @@ TEST_CASE("Setting pathfinding search's start vertices #4")
   REQUIRE(startVertices[0]->getPosition() == sf::Vector2i(30, 0));
   REQUIRE(startVertices[1]->getPosition() == sf::Vector2i(30, 30));
 }
-*/
 
 
 

@@ -74,7 +74,6 @@ void PathfindingGraph::setSearchStart(sf::Vector2f centerPosition,
     if (ptr->getRect().intersects(entityRect))
     {
       mSearchStartVertices.push_back(ptr.get());
-
     }
   }
 } // setSearchStart()
