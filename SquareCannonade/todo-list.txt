@@ -11,7 +11,9 @@ Current:
 	)
 	-tests
 		-test for:
-			-means of setting path ending
+			-get tests to pass
+				-means of setting path ending
+				-one or two tests for setting start/end vertices
 			-correct path ending vertex (tests performAStarSearch)
 				-requires a means of setting path beginnings and endings
 			-algorithm's solution (using inputs with deterministic outputs)

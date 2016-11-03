@@ -50,10 +50,14 @@ public:
   // These are public for testing purposes
   int getNumSearchStartVertices() const;
   const std::vector<PGVertex*>& getSearchStartVertices() const;
+  int getNumSearchEndVertices() const;
+  const std::vector<PGVertex*>& getSearchEndVertices() const;
 
-  // Based on enemy's location, sets the tiles on which the pathfinding
-  // search would start (i.e. which tiles this entity is touching).
-  void setSearchStart(sf::Vector2f centerPosition, int width, int height);
+  // Based on parameters, sets the tiles on which the pathfinding
+  // search would start/end (i.e. which tiles this entity is touching).
+  // Set isSettingStart to false to set path ending vertices.
+  void setSearchStartOrEnd(bool isSettingStart,
+    sf::Vector2f centerPosition, int width, int height);
 
   // Perform's the search part of A* algorithm.
   // Returns index of the path ending vertex (with which the path can
@@ -82,4 +86,5 @@ private:
 
   // A* data
   std::vector<PGVertex*> mSearchStartVertices;
+  std::vector<PGVertex*> mSearchEndVertices;
 };

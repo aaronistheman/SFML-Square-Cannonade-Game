@@ -19,6 +19,7 @@ PathfindingGraph::PathfindingGraph(const std::vector<Tile::Ptr> &tileGrid)
   : mVertices()
   , mNumEdges(0)
   , mSearchStartVertices()
+  , mSearchEndVertices()
 {
   createVertices(tileGrid);
 
@@ -58,8 +59,18 @@ const std::vector<PGVertex*>& PathfindingGraph::getSearchStartVertices() const
   return mSearchStartVertices;
 }
 
-void PathfindingGraph::setSearchStart(sf::Vector2f centerPosition,
-  int width, int height)
+int PathfindingGraph::getNumSearchEndVertices() const
+{
+  return mSearchEndVertices.size();
+}
+
+const std::vector<PGVertex*>& PathfindingGraph::getSearchEndVertices() const
+{
+  return mSearchEndVertices;
+}
+
+void PathfindingGraph::setSearchStartOrEnd(bool isSettingStart,
+  sf::Vector2f centerPosition, int width, int height)
 {
   // Form a rectangle representing the entity's position
   sf::Vector2i topLeft = sf::Vector2i(
