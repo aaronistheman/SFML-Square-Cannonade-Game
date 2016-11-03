@@ -39,8 +39,8 @@ class PathfindingGraph
 public:
   explicit PathfindingGraph(const std::vector<Tile::Ptr> &tileGrid);
 
-  int getNumVertices() const;
-  int getNumEdges() const;
+  size_t getNumVertices() const;
+  unsigned int getNumEdges() const;
 
   // Returns nullptr if fails to find vertex.
   // Is slow and meant to be used for edge creation (which happens once),
@@ -48,9 +48,9 @@ public:
   PGVertex* getVertex(sf::Vector2i position); // locate tile by position
 
   // These are public for testing purposes
-  int getNumSearchStartVertices() const;
+  size_t getNumSearchStartVertices() const;
   const std::vector<PGVertex*>& getSearchStartVertices() const;
-  int getNumSearchEndVertices() const;
+  size_t getNumSearchEndVertices() const;
   const std::vector<PGVertex*>& getSearchEndVertices() const;
 
   // Based on parameters, sets the tiles on which the pathfinding
@@ -61,8 +61,8 @@ public:
 
   // Perform's the search part of A* algorithm.
   // Returns index of the path ending vertex (with which the path can
-  // be generated).
-  int performAStarSearch();
+  // be generated) in mVertices.
+  unsigned int performAStarSearch();
 
   // Generates the path found by the A* algorithm.
   // Returns said path as an array of pointers to the vertices involved
@@ -82,7 +82,7 @@ private:
 
 private:
   std::vector<PGVertex::Ptr> mVertices;
-  int mNumEdges;
+  unsigned int mNumEdges;
 
   // A* data
   std::vector<PGVertex*> mSearchStartVertices;

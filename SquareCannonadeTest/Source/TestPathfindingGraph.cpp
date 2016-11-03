@@ -418,7 +418,7 @@ std::unique_ptr<PathfindingGraph> setupPathfindingSetupTests(
   }
 
   return pg;
-}
+} // setupPathfindingSetupTests()
 
 TEST_CASE("Setting pathfinding search's start vertices #1")
 {

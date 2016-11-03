@@ -12,7 +12,10 @@ Current:
 	-tests
 		-test for:
 			-correct path ending vertex (tests performAStarSearch())
-				-requires a means of setting path beginnings and endings
+				-figure out how to use the path ending vertex (that is,
+				what it means)
+				-implement the tests, based on the ones I wrote out on paper
+				("A* Test Cases")
 			-algorithm's solution (using inputs with deterministic outputs)
 			(tests generatePath())
 	-set up algorithm
@@ -33,6 +36,7 @@ Current:
 	-cite helpful sources
 -somewhere, enforce that an enemy can't be bigger than a tile
 -implementing A*: apply to game
+	-perhaps store tile grid in PathfindingGraph instance
 	-figure out heuristic function
 		-ideas:
 			-pure distance (i.e. Pythagorean theorem)

@@ -28,12 +28,12 @@ PathfindingGraph::PathfindingGraph(const std::vector<Tile::Ptr> &tileGrid)
   createEdges(tileLength);
 }
 
-int PathfindingGraph::getNumVertices() const
+size_t PathfindingGraph::getNumVertices() const
 {
   return mVertices.size();
 }
 
-int PathfindingGraph::getNumEdges() const
+unsigned int PathfindingGraph::getNumEdges() const
 {
   return mNumEdges;
 }
@@ -49,7 +49,7 @@ PGVertex * PathfindingGraph::getVertex(sf::Vector2i position)
   return nullptr;
 }
 
-int PathfindingGraph::getNumSearchStartVertices() const
+size_t PathfindingGraph::getNumSearchStartVertices() const
 {
   return mSearchStartVertices.size();
 }
@@ -59,7 +59,7 @@ const std::vector<PGVertex*>& PathfindingGraph::getSearchStartVertices() const
   return mSearchStartVertices;
 }
 
-int PathfindingGraph::getNumSearchEndVertices() const
+size_t PathfindingGraph::getNumSearchEndVertices() const
 {
   return mSearchEndVertices.size();
 }
@@ -92,9 +92,9 @@ void PathfindingGraph::setSearchStartOrEnd(bool isSettingStart,
   }
 } // setSearchStart()
 
-int PathfindingGraph::performAStarSearch()
+unsigned int PathfindingGraph::performAStarSearch()
 {
-  return -1; // to be implemented correctly later
+  return 0; // to be implemented correctly later
 }
 
 PGVertex ** PathfindingGraph::generatePath(int pathEndingVertexId)
