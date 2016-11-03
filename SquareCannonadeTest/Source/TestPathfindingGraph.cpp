@@ -4,6 +4,7 @@
 #include <Game/PathfindingGraph.hpp>
 
 #include <cassert>
+#include <iostream>
 
 
 /**
@@ -279,19 +280,18 @@ TEST_CASE("Created correct number of edges #7")
 
 // Setup function to help with the tests of the setup of the pathfinding
 std::unique_ptr<PathfindingGraph> setupPathfindingSetupTests(
-  int caseNum, std::vector<Tile::Ptr>& tileGrid,
-  bool isSettingStartVertices)
+  int caseNum, std::vector<Tile::Ptr>& tileGrid)
 {
   // Set tileLength
   int tileLength = 0;
   int enemyLength = 0;
   switch (caseNum)
   {
-  case 2:
+  case 2: case 6:
     tileLength = 30;
     enemyLength = 20;
     break;
-  case 3: case 4:
+  case 3: case 4: case 7: case 8:
     tileLength = 10;
     enemyLength = 5;
     break;
@@ -304,19 +304,20 @@ std::unique_ptr<PathfindingGraph> setupPathfindingSetupTests(
   sf::IntRect area;
   switch (caseNum)
   {
-  case 1:
+  case 1: case 5:
     area = sf::IntRect(0, 0, 50, 40);
     break;
-  case 2:
+  case 2: case 6:
     area = sf::IntRect(0, 0, 150, 150);
     break;
-  case 3:
+  case 3: case 7:
     area = sf::IntRect(0, 0, 20, 20);
     break;
-  case 4:
+  case 4: case 8:
     area = sf::IntRect(0, 0, 30, 20);
     break;
   default:
+    std::cerr << "Invalid case number\n";
     assert(false); // shouldn't be reached; no logical default area
     break;
   }
@@ -325,7 +326,7 @@ std::unique_ptr<PathfindingGraph> setupPathfindingSetupTests(
   std::string tileMap = "";
   switch (caseNum)
   {
-  case 2: // some random walls
+  case 2: case 6: // some random walls
     tileMap += "00www";
     tileMap += "w000w";
     tileMap += "00w00";
@@ -361,6 +362,22 @@ std::unique_ptr<PathfindingGraph> setupPathfindingSetupTests(
     pg->setSearchStartOrEnd(true, sf::Vector2f(15, 10),
       enemyLength, enemyLength);
     break;
+  case 5:
+    pg->setSearchStartOrEnd(false, sf::Vector2f(29, 18),
+      enemyLength, enemyLength);
+    break;
+  case 6:
+    pg->setSearchStartOrEnd(false, sf::Vector2f(32, 94),
+      enemyLength, enemyLength);
+    break;
+  case 7:
+    pg->setSearchStartOrEnd(false, sf::Vector2f(15, 5),
+      enemyLength, enemyLength);
+    break;
+  case 8:
+    pg->setSearchStartOrEnd(false, sf::Vector2f(15, 10),
+      enemyLength, enemyLength);
+    break;
   default:
     assert(false); // no logical default
   }
@@ -372,7 +389,7 @@ TEST_CASE("Setting pathfinding search's start vertices #1")
 {
   std::vector<Tile::Ptr> tileGrid;
   std::unique_ptr<PathfindingGraph> pg =
-    setupPathfindingSetupTests(1, tileGrid, true);
+    setupPathfindingSetupTests(1, tileGrid);
 
   // Assertion
   REQUIRE(pg->getNumSearchStartVertices() == 4);
@@ -387,7 +404,7 @@ TEST_CASE("Setting pathfinding search's start vertices #1")
 TEST_CASE("Setting pathfinding search's start vertices #2")
 {
   std::vector<Tile::Ptr> tileGrid;
-  auto pg = setupPathfindingSetupTests(2, tileGrid, true);
+  auto pg = setupPathfindingSetupTests(2, tileGrid);
 
   // Assertion
   REQUIRE(pg->getNumSearchStartVertices() == 4);
@@ -402,7 +419,7 @@ TEST_CASE("Setting pathfinding search's start vertices #2")
 TEST_CASE("Setting pathfinding search's start vertices #3")
 {
   std::vector<Tile::Ptr> tileGrid;
-  auto pg = setupPathfindingSetupTests(3, tileGrid, true);
+  auto pg = setupPathfindingSetupTests(3, tileGrid);
 
   // Assertion
   REQUIRE(pg->getNumSearchStartVertices() == 1);
@@ -414,7 +431,7 @@ TEST_CASE("Setting pathfinding search's start vertices #3")
 TEST_CASE("Setting pathfinding search's start vertices #4")
 {
   std::vector<Tile::Ptr> tileGrid;
-  auto pg = setupPathfindingSetupTests(4, tileGrid, true);
+  auto pg = setupPathfindingSetupTests(4, tileGrid);
 
   // Assertion
   REQUIRE(pg->getNumSearchStartVertices() == 2);
@@ -427,7 +444,7 @@ TEST_CASE("Setting pathfinding search's end vertices #1")
 {
   std::vector<Tile::Ptr> tileGrid;
   std::unique_ptr<PathfindingGraph> pg =
-    setupPathfindingSetupTests(1, tileGrid, false);
+    setupPathfindingSetupTests(5, tileGrid);
 
   // Assertion
   REQUIRE(pg->getNumSearchEndVertices() == 4);
@@ -442,7 +459,7 @@ TEST_CASE("Setting pathfinding search's end vertices #1")
 TEST_CASE("Setting pathfinding search's end vertices #2")
 {
   std::vector<Tile::Ptr> tileGrid;
-  auto pg = setupPathfindingSetupTests(2, tileGrid, false);
+  auto pg = setupPathfindingSetupTests(6, tileGrid);
 
   // Assertion
   REQUIRE(pg->getNumSearchEndVertices() == 4);
@@ -457,7 +474,7 @@ TEST_CASE("Setting pathfinding search's end vertices #2")
 TEST_CASE("Setting pathfinding search's end vertices #3")
 {
   std::vector<Tile::Ptr> tileGrid;
-  auto pg = setupPathfindingSetupTests(3, tileGrid, false);
+  auto pg = setupPathfindingSetupTests(7, tileGrid);
 
   // Assertion
   REQUIRE(pg->getNumSearchEndVertices() == 1);
@@ -469,7 +486,7 @@ TEST_CASE("Setting pathfinding search's end vertices #3")
 TEST_CASE("Setting pathfinding search's end vertices #4")
 {
   std::vector<Tile::Ptr> tileGrid;
-  auto pg = setupPathfindingSetupTests(4, tileGrid, false);
+  auto pg = setupPathfindingSetupTests(8, tileGrid);
 
   // Assertion
   REQUIRE(pg->getNumSearchEndVertices() == 2);
