@@ -11,13 +11,10 @@ Current:
 	)
 	-tests
 		-test for:
-			-get tests to pass
-				-means of setting path ending
-				-one or two tests for setting start/end vertices
-			-correct path ending vertex (tests performAStarSearch)
+			-correct path ending vertex (tests performAStarSearch())
 				-requires a means of setting path beginnings and endings
 			-algorithm's solution (using inputs with deterministic outputs)
-			(tests generatePath)
+			(tests generatePath())
 	-set up algorithm
 		-have way to set start vertex (given an enemy's position)
 		and "run the algorithm"

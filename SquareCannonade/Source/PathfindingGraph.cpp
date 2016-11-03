@@ -84,7 +84,10 @@ void PathfindingGraph::setSearchStartOrEnd(bool isSettingStart,
 
     if (ptr->getRect().intersects(entityRect))
     {
-      mSearchStartVertices.push_back(ptr.get());
+      if (isSettingStart)
+        mSearchStartVertices.push_back(ptr.get());
+      else
+        mSearchEndVertices.push_back(ptr.get());
     }
   }
 } // setSearchStart()
