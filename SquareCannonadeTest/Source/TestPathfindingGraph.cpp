@@ -371,10 +371,10 @@ TEST_CASE("Setting pathfinding search's start vertices #1")
   // Assertion
   REQUIRE(pg->getNumSearchStartVertices() == 4);
   auto startVertices = pg->getSearchStartVertices();
-  REQUIRE(startVertices[0]->getPosition() == sf::Vector2i(20, 10));
-  REQUIRE(startVertices[1]->getPosition() == sf::Vector2i(30, 10));
-  REQUIRE(startVertices[2]->getPosition() == sf::Vector2i(20, 20));
-  REQUIRE(startVertices[3]->getPosition() == sf::Vector2i(30, 20));
+  assertEquality(startVertices[0]->getPosition(), sf::Vector2i(20, 10));
+  assertEquality(startVertices[1]->getPosition(), sf::Vector2i(30, 10));
+  assertEquality(startVertices[2]->getPosition(), sf::Vector2i(20, 20));
+  assertEquality(startVertices[3]->getPosition(), sf::Vector2i(30, 20));
 }
 
 // Involves some random walls that *shouldn't* affect anything
@@ -386,10 +386,10 @@ TEST_CASE("Setting pathfinding search's start vertices #2")
   // Assertion
   REQUIRE(pg->getNumSearchStartVertices() == 4);
   auto startVertices = pg->getSearchStartVertices();
-  REQUIRE(startVertices[0]->getPosition() == sf::Vector2i(0, 60));
-  REQUIRE(startVertices[1]->getPosition() == sf::Vector2i(30, 60));
-  REQUIRE(startVertices[2]->getPosition() == sf::Vector2i(0, 90));
-  REQUIRE(startVertices[3]->getPosition() == sf::Vector2i(30, 90));
+  assertEquality(startVertices[0]->getPosition(), sf::Vector2i(0, 60));
+  assertEquality(startVertices[1]->getPosition(), sf::Vector2i(30, 60));
+  assertEquality(startVertices[2]->getPosition(), sf::Vector2i(0, 90));
+  assertEquality(startVertices[3]->getPosition(), sf::Vector2i(30, 90));
 }
 
 // Enemy completely fits in one tile
@@ -401,7 +401,7 @@ TEST_CASE("Setting pathfinding search's start vertices #3")
   // Assertion
   REQUIRE(pg->getNumSearchStartVertices() == 1);
   auto startVertices = pg->getSearchStartVertices();
-  REQUIRE(startVertices[0]->getPosition() == sf::Vector2i(30, 0));
+  assertEquality(startVertices[0]->getPosition(), sf::Vector2i(30, 0));
 }
 
 // Enemy completely fits in two tiles
@@ -413,8 +413,8 @@ TEST_CASE("Setting pathfinding search's start vertices #4")
   // Assertion
   REQUIRE(pg->getNumSearchStartVertices() == 2);
   auto startVertices = pg->getSearchStartVertices();
-  REQUIRE(startVertices[0]->getPosition() == sf::Vector2i(30, 0));
-  REQUIRE(startVertices[1]->getPosition() == sf::Vector2i(30, 30));
+  assertEquality(startVertices[0]->getPosition(), sf::Vector2i(30, 0));
+  assertEquality(startVertices[1]->getPosition(), sf::Vector2i(30, 30));
 }
 
 
