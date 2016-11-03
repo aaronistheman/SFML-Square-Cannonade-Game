@@ -11,8 +11,6 @@ Current:
 	)
 	-tests
 		-test for:
-			-means of setting path beginning
-				-figure out why not all tests pass
 			-means of setting path ending
 			-correct path ending vertex (tests performAStarSearch)
 				-requires a means of setting path beginnings and endings
