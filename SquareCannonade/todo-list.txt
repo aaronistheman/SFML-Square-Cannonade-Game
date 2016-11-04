@@ -10,21 +10,13 @@ Current:
 			-DO something; don't hesitate too much
 	)
 	-tests
-		-am I making it a prerequisite for the method that a suitable
-		path must exist?
-			-if so, an assertion should document this
-			-if not, a test must document this
 		-test for:
 			-correct path ending vertex (tests performAStarSearch());
 			implement the tests, based on the ones I wrote out on paper
 			("A* Test Cases")
+				-apply easier settors to old tests
 				-setup method
-					-tile length
-					-area rect
-					-tile map
-					-stuff for every test case
 					-set search and end
-					-run method-to-test
 			-algorithm's solution (using inputs with deterministic outputs)
 			(tests generatePath())
 	-set up algorithm
@@ -39,6 +31,8 @@ Current:
 			the algorithm
 		-for now, could set heuristic function to zero
 	-implement algorithm to pass the tests
+		-if a path isn't found, raise an assertion; document that a suitable
+		path must exist as a prerequisite for the method
 		-translate Wikipedia pseudocode
 		-have set of instances of "VertexData" (not necessarily with that name)
 		-perhaps borrow Weiss' BinaryHeap class

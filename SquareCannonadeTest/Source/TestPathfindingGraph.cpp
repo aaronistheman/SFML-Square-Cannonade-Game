@@ -282,7 +282,7 @@ TEST_CASE("Created correct number of edges #7")
 std::unique_ptr<PathfindingGraph> setupPathfindingSetupTests(
   int caseNum, std::vector<Tile::Ptr>& tileGrid)
 {
-  // Set tileLength
+  // Set tile and enemy length
   int tileLength = 0;
   int enemyLength = 0;
   switch (caseNum)
@@ -587,7 +587,123 @@ TEST_CASE("Setting pathfinding search's start and end vertices #2")
 unsigned int setupPathfindingEndTests(
   int caseNum, std::vector<Tile::Ptr>& tileGrid)
 {
-  return 100000; // to be implemented correctly
+  // Set tile and enemy length
+  int tileLength = 0;
+  int enemyLength = 0;
+  switch (caseNum)
+  {
+  case 1: case 2: case 3: case 6: // if tile should be larger than enemy
+    tileLength = 10;
+    enemyLength = 5;
+    break;
+  default:
+    tileLength = 10;
+    enemyLength = 10;
+    break;
+  }
+  // So I don't mess up:
+  assert(tileLength != 0);
+  assert(enemyLength != 0);
+
+  // Set area rect
+  sf::IntRect area;
+  switch (caseNum)
+  {
+  case 1:
+    area = sf::IntRect(0, 0, 30, 10);
+    break;
+  case 2:
+    area = sf::IntRect(0, 0, 30, 20);
+    break;
+  case 3:
+    area = sf::IntRect(0, 0, 200, 200);
+    break;
+  case 4:
+    area = sf::IntRect(0, 0, 80, 20);
+    break;
+  case 5:
+    area = sf::IntRect(0, 0, 70, 70);
+    break;
+  case 6:
+    area = sf::IntRect(0, 0, 20, 20);
+    break;
+  case 7:
+    area = sf::IntRect(0, 0, 100, 90);
+    break;
+  default:
+    // No suitable default; stop tests
+    std::cerr << "Invalid case number\n";
+    assert(false);
+  }
+
+  // Set tile map
+  std::string tileMap = "";
+  switch (caseNum)
+  {
+  case 2:
+    tileMap += "000";
+    tileMap += "0w0";
+    break;
+  case 3: // just one wall for first spot of second row
+    tileMap = createTileMapAllDefault(area, tileLength);
+    tileMap.at(20) = 'w';
+    break;
+  case 4:
+    tileMap += "00000000";
+    tileMap += "00w00000";
+    break;
+  case 7:
+    tileMap += "0000000000";
+    tileMap += "0000000000";
+    tileMap += "000wwwww00";
+    tileMap += "000wwwww00";
+    tileMap += "000wwwww00";
+    tileMap += "000wwwww00";
+    tileMap += "0000wwww00";
+    tileMap += "0000000000";
+    tileMap += "0000000000";
+    break;
+  default:
+    tileMap = createTileMapAllDefault(area, tileLength);
+    break;
+  }
+
+  // Stuff for every test case
+  runCreateGrid(tileGrid, area, tileLength, tileMap);
+  std::unique_ptr<PathfindingGraph> pg =
+    std::unique_ptr<PathfindingGraph>(new PathfindingGraph(tileGrid));
+
+  // Set search and end
+  switch (caseNum)
+  {
+  case 1:
+
+    break;
+  case 2:
+
+    break;
+  case 3:
+
+    break;
+  case 4:
+
+    break;
+  case 5:
+
+    break;
+  case 6:
+
+    break;
+  case 7:
+
+    break;
+  default:
+    std::cerr << "Invalid case number\n";
+    assert(false); // no logical default
+  }
+
+  // Run method-to-test
+  return pg->performAStarSearch();
 } // setupPathfindingEndTests()
 
 TEST_CASE("Correct path end #1")
