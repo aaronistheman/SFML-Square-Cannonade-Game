@@ -69,28 +69,29 @@ const std::vector<PGVertex*>& PathfindingGraph::getSearchEndVertices() const
   return mSearchEndVertices;
 }
 
-void PathfindingGraph::setSearchStartOrEnd(bool isSettingStart,
-  sf::Vector2f centerPosition, int width, int height)
+void PathfindingGraph::setSearchStart(sf::Vector2f entityCenterPosition,
+  int entityWidth, int entityHeight)
 {
-  // Form a rectangle representing the entity's position
-  sf::Vector2i topLeft = sf::Vector2i(
-    (int)centerPosition.x - width / 2,
-    (int)centerPosition.y - height / 2);
-  sf::IntRect entityRect = sf::IntRect(topLeft, sf::Vector2i(width, height));
+  setSearchStartOrEnd(true, entityCenterPosition, entityWidth, entityHeight);
+}
 
-  // Note each vertex that's area intersects the entity's rectangle
-  for (auto const &ptr : mVertices)
-  {
+void PathfindingGraph::setSearchEnd(sf::Vector2f entityCenterPosition,
+  int entityWidth, int entityHeight)
+{
+  setSearchStartOrEnd(false, entityCenterPosition, entityWidth, entityHeight);
+}
 
-    if (ptr->getRect().intersects(entityRect))
-    {
-      if (isSettingStart)
-        mSearchStartVertices.push_back(ptr.get());
-      else
-        mSearchEndVertices.push_back(ptr.get());
-    }
-  }
-} // setSearchStart()
+void PathfindingGraph::setSearchStart(sf::Vector2f entityCenterPosition,
+  int entityLength)
+{
+  setSearchStart(entityCenterPosition, entityLength, entityLength);
+}
+
+void PathfindingGraph::setSearchEnd(sf::Vector2f entityCenterPosition,
+  int entityLength)
+{
+  setSearchEnd(entityCenterPosition, entityLength, entityLength);
+}
 
 unsigned int PathfindingGraph::performAStarSearch()
 {
@@ -231,3 +232,27 @@ void PathfindingGraph::createDiagonalEdges(
     } // if found a vertex
   } // for each diagonal offset
 } // createDiagonalEdges()
+
+
+void PathfindingGraph::setSearchStartOrEnd(bool isSettingStart,
+  sf::Vector2f centerPosition, int width, int height)
+{
+  // Form a rectangle representing the entity's position
+  sf::Vector2i topLeft = sf::Vector2i(
+    (int)centerPosition.x - width / 2,
+    (int)centerPosition.y - height / 2);
+  sf::IntRect entityRect = sf::IntRect(topLeft, sf::Vector2i(width, height));
+
+  // Note each vertex that's area intersects the entity's rectangle
+  for (auto const &ptr : mVertices)
+  {
+
+    if (ptr->getRect().intersects(entityRect))
+    {
+      if (isSettingStart)
+        mSearchStartVertices.push_back(ptr.get());
+      else
+        mSearchEndVertices.push_back(ptr.get());
+    }
+  }
+} // setSearchStartOrEnd()

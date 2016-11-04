@@ -53,11 +53,17 @@ public:
   size_t getNumSearchEndVertices() const;
   const std::vector<PGVertex*>& getSearchEndVertices() const;
 
-  // Based on parameters, sets the tiles on which the pathfinding
-  // search would start/end (i.e. which tiles this entity is touching).
-  // Set isSettingStart to false to set path ending vertices.
-  void setSearchStartOrEnd(bool isSettingStart,
-    sf::Vector2f centerPosition, int width, int height);
+  // For setting start/end of pathfinding search based on entity's traits
+  // (e.g. entity's position, entity's width). More specifically, the
+  // tiles touched by the entity are set as the start or end tiles,
+  // depending on which method is called.
+  void setSearchStart(sf::Vector2f entityCenterPosition,
+    int entityWidth, int entityHeight);
+  void setSearchEnd(sf::Vector2f entityCenterPosition,
+    int entityWidth, int entityHeight);
+  // If width=height, can use these instead of the above
+  void setSearchStart(sf::Vector2f entityCenterPosition, int entityLength);
+  void setSearchEnd(sf::Vector2f entityCenterPosition, int entityLength);
 
   // Perform's the search part of A* algorithm.
   // Returns index of the path ending vertex (with which the path can
@@ -79,6 +85,14 @@ private:
 
   void createNondiagonalEdges(PGVertex::Ptr &vertex, int tileLength);
   void createDiagonalEdges(PGVertex::Ptr &vertex, int tileLength);
+
+  // Based on parameters, sets the tiles on which the pathfinding
+  // search would start/end (i.e. which tiles this entity is touching).
+  // Set isSettingStart to false to set path ending vertices.
+  // "width" and "height" refer to characteristics of the entity located
+  // at parameter "centerPosition".
+  void setSearchStartOrEnd(bool isSettingStart,
+    sf::Vector2f centerPosition, int width, int height);
 
 private:
   std::vector<PGVertex::Ptr> mVertices;

@@ -370,48 +370,36 @@ std::unique_ptr<PathfindingGraph> setupPathfindingSetupTests(
   switch (caseNum)
   {
   case 1:
-    pg->setSearchStartOrEnd(true, sf::Vector2f(29, 18),
-      enemyLength, enemyLength);
+    pg->setSearchStart(sf::Vector2f(29, 18), enemyLength);
     break;
   case 2:
-    pg->setSearchStartOrEnd(true, sf::Vector2f(32, 94),
-      enemyLength, enemyLength);
+    pg->setSearchStart(sf::Vector2f(32, 94), enemyLength);
     break;
   case 3:
-    pg->setSearchStartOrEnd(true, sf::Vector2f(15, 5),
-      enemyLength, enemyLength);
+    pg->setSearchStart(sf::Vector2f(15, 5), enemyLength);
     break;
   case 4:
-    pg->setSearchStartOrEnd(true, sf::Vector2f(15, 10),
-      enemyLength, enemyLength);
+    pg->setSearchStart(sf::Vector2f(15, 10), enemyLength);
     break;
   case 5:
-    pg->setSearchStartOrEnd(false, sf::Vector2f(29, 18),
-      enemyLength, enemyLength);
+    pg->setSearchEnd(sf::Vector2f(29, 18), enemyLength);
     break;
   case 6:
-    pg->setSearchStartOrEnd(false, sf::Vector2f(32, 94),
-      enemyLength, enemyLength);
+    pg->setSearchEnd(sf::Vector2f(32, 94), enemyLength);
     break;
   case 7:
-    pg->setSearchStartOrEnd(false, sf::Vector2f(15, 5),
-      enemyLength, enemyLength);
+    pg->setSearchEnd(sf::Vector2f(15, 5), enemyLength);
     break;
   case 8:
-    pg->setSearchStartOrEnd(false, sf::Vector2f(15, 10),
-      enemyLength, enemyLength);
+    pg->setSearchEnd(sf::Vector2f(15, 10), enemyLength);
     break;
   case 9:
-    pg->setSearchStartOrEnd(true, sf::Vector2f(40, 10),
-      enemyLength, enemyLength);
-    pg->setSearchStartOrEnd(false, sf::Vector2f(20, 30),
-      enemyLength, enemyLength);
+    pg->setSearchStart(sf::Vector2f(40, 10), enemyLength);
+    pg->setSearchEnd(sf::Vector2f(20, 30), enemyLength);
     break;
   case 10:
-    pg->setSearchStartOrEnd(true, sf::Vector2f(20, 30),
-      enemyLength, enemyLength);
-    pg->setSearchStartOrEnd(false, sf::Vector2f(45, 15),
-      enemyLength, enemyLength);
+    pg->setSearchStart(sf::Vector2f(20, 30), enemyLength);
+    pg->setSearchEnd(sf::Vector2f(45, 15), enemyLength);
     break;
   default:
     assert(false); // no logical default

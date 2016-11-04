@@ -14,7 +14,6 @@ Current:
 			-correct path ending vertex (tests performAStarSearch());
 			implement the tests, based on the ones I wrote out on paper
 			("A* Test Cases")
-				-apply easier settors to old tests
 				-setup method
 					-set search and end
 			-algorithm's solution (using inputs with deterministic outputs)
