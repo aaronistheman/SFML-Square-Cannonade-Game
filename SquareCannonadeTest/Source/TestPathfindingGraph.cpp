@@ -579,6 +579,80 @@ TEST_CASE("Setting pathfinding search's start and end vertices #2")
 
 
 /**
+ * Tests for performAStarSearch() (that is, for finding correct path
+ * ending vertex)
+ */
+
+// Returns the path ending vertex id
+unsigned int setupPathfindingEndTests(
+  int caseNum, std::vector<Tile::Ptr>& tileGrid)
+{
+  return 100000; // to be implemented correctly
+} // setupPathfindingEndTests()
+
+TEST_CASE("Correct path end #1")
+{
+  std::vector<Tile::Ptr> tileGrid;
+  auto index = setupPathfindingEndTests(1, tileGrid);
+
+  REQUIRE(index == 2);
+}
+
+TEST_CASE("Correct path end #2")
+{
+  std::vector<Tile::Ptr> tileGrid;
+  auto index = setupPathfindingEndTests(2, tileGrid);
+
+  REQUIRE(index == 4);
+}
+
+TEST_CASE("Correct path end #3")
+{
+  std::vector<Tile::Ptr> tileGrid;
+  auto index = setupPathfindingEndTests(3, tileGrid);
+
+  REQUIRE(index == 398);
+}
+
+TEST_CASE("Correct path end #4")
+{
+  std::vector<Tile::Ptr> tileGrid;
+  auto index = setupPathfindingEndTests(4, tileGrid);
+
+  REQUIRE(index == 6);
+}
+
+TEST_CASE("Correct path end #5")
+{
+  std::vector<Tile::Ptr> tileGrid;
+  auto index = setupPathfindingEndTests(5, tileGrid);
+
+  REQUIRE(index == 8);
+}
+
+TEST_CASE("Correct path end #6")
+{
+  std::vector<Tile::Ptr> tileGrid;
+  auto index = setupPathfindingEndTests(6, tileGrid);
+
+  REQUIRE(index == 1);
+}
+
+TEST_CASE("Correct path end #7")
+{
+  std::vector<Tile::Ptr> tileGrid;
+  auto index = setupPathfindingEndTests(7, tileGrid);
+
+  REQUIRE(index == 12);
+}
+
+
+
+
+
+
+
+/**
  * Tests for finding the correct path with pathfinding algorithm
  */
 
