@@ -665,25 +665,32 @@ unsigned int setupPathfindingEndTests(
   switch (caseNum)
   {
   case 1:
-
+    pg->setSearchStart(sf::Vector2f(5, 5), enemyLength);
+    pg->setSearchEnd(sf::Vector2f(25, 5), enemyLength);
     break;
   case 2:
-
+    pg->setSearchStart(sf::Vector2f(5, 15), enemyLength);
+    pg->setSearchEnd(sf::Vector2f(25, 15), enemyLength);
     break;
   case 3:
-
+    pg->setSearchStart(sf::Vector2f(5, 5), enemyLength);
+    pg->setSearchEnd(sf::Vector2f(195, 195), enemyLength);
     break;
   case 4:
-
+    pg->setSearchStart(sf::Vector2f(10, 10), enemyLength);
+    pg->setSearchEnd(sf::Vector2f(70, 10), enemyLength);
     break;
   case 5:
-
+    pg->setSearchStart(sf::Vector2f(60, 60), enemyLength);
+    pg->setSearchEnd(sf::Vector2f(9, 11), enemyLength);
     break;
   case 6:
-
+    pg->setSearchStart(sf::Vector2f(5, 15), enemyLength);
+    pg->setSearchEnd(sf::Vector2f(15, 5), enemyLength);
     break;
   case 7:
-
+    pg->setSearchStart(sf::Vector2f(80, 80), enemyLength);
+    pg->setSearchEnd(sf::Vector2f(18, 11), enemyLength);
     break;
   default:
     std::cerr << "Invalid case number\n";

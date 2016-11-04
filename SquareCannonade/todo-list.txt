@@ -9,13 +9,9 @@ Current:
 				looking at the entire set. Change this to use a heap later.
 			-DO something; don't hesitate too much
 	)
+	-implement performAStartSearch()
 	-tests
 		-test for:
-			-correct path ending vertex (tests performAStarSearch());
-			implement the tests, based on the ones I wrote out on paper
-			("A* Test Cases")
-				-setup method
-					-set search and end
 			-algorithm's solution (using inputs with deterministic outputs)
 			(tests generatePath())
 	-set up algorithm
