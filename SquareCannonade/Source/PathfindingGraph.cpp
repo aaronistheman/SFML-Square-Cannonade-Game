@@ -2,6 +2,9 @@
 
 #include <cassert>
 
+const int PathfindingGraphVertex::NoPrevious = -1;
+const int PathfindingGraphVertex::InfiniteMovementCost = -1;
+
 const int PathfindingGraph::NondiagonalEdgeWeight = 10;
 const int PathfindingGraph::DiagonalEdgeWeight = 14;
 
@@ -95,7 +98,29 @@ void PathfindingGraph::setSearchEnd(sf::Vector2f entityCenterPosition,
 
 unsigned int PathfindingGraph::performAStarSearch()
 {
+  setUpAStarSearch();
+
   return 0; // to be implemented correctly later
+  
+  // while open set isn't empty
+    // pick a node from the open set
+    // if picked node is a goal node
+      // return its index
+    // move picked node from open set to closed set
+    // for each neighbor of current
+      // if neighbor not in closed set (i.e. not already evaluated)
+        // set newMovementCost to current vertex's movementCost plus
+        // ...distance to get to that neighbor
+        // if neighbor not in open set (i.e. if found a new node)
+          // add neighbor to the open set
+        // if newMovementCost < neighbor's movementCost (i.e. if
+        // ...found better path)
+          // update neighbor's pv
+          // update neighbor's movementCost to be newMovementCost
+          // update neighbor's estimatedMovementCost to be
+          // ...neighbor's movementCost + h(neighbor)
+
+  // failed to reach goal; create failed assertion
 }
 
 PGVertex ** PathfindingGraph::generatePath(int pathEndingVertexId)
@@ -256,3 +281,25 @@ void PathfindingGraph::setSearchStartOrEnd(bool isSettingStart,
     }
   }
 } // setSearchStartOrEnd()
+
+void PathfindingGraph::setUpAStarSearch()
+{
+  mResolvedVertices.clear(); // empty closed set
+
+  // initialize each vertex's data
+  for (auto& vertex : mVertices) // for each vertex
+  {
+    vertex->previousVertexIndex = PGVertex::NoPrevious;
+    vertex->movementCost = vertex->estimatedMovementCost
+      = PGVertex::InfiniteMovementCost;
+  }
+
+  // create open set with the start vertices; clear each
+  // start vertex's movement cost, since they're reached by default
+  mUnresolvedVertices.clear();
+  for (auto& vertex : mSearchStartVertices)
+  {
+    mUnresolvedVertices.push_back(vertex);
+    vertex->movementCost = 0;
+  }
+} // setUpAStarSearch()
