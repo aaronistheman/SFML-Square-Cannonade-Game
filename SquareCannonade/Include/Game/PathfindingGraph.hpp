@@ -97,9 +97,11 @@ public:
 
 
   // Generates the path found by the A* algorithm.
-  // Returns said path as an array of pointers to the vertices involved
-  // in the path, where index 0 corresponds to the start of the path.
-  PGVertex** generatePath(int pathEndingVertexId);
+  // Returns said path as a set of vertices involved
+  // in the path, where the first element of the set corresponds to
+  // the start of the path. Each vertex is represented by its index
+  // in the container of vertices.
+  std::vector<unsigned int> * generatePath(int pathEndingVertexId);
 
 
 private:

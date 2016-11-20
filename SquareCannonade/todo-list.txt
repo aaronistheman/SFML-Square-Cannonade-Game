@@ -10,13 +10,15 @@ Current:
 			-DO something; don't hesitate too much
 	)
 	-tests (before finishing implementation)
-		-test for:
-			-should I test for the case of the start and finish squares
-			being the same?
-			-algorithm's solution (using inputs with deterministic outputs)
-			(tests generatePath())
-	-implement generatePath() (tests should still fail because performAStarSearch()
-	doesn't use the A* algorithm yet)
+		-algorithm's solution (using inputs with deterministic outputs)
+		(tests generatePath())
+			-test for:
+				-path size
+				-first path element
+				-in some cases, second path element
+				-in some cases, last path element
+	-implement generatePath() (all except test #1 and maybe #6
+	should still fail because performAStarSearch() doesn't use the A* algorithm yet)
 	-finish implement performAStarSearch()
 		-apply selection of lowest f value (to make at least one more test pass)
 		(for now, this selection is in O(N) time, where N is number of vertices)
@@ -25,6 +27,9 @@ Current:
 			-edit calculation of neighbor's estimated movement cost
 		-apply priority queue (so that selection of lowest f value is in
 		O(1) time)
+	-any more tests?
+		-should I test for the case of the start and finish squares
+		being the same?
 	-speed up algorithm
 		-find some way to measure the speed of the algorithm
 		-things to speed up:
@@ -39,6 +44,8 @@ Current:
 			-determination of which edge cost (10 or 14) to use
 			(i.e. determination of whether the neighbor is diagonal or not)
 				-remote the two for loops checking these things
+			-perhaps initialize any used vectors with space up front, so
+			vectors won't resize
 			-etc. (look for some things)
 	-clean up the A* code; stepwise refinement
 

@@ -198,10 +198,10 @@ unsigned int PathfindingGraph::performAStarSearch()
 
 } // performAStarSearch()
 
-PGVertex ** PathfindingGraph::generatePath(int pathEndingVertexId)
+std::vector<unsigned int> * PathfindingGraph::generatePath(int pathEndingVertexId)
 {
   return nullptr;
-}
+} // generatePath()
 
 void PathfindingGraph::createVertices(const std::vector<Tile::Ptr> &tileGrid)
 {
