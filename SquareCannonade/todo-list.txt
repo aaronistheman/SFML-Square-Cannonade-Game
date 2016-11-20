@@ -9,12 +9,17 @@ Current:
 				looking at the entire set. Change this to use a heap later.
 			-DO something; don't hesitate too much
 	)
-	-implement performAStarSearch()
-		-at first, just do depth-first search to avoid having to deal
-		with the priority queue now; set heuristic to zero;
-		should pass some cases
-			-translate pseudocode
-				-fix edge cost determination
+	-implement cleanUpAStarSearch()
+		-resets start, end, etc.
+	-tests (before finishing implementation)
+		-test for:
+			-should I test for the case of the start and finish squares
+			being the same?
+			-algorithm's solution (using inputs with deterministic outputs)
+			(tests generatePath())
+	-implement generatePath() (tests should still fail because performAStarSearch()
+	doesn't use the A* algorithm yet)
+	-finish implement performAStarSearch()
 		-apply selection of lowest f value (to make at least one more test pass)
 		(for now, this selection is in O(N) time, where N is number of vertices)
 		-apply heuristic (to make at least one more test pass, or else
@@ -22,15 +27,6 @@ Current:
 			-edit calculation of neighbor's estimated movement cost
 		-apply priority queue (so that selection of lowest f value is in
 		O(1) time)
-	-implement cleanUpAStarSearch()
-		-resets start, end, etc.
-	-tests
-		-test for:
-			-should I test for the case of the start and finish squares
-			being the same?
-			-algorithm's solution (using inputs with deterministic outputs)
-			(tests generatePath())
-	-cite helpful sources
 	-speed up algorithm
 		-find some way to measure the speed of the algorithm
 		-things to speed up:
@@ -42,9 +38,11 @@ Current:
 				-change the sets into arrays that have the vertices' indices
 				as array indices (reduces checking speed to O(1))
 				-remove the two for loops checking these things
-			-determination of which edge cost (10 or 14) to use?
+			-determination of which edge cost (10 or 14) to use
 			(i.e. determination of whether the neighbor is diagonal or not)
+				-remote the two for loops checking these things
 			-etc. (look for some things)
+	-clean up the A* code; stepwise refinement
 
 -somewhere, enforce that an enemy can't be bigger than a tile
 -perhaps try to apply Boost where appropriate, for the practice;

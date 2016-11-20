@@ -136,23 +136,37 @@ unsigned int PathfindingGraph::performAStarSearch()
         }
       }
 
-      // determine if neighbor is already in open set
-      bool inOpenSet = false;
-      for (auto const& o : mUnresolvedVertices)
-      {
-        if (o == neighbor)
-        {
-          inOpenSet = true;
-          break;
-        }
-      }
-
       // if neighbor not in closed set (i.e. not already evaluated)
       if (!inClosedSet)
       {
+        // determine if neighbor is already in open set
+        bool inOpenSet = false;
+        for (auto const& o : mUnresolvedVertices)
+        {
+          if (o == neighbor)
+          {
+            inOpenSet = true;
+            break;
+          }
+        }
+
+        // determine if neighbor is diagonally adjacent,
+        // then pick which edge weight to use
+        bool isDiagonallyAdjacent = false;
+        for (auto const& d : vertex->adjacentDiagonalVertices)
+        {
+          if (d == neighbor)
+            isDiagonallyAdjacent = true;
+        }
+        int edgeWeight = 0;
+        if (isDiagonallyAdjacent)
+          edgeWeight = DiagonalEdgeWeight;
+        else
+          edgeWeight = NondiagonalEdgeWeight;
+
         // set newMovementCost to current vertex's movementCost plus
         // ...distance to get to that neighbor
-        int newMovementCost = vertex->movementCost + 5;
+        int newMovementCost = vertex->movementCost + edgeWeight;
 
         // if neighbor not in open set (i.e. if found a new node)
         if (!inOpenSet)
