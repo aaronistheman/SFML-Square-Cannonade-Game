@@ -124,6 +124,7 @@ private:
 
 
   void setUpAStarSearch();
+  void cleanUpAStarSearch();
 
 
   // Returns true if given vertex could end the pathfinding algorithm

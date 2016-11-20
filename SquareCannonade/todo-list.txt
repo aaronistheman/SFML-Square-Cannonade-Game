@@ -9,8 +9,6 @@ Current:
 				looking at the entire set. Change this to use a heap later.
 			-DO something; don't hesitate too much
 	)
-	-implement cleanUpAStarSearch()
-		-resets start, end, etc.
 	-tests (before finishing implementation)
 		-test for:
 			-should I test for the case of the start and finish squares

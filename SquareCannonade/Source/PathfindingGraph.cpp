@@ -379,6 +379,12 @@ void PathfindingGraph::setUpAStarSearch()
   }
 } // setUpAStarSearch()
 
+void PathfindingGraph::cleanUpAStarSearch()
+{
+  mSearchStartVertices.clear();
+  mSearchEndVertices.clear();
+} // cleanUpAStarSearch()
+
 bool PathfindingGraph::isGoalVertex(PGVertex * vertex) const
 {
   for (auto& const g : mSearchEndVertices)
