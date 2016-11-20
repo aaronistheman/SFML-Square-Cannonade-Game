@@ -91,6 +91,7 @@ public:
   // Perform's the search part of A* algorithm.
   // Returns index of the path ending vertex (with which the path can
   // be generated) in mVertices.
+  // REQUIRES that a valid path exist.
   unsigned int performAStarSearch();
 
 
@@ -121,6 +122,9 @@ private:
 
 
   void setUpAStarSearch();
+
+  // Returns true if given vertex could end the pathfinding algorithm
+  bool isGoalVertex(PGVertex* vertex) const;
 
 private:
   std::vector<PGVertex::Ptr> mVertices;

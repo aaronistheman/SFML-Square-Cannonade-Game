@@ -96,32 +96,93 @@ void PathfindingGraph::setSearchEnd(sf::Vector2f entityCenterPosition,
   setSearchEnd(entityCenterPosition, entityLength, entityLength);
 }
 
+/**
+ * Note: I know it's bad practice to implement an algorithm that
+ * something like the Boost library has already implemented,
+ * but I just implemented this for the fun of it.
+ *
+ * The pseudocode found on the Wikipedia page cited in the readme
+ * greatly helped in implementing this algorithm.
+ */
 unsigned int PathfindingGraph::performAStarSearch()
 {
   setUpAStarSearch();
-
-  return 0; // to be implemented correctly later
   
-  // while open set isn't empty
-    // pick a node from the open set
-    // if picked node is a goal node
-      // return its index
+  while (!mUnresolvedVertices.empty())
+  {
+    // for now, arbitrarily pick a node from the open set
+    PGVertex* vertex = mUnresolvedVertices.back();
+
+    if (isGoalVertex(vertex))
+      return 420; // return its index -- how???
+
     // move picked node from open set to closed set
+    mUnresolvedVertices.pop_back();
+    mResolvedVertices.push_back(vertex);
+
     // for each neighbor of current
+    for (auto const& neighbor : vertex->adjacentVertices)
+    {
+      // determine if neighbor is already in closed set;
+      // I'm not putting this for loop in a function, because it
+      // should eventually be removed
+      bool inClosedSet = false;
+      for (auto const& c : mResolvedVertices)
+      {
+        if (c == neighbor)
+        {
+          inClosedSet = true;
+          break;
+        }
+      }
+
+      // determine if neighbor is already in open set
+      bool inOpenSet = false;
+      for (auto const& o : mUnresolvedVertices)
+      {
+        if (o == neighbor)
+        {
+          inOpenSet = true;
+          break;
+        }
+      }
+
       // if neighbor not in closed set (i.e. not already evaluated)
+      if (!inClosedSet)
+      {
         // set newMovementCost to current vertex's movementCost plus
         // ...distance to get to that neighbor
+        int newMovementCost = vertex->movementCost + 5;
+
         // if neighbor not in open set (i.e. if found a new node)
+        if (!inOpenSet)
+        {
           // add neighbor to the open set
+          mUnresolvedVertices.push_back(neighbor);
+        }
+
         // if newMovementCost < neighbor's movementCost (i.e. if
         // ...found better path)
+        if (newMovementCost < neighbor->movementCost)
+        {
           // update neighbor's pv
+          neighbor->previousVertexIndex = 240;
+
           // update neighbor's movementCost to be newMovementCost
+          neighbor->movementCost = newMovementCost;
+
           // update neighbor's estimatedMovementCost to be
           // ...neighbor's movementCost + h(neighbor)
+          neighbor->estimatedMovementCost = neighbor->movementCost;
+        }
+      }
+    }
+  }
 
   // failed to reach goal; create failed assertion
-}
+  assert(false);
+
+} // performAStarSearch()
 
 PGVertex ** PathfindingGraph::generatePath(int pathEndingVertexId)
 {
@@ -303,3 +364,14 @@ void PathfindingGraph::setUpAStarSearch()
     vertex->movementCost = 0;
   }
 } // setUpAStarSearch()
+
+bool PathfindingGraph::isGoalVertex(PGVertex * vertex) const
+{
+  for (auto& const g : mSearchEndVertices)
+  {
+    if (vertex == g) // if given vertex is one of the goal vertices
+      return true;
+  }
+
+  return false; // found no match
+}
