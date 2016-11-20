@@ -765,26 +765,85 @@ TEST_CASE("Correct path end #7")
  * Tests for finding the correct path with pathfinding algorithm
  */
 
-/*
-TEST_CASE("Found correct path in search #1")
+std::vector<unsigned int> * setupGeneratePathTests(
+  int caseNum, std::vector<Tile::Ptr>& tileGrid)
+{
+  // The test cases are handled in this method, which means performAStarSearch()
+  // and generatePath() have same test cases (but different tested values)
+  auto pg = setupPathfindingEndTests(caseNum, tileGrid);
+
+  int pathEndingVertexId = pg->performAStarSearch();
+
+  // run method-to-test
+  return pg->generatePath(pathEndingVertexId);
+} // setupGeneratePathTests()
+
+TEST_CASE("Found correct path #1")
 {
   std::vector<Tile::Ptr> tileGrid;
-  sf::IntRect rect(0, 0, 30, 20);
-  int tileLength = 10;
+  auto path = *setupGeneratePathTests(1, tileGrid);
 
-  std::string tileMap = "";
-  tileMap += "000";
-  tileMap += "0w0";
-
-  runCreateGrid(tileGrid, rect, tileLength, tileMap);
-  PathfindingGraph pg(tileGrid);
-
-  // Run method-to-test
-  PGVertex** path = pg.generatePath(pg.performAStarSearch());
-
-  // Assertion
-  REQUIRE(path);
-  REQUIRE(path[0]);
-  REQUIRE(path[1]);
+  REQUIRE(path.size() == 2);
+  REQUIRE(path[0] == 1);
+  REQUIRE(path[1] == 2);
 }
-*/
+
+TEST_CASE("Found correct path #2")
+{
+  std::vector<Tile::Ptr> tileGrid;
+  auto path = *setupGeneratePathTests(2, tileGrid);
+
+  REQUIRE(path.size() == 4);
+  REQUIRE(path[0] == 0);
+  REQUIRE(path[1] == 1);
+  REQUIRE(path[3] == 5);
+}
+
+TEST_CASE("Found correct path #3")
+{
+  std::vector<Tile::Ptr> tileGrid;
+  auto path = *setupGeneratePathTests(3, tileGrid);
+
+  REQUIRE(path.size() == 20);
+  REQUIRE(path[0] == 1);
+  REQUIRE(path[19] == 399);
+}
+
+TEST_CASE("Found correct path #4")
+{
+  std::vector<Tile::Ptr> tileGrid;
+  auto path = *setupGeneratePathTests(4, tileGrid);
+
+  REQUIRE(path.size() == 5);
+  REQUIRE(path[0] == 2);
+  REQUIRE(path[1] == 3);
+}
+
+TEST_CASE("Found correct path #5")
+{
+  std::vector<Tile::Ptr> tileGrid;
+  auto path = *setupGeneratePathTests(5, tileGrid);
+
+  REQUIRE(path.size() == 4);
+  REQUIRE(path[0] == 32);
+  REQUIRE(path[1] == 24);
+}
+
+TEST_CASE("Found correct path #6")
+{
+  std::vector<Tile::Ptr> tileGrid;
+  auto path = *setupGeneratePathTests(6, tileGrid);
+
+  REQUIRE(path.size() == 1);
+  REQUIRE(path[0] == 1);
+}
+
+TEST_CASE("Found correct path #7")
+{
+  std::vector<Tile::Ptr> tileGrid;
+  auto path = *setupGeneratePathTests(7, tileGrid);
+
+  REQUIRE(path.size() == 10);
+  REQUIRE(path[0] == 76);
+  REQUIRE(path[1] == 75);
+}

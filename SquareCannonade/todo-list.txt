@@ -9,14 +9,6 @@ Current:
 				looking at the entire set. Change this to use a heap later.
 			-DO something; don't hesitate too much
 	)
-	-tests (before finishing implementation)
-		-algorithm's solution (using inputs with deterministic outputs)
-		(tests generatePath())
-			-test for:
-				-path size
-				-first path element
-				-in some cases, second path element
-				-in some cases, last path element
 	-implement generatePath() (all except test #1 and maybe #6
 	should still fail because performAStarSearch() doesn't use the A* algorithm yet)
 	-finish implement performAStarSearch()
@@ -27,6 +19,8 @@ Current:
 			-edit calculation of neighbor's estimated movement cost
 		-apply priority queue (so that selection of lowest f value is in
 		O(1) time)
+	-actually call cleanUpAStarSearch() instead of just implementing it and
+	not calling it like a silly person!! :-)
 	-any more tests?
 		-should I test for the case of the start and finish squares
 		being the same?
