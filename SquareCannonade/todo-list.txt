@@ -2,15 +2,9 @@ Current:
 --------
 
 -getting A* to work (passing the tests)
-	(
-		-GENERAL NOTES:
-			-don't worry too much about speed yet; first, get something working
-				-Thus, pick the next vertex in the set of open vertices by
-				looking at the entire set. Change this to use a heap later.
-			-DO something; don't hesitate too much
-	)
 	-implement generatePath() (all except test #1 and maybe #6
 	should still fail because performAStarSearch() doesn't use the A* algorithm yet)
+		-figure out why the above prediction fails
 	-finish implement performAStarSearch()
 		-apply selection of lowest f value (to make at least one more test pass)
 		(for now, this selection is in O(N) time, where N is number of vertices)

@@ -1,6 +1,7 @@
 #include <Game/PathfindingGraph.hpp>
 
 #include <cassert>
+#include <stack>
 
 const int PathfindingGraphVertex::NoPrevious = -1;
 const int PathfindingGraphVertex::InfiniteMovementCost = -1;
@@ -200,7 +201,27 @@ unsigned int PathfindingGraph::performAStarSearch()
 
 std::vector<unsigned int> * PathfindingGraph::generatePath(int pathEndingVertexId)
 {
+  // Setup
+  std::stack<unsigned int> reversedPath;
+  reversedPath.push(pathEndingVertexId);
+
+  // Trace back from the (given) index of the path-ending vertex until
+  // the start vertex is reached, updating the stack with the reversed path
+  auto vertex = mVertices[pathEndingVertexId].get();
+  while (vertex->previousVertexIndex != PGVertex::NoPrevious)
+  {
+    int pv = vertex->previousVertexIndex;
+    reversedPath.push(pv);
+    vertex = mVertices[pv].get();
+  }
+
+  // Use the stack to generate the correct (non-reversed) path
   auto path = new std::vector<unsigned int>;
+  while (!reversedPath.empty())
+  {
+    path->push_back(reversedPath.top());
+    reversedPath.pop();
+  }
 
   return path;
 } // generatePath()
