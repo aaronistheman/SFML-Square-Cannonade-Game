@@ -15,10 +15,6 @@ Current:
 		should pass some cases
 			-translate pseudocode
 				-fix edge cost determination
-				-figure how to return a vertex's index; perhaps write a
-				function for this, though that might be slow for the program
-				(if so, make a note to find a way to speed this up)
-					-apply to returning goal vertex's index and setting pv
 		-apply selection of lowest f value (to make at least one more test pass)
 		(for now, this selection is in O(N) time, where N is number of vertices)
 		-apply heuristic (to make at least one more test pass, or else
@@ -45,6 +41,7 @@ Current:
 			-checking if a neighbor is in the closed or open sets
 				-change the sets into arrays that have the vertices' indices
 				as array indices (reduces checking speed to O(1))
+				-remove the two for loops checking these things
 			-determination of which edge cost (10 or 14) to use?
 			(i.e. determination of whether the neighbor is diagonal or not)
 			-etc. (look for some things)

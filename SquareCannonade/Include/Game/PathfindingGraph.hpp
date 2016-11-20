@@ -68,10 +68,10 @@ public:
 
 
   // These are public for testing purposes
-  size_t getNumSearchStartVertices() const;
-  const std::vector<PGVertex*>& getSearchStartVertices() const;
-  size_t getNumSearchEndVertices() const;
-  const std::vector<PGVertex*>& getSearchEndVertices() const;
+  size_t                          getNumSearchStartVertices() const;
+  const std::vector<PGVertex*>&   getSearchStartVertices() const;
+  size_t                          getNumSearchEndVertices() const;
+  const std::vector<PGVertex*>&   getSearchEndVertices() const;
 
 
 
@@ -79,13 +79,14 @@ public:
   // (e.g. entity's position, entity's width). More specifically, the
   // tiles touched by the entity are set as the start or end tiles,
   // depending on which method is called.
-  void setSearchStart(sf::Vector2f entityCenterPosition,
-    int entityWidth, int entityHeight);
-  void setSearchEnd(sf::Vector2f entityCenterPosition,
-    int entityWidth, int entityHeight);
+  void    setSearchStart(sf::Vector2f entityCenterPosition,
+                         int entityWidth, int entityHeight);
+  void    setSearchEnd(sf::Vector2f entityCenterPosition,
+                       int entityWidth, int entityHeight);
+
   // If width=height, can use these instead of the above
-  void setSearchStart(sf::Vector2f entityCenterPosition, int entityLength);
-  void setSearchEnd(sf::Vector2f entityCenterPosition, int entityLength);
+  void    setSearchStart(sf::Vector2f entityCenterPosition, int entityLength);
+  void    setSearchEnd(sf::Vector2f entityCenterPosition, int entityLength);
 
 
   // Perform's the search part of A* algorithm.
@@ -99,6 +100,7 @@ public:
   // Returns said path as an array of pointers to the vertices involved
   // in the path, where index 0 corresponds to the start of the path.
   PGVertex** generatePath(int pathEndingVertexId);
+
 
 private:
   static const int NondiagonalEdgeWeight;
@@ -123,8 +125,17 @@ private:
 
   void setUpAStarSearch();
 
+
   // Returns true if given vertex could end the pathfinding algorithm
   bool isGoalVertex(PGVertex* vertex) const;
+
+
+  // This method is O(N) (where N is number of vertices). Which is bad!
+  // Try not to use this method!
+  // Returns the index of the given vertex in mVertices. Kills program
+  // if fails to find index.
+  unsigned int getIndex(const PGVertex* vertex) const;
+
 
 private:
   std::vector<PGVertex::Ptr> mVertices;

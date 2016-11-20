@@ -114,13 +114,13 @@ unsigned int PathfindingGraph::performAStarSearch()
     PGVertex* vertex = mUnresolvedVertices.back();
 
     if (isGoalVertex(vertex))
-      return 420; // return its index -- how???
+      return getIndex(vertex);
 
     // move picked node from open set to closed set
     mUnresolvedVertices.pop_back();
     mResolvedVertices.push_back(vertex);
 
-    // for each neighbor of current
+    // for each neighbor of current vertex
     for (auto const& neighbor : vertex->adjacentVertices)
     {
       // determine if neighbor is already in closed set;
@@ -166,7 +166,7 @@ unsigned int PathfindingGraph::performAStarSearch()
         if (newMovementCost < neighbor->movementCost)
         {
           // update neighbor's pv
-          neighbor->previousVertexIndex = 240;
+          neighbor->previousVertexIndex = getIndex(vertex);
 
           // update neighbor's movementCost to be newMovementCost
           neighbor->movementCost = newMovementCost;
@@ -374,4 +374,14 @@ bool PathfindingGraph::isGoalVertex(PGVertex * vertex) const
   }
 
   return false; // found no match
+}
+
+unsigned int PathfindingGraph::getIndex(const PGVertex * vertex) const
+{
+  // Can't use foreach loop because need index
+  for (unsigned int i = 0; i < mVertices.size(); ++i)
+  {
+    if (mVertices[i].get() == vertex) // if found the vertex
+      return i; // return the vertex's index
+  }
 }
