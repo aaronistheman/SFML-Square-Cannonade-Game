@@ -110,6 +110,7 @@ unsigned int PathfindingGraph::performAStarSearch()
 {
   setUpAStarSearch();
   
+  // this while loop shouldn't end by the condition being false
   while (!mUnresolvedVertices.empty())
   {
     PGVertex* vertex = getNextAStarVertex();
@@ -118,38 +119,14 @@ unsigned int PathfindingGraph::performAStarSearch()
       return getIndex(vertex);
 
     // move picked node to closed set
-    mResolvedVertices.push_back(vertex);
+    vertex->resolutionStatus = PGVertex::ResolutionStatus::Resolved;
 
     // for each neighbor of current vertex
     for (auto const& neighbor : vertex->adjacentVertices)
     {
-      // determine if neighbor is already in closed set;
-      // I'm not putting this for loop in a function, because it
-      // should eventually be removed
-      bool inClosedSet = false;
-      for (auto const& c : mResolvedVertices)
-      {
-        if (c == neighbor)
-        {
-          inClosedSet = true;
-          break;
-        }
-      }
-
       // if neighbor not in closed set (i.e. not already evaluated)
-      if (!inClosedSet)
+      if (neighbor->resolutionStatus != PGVertex::ResolutionStatus::Resolved)
       {
-        // determine if neighbor is already in open set
-        bool inOpenSet = false;
-        for (auto const& o : mUnresolvedVertices)
-        {
-          if (o == neighbor)
-          {
-            inOpenSet = true;
-            break;
-          }
-        }
-
         // determine if neighbor is diagonally adjacent,
         // then pick which edge weight to use
         bool isDiagonallyAdjacent = false;
@@ -169,10 +146,11 @@ unsigned int PathfindingGraph::performAStarSearch()
         int newMovementCost = vertex->movementCost + edgeWeight;
 
         // if neighbor not in open set (i.e. if found a new node)
-        if (!inOpenSet)
+        if (neighbor->resolutionStatus != PGVertex::ResolutionStatus::CouldResolve)
         {
           // add neighbor to the open set
           mUnresolvedVertices.push_back(neighbor);
+          neighbor->resolutionStatus = PGVertex::ResolutionStatus::CouldResolve;
         }
 
         // if newMovementCost < neighbor's movementCost (i.e. if
@@ -397,14 +375,13 @@ void PathfindingGraph::setSearchStartOrEnd(bool isSettingStart,
 
 void PathfindingGraph::setUpAStarSearch()
 {
-  mResolvedVertices.clear(); // empty closed set
-
   // initialize each vertex's data
   for (auto& vertex : mVertices) // for each vertex
   {
     vertex->previousVertexIndex = PGVertex::NoPrevious;
     vertex->movementCost = vertex->estimatedMovementCost
       = PGVertex::InfiniteMovementCost;
+    vertex->resolutionStatus = PGVertex::ResolutionStatus::Untouched;
   }
 
   // create open set with the start vertices; clear each
@@ -413,6 +390,7 @@ void PathfindingGraph::setUpAStarSearch()
   for (auto& vertex : mSearchStartVertices)
   {
     mUnresolvedVertices.push_back(vertex);
+    vertex->resolutionStatus = PGVertex::ResolutionStatus::CouldResolve;
     vertex->movementCost = 0;
   }
 } // setUpAStarSearch()

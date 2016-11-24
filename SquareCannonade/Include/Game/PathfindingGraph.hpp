@@ -10,15 +10,26 @@
  */
 struct PathfindingGraphVertex
 {
-public: // non-data related; just for cleaner code
+public: // non-data related; just for cleaner/better code
 
   typedef std::unique_ptr<PathfindingGraphVertex> Ptr;
+
   sf::Vector2i getPosition() const;
   sf::IntRect getRect() const;
 
   // for initializing vertex data for A* search
   static const int NoPrevious;
   static const int InfiniteMovementCost;
+
+  // For A* pathfinding search
+  enum class ResolutionStatus
+  {
+    CouldResolve, // This vertex is a neighbor of at least one resolved
+                  // vertex, meaning it *could* be resolved next.
+    Resolved,     // Also called "closed". The quickest path to this vertex
+                  // has been found in the search.
+    Untouched,    // This vertex hasn't been interacted with in the search.
+  };
 
 public: // data
 
@@ -41,6 +52,7 @@ public: // data
                     // a start vertex
   int estimatedMovementCost; // estimated distance to get to this vertex
                              // from a start vertex
+  ResolutionStatus resolutionStatus;
 };
 typedef PathfindingGraphVertex PGVertex;
 
@@ -67,7 +79,8 @@ public:
 
 
 
-  // These are public for testing purposes
+  // These are public for testing purposes, which hopefully doesn't couple
+  // this class's implementation to its tests too severely
   size_t                          getNumSearchStartVertices() const;
   const std::vector<PGVertex*>&   getSearchStartVertices() const;
   size_t                          getNumSearchEndVertices() const;
@@ -159,8 +172,6 @@ private:
   // A* data
   std::vector<PGVertex*> mSearchStartVertices;
   std::vector<PGVertex*> mSearchEndVertices;
-  std::vector<PGVertex*> mResolvedVertices; // the vertices that have been
-                                            // evaluated in the search
   std::vector<PGVertex*> mUnresolvedVertices; // the vertices that haven't
                                               // been resolved
 };
