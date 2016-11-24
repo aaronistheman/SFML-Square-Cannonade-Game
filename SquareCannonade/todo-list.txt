@@ -3,14 +3,11 @@ Current:
 
 -getting A* to work (passing the tests)
 	-finish implement performAStarSearch()
-		-apply selection of lowest f value (to make at least one more test pass)
-		(for now, this selection is in O(N) time, where N is number of vertices)
 		-apply heuristic (to make at least one more test pass, or else
 		I should add a test; all tests should pass after this)
 			-edit calculation of neighbor's estimated movement cost
 		-apply priority queue (so that selection of lowest f value is in
 		O(1) time)
-		-AT THIS POINT: all tests should pass
 	-actually call cleanUpAStarSearch() instead of just implementing it and
 	not calling it like a silly person!! :-)
 	-any more tests?

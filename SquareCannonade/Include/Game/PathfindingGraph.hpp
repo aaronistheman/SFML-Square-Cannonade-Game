@@ -140,6 +140,11 @@ private:
   bool isGoalVertex(PGVertex* vertex) const;
 
 
+  // From the set of unresolved vertices, gets the one with the lowest
+  // estimated movement cost AND removes the vertex from that set.
+  PGVertex* getNextAStarVertex();
+
+
   // This method is O(N) (where N is number of vertices). Which is bad!
   // Try not to use this method!
   // Returns the index of the given vertex in mVertices. Kills program

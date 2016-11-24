@@ -642,11 +642,11 @@ std::unique_ptr<PathfindingGraph> setupPathfindingEndTests(
   case 7:
     tileMap += "0000000000";
     tileMap += "0000000000";
-    tileMap += "000wwwww00";
-    tileMap += "000wwwww00";
-    tileMap += "000wwwww00";
-    tileMap += "000wwwww00";
-    tileMap += "0000wwww00";
+    tileMap += "000wwww000";
+    tileMap += "000wwww000";
+    tileMap += "000wwww000";
+    tileMap += "000wwww000";
+    tileMap += "0000www000";
     tileMap += "0000000000";
     tileMap += "0000000000";
     break;
@@ -850,7 +850,7 @@ TEST_CASE("Found correct path #7")
   auto path = *setupGeneratePathTests(7, tileGrid);
 
   REQUIRE(path.size() == 11);
-  REQUIRE(path[0] == 77);
-  REQUIRE(path[1] == 76);
-  REQUIRE(path[2] == 75);
+  REQUIRE(path[0] == 58);
+  REQUIRE(path[1] == 57);
+  REQUIRE(path[2] == 56);
 }

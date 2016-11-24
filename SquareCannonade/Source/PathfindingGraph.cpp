@@ -112,14 +112,12 @@ unsigned int PathfindingGraph::performAStarSearch()
   
   while (!mUnresolvedVertices.empty())
   {
-    // for now, arbitrarily pick a node from the open set
-    PGVertex* vertex = mUnresolvedVertices.back();
+    PGVertex* vertex = getNextAStarVertex();
 
     if (isGoalVertex(vertex))
       return getIndex(vertex);
 
-    // move picked node from open set to closed set
-    mUnresolvedVertices.pop_back();
+    // move picked node to closed set
     mResolvedVertices.push_back(vertex);
 
     // for each neighbor of current vertex
@@ -435,6 +433,33 @@ bool PathfindingGraph::isGoalVertex(PGVertex * vertex) const
 
   return false; // found no match
 }
+
+PGVertex * PathfindingGraph::getNextAStarVertex()
+{
+  // Setup
+  assert(mUnresolvedVertices.size() > 0);
+  PGVertex* selected = mUnresolvedVertices[0];
+  size_t indexOfSelected = 0;
+
+  // Pick the vertex with the lowest estimated movement cost,
+  // using a slow strategy that will soon be replaced by use
+  // of a priority queue
+  for (size_t i = 1; i < mUnresolvedVertices.size(); ++i)
+  {
+    if (mUnresolvedVertices[i]->estimatedMovementCost
+      < selected->estimatedMovementCost)
+    {
+      selected = mUnresolvedVertices[i];
+      indexOfSelected = i;
+    }
+  }
+  assert(selected);
+
+  // Remove the selected vertex from the set of unresolved vertices
+  mUnresolvedVertices.erase(mUnresolvedVertices.begin() + indexOfSelected);
+
+  return selected;
+} // getNextAStarVertex()
 
 unsigned int PathfindingGraph::getIndex(const PGVertex * vertex) const
 {
