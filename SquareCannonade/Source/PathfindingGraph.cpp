@@ -2,9 +2,10 @@
 
 #include <cassert>
 #include <stack>
+#include <iostream> // for debugging
 
 const int PathfindingGraphVertex::NoPrevious = -1;
-const int PathfindingGraphVertex::InfiniteMovementCost = -1;
+const int PathfindingGraphVertex::InfiniteMovementCost = INT_MAX;
 
 const int PathfindingGraph::NondiagonalEdgeWeight = 10;
 const int PathfindingGraph::DiagonalEdgeWeight = 14;
@@ -190,8 +191,8 @@ unsigned int PathfindingGraph::performAStarSearch()
           // ...neighbor's movementCost + h(neighbor)
           neighbor->estimatedMovementCost = neighbor->movementCost;
         }
-      }
-    }
+      } // if neighbor not in closed set
+    } // for each neighbor of the closed vertex
   }
 
   // failed to reach goal; create failed assertion
@@ -225,6 +226,22 @@ std::vector<unsigned int> * PathfindingGraph::generatePath(int pathEndingVertexI
 
   return path;
 } // generatePath()
+
+void PathfindingGraph::printAStarTable() const
+{
+  // Table header
+  std::cout << "\n--------------------------------------\n";
+  std::cout << "index pv movementCost estimatedMovementCost\n";
+
+  for (unsigned int i = 0; i < mVertices.size(); ++i)
+  {
+    auto & vertex = mVertices[i];
+    std::cout << i << ' ' << vertex->previousVertexIndex << ' '
+      << vertex->movementCost << ' ' << vertex->estimatedMovementCost << '\n';
+  }
+
+  std::cout << "\n--------------------------------------\n\n";
+}
 
 void PathfindingGraph::createVertices(const std::vector<Tile::Ptr> &tileGrid)
 {

@@ -2,9 +2,6 @@ Current:
 --------
 
 -getting A* to work (passing the tests)
-	-implement generatePath() (all except test #1 and maybe #6
-	should still fail because performAStarSearch() doesn't use the A* algorithm yet)
-		-figure out why the above prediction fails
 	-finish implement performAStarSearch()
 		-apply selection of lowest f value (to make at least one more test pass)
 		(for now, this selection is in O(N) time, where N is number of vertices)
@@ -13,6 +10,7 @@ Current:
 			-edit calculation of neighbor's estimated movement cost
 		-apply priority queue (so that selection of lowest f value is in
 		O(1) time)
+		-AT THIS POINT: all tests should pass
 	-actually call cleanUpAStarSearch() instead of just implementing it and
 	not calling it like a silly person!! :-)
 	-any more tests?

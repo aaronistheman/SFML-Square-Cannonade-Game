@@ -99,9 +99,16 @@ public:
   // Generates the path found by the A* algorithm.
   // Returns said path as a set of vertices involved
   // in the path, where the first element of the set corresponds to
-  // the start of the path. Each vertex is represented by its index
+  // the start of the path. (Note that this first element must be one
+  // of the designated start vertices in the A* search.)
+  // Each vertex is represented by its index
   // in the container of vertices.
   std::vector<unsigned int> * generatePath(int pathEndingVertexId);
+
+
+  // For debugging
+  // Prints A* data of each vertex
+  void printAStarTable() const;
 
 
 private:
