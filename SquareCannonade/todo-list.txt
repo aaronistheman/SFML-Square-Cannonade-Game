@@ -5,6 +5,7 @@ Current:
 	-finish implement performAStarSearch()
 		-apply priority queue (so that selection of lowest f value is in
 		O(1) time)
+			-figure out which test is crashing and why
 			-clean up the A* code, so it's less confusing
 				-change name of mUnresolvedVertices, because this is NOT
 				the set of ALL vertices that are unresolved; in fact,

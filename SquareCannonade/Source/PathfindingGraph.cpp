@@ -157,7 +157,7 @@ unsigned int PathfindingGraph::performAStarSearch()
         if (neighbor->resolutionStatus == PGVertex::ResolutionStatus::Untouched)
         {
           // add neighbor to the open set
-          mUnresolvedVertices.push(neighbor);
+          // mUnresolvedVertices.push(neighbor);
           neighbor->resolutionStatus = PGVertex::ResolutionStatus::CouldResolve;
         }
 
@@ -175,6 +175,13 @@ unsigned int PathfindingGraph::performAStarSearch()
           // update neighbor's estimatedMovementCost to be
           // ...neighbor's movementCost + h(neighbor)
           neighbor->estimatedMovementCost = neighbor->movementCost;
+
+          // mark that the vertex can be picked for resolution;
+          // for an updated vertex (i.e. one that wasn't newly discovered
+          // during this iteration), that vertex will be put in the heap
+          // again, but closer to the top (to reflect its improved
+          // estimated movement cost)
+          mUnresolvedVertices.push(neighbor);
         }
       } // if neighbor not in closed set
     } // for each neighbor of the closed vertex
@@ -439,6 +446,8 @@ PGVertex * PathfindingGraph::getNextAStarVertex()
 
     selected = mUnresolvedVertices.top();
     mUnresolvedVertices.pop();
+
+    assert(selected->resolutionStatus != PGVertex::ResolutionStatus::Untouched);
   }
 
   return selected;
