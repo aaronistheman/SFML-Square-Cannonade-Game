@@ -5,12 +5,19 @@ Current:
 	-finish implement performAStarSearch()
 		-apply priority queue (so that selection of lowest f value is in
 		O(1) time)
+			-clean up the A* code, so it's less confusing
+				-change name of mUnresolvedVertices, because this is NOT
+				the set of ALL vertices that are unresolved; in fact,
+				it may contain vertices that HAVE been resolved
+				-stepwise refinement
 			-apply
-				-improving the cost of a vertex should result in putting it back
-				in the heap
-			-change name of mUnresolvedVertices, because this is NOT
-			the set of ALL vertices that are unresolved; in fact,
-			it may contain vertices that HAVE been resolved
+				-is the logic of the popping correct?
+					-I BELIEVE SO, because each vertex stores its information
+					(esp. its previous vertex)
+					-if not, create a test to expose this
+				-should improving the cost of a vertex should result
+				in putting it back in the heap?
+					-if what I have is wrong, create a test to expose it
 			-AT THIS POINT: All tests should STILL pass at this point
 		-what should I initially be setting the start vertices' estimated
 		movement costs to?; document this somewhere so I stop wondering
@@ -50,7 +57,6 @@ Current:
 			-perhaps initialize any used vectors with space up front, so
 			vectors won't resize as often
 			-etc. (look for some things)
-	-clean up the A* code; stepwise refinement
 
 -somewhere, enforce that an enemy can't be bigger than a tile
 -perhaps try to apply Boost where appropriate, for the practice;

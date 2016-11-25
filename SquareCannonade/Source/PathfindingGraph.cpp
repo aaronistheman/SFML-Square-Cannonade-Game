@@ -20,6 +20,16 @@ sf::IntRect PathfindingGraphVertex::getRect() const
   return tile->getRect();
 }
 
+bool PathfindingGraphVertex::isDiagonallyAdjacent(
+  const PathfindingGraphVertex * vertex)
+{
+  for (auto const& d : adjacentDiagonalVertices)
+  {
+    if (d == vertex) // the given vertex matches a diagonal neighbor
+      return true;
+  }
+}
+
 PathfindingGraph::PathfindingGraph(const std::vector<Tile::Ptr> &tileGrid)
   : mVertices()
   , mNumEdges(0)
@@ -117,9 +127,12 @@ unsigned int PathfindingGraph::performAStarSearch()
     PGVertex* vertex = getNextAStarVertex();
 
     if (isGoalVertex(vertex))
+    {
+      // reached the goal; abandon the search
       return getIndex(vertex);
+    }
 
-    // move picked node to closed set
+    // this vertex is about to be evaluated; mark it resolved
     vertex->resolutionStatus = PGVertex::ResolutionStatus::Resolved;
 
     // for each neighbor of current vertex
@@ -130,14 +143,8 @@ unsigned int PathfindingGraph::performAStarSearch()
       {
         // determine if neighbor is diagonally adjacent,
         // then pick which edge weight to use
-        bool isDiagonallyAdjacent = false;
-        for (auto const& d : vertex->adjacentDiagonalVertices)
-        {
-          if (d == neighbor)
-            isDiagonallyAdjacent = true;
-        }
         int edgeWeight = 0;
-        if (isDiagonallyAdjacent)
+        if (vertex->isDiagonallyAdjacent(neighbor))
           edgeWeight = DiagonalEdgeWeight;
         else
           edgeWeight = NondiagonalEdgeWeight;
@@ -147,7 +154,7 @@ unsigned int PathfindingGraph::performAStarSearch()
         int newMovementCost = vertex->movementCost + edgeWeight;
 
         // if neighbor not in open set (i.e. if found a new node)
-        if (neighbor->resolutionStatus != PGVertex::ResolutionStatus::CouldResolve)
+        if (neighbor->resolutionStatus == PGVertex::ResolutionStatus::Untouched)
         {
           // add neighbor to the open set
           mUnresolvedVertices.push(neighbor);
@@ -155,7 +162,8 @@ unsigned int PathfindingGraph::performAStarSearch()
         }
 
         // if newMovementCost < neighbor's movementCost (i.e. if
-        // ...found better path)
+        // ...found better path); for just touched vertices,
+        // this block is still run
         if (newMovementCost < neighbor->movementCost)
         {
           // update neighbor's pv

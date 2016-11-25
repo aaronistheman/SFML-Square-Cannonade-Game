@@ -18,6 +18,10 @@ public: // non-data related; just for cleaner/better code
   sf::Vector2i getPosition() const;
   sf::IntRect getRect() const;
 
+  // Returns true if and only if the given vertex is diagonally adjacent
+  // from "this" vertex.
+  bool isDiagonallyAdjacent(const PathfindingGraphVertex* vertex);
+
   // for initializing vertex data for A* search
   static const int NoPrevious;
   static const int InfiniteMovementCost;
