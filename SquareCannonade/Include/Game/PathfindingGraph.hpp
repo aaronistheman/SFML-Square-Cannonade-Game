@@ -3,6 +3,7 @@
 #include <Tile/Tile.hpp>
 
 #include <vector>
+#include <queue>
 
 
 /**
@@ -55,6 +56,19 @@ public: // data
   ResolutionStatus resolutionStatus;
 };
 typedef PathfindingGraphVertex PGVertex;
+
+
+
+// For use with an std::priority_queue of PGVertex* instances
+struct CompareVerticesEstimatedMovementCost
+{
+  // If returns true, rhs will be closer to the top of the
+  // std::priority_queue than lhs will
+  bool operator()(const PGVertex* lhs, const PGVertex* rhs)
+  {
+    return lhs->estimatedMovementCost < rhs->estimatedMovementCost;
+  }
+};
 
 
 
@@ -171,7 +185,8 @@ private:
 
   // A* data
   std::vector<PGVertex*> mSearchStartVertices;
-  std::vector<PGVertex*> mSearchEndVertices;
-  std::vector<PGVertex*> mUnresolvedVertices; // the vertices that haven't
-                                              // been resolved
+  std::vector<PGVertex*> mSearchEndVertices;      // evaluated in the search
+  std::priority_queue<PGVertex*,
+    std::vector<PGVertex*>, CompareVerticesEstimatedMovementCost>
+    mUnresolvedVertices; // the vertices that haven't been resolved
 };

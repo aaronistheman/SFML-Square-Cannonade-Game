@@ -25,6 +25,7 @@ PathfindingGraph::PathfindingGraph(const std::vector<Tile::Ptr> &tileGrid)
   , mNumEdges(0)
   , mSearchStartVertices()
   , mSearchEndVertices()
+  , mUnresolvedVertices()
 {
   createVertices(tileGrid);
 
@@ -149,7 +150,7 @@ unsigned int PathfindingGraph::performAStarSearch()
         if (neighbor->resolutionStatus != PGVertex::ResolutionStatus::CouldResolve)
         {
           // add neighbor to the open set
-          mUnresolvedVertices.push_back(neighbor);
+          mUnresolvedVertices.push(neighbor);
           neighbor->resolutionStatus = PGVertex::ResolutionStatus::CouldResolve;
         }
 
@@ -386,10 +387,11 @@ void PathfindingGraph::setUpAStarSearch()
 
   // create open set with the start vertices; clear each
   // start vertex's movement cost, since they're reached by default
-  mUnresolvedVertices.clear();
+  mUnresolvedVertices = std::priority_queue<PGVertex*,
+    std::vector<PGVertex*>, CompareVerticesEstimatedMovementCost>();
   for (auto& vertex : mSearchStartVertices)
   {
-    mUnresolvedVertices.push_back(vertex);
+    mUnresolvedVertices.push(vertex);
     vertex->resolutionStatus = PGVertex::ResolutionStatus::CouldResolve;
     vertex->movementCost = 0;
   }
@@ -414,27 +416,22 @@ bool PathfindingGraph::isGoalVertex(PGVertex * vertex) const
 
 PGVertex * PathfindingGraph::getNextAStarVertex()
 {
-  // Setup
   assert(mUnresolvedVertices.size() > 0);
-  PGVertex* selected = mUnresolvedVertices[0];
-  size_t indexOfSelected = 0;
 
-  // Pick the vertex with the lowest estimated movement cost,
-  // using a slow strategy that will soon be replaced by use
-  // of a priority queue
-  for (size_t i = 1; i < mUnresolvedVertices.size(); ++i)
+  // Keep checking vertices with the lowest estimated movement cost until
+  // find data on a vertex that can be resolved
+  PGVertex * selected = mUnresolvedVertices.top();
+  mUnresolvedVertices.pop();
+
+  while (selected->resolutionStatus != PGVertex::ResolutionStatus::CouldResolve)
   {
-    if (mUnresolvedVertices[i]->estimatedMovementCost
-      < selected->estimatedMovementCost)
-    {
-      selected = mUnresolvedVertices[i];
-      indexOfSelected = i;
-    }
-  }
-  assert(selected);
+    // If this assertion is false, then there's no more data regarding
+    // more pathfinding, so the algorithm should've finished
+    assert(mUnresolvedVertices.size() > 0);
 
-  // Remove the selected vertex from the set of unresolved vertices
-  mUnresolvedVertices.erase(mUnresolvedVertices.begin() + indexOfSelected);
+    selected = mUnresolvedVertices.top();
+    mUnresolvedVertices.pop();
+  }
 
   return selected;
 } // getNextAStarVertex()

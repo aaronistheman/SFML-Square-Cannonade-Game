@@ -5,14 +5,29 @@ Current:
 	-finish implement performAStarSearch()
 		-apply priority queue (so that selection of lowest f value is in
 		O(1) time)
-			-change name of mUnresolvedVertices, because this is NOT
-			the set of ALL vertices that are unresolved; say mVerticesToClose
 			-apply
+				-improving the cost of a vertex should result in putting it back
+				in the heap
+			-change name of mUnresolvedVertices, because this is NOT
+			the set of ALL vertices that are unresolved; in fact,
+			it may contain vertices that HAVE been resolved
+			-AT THIS POINT: All tests should STILL pass at this point
 		-what should I initially be setting the start vertices' estimated
 		movement costs to?; document this somewhere so I stop wondering
-		-apply heuristic (to make at least one more test pass, or else
-		I should add a test; all tests should pass after this)
-			-edit calculation of neighbor's estimated movement cost
+		-transitioning from Dijkstra's to A*: heuristic
+			-select heuristic
+				-ideas (find more ideas, or use the one with ***):
+					-pure distance (i.e. Pythagorean theorem)
+					-***perhaps horizontal distance (to avoid temporal
+					cost in using Pythagoren theorem)
+					-vertical distance (since the game has greater width
+					than length, horizontal distance could influence
+					the path more)
+			-if possible, add a test that FAILS due to the absence of the heuristic;
+			(one issue is that such a test may make it harder to change the heuristic)
+			-apply heuristic
+				-edit calculation of neighbor's estimated movement cost
+		-AT THIS POINT: All tests should STILL pass at this point
 	-actually call cleanUpAStarSearch() instead of just implementing it and
 	not calling it like a silly person!! :-)
 	-any more tests?
@@ -33,7 +48,7 @@ Current:
 			(i.e. determination of whether the neighbor is diagonal or not)
 				-remote the two for loops checking these things
 			-perhaps initialize any used vectors with space up front, so
-			vectors won't resize
+			vectors won't resize as often
 			-etc. (look for some things)
 	-clean up the A* code; stepwise refinement
 
@@ -42,11 +57,6 @@ Current:
 don't force it too much, though
 -implementing A*: apply to game
 	-perhaps store tile grid in PathfindingGraph instance
-	-figure out heuristic function
-		-ideas:
-			-pure distance (i.e. Pythagorean theorem)
-			-perhaps horizontal distance (to avoid temporal
-			cost in using Pythagoren theorem)
 	-CONCERN: make sure enemy doesn't keep going back and forth across the
 	tile it's supposed to be headed to, due to the game's not knowing the
 	enemy officially "reached" the tile (may need some epsilon value)
