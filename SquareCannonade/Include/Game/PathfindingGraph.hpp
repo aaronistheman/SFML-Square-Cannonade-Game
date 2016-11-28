@@ -73,6 +73,18 @@ struct CompareVerticesEstimatedMovementCost
     return lhs->estimatedMovementCost < rhs->estimatedMovementCost;
   }
 };
+*/
+// For use with an std::priority_queue of PGVertex* instances
+struct CompareVerticesEstimatedMovementCost
+{
+  // If returns true, rhs will be closer to the top of the
+  // std::priority_queue than lhs will. Thus, the lower estimated
+  // movement costs are closer to the top of the queue.
+  bool operator()(const PGVertex* lhs, const PGVertex* rhs)
+  {
+    return lhs->estimatedMovementCost > rhs->estimatedMovementCost;
+  }
+};
 
 
 

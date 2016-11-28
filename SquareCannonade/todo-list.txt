@@ -5,18 +5,31 @@ Current:
 	-finish implement performAStarSearch()
 		-apply priority queue (so that selection of lowest f value is in
 		O(1) time)
-			-figure out which test is crashing and why
-				-***IDEA: the heap is invalidated because I'm changing the values
-				in it without letting them reposition, violating one of the
-				"heap properties"; thus, I should use the MovementData technique
-				I used in the ECS 60 challenge program
-				-try to isolate the source of the problem
-					-does the program still crash if I switch back to
-					O(N) vertex selection, even including updated neighbor's
-					data. Just change that one method. All tests should pass,
-					so can Git commit to lock in this point.
-				-could it be because top() returns a reference that is soon
-				popped?
+			-based on the fact that all the tests still pass:
+				-figure out if I *should* use the "movement data" approach,
+				so as to avoid violating the heap property
+					-test if this heap property violation occurs with an
+					std::priority_queue of pointers in a smaller snippet of code
+					-perhaps still save the struct for this approach in a
+					separate file
+				-figure out if the algorithm's logic (more specifically, the
+				setting of the pvs) is correct
+			[NOTES-TO-DELETE:
+				-figure out which test is crashing and why
+					-***IDEA: the heap is invalidated because I'm changing the values
+					in it without letting them reposition, violating one of the
+					"heap properties"; thus, I should use the MovementData technique
+					I used in the ECS 60 challenge program
+					-try to isolate the source of the problem
+						-does the program still crash if I switch back to
+						O(N) vertex selection, even including updated neighbor's
+						data. Just change that one method. All tests should pass,
+						so can Git commit to lock in this point.
+					-could it be because top() returns a reference that is soon
+					popped?
+			]
+			-if go through with "movement data" approach
+				-do the "update the found vertex" step
 			-clean up the A* code, so it's less confusing
 				-change name of mUnresolvedVertices, because this is NOT
 				the set of ALL vertices that are unresolved; in fact,

@@ -426,7 +426,6 @@ void PathfindingGraph::updateNeighborsAStar(PGVertex * vertex)
       if (neighbor->resolutionStatus == PGVertex::ResolutionStatus::Untouched)
       {
         // add neighbor to the open set
-        // mUnresolvedVertices.push(neighbor);
         neighbor->resolutionStatus = PGVertex::ResolutionStatus::CouldResolve;
       }
 
