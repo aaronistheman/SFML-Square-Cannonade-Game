@@ -6,6 +6,17 @@ Current:
 		-apply priority queue (so that selection of lowest f value is in
 		O(1) time)
 			-figure out which test is crashing and why
+				-***IDEA: the heap is invalidated because I'm changing the values
+				in it without letting them reposition, violating one of the
+				"heap properties"; thus, I should use the MovementData technique
+				I used in the ECS 60 challenge program
+				-try to isolate the source of the problem
+					-does the program still crash if I switch back to
+					O(N) vertex selection, even including updated neighbor's
+					data. Just change that one method. All tests should pass,
+					so can Git commit to lock in this point.
+				-could it be because top() returns a reference that is soon
+				popped?
 			-clean up the A* code, so it's less confusing
 				-change name of mUnresolvedVertices, because this is NOT
 				the set of ALL vertices that are unresolved; in fact,
@@ -20,6 +31,7 @@ Current:
 				in putting it back in the heap?
 					-if what I have is wrong, create a test to expose it
 			-AT THIS POINT: All tests should STILL pass at this point
+		-move extra classes out of PathfindingGraph.hpp into other files
 		-what should I initially be setting the start vertices' estimated
 		movement costs to?; document this somewhere so I stop wondering
 		-transitioning from Dijkstra's to A*: heuristic

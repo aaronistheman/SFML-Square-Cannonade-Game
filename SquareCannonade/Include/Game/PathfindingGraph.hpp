@@ -176,6 +176,12 @@ private:
   PGVertex* getNextAStarVertex();
 
 
+  // Updates the neighbors of the given vertex, so as to prepare to continue
+  // the A* search.
+  // The given vertex should be the one currently being resolved.
+  void updateNeighborsAStar(PGVertex* vertex);
+
+
   // This method is O(N) (where N is number of vertices). Which is bad!
   // Try not to use this method!
   // Returns the index of the given vertex in mVertices. Kills program
