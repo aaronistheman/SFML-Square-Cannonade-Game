@@ -7,8 +7,8 @@ Current:
 		O(1) time)
 			-change to use the "movement data" approach, because I may
 			randomly get an invalid heap error
-				-implementing this approach
-					-translate the pseudocode
+				-fix setup method
+				-translate the pseudocode
 			-figure out if the algorithm's logic (more specifically, the
 			setting of the pvs) is correct
 			-AT THIS POINT: all tests should still pass
@@ -23,7 +23,11 @@ Current:
 				in putting it back in the heap?
 					-if what I have is wrong, create a test to expose it
 			-AT THIS POINT: All tests should STILL pass
-		-move extra classes out of PathfindingGraph.hpp into other files
+		-find a way to avoid using getIndex(), since it's slow
+			-perhaps have each PGVertex know its index
+		-clean up
+			-space implementations apart within same file
+			-move extra classes out of PathfindingGraph.hpp into other files
 		-what should I initially be setting the start vertices' estimated
 		movement costs to?; document this somewhere so I stop wondering
 		-transitioning from Dijkstra's to A*: heuristic

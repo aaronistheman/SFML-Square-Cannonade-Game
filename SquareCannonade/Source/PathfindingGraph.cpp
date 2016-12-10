@@ -384,13 +384,16 @@ void PathfindingGraph::setUpAStarSearch()
     vertex->resolutionStatus = PGVertex::ResolutionStatus::Untouched;
   }
 
-  // create open set with the start vertices; clear each
-  // start vertex's movement cost, since they're reached by default
-  mUnresolvedVertices = std::priority_queue<PGVertex*,
-    std::vector<PGVertex*>, CompareVerticesEstimatedMovementCost>();
+  // Reset priority queue
+  mPossibleEdgeSelections = std::priority_queue<PossibleSelection,
+    std::vector<PossibleSelection>, ComparePossibleAStarEdgeSelections>();
+
+  // Make each designated start vertex a possible first selection.
+  // Clear each start vertex's movement cost, since they're reached by default.
   for (auto& vertex : mSearchStartVertices)
   {
-    mUnresolvedVertices.push(vertex);
+    mPossibleEdgeSelections.push(
+      PossibleSelection(PGVertex::NoPrevious, getIndex(vertex), 0));
     vertex->resolutionStatus = PGVertex::ResolutionStatus::CouldResolve;
     vertex->movementCost = 0;
   }
