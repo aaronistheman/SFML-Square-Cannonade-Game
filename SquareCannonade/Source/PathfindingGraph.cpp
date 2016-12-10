@@ -128,15 +128,19 @@ void PathfindingGraph::setSearchEnd(sf::Vector2f entityCenterPosition,
 unsigned int PathfindingGraph::performAStarSearch()
 {
   setUpAStarSearch();
-  
-  /*
-  // this while loop shouldn't end by the condition being false
-  while (!mUnresolvedVertices.empty())
+
+  // One vertex is resolved per iteration
+  auto numVertices = getNumVertices();
+  for (size_t i = 0; i < numVertices; ++i)
   {
-    PGVertex* vertex = getNextAStarVertex();
+    auto selectedEdge = getNextAStarEdge();
+    auto vertex = mVertices.at(selectedEdge.vertexToResolveIndex).get();
 
     // Update the found vertex
-
+    vertex->previousVertexIndex = selectedEdge.vertexToComeFromIndex;
+    vertex->movementCost = selectedEdge.movementCost;
+    vertex->estimatedMovementCost = selectedEdge.estimatedMovementCost;
+    vertex->resolutionStatus = PGVertex::ResolutionStatus::Resolved;
 
     // if reached the goal, abandon the search
     if (isGoalVertex(vertex))
@@ -144,29 +148,7 @@ unsigned int PathfindingGraph::performAStarSearch()
       return getIndex(vertex);
     }
 
-    // this vertex is about to be evaluated; mark it resolved
-    vertex->resolutionStatus = PGVertex::ResolutionStatus::Resolved;
-
     updateNeighborsAStar(vertex);
-  }
-  */
-
-  // One vertex is resolved per iteration
-  // auto numVertices = getNumVertices();
-  // for (size_t i = 0; i < numVertices; ++i)
-  // some sort of loop
-  {
-    // Find unresolved vertex that has the smallest dv
-
-
-    // Update the found vertex
-
-
-    // Check if goal has been reached
-
-
-    // Update data of adjacent vertices
-
   }
 
   // Resolved all vertices reachable from the start vertex/vertices,
@@ -416,73 +398,79 @@ bool PathfindingGraph::isGoalVertex(PGVertex * vertex) const
   return false; // found no match
 }
 
-PGVertex * PathfindingGraph::getNextAStarVertex()
+PossibleSelection PathfindingGraph::getNextAStarEdge()
 {
-  assert(mUnresolvedVertices.size() > 0);
+  assert(mPossibleEdgeSelections.size() > 0);
 
   // Keep checking vertices with the lowest estimated movement cost until
   // find data on a vertex that can be resolved
-  PGVertex * selected = mUnresolvedVertices.top();
-  mUnresolvedVertices.pop();
+  auto selection = mPossibleEdgeSelections.top();
+  mPossibleEdgeSelections.pop();
 
-  while (selected->resolutionStatus != PGVertex::ResolutionStatus::CouldResolve)
+  // While failing to find an edge to a vertex that has NOT been resolved.
+  while (mVertices.at(selection.vertexToResolveIndex)->resolutionStatus
+    != PGVertex::ResolutionStatus::CouldResolve)
   {
     // If this assertion is false, then there's no more data regarding
     // more pathfinding, so the algorithm should've finished
-    assert(mUnresolvedVertices.size() > 0);
+    assert(mPossibleEdgeSelections.size() > 0);
 
-    selected = mUnresolvedVertices.top();
-    mUnresolvedVertices.pop();
+    // Pick another edge.
+    selection = mPossibleEdgeSelections.top();
+    mPossibleEdgeSelections.pop();
 
-    assert(selected->resolutionStatus != PGVertex::ResolutionStatus::Untouched);
+    // We shouldn't encounter an untouched vertex, because otherwise,
+    // it wouldn't have been in the edge selection heap in the first place!
+    assert(mVertices.at(selection.vertexToResolveIndex)->resolutionStatus
+      != PGVertex::ResolutionStatus::Untouched);
   }
 
-  return selected;
+  return selection;
 } // getNextAStarVertex()
 
 void PathfindingGraph::updateNeighborsAStar(const PGVertex * vertex)
 {
+  auto vertexIndex = getIndex(vertex);
+
   // for each neighbor of current vertex
   for (auto const& neighbor : vertex->adjacentVertices)
   {
-    // if neighbor not in closed set (i.e. not already evaluated)
     if (neighbor->resolutionStatus != PGVertex::ResolutionStatus::Resolved)
     {
       int edgeWeight = (vertex->isDiagonallyAdjacent(neighbor))
         ? DiagonalEdgeWeight : NondiagonalEdgeWeight;
 
       // set newMovementCost to current vertex's movementCost plus
-      // ...distance to get to that neighbor
+      // distance to get to that neighbor
       int newMovementCost = vertex->movementCost + edgeWeight;
 
-      // if neighbor not in open set (i.e. if found a new node)
+      // if found a new node
       if (neighbor->resolutionStatus == PGVertex::ResolutionStatus::Untouched)
       {
-        // add neighbor to the open set
+        // add neighbor to the set of vertices that could be resolved
         neighbor->resolutionStatus = PGVertex::ResolutionStatus::CouldResolve;
       }
 
       // if newMovementCost < neighbor's movementCost (i.e. if
-      // ...found better path); for just touched vertices,
+      // found better path); for vertices that were just "touched",
       // this block is still run
       if (newMovementCost < neighbor->movementCost)
       {
         // update neighbor's pv
-        neighbor->previousVertexIndex = getIndex(vertex);
+        neighbor->previousVertexIndex = vertexIndex;
 
         // update neighbor's movementCost to be newMovementCost
         neighbor->movementCost = newMovementCost;
 
-        // update neighbor's estimatedMovementCost to be
-        // ...neighbor's movementCost + h(neighbor)
+        // Update neighbor's estimatedMovementCost to be
+        // neighbor's movementCost + h(neighbor).
+        // NOTE: Will implement the heuristic soon.
         neighbor->estimatedMovementCost = neighbor->movementCost;
 
-        // mark that the vertex can be picked for resolution;
-        // for an updated vertex (i.e. one that wasn't newly discovered
-        // during this iteration), that vertex will be put in the heap
-        // again, but closer to the top (to reflect its improved
-        // estimated movement cost)
-        mUnresolvedVertices.push(neighbor);
+        // Introduce the possibility of selecting this neighbor next.
+        mPossibleEdgeSelections.push(
+          PossibleSelection(vertexIndex, getIndex(neighbor),
+            neighbor->estimatedMovementCost));
       } // if improved movement cost
     } // if neighbor not in closed set
   } // for each neighbor of the closed vertex

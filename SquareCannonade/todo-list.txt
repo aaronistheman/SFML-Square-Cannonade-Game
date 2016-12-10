@@ -7,24 +7,10 @@ Current:
 		O(1) time)
 			-change to use the "movement data" approach, because I may
 			randomly get an invalid heap error
-				-fix setup method
-				-translate the pseudocode
-			-figure out if the algorithm's logic (more specifically, the
-			setting of the pvs) is correct
+				-figure out why the tests fail
+					-figure out if the algorithm's logic (more specifically, the
+					setting of the pvs) is correct
 			-AT THIS POINT: all tests should still pass
-			-clean up the A* code, so it's less confusing
-				-stepwise refinement
-			-(potentially outdated) questions
-				-is the logic of the popping correct?
-					-I BELIEVE SO, because each vertex stores its information
-					(esp. its previous vertex)
-					-if not, create a test to expose this
-				-should improving the cost of a vertex should result
-				in putting it back in the heap?
-					-if what I have is wrong, create a test to expose it
-			-AT THIS POINT: All tests should STILL pass
-		-find a way to avoid using getIndex(), since it's slow
-			-perhaps have each PGVertex know its index
 		-clean up
 			-space implementations apart within same file
 			-move extra classes out of PathfindingGraph.hpp into other files
@@ -65,6 +51,8 @@ Current:
 				-remote the two for loops checking these things
 			-perhaps initialize any used vectors with space up front, so
 			vectors won't resize as often
+			-find a way to avoid using getIndex(), since it's slow
+				-perhaps have each PGVertex know its index
 			-etc. (look for some things)
 
 -somewhere, enforce that an enemy can't be bigger than a tile

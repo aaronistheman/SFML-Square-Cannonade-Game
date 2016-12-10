@@ -196,9 +196,11 @@ private:
   bool isGoalVertex(PGVertex* vertex) const;
 
 
-  // From the set of unresolved vertices, gets the one with the lowest
-  // estimated movement cost AND removes the vertex from that set.
-  PGVertex* getNextAStarVertex();
+  // Returns an edge from the set of possible edge selections, such
+  // that one end of the edge is resolved, and the other could be resolved,
+  // and such that the vertex-to-resolve has the lowest estimated movement
+  // cost among other selectable vertices-to-resolve.
+  PossibleSelection getNextAStarEdge();
 
 
   // Updates the neighbors of the given vertex, so as to prepare to continue
