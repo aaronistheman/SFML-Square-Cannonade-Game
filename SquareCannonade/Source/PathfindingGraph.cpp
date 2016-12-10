@@ -21,7 +21,7 @@ sf::IntRect PathfindingGraphVertex::getRect() const
 }
 
 bool PathfindingGraphVertex::isDiagonallyAdjacent(
-  const PathfindingGraphVertex * vertex)
+  const PathfindingGraphVertex * vertex) const
 {
   for (auto const& d : adjacentDiagonalVertices)
   {
@@ -440,7 +440,7 @@ PGVertex * PathfindingGraph::getNextAStarVertex()
   return selected;
 } // getNextAStarVertex()
 
-void PathfindingGraph::updateNeighborsAStar(PGVertex * vertex)
+void PathfindingGraph::updateNeighborsAStar(const PGVertex * vertex)
 {
   // for each neighbor of current vertex
   for (auto const& neighbor : vertex->adjacentVertices)

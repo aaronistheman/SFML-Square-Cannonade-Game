@@ -20,7 +20,7 @@ public: // non-data related; just for cleaner/better code
 
   // Returns true if and only if the given vertex is diagonally adjacent
   // from "this" vertex.
-  bool isDiagonallyAdjacent(const PathfindingGraphVertex* vertex);
+  bool isDiagonallyAdjacent(const PathfindingGraphVertex* vertex) const;
 
   // for initializing vertex data for A* search
   static const int NoPrevious;
@@ -71,10 +71,13 @@ struct PossibleAStarEdgeSelection
   int   vertexToComeFromIndex;  // Is already resolved.
   int   vertexToResolveIndex;   // Index of the vertex that would be resolved.
 
-  int   estimatedMovementCost;  // Estimated movement cost of reaching
+  int   movementCost;           // Movement cost of reaching the vertex
                                 // the vertex-to-resolve through the shortest
                                 // path through the vertex-to-come-from.
                                 // IS NOT the weight of the edge.
+
+  int   estimatedMovementCost;  // The "estimated" (by A* algorithm's
+                                // definition) variant of the movementCost.
 
   // To make life easier
   PossibleAStarEdgeSelection(int vtcf, int vtr, int emc);
@@ -201,7 +204,7 @@ private:
   // Updates the neighbors of the given vertex, so as to prepare to continue
   // the A* search.
   // The given vertex should be the one currently being resolved.
-  void updateNeighborsAStar(PGVertex* vertex);
+  void updateNeighborsAStar(const PGVertex* vertex);
 
 
   // This method is O(N) (where N is number of vertices). Which is bad!
