@@ -8,15 +8,11 @@ Current:
 			-change to use the "movement data" approach, because I may
 			randomly get an invalid heap error
 				-implementing this approach
-					-it really should be seen as an edge selection
 					-translate the pseudocode
 			-figure out if the algorithm's logic (more specifically, the
 			setting of the pvs) is correct
 			-AT THIS POINT: all tests should still pass
 			-clean up the A* code, so it's less confusing
-				-change name of mUnresolvedVertices, because this is NOT
-				the set of ALL vertices that are unresolved; in fact,
-				it may contain vertices that HAVE been resolved
 				-stepwise refinement
 			-(potentially outdated) questions
 				-is the logic of the popping correct?

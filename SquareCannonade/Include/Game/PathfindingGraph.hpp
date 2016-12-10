@@ -63,29 +63,29 @@ typedef PathfindingGraphVertex PGVertex;
 
 
 
-// Represents an option to select a vertex to be resolved in the
-// A* algorithm. The "previous vertex" is noted, because if a vertex
-// has at least two incident edges, there are at least two possible
-// previous vertices, and the path to said vertex may be better through
-// one of these previous vertices than through the other.
-struct PossibleAStarVertexSelection
+
+// Represents an option to select an edge to "traverse" in the A*
+// algorithm.
+struct PossibleAStarEdgeSelection
 {
-  int   vertexToComeFromIndex;
+  int   vertexToComeFromIndex;  // Is already resolved.
   int   vertexToResolveIndex;   // Index of the vertex that would be resolved.
+
   int   estimatedMovementCost;  // Estimated movement cost of reaching
                                 // the vertex-to-resolve through the shortest
                                 // path through the vertex-to-come-from.
+                                // IS NOT the weight of the edge.
 
   // To make life easier
-  PossibleAStarVertexSelection(int vtcf, int vtr, int emc);
+  PossibleAStarEdgeSelection(int vtcf, int vtr, int emc);
 };
-typedef PossibleAStarVertexSelection PossibleSelection;
+typedef PossibleAStarEdgeSelection PossibleSelection;
 
 
 
 
 // For use with an instance of std::priority_queue<PossibleSelection>
-struct ComparePossibleAStarVertexSelections
+struct ComparePossibleAStarEdgeSelections
 {
   // If returns true, rhs will be closer to the top of the
   // std::priority_queue than lhs will
@@ -95,20 +95,6 @@ struct ComparePossibleAStarVertexSelections
     return lhs.estimatedMovementCost > rhs.estimatedMovementCost;
   }
 };
-
-/*
-// For use with an std::priority_queue of PGVertex* instances
-struct CompareVerticesEstimatedMovementCost
-{
-  // If returns true, rhs will be closer to the top of the
-  // std::priority_queue than lhs will. Thus, the lower estimated
-  // movement costs are closer to the top of the queue.
-  bool operator()(const PGVertex* lhs, const PGVertex* rhs)
-  {
-    return lhs->estimatedMovementCost > rhs->estimatedMovementCost;
-  }
-};
-*/
 
 
 
@@ -226,13 +212,28 @@ private:
 
 
 private:
+
+  ///////////////////////////////////////////
+  //// General graph data
+  ///////////////////////////////////////////
+
   std::vector<PGVertex::Ptr> mVertices;
   unsigned int mNumEdges;
 
-  // A* data
+
+  ///////////////////////////////////////////
+  //// A* data
+  ///////////////////////////////////////////
+
   std::vector<PGVertex*> mSearchStartVertices;
   std::vector<PGVertex*> mSearchEndVertices;      // evaluated in the search
-  std::priority_queue<PGVertex*,
-    std::vector<PGVertex*>, CompareVerticesEstimatedMovementCost>
-    mUnresolvedVertices; // the vertices that haven't been resolved
+
+  // Original idea was to use an std::priority_queue of PGVertex*
+  // instances, but this opens the door for a "heap violation" exception
+  // (which is used by the Visual Studio 2015 compiler but not by g++),
+  // because the PGVertex pointers can be used to modify the heap's
+  // contents from outside.
+  std::priority_queue<PossibleSelection, std::vector<PossibleSelection>,
+    ComparePossibleAStarEdgeSelections>
+    mPossibleEdgeSelections;
 };
