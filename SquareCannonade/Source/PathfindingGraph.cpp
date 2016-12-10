@@ -30,6 +30,14 @@ bool PathfindingGraphVertex::isDiagonallyAdjacent(
   }
 }
 
+PossibleAStarVertexSelection::PossibleAStarVertexSelection(
+  int vtcf, int vtr, int emc)
+  : vertexToComeFromIndex(vtcf)
+  , vertexToResolveIndex(vtr)
+  , estimatedMovementCost(emc)
+{
+}
+
 PathfindingGraph::PathfindingGraph(const std::vector<Tile::Ptr> &tileGrid)
   : mVertices()
   , mNumEdges(0)

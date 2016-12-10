@@ -63,17 +63,40 @@ typedef PathfindingGraphVertex PGVertex;
 
 
 
-// For use with an std::priority_queue of PGVertex* instances
-struct CompareVerticesEstimatedMovementCost
+// Represents an option to select a vertex to be resolved in the
+// A* algorithm. The "previous vertex" is noted, because if a vertex
+// has at least two incident edges, there are at least two possible
+// previous vertices, and the path to said vertex may be better through
+// one of these previous vertices than through the other.
+struct PossibleAStarVertexSelection
+{
+  int   vertexToComeFromIndex;
+  int   vertexToResolveIndex;   // Index of the vertex that would be resolved.
+  int   estimatedMovementCost;  // Estimated movement cost of reaching
+                                // the vertex-to-resolve through the shortest
+                                // path through the vertex-to-come-from.
+
+  // To make life easier
+  PossibleAStarVertexSelection(int vtcf, int vtr, int emc);
+};
+typedef PossibleAStarVertexSelection PossibleSelection;
+
+
+
+
+// For use with an instance of std::priority_queue<PossibleSelection>
+struct ComparePossibleAStarVertexSelections
 {
   // If returns true, rhs will be closer to the top of the
   // std::priority_queue than lhs will
-  bool operator()(const PGVertex* lhs, const PGVertex* rhs)
+  bool operator()(const PossibleSelection& lhs,
+    const PossibleSelection& rhs)
   {
-    return lhs->estimatedMovementCost < rhs->estimatedMovementCost;
+    return lhs.estimatedMovementCost > rhs.estimatedMovementCost;
   }
 };
-*/
+
+/*
 // For use with an std::priority_queue of PGVertex* instances
 struct CompareVerticesEstimatedMovementCost
 {
@@ -85,6 +108,7 @@ struct CompareVerticesEstimatedMovementCost
     return lhs->estimatedMovementCost > rhs->estimatedMovementCost;
   }
 };
+*/
 
 
 
