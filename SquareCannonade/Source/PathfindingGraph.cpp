@@ -129,6 +129,7 @@ unsigned int PathfindingGraph::performAStarSearch()
 {
   setUpAStarSearch();
   
+  /*
   // this while loop shouldn't end by the condition being false
   while (!mUnresolvedVertices.empty())
   {
@@ -148,8 +149,29 @@ unsigned int PathfindingGraph::performAStarSearch()
 
     updateNeighborsAStar(vertex);
   }
+  */
 
-  // failed to reach goal; create failed assertion
+  // One vertex is resolved per iteration
+  // auto numVertices = getNumVertices();
+  // for (size_t i = 0; i < numVertices; ++i)
+  // some sort of loop
+  {
+    // Find unresolved vertex that has the smallest dv
+
+
+    // Update the found vertex
+
+
+    // Check if goal has been reached
+
+
+    // Update data of adjacent vertices
+
+  }
+
+  // Resolved all vertices reachable from the start vertex/vertices,
+  // but failed to reach the goal, violating a prerequisite of use
+  // of this method
   assert(false);
 
 } // performAStarSearch()

@@ -8,8 +8,8 @@ Current:
 			-change to use the "movement data" approach, because I may
 			randomly get an invalid heap error
 				-implementing this approach
-					-review my ECS 60 project so I don't miss any steps
-					-do the "update the found vertex" step
+					-it really should be seen as an edge selection
+					-translate the pseudocode
 			-figure out if the algorithm's logic (more specifically, the
 			setting of the pvs) is correct
 			-AT THIS POINT: all tests should still pass
