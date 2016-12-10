@@ -3,14 +3,6 @@ Current:
 
 -getting A* to work (passing the tests)
 	-finish implement performAStarSearch()
-		-apply priority queue (so that selection of lowest f value is in
-		O(1) time)
-			-change to use the "movement data" approach, because I may
-			randomly get an invalid heap error
-				-figure out why the tests fail
-					-figure out if the algorithm's logic (more specifically, the
-					setting of the pvs) is correct
-			-AT THIS POINT: all tests should still pass
 		-clean up
 			-space implementations apart within same file
 			-move extra classes out of PathfindingGraph.hpp into other files

@@ -80,7 +80,7 @@ struct PossibleAStarEdgeSelection
                                 // definition) variant of the movementCost.
 
   // To make life easier
-  PossibleAStarEdgeSelection(int vtcf, int vtr, int emc);
+  PossibleAStarEdgeSelection(int vtcf, int vtr, int mc, int emc);
 };
 typedef PossibleAStarEdgeSelection PossibleSelection;
 
@@ -91,7 +91,8 @@ typedef PossibleAStarEdgeSelection PossibleSelection;
 struct ComparePossibleAStarEdgeSelections
 {
   // If returns true, rhs will be closer to the top of the
-  // std::priority_queue than lhs will
+  // std::priority_queue than lhs will, meaning that the argument
+  // with the lower EMC will be placed closer to the top of the queue.
   bool operator()(const PossibleSelection& lhs,
     const PossibleSelection& rhs)
   {
@@ -235,7 +236,7 @@ private:
 
   // Original idea was to use an std::priority_queue of PGVertex*
   // instances, but this opens the door for a "heap violation" exception
-  // (which is used by the Visual Studio 2015 compiler but not by g++),
+  // (which is thrown by the Visual Studio 2015 compiler but not by g++),
   // because the PGVertex pointers can be used to modify the heap's
   // contents from outside.
   std::priority_queue<PossibleSelection, std::vector<PossibleSelection>,

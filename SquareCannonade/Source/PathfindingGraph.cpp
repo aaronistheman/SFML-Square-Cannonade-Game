@@ -31,9 +31,10 @@ bool PathfindingGraphVertex::isDiagonallyAdjacent(
 }
 
 PossibleAStarEdgeSelection::PossibleAStarEdgeSelection(
-  int vtcf, int vtr, int emc)
+  int vtcf, int vtr, int mc, int emc)
   : vertexToComeFromIndex(vtcf)
   , vertexToResolveIndex(vtr)
+  , movementCost(mc)
   , estimatedMovementCost(emc)
 {
 }
@@ -375,7 +376,7 @@ void PathfindingGraph::setUpAStarSearch()
   for (auto& vertex : mSearchStartVertices)
   {
     mPossibleEdgeSelections.push(
-      PossibleSelection(PGVertex::NoPrevious, getIndex(vertex), 0));
+      PossibleSelection(PGVertex::NoPrevious, getIndex(vertex), 0, 0));
     vertex->resolutionStatus = PGVertex::ResolutionStatus::CouldResolve;
     vertex->movementCost = 0;
   }
@@ -426,7 +427,7 @@ PossibleSelection PathfindingGraph::getNextAStarEdge()
   }
 
   return selection;
-} // getNextAStarVertex()
+} // getNextAStarEdge()
 
 void PathfindingGraph::updateNeighborsAStar(const PGVertex * vertex)
 {
@@ -470,6 +471,7 @@ void PathfindingGraph::updateNeighborsAStar(const PGVertex * vertex)
         // Introduce the possibility of selecting this neighbor next.
         mPossibleEdgeSelections.push(
           PossibleSelection(vertexIndex, getIndex(neighbor),
+            neighbor->movementCost,
             neighbor->estimatedMovementCost));
       } // if improved movement cost
     } // if neighbor not in closed set
