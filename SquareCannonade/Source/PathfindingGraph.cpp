@@ -4,31 +4,12 @@
 #include <stack>
 #include <iostream> // for debugging
 
-const int PathfindingGraphVertex::NoPrevious = -1;
-const int PathfindingGraphVertex::InfiniteMovementCost = INT_MAX;
+
 
 const int PathfindingGraph::NondiagonalEdgeWeight = 10;
 const int PathfindingGraph::DiagonalEdgeWeight = 14;
 
-sf::Vector2i PathfindingGraphVertex::getPosition() const
-{
-  return tile->getPosition();
-}
 
-sf::IntRect PathfindingGraphVertex::getRect() const
-{
-  return tile->getRect();
-}
-
-bool PathfindingGraphVertex::isDiagonallyAdjacent(
-  const PathfindingGraphVertex * vertex) const
-{
-  for (auto const& d : adjacentDiagonalVertices)
-  {
-    if (d == vertex) // the given vertex matches a diagonal neighbor
-      return true;
-  }
-}
 
 PossibleAStarEdgeSelection::PossibleAStarEdgeSelection(
   int vtcf, int vtr, int mc, int emc)
@@ -38,6 +19,9 @@ PossibleAStarEdgeSelection::PossibleAStarEdgeSelection(
   , estimatedMovementCost(emc)
 {
 }
+
+
+
 
 PathfindingGraph::PathfindingGraph(const std::vector<Tile::Ptr> &tileGrid)
   : mVertices()
@@ -52,6 +36,7 @@ PathfindingGraph::PathfindingGraph(const std::vector<Tile::Ptr> &tileGrid)
   int tileLength = tileGrid[0]->getLength();
   createEdges(tileLength);
 }
+
 
 size_t PathfindingGraph::getNumVertices() const
 {
@@ -94,11 +79,15 @@ const std::vector<PGVertex*>& PathfindingGraph::getSearchEndVertices() const
   return mSearchEndVertices;
 }
 
+
+
+
 void PathfindingGraph::setSearchStart(sf::Vector2f entityCenterPosition,
   int entityWidth, int entityHeight)
 {
   setSearchStartOrEnd(true, entityCenterPosition, entityWidth, entityHeight);
 }
+
 
 void PathfindingGraph::setSearchEnd(sf::Vector2f entityCenterPosition,
   int entityWidth, int entityHeight)
@@ -106,17 +95,22 @@ void PathfindingGraph::setSearchEnd(sf::Vector2f entityCenterPosition,
   setSearchStartOrEnd(false, entityCenterPosition, entityWidth, entityHeight);
 }
 
+
 void PathfindingGraph::setSearchStart(sf::Vector2f entityCenterPosition,
   int entityLength)
 {
   setSearchStart(entityCenterPosition, entityLength, entityLength);
 }
 
+
 void PathfindingGraph::setSearchEnd(sf::Vector2f entityCenterPosition,
   int entityLength)
 {
   setSearchEnd(entityCenterPosition, entityLength, entityLength);
 }
+
+
+
 
 /**
  * Note: I know it's bad practice to implement an algorithm that
@@ -159,6 +153,9 @@ unsigned int PathfindingGraph::performAStarSearch()
 
 } // performAStarSearch()
 
+
+
+
 std::vector<unsigned int> * PathfindingGraph::generatePath(int pathEndingVertexId)
 {
   // Setup
@@ -186,6 +183,9 @@ std::vector<unsigned int> * PathfindingGraph::generatePath(int pathEndingVertexI
   return path;
 } // generatePath()
 
+
+
+
 void PathfindingGraph::printAStarTable() const
 {
   // Table header
@@ -202,6 +202,9 @@ void PathfindingGraph::printAStarTable() const
   std::cout << "\n--------------------------------------\n\n";
 }
 
+
+
+
 void PathfindingGraph::createVertices(const std::vector<Tile::Ptr> &tileGrid)
 {
   for (auto const& tile : tileGrid)
@@ -216,6 +219,9 @@ void PathfindingGraph::createVertices(const std::vector<Tile::Ptr> &tileGrid)
     }
   }
 }
+
+
+
 
 // Creates edges (which are represented in the vertices' adjacency
 // lists) by checking which vertices are adjacent to each other
@@ -234,6 +240,9 @@ void PathfindingGraph::createEdges(int tileLength)
   assert(mNumEdges % 2 == 0); // should be even number
   mNumEdges /= 2;
 }
+
+
+
 
 void PathfindingGraph::createNondiagonalEdges(
   PGVertex::Ptr &vertex, int tileLength)
@@ -264,6 +273,9 @@ void PathfindingGraph::createNondiagonalEdges(
     }
   }
 } // createNondiagonalEdges()
+
+
+
 
 void PathfindingGraph::createDiagonalEdges(
   PGVertex::Ptr &vertex, int tileLength)
@@ -333,6 +345,9 @@ void PathfindingGraph::createDiagonalEdges(
 } // createDiagonalEdges()
 
 
+
+
+
 void PathfindingGraph::setSearchStartOrEnd(bool isSettingStart,
   sf::Vector2f centerPosition, int width, int height)
 {
@@ -355,6 +370,9 @@ void PathfindingGraph::setSearchStartOrEnd(bool isSettingStart,
     }
   }
 } // setSearchStartOrEnd()
+
+
+
 
 void PathfindingGraph::setUpAStarSearch()
 {
@@ -382,11 +400,17 @@ void PathfindingGraph::setUpAStarSearch()
   }
 } // setUpAStarSearch()
 
+
+
+
 void PathfindingGraph::cleanUpAStarSearch()
 {
   mSearchStartVertices.clear();
   mSearchEndVertices.clear();
 } // cleanUpAStarSearch()
+
+
+
 
 bool PathfindingGraph::isGoalVertex(PGVertex * vertex) const
 {
@@ -398,6 +422,9 @@ bool PathfindingGraph::isGoalVertex(PGVertex * vertex) const
 
   return false; // found no match
 }
+
+
+
 
 PossibleSelection PathfindingGraph::getNextAStarEdge()
 {
@@ -428,6 +455,9 @@ PossibleSelection PathfindingGraph::getNextAStarEdge()
 
   return selection;
 } // getNextAStarEdge()
+
+
+
 
 void PathfindingGraph::updateNeighborsAStar(const PGVertex * vertex)
 {
@@ -477,6 +507,9 @@ void PathfindingGraph::updateNeighborsAStar(const PGVertex * vertex)
     } // if neighbor not in closed set
   } // for each neighbor of the closed vertex
 } // updateNeighborsAStar()
+
+
+
 
 unsigned int PathfindingGraph::getIndex(const PGVertex * vertex) const
 {

@@ -127,6 +127,7 @@
     <ClCompile Include="..\SquareCannonade\Source\GameState.cpp" />
     <ClCompile Include="..\SquareCannonade\Source\Hunter.cpp" />
     <ClCompile Include="..\SquareCannonade\Source\PathfindingGraph.cpp" />
+    <ClCompile Include="..\SquareCannonade\Source\PathfindingGraphVertex.cpp" />
     <ClCompile Include="..\SquareCannonade\Source\Player.cpp" />
     <ClCompile Include="..\SquareCannonade\Source\State.cpp" />
     <ClCompile Include="..\SquareCannonade\Source\StateManager.cpp" />

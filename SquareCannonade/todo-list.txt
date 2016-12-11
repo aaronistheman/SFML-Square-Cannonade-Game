@@ -3,9 +3,6 @@ Current:
 
 -getting A* to work (passing the tests)
 	-finish implement performAStarSearch()
-		-clean up
-			-space implementations apart within same file
-			-move extra classes out of PathfindingGraph.hpp into other files
 		-what should I initially be setting the start vertices' estimated
 		movement costs to?; document this somewhere so I stop wondering
 		-transitioning from Dijkstra's to A*: heuristic
