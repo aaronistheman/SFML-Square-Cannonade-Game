@@ -205,6 +205,16 @@ void PathfindingGraph::printAStarTable() const
 
 
 
+
+int PathfindingGraph::getHorizontalDistance(const PGVertex * current,
+  const PGVertex * goal)
+{
+  return goal->getPosition().x - current->getPosition().x;
+} // getHorizontalDistance()
+
+
+
+
 void PathfindingGraph::createVertices(const std::vector<Tile::Ptr> &tileGrid)
 {
   for (auto const& tile : tileGrid)
@@ -520,3 +530,15 @@ unsigned int PathfindingGraph::getIndex(const PGVertex * vertex) const
       return i; // return the vertex's index
   }
 }
+
+
+
+int PathfindingGraph::heuristicGetEstimatedGraphDistance(
+  const PGVertex * current) const
+{
+  // Use the tile width and the real horizontal distance to get the number
+  // of tiles horizontally between the two vertices
+
+
+  // Multiply 
+} // heuristicGetEstimatedGraphDistance()

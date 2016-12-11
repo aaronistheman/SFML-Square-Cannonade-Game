@@ -2,23 +2,15 @@ Current:
 --------
 
 -getting A* to work (passing the tests)
-	-finish implement performAStarSearch()
-		-what should I initially be setting the start vertices' estimated
-		movement costs to?; document this somewhere so I stop wondering
-		-transitioning from Dijkstra's to A*: heuristic
-			-select heuristic
-				-ideas (find more ideas, or use the one with ***):
-					-pure distance (i.e. Pythagorean theorem)
-					-***perhaps horizontal distance (to avoid temporal
-					cost in using Pythagoren theorem)
-					-vertical distance (since the game has greater width
-					than length, horizontal distance could influence
-					the path more)
-			-if possible, add a test that FAILS due to the absence of the heuristic;
-			(one issue is that such a test may make it harder to change the heuristic)
-			-apply heuristic
-				-edit calculation of neighbor's estimated movement cost
-		-AT THIS POINT: All tests should STILL pass at this point
+	-split PathfindingGraph tests up
+	-transitioning from Dijkstra's to A*: heuristic
+		-apply heuristic: horizontal distance
+			-figure out the signature of the function
+			-set start vertices' estimated movement cost to heuristic value,
+			or else all the start vertices will be resolved first
+			-edit calculation of neighbor's estimated movement cost
+	-tests should still pass, or else either edit them to make sense with
+	the selected heuristic or forget the heuristic
 	-actually call cleanUpAStarSearch() instead of just implementing it and
 	not calling it like a silly person!! :-)
 	-any more tests?

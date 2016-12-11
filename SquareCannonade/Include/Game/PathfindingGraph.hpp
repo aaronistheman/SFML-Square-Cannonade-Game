@@ -111,9 +111,23 @@ public:
   void printAStarTable() const;
 
 
+
+
 private:
+
+
   static const int NondiagonalEdgeWeight;
   static const int DiagonalEdgeWeight;
+
+
+  // Returns horizontal distance between the given two vertices.
+  // Distance is positive if goal is to the right of current.
+  static int getHorizontalDistance(const PGVertex* current,
+    const PGVertex* goal);
+
+
+
+
 
 private:
   void createVertices(const std::vector<Tile::Ptr> &tileGrid);
@@ -158,6 +172,13 @@ private:
   // Returns the index of the given vertex in mVertices. Kills program
   // if fails to find index.
   unsigned int getIndex(const PGVertex* vertex) const;
+
+
+
+  // Heuristic for the A* algorithm.
+  // Returns minimum estimated graph distance from current to any
+  // designated goal vertex.
+  int heuristicGetEstimatedGraphDistance(const PGVertex* current) const;
 
 
 private:
