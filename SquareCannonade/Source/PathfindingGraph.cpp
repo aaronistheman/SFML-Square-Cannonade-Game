@@ -185,6 +185,20 @@ std::vector<unsigned int> * PathfindingGraph::generatePath(int pathEndingVertexI
 
 
 
+int PathfindingGraph::heuristicGetEstimatedGraphDistance(
+  const PGVertex * current) const
+{
+  // Use the tile width and the real horizontal distance to get the number
+  // of tiles horizontally between the two vertices
+
+
+  // Multiply 
+
+  return -2;
+} // heuristicGetEstimatedGraphDistance()
+
+
+
 
 void PathfindingGraph::printAStarTable() const
 {
@@ -530,17 +544,3 @@ unsigned int PathfindingGraph::getIndex(const PGVertex * vertex) const
       return i; // return the vertex's index
   }
 }
-
-
-
-int PathfindingGraph::heuristicGetEstimatedGraphDistance(
-  const PGVertex * current) const
-{
-  // Use the tile width and the real horizontal distance to get the number
-  // of tiles horizontally between the two vertices
-
-
-  // Multiply 
-
-  return 0;
-} // heuristicGetEstimatedGraphDistance()

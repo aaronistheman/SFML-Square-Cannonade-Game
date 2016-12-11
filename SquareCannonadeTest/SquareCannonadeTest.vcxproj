@@ -139,6 +139,7 @@
     <ClCompile Include="..\SquareCannonade\Source\World.cpp" />
     <ClCompile Include="Source\GeneralHelpersForTests.cpp" />
     <ClCompile Include="Source\Setup.cpp" />
+    <ClCompile Include="Source\TestHeuristicHorizontalDistance.cpp" />
     <ClCompile Include="Source\TestPathfindingSetup.cpp" />
     <ClCompile Include="Source\TestPathfindingSuccess.cpp" />
     <ClCompile Include="Source\TestPathfindingGraphCreation.cpp" />

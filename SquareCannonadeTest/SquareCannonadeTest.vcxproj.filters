@@ -87,6 +87,9 @@
     <ClCompile Include="Source\TestPathfindingSetup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\TestHeuristicHorizontalDistance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Catch\Catch.hpp">

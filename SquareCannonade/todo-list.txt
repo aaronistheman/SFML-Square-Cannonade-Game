@@ -4,10 +4,12 @@ Current:
 -getting A* to work (passing the tests)
 	-transitioning from Dijkstra's to A*: heuristic
 		-apply heuristic: horizontal distance
-			-figure out the signature of the function
-			-set start vertices' estimated movement cost to heuristic value,
-			or else all the start vertices will be resolved first
-			-edit calculation of neighbor's estimated movement cost
+			-heuristic function
+				-implement the method to pass the tests
+			-applying
+				-set start vertices' estimated movement cost to heuristic value,
+				or else all the start vertices will be resolved first
+				-edit calculation of neighbor's estimated movement cost
 	-tests should still pass, or else either edit them to make sense with
 	the selected heuristic or forget the heuristic
 	-actually call cleanUpAStarSearch() instead of just implementing it and

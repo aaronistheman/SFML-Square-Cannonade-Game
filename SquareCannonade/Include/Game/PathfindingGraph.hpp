@@ -59,10 +59,10 @@ public:
   unsigned int getNumEdges() const;
 
 
+  // Takes slow O(N) time, where N is number of vertices.
+  // Takes top-left position as argument for finding vertex.
   // Returns nullptr if fails to find vertex.
-  // Is slow and meant to be used for edge creation (which happens once),
-  // but has to be public to be testable
-  PGVertex* getVertex(sf::Vector2i position); // locate tile by position
+  PGVertex* getVertex(sf::Vector2i position);
 
 
 
@@ -76,7 +76,7 @@ public:
 
 
   // For setting start/end of pathfinding search based on entity's traits
-  // (e.g. entity's position, entity's width). More specifically, the
+  // (e.g. entity's center position, entity's width). More specifically, the
   // tiles touched by the entity are set as the start or end tiles,
   // depending on which method is called.
   void    setSearchStart(sf::Vector2f entityCenterPosition,
@@ -104,6 +104,13 @@ public:
   // Each vertex is represented by its index
   // in the container of vertices.
   std::vector<unsigned int> * generatePath(int pathEndingVertexId);
+
+
+
+  // Heuristic for the A* algorithm.
+  // Returns minimum estimated graph distance from current to any
+  // designated goal vertex.
+  int heuristicGetEstimatedGraphDistance(const PGVertex* current) const;
 
 
   // For debugging
@@ -172,13 +179,6 @@ private:
   // Returns the index of the given vertex in mVertices. Kills program
   // if fails to find index.
   unsigned int getIndex(const PGVertex* vertex) const;
-
-
-
-  // Heuristic for the A* algorithm.
-  // Returns minimum estimated graph distance from current to any
-  // designated goal vertex.
-  int heuristicGetEstimatedGraphDistance(const PGVertex* current) const;
 
 
 private:
