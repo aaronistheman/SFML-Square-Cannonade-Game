@@ -541,4 +541,6 @@ int PathfindingGraph::heuristicGetEstimatedGraphDistance(
 
 
   // Multiply 
+
+  return 0;
 } // heuristicGetEstimatedGraphDistance()

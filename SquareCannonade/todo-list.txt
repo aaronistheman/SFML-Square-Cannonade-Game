@@ -2,7 +2,6 @@ Current:
 --------
 
 -getting A* to work (passing the tests)
-	-split PathfindingGraph tests up
 	-transitioning from Dijkstra's to A*: heuristic
 		-apply heuristic: horizontal distance
 			-figure out the signature of the function
