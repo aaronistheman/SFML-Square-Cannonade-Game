@@ -18,6 +18,11 @@ sf::IntRect PathfindingGraphVertex::getRect() const
   return tile->getRect();
 }
 
+int PathfindingGraphVertex::getTileLength() const
+{
+  return tile->getLength();
+}
+
 
 
 bool PathfindingGraphVertex::isDiagonallyAdjacent(

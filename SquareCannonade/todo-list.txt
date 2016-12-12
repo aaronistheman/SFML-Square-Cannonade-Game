@@ -4,9 +4,8 @@ Current:
 -getting A* to work (passing the tests)
 	-transitioning from Dijkstra's to A*: heuristic
 		-apply heuristic: horizontal distance
-			-heuristic function
-				-implement the method to pass the tests
 			-applying
+				-choose what constant to multiply the estimated number of tiles by
 				-set start vertices' estimated movement cost to heuristic value,
 				or else all the start vertices will be resolved first
 				-edit calculation of neighbor's estimated movement cost

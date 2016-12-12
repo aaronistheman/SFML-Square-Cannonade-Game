@@ -188,13 +188,19 @@ std::vector<unsigned int> * PathfindingGraph::generatePath(int pathEndingVertexI
 int PathfindingGraph::heuristicGetEstimatedGraphDistance(
   const PGVertex * current) const
 {
-  // Use the tile width and the real horizontal distance to get the number
-  // of tiles horizontally between the two vertices
-
-
-  // Multiply 
-
-  return -2;
+  // Find minimum real horizontal distance between given vertex and
+  // any end vertex
+  int minRealHorizontalDistance = INT_MAX;
+  int d = 0;
+  for (const auto &endVertex : mSearchEndVertices)
+  {
+    d = getHorizontalDistance(current, endVertex);
+    if (d < minRealHorizontalDistance)   // if found smaller distance
+      minRealHorizontalDistance = d;  // record it
+  }
+  
+  // Return the distance as a number of tiles
+  return minRealHorizontalDistance / getTileLength();
 } // heuristicGetEstimatedGraphDistance()
 
 
@@ -223,8 +229,17 @@ void PathfindingGraph::printAStarTable() const
 int PathfindingGraph::getHorizontalDistance(const PGVertex * current,
   const PGVertex * goal)
 {
-  return goal->getPosition().x - current->getPosition().x;
+  return abs(goal->getPosition().x - current->getPosition().x);
 } // getHorizontalDistance()
+
+
+
+
+int PathfindingGraph::getTileLength() const
+{
+  return mVertices.at(0)->getTileLength();
+}
+
 
 
 

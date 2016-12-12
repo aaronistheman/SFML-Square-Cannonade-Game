@@ -18,6 +18,7 @@ public: // non-data related; just for cleaner/better code
 
   sf::Vector2i getPosition() const;
   sf::IntRect getRect() const;
+  int getTileLength() const;
 
   // Returns true if and only if the given vertex is diagonally adjacent
   // from "this" vertex.
@@ -36,6 +37,8 @@ public: // non-data related; just for cleaner/better code
                   // has been found in the search.
     Untouched,    // This vertex hasn't been interacted with in the search.
   };
+
+
 
 public: // data
 

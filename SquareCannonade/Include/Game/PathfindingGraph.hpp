@@ -109,7 +109,7 @@ public:
 
   // Heuristic for the A* algorithm.
   // Returns minimum estimated graph distance from current to any
-  // designated goal vertex.
+  // designated goal vertex. This distance is IN TERMS OF NUMBER OF TILES.
   int heuristicGetEstimatedGraphDistance(const PGVertex* current) const;
 
 
@@ -127,8 +127,8 @@ private:
   static const int DiagonalEdgeWeight;
 
 
-  // Returns horizontal distance between the given two vertices.
-  // Distance is positive if goal is to the right of current.
+  // Returns horizontal pixel distance between the given two vertices.
+  // Always returns nonnegative value.
   static int getHorizontalDistance(const PGVertex* current,
     const PGVertex* goal);
 
@@ -137,6 +137,10 @@ private:
 
 
 private:
+
+  int getTileLength() const;
+
+
   void createVertices(const std::vector<Tile::Ptr> &tileGrid);
   void createEdges(int tileLength);
 
