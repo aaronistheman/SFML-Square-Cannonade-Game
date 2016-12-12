@@ -14,3 +14,5 @@ void runCreateGrid(std::vector<Tile::Ptr> &tileGrid,
   const sf::IntRect &area, int tileLength,
   const std::string &tileMap,
   std::vector<WallTile*> &wallTiles = std::vector<WallTile*>());
+
+void assertEquality(const sf::Vector2i& lhs, const sf::Vector2i& rhs);

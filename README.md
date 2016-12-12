@@ -57,6 +57,10 @@ Hansson, and Jan Haller. I borrowed certain classes (e.g.
 ResourceHolder) or based certain classes (e.g. Application) on those from the
 source code associated with this book.
 
+* Helpful resources related to implementing the A* algorithm:
+ * http://www.policyalmanac.org/games/aStarTutorial.htm
+ * https://en.wikipedia.org/wiki/A*_search_algorithm
+
 * Developers of the Catch framework.
 (https://github.com/philsquared/Catch)
 

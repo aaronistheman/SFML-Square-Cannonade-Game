@@ -1,34 +1,45 @@
 Current:
 --------
 
--use A* pathfinding algorithm to have enemies avoid walls as
-they navigate to the player
-	-cite helpful sources
-	-set up good tile map for World?
-	-set up algorithm
-		-have way to set up goal vertices
-		-have way to set start vertex and "run the algorithm"
-		(just print a junk statement for now)
-	-unit tests for:
-		-making of the grid graph
-		-accuracy of algorithm
-	-can Boost help?
-	-figure out how to make graph
-		-map player to the grid it's closest to
-	-figure out heuristic function
-		-ideas:
-			-use distance from player
-				-perhaps horizontal distance (to avoid temporal
-				cost in using Pythagoren theorem)
-	-make sure enemy doesn't freeze if too close to player
+-speed up my A* algorithm implementation
+	-find some way to measure the speed of the algorithm
+	-things to speed up:
+		-determination of the index to return when the goal vertex is reached
+			-instead of storing pointers to the vertices in those four
+			vectors, store their indices
+				-would have to adjust the tests, which should be easy
+		-checking if a neighbor is in the closed or open sets
+			-change the sets into arrays that have the vertices' indices
+			as array indices (reduces checking speed to O(1))
+			-remove the two for loops checking these things
+		-determination of which edge cost (10 or 14) to use
+		(i.e. determination of whether the neighbor is diagonal or not)
+			-remote the two for loops checking these things
+		-perhaps initialize any used vectors with space up front, so
+		vectors won't resize as often
+		-find a way to avoid using getIndex(), since it's slow
+			-perhaps have each PGVertex know its index
+		-some of the data assignments in my A* implementation may be
+		unnecessary, since I end up assigning to the vertex's data when
+		it's resolved anyway. More specifically, I don't think there's any
+		reason to update the data of the *not yet resolved* neighbors.
+		-etc. (look for some things)
+-somewhere, enforce that an enemy can't be bigger than a tile
+-perhaps try to apply Boost where appropriate, for the practice;
+don't force it too much, though
+-implementing A*: apply to game
+	-perhaps store tile grid in PathfindingGraph instance
+	-CONCERN: make sure enemy doesn't keep going back and forth across the
+	tile it's supposed to be headed to, due to the game's not knowing the
+	enemy officially "reached" the tile (may need some epsilon value)
+	-CONCERN: make sure enemy doesn't freeze if too close to player
 	while in its grid square:
 		-if enemy and player are in same grid square, set
 		the enemy after the player's position (i.e. apply
 		waypoint-based AI)
 	-don't run A* each frame; maybe do each half second
-	-ideas on how:
-		-see memo in my phone
-		
+
+-set up good tile map for World?
 -(not necessarily complete) basic classes for Cannon, EnemySquare, etc.
 	-put the getTransform() logic in one place
 -data read from text files
@@ -81,6 +92,7 @@ Eventually:
 		-Wall class (that inherits from TileSet)
 -where information on size is known, turn some vectors into arrays
 -eliminate unneeded inclusions of <iostream>
+-drop all Git stashes
 
 Considerable:
 -------------
@@ -99,6 +111,7 @@ avoid walls
 -on background scolling:
 	-instead, make the background switch between scrolling left, up, right,
 	and down (based on how far it scrolls out) rather than following player
+-edit the tests to separate the setup out of the cases, for reusability
 
 OOP Classes (incomplete):
 ------------------------
