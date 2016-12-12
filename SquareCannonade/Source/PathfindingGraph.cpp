@@ -142,6 +142,7 @@ unsigned int PathfindingGraph::performAStarSearch()
     // if reached the goal, abandon the search
     if (isGoalVertex(vertex))
     {
+      clearVerticesSets();
       return getIndex(vertex);
     }
 
@@ -454,11 +455,11 @@ void PathfindingGraph::setUpAStarSearch()
 
 
 
-void PathfindingGraph::cleanUpAStarSearch()
+void PathfindingGraph::clearVerticesSets()
 {
   mSearchStartVertices.clear();
   mSearchEndVertices.clear();
-} // cleanUpAStarSearch()
+} // clearVerticesSets()
 
 
 
