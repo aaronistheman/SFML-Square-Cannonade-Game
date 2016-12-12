@@ -108,9 +108,13 @@ public:
 
 
   // Heuristic for the A* algorithm.
+  int getEstimatedGraphDistanceAsGraphCost(const PGVertex* current) const;
+
+
+
   // Returns minimum estimated graph distance from current to any
   // designated goal vertex. This distance is IN TERMS OF NUMBER OF TILES.
-  int heuristicGetEstimatedGraphDistance(const PGVertex* current) const;
+  int getEstimatedGraphDistanceInTiles(const PGVertex* current) const;
 
 
   // For debugging
@@ -129,7 +133,7 @@ private:
 
   // Returns horizontal pixel distance between the given two vertices.
   // Always returns nonnegative value.
-  static int getHorizontalDistance(const PGVertex* current,
+  static int getHorizontalDistanceInPixels(const PGVertex* current,
     const PGVertex* goal);
 
 

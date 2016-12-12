@@ -101,7 +101,7 @@ int setupHeuristicHorizontalDistanceTests(
   PGVertex* current = pg->getVertex(currentPos);
   assert(current);
 
-  return pg->heuristicGetEstimatedGraphDistance(current);
+  return pg->getEstimatedGraphDistanceInTiles(current);
 }
 
 TEST_CASE("Correct heuristic horizonal distance #1")
