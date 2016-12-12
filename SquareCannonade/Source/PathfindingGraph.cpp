@@ -3,6 +3,7 @@
 #include <cassert>
 #include <stack>
 #include <iostream> // for debugging
+#include <string>
 
 
 
@@ -131,7 +132,8 @@ unsigned int PathfindingGraph::performAStarSearch()
     auto selectedEdge = getNextAStarEdge();
     auto vertex = mVertices.at(selectedEdge.vertexToResolveIndex).get();
 
-    // Update the found vertex
+    // Update the found vertex, just in case its data is from a different
+    // (worse) selectable edge more recently put in the heap
     vertex->previousVertexIndex = selectedEdge.vertexToComeFromIndex;
     vertex->movementCost = selectedEdge.movementCost;
     vertex->estimatedMovementCost = selectedEdge.estimatedMovementCost;
@@ -185,14 +187,6 @@ std::vector<unsigned int> * PathfindingGraph::generatePath(int pathEndingVertexI
 
 
 
-int PathfindingGraph::getEstimatedGraphDistanceAsGraphCost(
-  const PGVertex * current) const
-{
-  return NondiagonalEdgeWeight * getEstimatedGraphDistanceInTiles(current);
-} // getEstimatedGraphDistanceAsGraphCost()
-
-
-
 int PathfindingGraph::getEstimatedGraphDistanceInTiles(
   const PGVertex * current) const
 {
@@ -223,8 +217,12 @@ void PathfindingGraph::printAStarTable() const
   for (unsigned int i = 0; i < mVertices.size(); ++i)
   {
     auto & vertex = mVertices[i];
+    std::string resolutionStatus =
+      (vertex->resolutionStatus == PGVertex::ResolutionStatus::Resolved)
+      ? "Resolved" : "Not Yet Resolved";
     std::cout << i << ' ' << vertex->previousVertexIndex << ' '
-      << vertex->movementCost << ' ' << vertex->estimatedMovementCost << '\n';
+      << vertex->movementCost << ' ' << vertex->estimatedMovementCost << ' '
+      << resolutionStatus << '\n';
   }
 
   std::cout << "\n--------------------------------------\n\n";
@@ -440,10 +438,16 @@ void PathfindingGraph::setUpAStarSearch()
   // Clear each start vertex's movement cost, since they're reached by default.
   for (auto& vertex : mSearchStartVertices)
   {
-    mPossibleEdgeSelections.push(
-      PossibleSelection(PGVertex::NoPrevious, getIndex(vertex), 0, 0));
     vertex->resolutionStatus = PGVertex::ResolutionStatus::CouldResolve;
     vertex->movementCost = 0;
+    vertex->estimatedMovementCost =
+      getEstimatedGraphDistanceAsGraphCost(vertex);
+
+    // Make this vertex selectable for resolution
+    mPossibleEdgeSelections.push(
+      PossibleSelection(PGVertex::NoPrevious, getIndex(vertex),
+        vertex->movementCost,
+        vertex->estimatedMovementCost));
   }
 } // setUpAStarSearch()
 
@@ -542,8 +546,9 @@ void PathfindingGraph::updateNeighborsAStar(const PGVertex * vertex)
 
         // Update neighbor's estimatedMovementCost to be
         // neighbor's movementCost + h(neighbor).
-        // NOTE: Will implement the heuristic soon.
-        neighbor->estimatedMovementCost = neighbor->movementCost;
+        neighbor->estimatedMovementCost =
+          neighbor->movementCost
+          + getEstimatedGraphDistanceAsGraphCost(neighbor);
 
         // Introduce the possibility of selecting this neighbor next.
         mPossibleEdgeSelections.push(
@@ -567,3 +572,11 @@ unsigned int PathfindingGraph::getIndex(const PGVertex * vertex) const
       return i; // return the vertex's index
   }
 }
+
+
+
+int PathfindingGraph::getEstimatedGraphDistanceAsGraphCost(
+  const PGVertex * current) const
+{
+  return NondiagonalEdgeWeight * getEstimatedGraphDistanceInTiles(current);
+} // getEstimatedGraphDistanceAsGraphCost()

@@ -2,19 +2,8 @@ Current:
 --------
 
 -getting A* to work (passing the tests)
-	-transitioning from Dijkstra's to A*: heuristic
-		-apply heuristic: horizontal distance
-			-applying
-				-set start vertices' estimated movement cost to heuristic value,
-				or else all the start vertices will be resolved first
-				-edit calculation of neighbor's estimated movement cost
-	-tests should still pass, or else either edit them to make sense with
-	the selected heuristic or forget the heuristic
 	-actually call cleanUpAStarSearch() instead of just implementing it and
 	not calling it like a silly person!! :-)
-	-any more tests?
-		-should I test for the case of the start and finish squares
-		being the same?
 	-speed up algorithm
 		-find some way to measure the speed of the algorithm
 		-things to speed up:
@@ -33,6 +22,10 @@ Current:
 			vectors won't resize as often
 			-find a way to avoid using getIndex(), since it's slow
 				-perhaps have each PGVertex know its index
+			-some of the data assignments in my A* implementation may be
+			unnecessary, since I end up assigning to the vertex's data when
+			it's resolved anyway. More specifically, I don't think there's any
+			reason to update the data of the *not yet resolved* neighbors.
 			-etc. (look for some things)
 
 -somewhere, enforce that an enemy can't be bigger than a tile

@@ -107,13 +107,9 @@ public:
 
 
 
-  // Heuristic for the A* algorithm.
-  int getEstimatedGraphDistanceAsGraphCost(const PGVertex* current) const;
-
-
-
   // Returns minimum estimated graph distance from current to any
   // designated goal vertex. This distance is IN TERMS OF NUMBER OF TILES.
+  // Is public for testing purposes.
   int getEstimatedGraphDistanceInTiles(const PGVertex* current) const;
 
 
@@ -187,6 +183,11 @@ private:
   // Returns the index of the given vertex in mVertices. Kills program
   // if fails to find index.
   unsigned int getIndex(const PGVertex* vertex) const;
+
+
+
+  // Heuristic for the A* algorithm.
+  int getEstimatedGraphDistanceAsGraphCost(const PGVertex* current) const;
 
 
 private:
