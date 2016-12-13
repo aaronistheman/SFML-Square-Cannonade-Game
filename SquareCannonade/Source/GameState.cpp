@@ -6,7 +6,7 @@
 
 GameState::GameState(sf::RenderWindow &window, const TextureHolder &textures)
   : State(window)
-  , mWorld(window, textures)
+  , mWorld(window)
 {
 }
 

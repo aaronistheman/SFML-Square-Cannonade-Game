@@ -17,7 +17,9 @@
 class World
 {
 public:
-  World(sf::RenderWindow &window, const TextureHolder &textures);
+  World(sf::RenderWindow &window);
+  
+  void setUpBackgroundTexture(const Player& player);
 
   // const std::vector<WallTile::Ptr>& getWallTiles() const;
 
@@ -54,6 +56,8 @@ private:
   sf::RenderWindow&   mWindow;
   bool mIsPaused;
 
+  // This class's own texture holder. Not shared with an external class
+  // (e.g. Application, GameState).
   TextureHolder mTextures;
 
   sf::Sprite mBackgroundSprite;

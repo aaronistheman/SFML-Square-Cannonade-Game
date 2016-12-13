@@ -23,6 +23,8 @@ Current:
 		-implement walls and collision detection
 		-AT THIS POINT: enemies should just get stuck on the walls
 		-add the walls to the tile grid passed to the PathfindingGraph instance
+-is the fact that I update the waypoints explicitly in World::update()
+a bad thing?
 -speed up my A* algorithm implementation
 	-find some way to measure the speed of the algorithm
 	-things to speed up:

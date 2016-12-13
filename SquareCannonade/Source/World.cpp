@@ -10,14 +10,17 @@
 const int World::TileLength = 30;
 const float World::BorderWidth = 10.f;
 
-World::World(sf::RenderWindow &window, const TextureHolder &textures)
+
+World::World(sf::RenderWindow &window)
   : mWindow(window)
   , mIsPaused(false)
+  , mTextures()   // ignore the passed in texture holder
   , mBackgroundSprite()
   , mPlayer()
   , mCoin1()
   , mCoin2()
   , mTileGrid()
+  , mWallTiles()
 {
   sf::Vector2u windowSize = mWindow.getSize();
 
@@ -28,15 +31,7 @@ World::World(sf::RenderWindow &window, const TextureHolder &textures)
   loadTextures();
 
   mPlayer.setPosition(sf::Vector2f(windowSize.x / 2, windowSize.y / 2));
-
-  // Set up background texture to repeat
-  sf::Texture& backgroundTexture = mTextures.get(Textures::Background);
-  backgroundTexture.setRepeated(true);
-  mBackgroundSprite.setTexture(backgroundTexture);
-  mBackgroundSprite.setTextureRect(
-    sf::IntRect(0, 0, windowSize.x, windowSize.y));
-  centerOrigin(mBackgroundSprite);
-  mBackgroundSprite.setPosition(mPlayer.getPosition());
+  setUpBackgroundTexture(mPlayer);
 
   mCoin1.setPosition(sf::Vector2f(30, 30));
   mCoin2.setPosition(sf::Vector2f(85, 20));
@@ -45,6 +40,20 @@ World::World(sf::RenderWindow &window, const TextureHolder &textures)
 
   createJunkWallTiles();
 } // World()
+
+void World::setUpBackgroundTexture(const Player& player)
+{
+  sf::Vector2u windowSize = mWindow.getSize();
+
+  // Set up background texture to repeat
+  sf::Texture& backgroundTexture = mTextures.get(Textures::Background);
+  backgroundTexture.setRepeated(true);
+  mBackgroundSprite.setTexture(backgroundTexture);
+  mBackgroundSprite.setTextureRect(
+    sf::IntRect(0, 0, windowSize.x, windowSize.y));
+  centerOrigin(mBackgroundSprite);
+  mBackgroundSprite.setPosition(player.getPosition());
+}
 
 /*
 const std::vector<WallTile::Ptr>& World::getWallTiles() const
