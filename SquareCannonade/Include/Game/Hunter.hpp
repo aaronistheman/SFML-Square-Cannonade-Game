@@ -16,8 +16,10 @@ public:
   virtual void setWaypoint(const sf::Vector2f& waypoint);
 
 private:
+  static const float HunterLength;
   static const float HunterSpeed;
 
+private:
   sf::RectangleShape mSprite;
 
   sf::Vector2f mWaypoint;

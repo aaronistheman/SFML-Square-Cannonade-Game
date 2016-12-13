@@ -24,6 +24,10 @@ PossibleAStarEdgeSelection::PossibleAStarEdgeSelection(
 
 
 
+PathfindingGraph::PathfindingGraph()
+{
+}
+
 PathfindingGraph::PathfindingGraph(const std::vector<Tile::Ptr> &tileGrid)
   : mVertices()
   , mNumEdges(0)

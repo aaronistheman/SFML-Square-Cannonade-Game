@@ -8,6 +8,8 @@
 #include <Tile/Tile.hpp>
 #include <Tile/WallTile.hpp>
 
+#include <Game/PathfindingGraph.hpp>
+
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
@@ -74,4 +76,5 @@ private:
   int mTileLength;
   std::vector<Tile::Ptr> mTileGrid;
   std::vector<WallTile*> mWallTiles;
+  PathfindingGraph mGraph;
 };

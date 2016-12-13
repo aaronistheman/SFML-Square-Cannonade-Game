@@ -4,10 +4,10 @@ Current:
 -applying A* to game
 	-GOAL #1: without walls, the enemy should head to the player, as if it
 	had waypoint-based AI
-		-set up PathfindingGraph and TileGrid instances
 		-in appropriate spot, set up the algorithm and run it
 			-see the test code for good examples
-		-notes:
+		-have the enemies react to the generated path
+		-NOTES/QUESTIONS:
 			-the tile grid instance for the PathfindingGraph must be kept alive
 			-make sure enemy doesn't keep going back and forth across the
 			tile it's supposed to be headed to, due to the game's not knowing the
@@ -18,6 +18,7 @@ Current:
 				the enemy after the player's position (i.e. apply
 				waypoint-based AI)
 			-don't run A* each frame; maybe do each half second
+			-what to do with the generated path?
 	-GOAL #2: *with* walls, the enemy should head to the player, avoiding
 	the walls in the way
 		-implement walls and collision detection

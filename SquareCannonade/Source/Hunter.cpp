@@ -3,10 +3,11 @@
 
 #include <SFML/Graphics/RenderTarget.hpp>
 
+const float Hunter::HunterLength = 30.f;
 const float Hunter::HunterSpeed = 100.f;
 
 Hunter::Hunter()
-  : mSprite(sf::RectangleShape(sf::Vector2f(30.f, 30.f)))
+  : mSprite(sf::RectangleShape(sf::Vector2f(HunterLength, HunterLength)))
   , mWaypoint()
 {
   centerOrigin(mSprite);

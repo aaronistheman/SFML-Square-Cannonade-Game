@@ -53,6 +53,7 @@ struct ComparePossibleAStarEdgeSelections
 class PathfindingGraph
 {
 public:
+  PathfindingGraph();    // junk default constructor to make program compile
   explicit PathfindingGraph(const std::vector<Tile::Ptr> &tileGrid);
 
   size_t getNumVertices() const;
