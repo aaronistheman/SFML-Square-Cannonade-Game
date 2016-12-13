@@ -46,7 +46,9 @@ private:
   void createJunkWallTiles();
 
 private:
-  static const int TileLength;
+
+  static const int WorldWidthInTiles;
+  static const int WorldHeightInTiles;
 
   // Visible width of the holes/edges surrounding the play area
   static const float BorderWidth;
@@ -69,6 +71,7 @@ private:
   Coin mCoin2;
   Hunter mEnemy1;
 
+  int mTileLength;
   std::vector<Tile::Ptr> mTileGrid;
   std::vector<WallTile*> mWallTiles;
 };

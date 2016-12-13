@@ -7,7 +7,10 @@
 
 #include <iostream>
 
-const int World::TileLength = 30;
+
+const int World::WorldWidthInTiles = 40;
+const int World::WorldHeightInTiles = 20;
+
 const float World::BorderWidth = 10.f;
 
 
@@ -19,14 +22,18 @@ World::World(sf::RenderWindow &window)
   , mPlayer()
   , mCoin1()
   , mCoin2()
+  , mTileLength()
   , mTileGrid()
   , mWallTiles()
 {
   sf::Vector2u windowSize = mWindow.getSize();
 
-  // Ensure window can be completely divided into equally-sized tiles
-  assert(windowSize.x % TileLength == 0);
-  assert(windowSize.y % TileLength == 0);
+  // Ensure window can be completely divided into *square* tiles
+  assert(windowSize.x % WorldWidthInTiles == 0);
+  assert(windowSize.y % WorldHeightInTiles == 0);
+  assert(windowSize.x / WorldWidthInTiles == windowSize.y / WorldHeightInTiles);
+
+  mTileLength = windowSize.x / WorldWidthInTiles;
 
   loadTextures();
 
@@ -169,8 +176,53 @@ void World::loadTextures()
 void World::createJunkWallTiles()
 {
   // Poor quality code, since this is just for quick test
-  auto area = sf::IntRect(0, 0, 300, 30);
-  std::string tileMap = "0000w000w0";
+  auto area = sf::IntRect(0, 0, mWindow.getSize().x, mWindow.getSize().y);
 
-  World::createGrid(mTileGrid, area, TileLength, tileMap, mWallTiles);
+  /*
+  std::string tileMap = "";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  */
+
+  std::string tileMap = "";
+  tileMap += "00000000000000000000w0000000000000000000";
+  tileMap += "0000000000000000000w0w000000000000000000";
+  tileMap += "000000000000000000w000w00000000000000000";
+  tileMap += "00000000000000000w00000w0000000000000000";
+  tileMap += "0000000000000000w0000000w000000000000000";
+  tileMap += "000000000000000w000000000w00000000000000";
+  tileMap += "00000000000000w00000000000w0000000000000";
+  tileMap += "0000000000000w0000000000000w000000000000";
+  tileMap += "000000000000w000000000000000w00000000000";
+  tileMap += "00000000000w00000000000000000w0000000000";
+  tileMap += "0000000000w0000000000000000000w000000000";
+  tileMap += "000000000w000000000000000000000w00000000";
+  tileMap += "00000000w00000000000000000000000w0000000";
+  tileMap += "0000000w0000000000000000000000000w000000";
+  tileMap += "0000000000000000000000000000000000w00000";
+  tileMap += "00000000000000000000000000000000000w0000";
+  tileMap += "000000000000000000000000000000000000w000";
+  tileMap += "0000000000000000000000000000000000000w00";
+  tileMap += "00000000000000000000000000000000000000w0";
+  tileMap += "000000000000000000000000000000000000000w";
+
+  World::createGrid(mTileGrid, area, mTileLength, tileMap, mWallTiles);
 }
