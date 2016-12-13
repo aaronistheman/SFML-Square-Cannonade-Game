@@ -1,6 +1,28 @@
 Current:
 --------
 
+-applying A* to game
+	-GOAL #1: without walls, the enemy should head to the player, as if it
+	had waypoint-based AI
+		-set up PathfindingGraph and TileGrid instances
+		-in appropriate spot, set up the algorithm and run it
+			-see the test code for good examples
+		-notes:
+			-the tile grid instance for the PathfindingGraph must be kept alive
+			-make sure enemy doesn't keep going back and forth across the
+			tile it's supposed to be headed to, due to the game's not knowing the
+			enemy officially "reached" the tile (may need some epsilon value)
+			-make sure enemy doesn't freeze if too close to player
+			while in its grid square:
+				-if enemy and player are in same grid square, set
+				the enemy after the player's position (i.e. apply
+				waypoint-based AI)
+			-don't run A* each frame; maybe do each half second
+	-GOAL #2: *with* walls, the enemy should head to the player, avoiding
+	the walls in the way
+		-implement walls and collision detection
+		-AT THIS POINT: enemies should just get stuck on the walls
+		-add the walls to the tile grid passed to the PathfindingGraph instance
 -speed up my A* algorithm implementation
 	-find some way to measure the speed of the algorithm
 	-things to speed up:
@@ -25,19 +47,6 @@ Current:
 		reason to update the data of the *not yet resolved* neighbors.
 		-etc. (look for some things)
 -somewhere, enforce that an enemy can't be bigger than a tile
--perhaps try to apply Boost where appropriate, for the practice;
-don't force it too much, though
--implementing A*: apply to game
-	-perhaps store tile grid in PathfindingGraph instance
-	-CONCERN: make sure enemy doesn't keep going back and forth across the
-	tile it's supposed to be headed to, due to the game's not knowing the
-	enemy officially "reached" the tile (may need some epsilon value)
-	-CONCERN: make sure enemy doesn't freeze if too close to player
-	while in its grid square:
-		-if enemy and player are in same grid square, set
-		the enemy after the player's position (i.e. apply
-		waypoint-based AI)
-	-don't run A* each frame; maybe do each half second
 
 -set up good tile map for World?
 -(not necessarily complete) basic classes for Cannon, EnemySquare, etc.
