@@ -11,6 +11,8 @@ class Player : public Entity
 public:
   Player();
 
+  float getLength() const;
+
   // The parameter name was pretty hard to come up with, admittedly :-)
   void setIsMovingLeft(bool b);
   void setIsMovingRight(bool b);
@@ -22,9 +24,10 @@ public:
     const;
 
 private:
+  static const float PlayerLength;
   static const float PlayerSpeed;
 
-  sf::RectangleShape mSprite;
+  sf::RectangleShape mSprite;   // player is square
 
   bool mIsMovingLeft;
   bool mIsMovingRight;

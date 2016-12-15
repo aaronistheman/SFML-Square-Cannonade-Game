@@ -20,6 +20,8 @@ class World
 {
 public:
   World(sf::RenderWindow &window);
+
+  void setUpEnemies();
   
   void setUpBackgroundTexture(const Player& player);
 
@@ -68,10 +70,10 @@ private:
 
   Player mPlayer;
 
-  // These should eventually be placed in a container
   Coin mCoin1;
   Coin mCoin2;
-  Hunter mEnemy1;
+
+  std::vector<std::unique_ptr<Hunter>> mEnemies;
 
   int mTileLength;
   std::vector<Tile::Ptr> mTileGrid;

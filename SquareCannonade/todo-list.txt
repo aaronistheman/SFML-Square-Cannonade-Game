@@ -4,9 +4,10 @@ Current:
 -applying A* to game
 	-GOAL #1: without walls, the enemy should head to the player, as if it
 	had waypoint-based AI
-		-in appropriate spot, set up the algorithm and run it
-			-see the test code for good examples
-		-have the enemies react to the generated path
+		-naive approach (good for a first approach): for each enemy, generate
+		his path, then set his waypoint to target the first point of the path
+		(or second, if the enemy is close enough to the first) (or can just
+		set the enemy to the second point for this first approach)
 		-NOTES/QUESTIONS:
 			-the tile grid instance for the PathfindingGraph must be kept alive
 			-make sure enemy doesn't keep going back and forth across the
@@ -26,6 +27,8 @@ Current:
 		-add the walls to the tile grid passed to the PathfindingGraph instance
 -is the fact that I update the waypoints explicitly in World::update()
 a bad thing?
+-speed up graph creation
+	-find some way to measure the speed of the graph creation
 -speed up my A* algorithm implementation
 	-find some way to measure the speed of the algorithm
 	-things to speed up:
@@ -49,7 +52,15 @@ a bad thing?
 		it's resolved anyway. More specifically, I don't think there's any
 		reason to update the data of the *not yet resolved* neighbors.
 		-etc. (look for some things)
+-speed up my A* algorithm application
+	-think of things
+
 -somewhere, enforce that an enemy can't be bigger than a tile
+-use Visual Studio project filters and folder organization
+to make the project more organized
+	-e.g. folder for Enemies, because it took me a while to see that Hunters
+	had currently been the only enemy
+-deal with compiler warnings
 
 -set up good tile map for World?
 -(not necessarily complete) basic classes for Cannon, EnemySquare, etc.

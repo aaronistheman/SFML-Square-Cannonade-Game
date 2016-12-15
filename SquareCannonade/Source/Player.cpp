@@ -3,15 +3,27 @@
 
 #include <SFML/Graphics/RenderTarget.hpp>
 
+#include <cassert>
+
+
+
+const float Player::PlayerLength = 30.f;
 const float Player::PlayerSpeed = 100.f;
 
 Player::Player()
-  : mSprite(sf::RectangleShape(sf::Vector2f(30, 30)))
+  : mSprite(sf::RectangleShape(sf::Vector2f(PlayerLength, PlayerLength)))
+  // the four movement booleans are initialized in the constructor's body
 {
   mIsMovingDown = mIsMovingLeft = mIsMovingRight = mIsMovingUp = false;
 
   centerOrigin(mSprite);
   mSprite.setFillColor(sf::Color::Blue);
+}
+
+float Player::getLength() const
+{
+  assert(mSprite.getSize().x == mSprite.getSize().y);
+  return mSprite.getSize().x;
 }
 
 void Player::setIsMovingLeft(bool b)

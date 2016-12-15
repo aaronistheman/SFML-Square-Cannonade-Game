@@ -22,7 +22,7 @@ World::World(sf::RenderWindow &window)
   , mPlayer()
   , mCoin1()
   , mCoin2()
-  , mEnemy1()
+  , mEnemies()
   , mTileLength()
   , mTileGrid()
   , mWallTiles()
@@ -45,11 +45,22 @@ World::World(sf::RenderWindow &window)
   mCoin1.setPosition(sf::Vector2f(30, 30));
   mCoin2.setPosition(sf::Vector2f(85, 20));
 
-  mEnemy1.setPosition(sf::Vector2f(180, 320));
+  setUpEnemies();
 
   createJunkWallTiles();
   mGraph = PathfindingGraph(mTileGrid);
 } // World()
+
+void World::setUpEnemies()
+{
+  // For now, just create two junk enemies
+  Hunter* enemy1 = new Hunter();
+  enemy1->setPosition(sf::Vector2f(180, 320));
+  mEnemies.push_back(std::unique_ptr<Hunter>(enemy1));
+  Hunter* enemy2 = new Hunter();
+  enemy2->setPosition(sf::Vector2f(40, 40));
+  mEnemies.push_back(std::unique_ptr<Hunter>(enemy2));
+}
 
 void World::setUpBackgroundTexture(const Player& player)
 {
@@ -85,7 +96,10 @@ void World::draw()
   mWindow.draw(mPlayer);
   mWindow.draw(mCoin1);
   mWindow.draw(mCoin2);
-  mWindow.draw(mEnemy1);
+
+  // Draw each enemy
+  for (const auto& enemy : mEnemies)
+    mWindow.draw(*enemy);
 }
 
 void World::update(sf::Time dt)
@@ -94,8 +108,9 @@ void World::update(sf::Time dt)
 
   mBackgroundSprite.setPosition(mPlayer.getPosition());
 
-  mEnemy1.setWaypoint(mPlayer.getPosition());
-  mEnemy1.update(dt);
+  // mEnemy1.setWaypoint(mPlayer.getPosition());
+  updateEnemiesPathfinding();
+  // mEnemy1.update(dt);
 }
 
 bool World::handleEvent(const sf::Event& event)
