@@ -29,6 +29,9 @@ public:
 
   virtual void draw();
   virtual void update(sf::Time dt);
+
+  virtual void updateEnemiesPathfinding();
+
   virtual bool handleEvent(const sf::Event& event);
   virtual void handleRealTimeInput();
 

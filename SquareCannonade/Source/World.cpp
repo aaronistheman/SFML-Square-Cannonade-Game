@@ -109,8 +109,32 @@ void World::update(sf::Time dt)
   mBackgroundSprite.setPosition(mPlayer.getPosition());
 
   // mEnemy1.setWaypoint(mPlayer.getPosition());
-  updateEnemiesPathfinding();
-  // mEnemy1.update(dt);
+  // updateEnemiesPathfinding();
+  
+  // For now, just update the first enemy
+  mEnemies.at(0)->update(dt);
+}
+
+void World::updateEnemiesPathfinding()
+{
+  mGraph.setSearchEnd(mPlayer.getPosition(), (int) mPlayer.getLength());
+
+  // For each enemy, set the start point(s) on the graph and run
+  // the pathfinding algorithm. Retrieve the path, and store that
+  // path with the enemy.
+
+  // For now, just set the start point, get the path, and set the *first*
+  // enemy's waypoint to the second part of the path
+  mGraph.setSearchStart(mEnemies.at(0)->getPosition(),
+    mEnemies.at(0)->getLength());
+  std::cout << "Before running A*\n";
+  int pathEndingVertexId = mGraph.performAStarSearch();
+  std::cout << "After running A*\n";
+  auto path = mGraph.generatePath(pathEndingVertexId);
+  std::cout << "After path-generation\n";
+  auto nextVertexIndex = path->at(1);
+  auto waypointPosition = mGraph.getVertex(nextVertexIndex)->getPosition();
+  mEnemies.at(0)->setWaypoint(waypointPosition);
 }
 
 bool World::handleEvent(const sf::Event& event)

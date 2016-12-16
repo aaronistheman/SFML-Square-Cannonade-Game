@@ -8,6 +8,11 @@ Current:
 		his path, then set his waypoint to target the first point of the path
 		(or second, if the enemy is close enough to the first) (or can just
 		set the enemy to the second point for this first approach)
+			-figure out why updateEnemiesPathfinding() stalls the application
+			so much that nothing else seems to be updated (even though
+			the print statements keep running)
+				-perhaps figure out how to *not* run the function every frame
+			-waypoint from the path must be set to a center position
 		-NOTES/QUESTIONS:
 			-the tile grid instance for the PathfindingGraph must be kept alive
 			-make sure enemy doesn't keep going back and forth across the
@@ -55,6 +60,10 @@ a bad thing?
 -speed up my A* algorithm application
 	-think of things
 
+-properly pick the next tasks from the below (including the "Eventually"
+section)
+-use OOP/inheritance better; Hunter.hpp and Player.hpp have duplication;
+Entity could have mSprite and getLength(), perhaps
 -somewhere, enforce that an enemy can't be bigger than a tile
 -use Visual Studio project filters and folder organization
 to make the project more organized

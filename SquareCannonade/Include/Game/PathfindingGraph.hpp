@@ -60,10 +60,14 @@ public:
   unsigned int getNumEdges() const;
 
 
+
+  PGVertex* getVertex(size_t index) const;
+
+
   // Takes slow O(N) time, where N is number of vertices.
   // Takes top-left position as argument for finding vertex.
   // Returns nullptr if fails to find vertex.
-  PGVertex* getVertex(sf::Vector2i position);
+  PGVertex* getVertex(sf::Vector2i position) const;
 
 
 

@@ -3,6 +3,9 @@
 
 #include <SFML/Graphics/RenderTarget.hpp>
 
+#include <cassert>
+
+
 const float Hunter::HunterLength = 30.f;
 const float Hunter::HunterSpeed = 100.f;
 
@@ -12,6 +15,12 @@ Hunter::Hunter()
 {
   centerOrigin(mSprite);
   mSprite.setFillColor(sf::Color::Red);
+}
+
+float Hunter::getLength() const
+{
+  assert(mSprite.getSize().x == mSprite.getSize().y);
+  return mSprite.getSize().x;
 }
 
 void Hunter::update(sf::Time dt)
@@ -41,3 +50,9 @@ void Hunter::setWaypoint(const sf::Vector2f& waypoint)
 {
   mWaypoint = waypoint;
 }
+
+void Hunter::setWaypoint(const sf::Vector2i & waypoint)
+{
+  setWaypoint(sf::Vector2f(waypoint.x, waypoint.y));
+}
+

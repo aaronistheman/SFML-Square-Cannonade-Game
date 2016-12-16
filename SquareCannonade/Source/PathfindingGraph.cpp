@@ -53,7 +53,15 @@ unsigned int PathfindingGraph::getNumEdges() const
   return mNumEdges;
 }
 
-PGVertex * PathfindingGraph::getVertex(sf::Vector2i position)
+PGVertex * PathfindingGraph::getVertex(size_t index) const
+{
+  assert(0 <= index);
+  assert(index < mVertices.size());
+
+  return mVertices.at(index).get();
+}
+
+PGVertex * PathfindingGraph::getVertex(sf::Vector2i position) const
 {
   for (auto & vertex : mVertices)
   {

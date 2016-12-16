@@ -11,8 +11,6 @@ sf::Vector2i PathfindingGraphVertex::getPosition() const
   return tile->getPosition();
 }
 
-
-
 sf::IntRect PathfindingGraphVertex::getRect() const
 {
   return tile->getRect();
