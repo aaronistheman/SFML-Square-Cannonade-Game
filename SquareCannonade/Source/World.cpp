@@ -13,7 +13,7 @@ const int World::WorldHeightInTiles = 20;
 
 const float World::BorderWidth = 10.f;
 
-const sf::Time World::TimePerPathfindingUpdate = sf::seconds(1);
+const sf::Time World::TimePerPathfindingUpdate = sf::seconds(0.5);
 
 
 World::World(sf::RenderWindow &window)
@@ -111,8 +111,6 @@ void World::update(sf::Time dt)
 
   mBackgroundSprite.setPosition(mPlayer.getPosition());
 
-  // mEnemy1.setWaypoint(mPlayer.getPosition());
-
   // update enemies' pathfinding pursuit if enough time passed
   mTimeSinceLastPathfinding += dt;
   if (mTimeSinceLastPathfinding > TimePerPathfindingUpdate)
@@ -121,11 +119,9 @@ void World::update(sf::Time dt)
     updateEnemiesPathfinding();
   }
 
-
-  // std::cout << "after updateEnemiesPathfinding()\n";
-  
-  // For now, just update the first enemy
-  mEnemies.at(0)->update(dt);
+  // Update each enemy
+  for (auto &enemy : mEnemies)
+    enemy->update(dt);
 }
 
 void World::updateEnemiesPathfinding()
@@ -135,19 +131,15 @@ void World::updateEnemiesPathfinding()
   // For each enemy, set the start point(s) on the graph and run
   // the pathfinding algorithm. Retrieve the path, and store that
   // path with the enemy.
-
-  // For now, just set the start point, get the path, and set the *first*
-  // enemy's waypoint to the second part of the path
-  mGraph.setSearchStart(mEnemies.at(0)->getPosition(),
-    mEnemies.at(0)->getLength());
-  std::cout << "Before running A*\n";
-  int pathEndingVertexId = mGraph.performAStarSearch();
-  std::cout << "After running A*\n";
-  auto path = mGraph.generatePath(pathEndingVertexId);
-  std::cout << "After path-generation\n";
-  auto nextVertexIndex = path->at(1);
-  auto waypointPosition = mGraph.getVertex(nextVertexIndex)->getPosition();
-  mEnemies.at(0)->setWaypoint(waypointPosition);
+  for (auto &enemy : mEnemies)
+  {
+    mGraph.setSearchStart(enemy->getPosition(), enemy->getLength());
+    int pathEndingVertexId = mGraph.performAStarSearch();
+    auto path = mGraph.generatePath(pathEndingVertexId);
+    auto nextVertexIndex = path->at(1);
+    auto waypointPosition = mGraph.getVertex(nextVertexIndex)->getPosition();
+    enemy->setWaypoint(waypointPosition);
+  }
 }
 
 bool World::handleEvent(const sf::Event& event)

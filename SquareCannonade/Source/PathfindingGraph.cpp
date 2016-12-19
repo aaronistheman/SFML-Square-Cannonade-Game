@@ -149,6 +149,7 @@ unsigned int PathfindingGraph::performAStarSearch()
     vertex->previousVertexIndex = selectedEdge.vertexToComeFromIndex;
     vertex->movementCost = selectedEdge.movementCost;
     vertex->estimatedMovementCost = selectedEdge.estimatedMovementCost;
+    assert(vertex->resolutionStatus != PGVertex::ResolutionStatus::Resolved);
     vertex->resolutionStatus = PGVertex::ResolutionStatus::Resolved;
 
     // if reached the goal, abandon the search

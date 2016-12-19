@@ -2,16 +2,18 @@ Current:
 --------
 
 -applying A* to game
+	-figure out what exactly to do next
+	-with two enemies, A* algorithm terminates on exception because all
+	vertices end up resolved but the goal somehow isn't reached
+		-***THIS: perhaps make at least one unit test involving sending multiple
+		enemies to a target, and check correctness of each path (allows
+		me to use a small, more easily debuggable world)
 	-GOAL #1: without walls, the enemy should head to the player, as if it
 	had waypoint-based AI
 		-naive approach (good for a first approach): for each enemy, generate
 		his path, then set his waypoint to target the first point of the path
 		(or second, if the enemy is close enough to the first) (or can just
 		set the enemy to the second point for this first approach)
-			-figure out why updateEnemiesPathfinding() stalls the application
-			so much that nothing else seems to be updated (even though
-			the print statements keep running)
-				-perhaps figure out how to *not* run the function every frame
 			-waypoint from the path must be set to a center position
 		-NOTES/QUESTIONS:
 			-the tile grid instance for the PathfindingGraph must be kept alive
