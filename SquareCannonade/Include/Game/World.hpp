@@ -16,6 +16,8 @@
 
 #include <vector>
 
+
+
 class World
 {
 public:
@@ -61,6 +63,9 @@ private:
   static const float BorderWidth;
 
 
+  static const sf::Time TimePerPathfindingUpdate;
+
+
 private:
   sf::RenderWindow&   mWindow;
   bool mIsPaused;
@@ -82,4 +87,6 @@ private:
   std::vector<Tile::Ptr> mTileGrid;
   std::vector<WallTile*> mWallTiles;
   PathfindingGraph mGraph;
+
+  sf::Time    mTimeSinceLastPathfinding;
 };

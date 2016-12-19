@@ -13,6 +13,8 @@ const int World::WorldHeightInTiles = 20;
 
 const float World::BorderWidth = 10.f;
 
+const sf::Time World::TimePerPathfindingUpdate = sf::seconds(1);
+
 
 World::World(sf::RenderWindow &window)
   : mWindow(window)
@@ -27,6 +29,7 @@ World::World(sf::RenderWindow &window)
   , mTileGrid()
   , mWallTiles()
   , mGraph()
+  , mTimeSinceLastPathfinding()
 {
   sf::Vector2u windowSize = mWindow.getSize();
 
@@ -109,7 +112,17 @@ void World::update(sf::Time dt)
   mBackgroundSprite.setPosition(mPlayer.getPosition());
 
   // mEnemy1.setWaypoint(mPlayer.getPosition());
-  // updateEnemiesPathfinding();
+
+  // update enemies' pathfinding pursuit if enough time passed
+  mTimeSinceLastPathfinding += dt;
+  if (mTimeSinceLastPathfinding > TimePerPathfindingUpdate)
+  {
+    mTimeSinceLastPathfinding -= TimePerPathfindingUpdate;
+    updateEnemiesPathfinding();
+  }
+
+
+  // std::cout << "after updateEnemiesPathfinding()\n";
   
   // For now, just update the first enemy
   mEnemies.at(0)->update(dt);

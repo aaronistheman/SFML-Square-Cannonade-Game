@@ -25,6 +25,8 @@ Current:
 				waypoint-based AI)
 			-don't run A* each frame; maybe do each half second
 			-what to do with the generated path?
+			-why does the program end up crashing from a "run out of memory"
+			error? is there a memory leak in my A* implementation?
 	-GOAL #2: *with* walls, the enemy should head to the player, avoiding
 	the walls in the way
 		-implement walls and collision detection
