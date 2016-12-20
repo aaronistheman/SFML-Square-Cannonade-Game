@@ -137,7 +137,8 @@ void World::updateEnemiesPathfinding()
     int pathEndingVertexId = mGraph.performAStarSearch();
     auto path = mGraph.generatePath(pathEndingVertexId);
     auto nextVertexIndex = path->at(1);
-    auto waypointPosition = mGraph.getVertex(nextVertexIndex)->getPosition();
+    auto waypointPosition =
+      mGraph.getVertex(nextVertexIndex)->getCenterPosition();
     enemy->setWaypoint(waypointPosition);
   }
 }

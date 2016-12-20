@@ -2,12 +2,14 @@ Current:
 --------
 
 -improving pathfinding
-	-waypoint from the path must be set to a center position
 	-with two enemies, A* algorithm terminates on exception because all
 	vertices end up resolved but the goal somehow isn't reached
 		-***THIS: perhaps make at least one unit test involving sending multiple
 		enemies to a target, and check correctness of each path (allows
 		me to use a small, more easily debuggable world)
+	-program crashes if enemy touches player
+		-perhaps add a test for the start and end points of the pathfinding
+		search being the same
 	-if enemy reaches the targeted point of his path, he should be set
 	to target the next point; reset the currently targeted point when the
 	path is reset; this change may make it more permissable to run

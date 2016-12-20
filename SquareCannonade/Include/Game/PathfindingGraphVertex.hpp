@@ -16,7 +16,11 @@ public: // non-data related; just for cleaner/better code
 
   typedef std::unique_ptr<PathfindingGraphVertex> Ptr;
 
+  // Returns top-left position
   sf::Vector2i getPosition() const;
+
+  sf::Vector2i getCenterPosition() const;
+
   sf::IntRect getRect() const;
   int getTileLength() const;
 
