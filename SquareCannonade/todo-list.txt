@@ -1,43 +1,30 @@
 Current:
 --------
 
--applying A* to game
-	-figure out what exactly to do next
+-improving pathfinding
+	-waypoint from the path must be set to a center position
 	-with two enemies, A* algorithm terminates on exception because all
 	vertices end up resolved but the goal somehow isn't reached
 		-***THIS: perhaps make at least one unit test involving sending multiple
 		enemies to a target, and check correctness of each path (allows
 		me to use a small, more easily debuggable world)
-	-GOAL #1: without walls, the enemy should head to the player, as if it
-	had waypoint-based AI
-		-naive approach (good for a first approach): for each enemy, generate
-		his path, then set his waypoint to target the first point of the path
-		(or second, if the enemy is close enough to the first) (or can just
-		set the enemy to the second point for this first approach)
-			-waypoint from the path must be set to a center position
-		-NOTES/QUESTIONS:
-			-the tile grid instance for the PathfindingGraph must be kept alive
+	-if enemy reaches the targeted point of his path, he should be set
+	to target the next point; reset the currently targeted point when the
+	path is reset; this change may make it more permissable to run
+	the pathfinding algorithm less often
+		-implementing
 			-make sure enemy doesn't keep going back and forth across the
 			tile it's supposed to be headed to, due to the game's not knowing the
 			enemy officially "reached" the tile (may need some epsilon value)
-			-make sure enemy doesn't freeze if too close to player
-			while in its grid square:
-				-if enemy and player are in same grid square, set
-				the enemy after the player's position (i.e. apply
-				waypoint-based AI)
-			-don't run A* each frame; maybe do each half second
-			-what to do with the generated path?
-			-why does the program end up crashing from a "run out of memory"
-			error? is there a memory leak in my A* implementation?
-	-GOAL #2: *with* walls, the enemy should head to the player, avoiding
-	the walls in the way
-		-implement walls and collision detection
-		-AT THIS POINT: enemies should just get stuck on the walls
-		-add the walls to the tile grid passed to the PathfindingGraph instance
--is the fact that I update the waypoints explicitly in World::update()
-a bad thing?
+		-also, this change would mean the enemies should initially be set
+		to the first coordinate on their respective paths
+	-determine why the program ends up crashing from a "run out of memory" error
+		-is there a memory leak in my A* implementation?
+	-implement walls and collision detection
+
 -speed up graph creation
 	-find some way to measure the speed of the graph creation
+	-could also put up some load screen to show the user
 -speed up my A* algorithm implementation
 	-find some way to measure the speed of the algorithm
 	-things to speed up:
