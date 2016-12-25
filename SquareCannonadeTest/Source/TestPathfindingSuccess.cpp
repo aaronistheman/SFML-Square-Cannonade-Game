@@ -113,7 +113,7 @@ std::unique_ptr<PathfindingGraph> setupPathfindingEndTests(
   std::unique_ptr<PathfindingGraph> pg =
     std::unique_ptr<PathfindingGraph>(new PathfindingGraph(tileGrid));
 
-  // Set search and end
+  // Set search start and end
   switch (caseNum)
   {
   case 1:

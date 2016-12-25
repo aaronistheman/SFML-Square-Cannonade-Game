@@ -4,9 +4,12 @@ Current:
 -improving pathfinding
 	-with two enemies, A* algorithm terminates on exception because all
 	vertices end up resolved but the goal somehow isn't reached
-		-***THIS: perhaps make at least one unit test involving sending multiple
+		-make at least three unit tests (include edge cases)
+		involving sending multiple
 		enemies to a target, and check correctness of each path (allows
 		me to use a small, more easily debuggable world)
+			-implement the tests (make sure they can fail by commenting out
+			certain lines in the A* implementation)
 	-program crashes if enemy touches player
 		-perhaps add a test for the start and end points of the pathfinding
 		search being the same
