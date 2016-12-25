@@ -108,6 +108,18 @@ void PathfindingGraph::setSearchEnd(sf::Vector2f entityCenterPosition,
   setSearchStartOrEnd(false, entityCenterPosition, entityWidth, entityHeight);
 }
 
+void PathfindingGraph::clearSearchStartVertices()
+{
+  mSearchStartVertices.clear();
+  assert(mSearchStartVertices.size() == 0);
+}
+
+void PathfindingGraph::clearSearchEndVertices()
+{
+  mSearchEndVertices.clear();
+  assert(mSearchEndVertices.size() == 0);
+}
+
 
 void PathfindingGraph::setSearchStart(sf::Vector2f entityCenterPosition,
   int entityLength)
@@ -158,7 +170,6 @@ unsigned int PathfindingGraph::performAStarSearch()
     // if reached the goal, abandon the search
     if (isGoalVertex(vertex))
     {
-      clearVerticesSets();
       return getIndex(vertex);
     }
 
@@ -471,12 +482,13 @@ void PathfindingGraph::setUpAStarSearch()
 
 
 
-
+/*
 void PathfindingGraph::clearVerticesSets()
 {
   mSearchStartVertices.clear();
   mSearchEndVertices.clear();
 } // clearVerticesSets()
+*/
 
 
 

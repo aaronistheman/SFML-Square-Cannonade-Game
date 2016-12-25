@@ -89,6 +89,12 @@ public:
   void    setSearchEnd(sf::Vector2f entityCenterPosition,
                        int entityWidth, int entityHeight);
 
+
+  void    clearSearchStartVertices();
+  void    clearSearchEndVertices();
+
+
+
   // If width=height, can use these instead of the above
   void    setSearchStart(sf::Vector2f entityCenterPosition, int entityLength);
   void    setSearchEnd(sf::Vector2f entityCenterPosition, int entityLength);
@@ -98,6 +104,9 @@ public:
   // Returns index of the path ending vertex (with which the path can
   // be generated) in mVertices.
   // REQUIRES that a valid path exist.
+  // NOTE OF CAUTION for repeated use: it is the caller's responsibility
+  // to clear search start and end vertices by calling the designated
+  // methods.
   unsigned int performAStarSearch();
 
 
@@ -164,7 +173,6 @@ private:
 
 
   void setUpAStarSearch();
-  void clearVerticesSets();
 
 
   // Returns true if given vertex could end the pathfinding algorithm

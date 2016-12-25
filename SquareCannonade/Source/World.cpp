@@ -134,13 +134,19 @@ void World::updateEnemiesPathfinding()
   for (auto &enemy : mEnemies)
   {
     mGraph.setSearchStart(enemy->getPosition(), enemy->getLength());
+
     int pathEndingVertexId = mGraph.performAStarSearch();
     auto path = mGraph.generatePath(pathEndingVertexId);
+
     auto nextVertexIndex = path->at(1);
     auto waypointPosition =
       mGraph.getVertex(nextVertexIndex)->getCenterPosition();
     enemy->setWaypoint(waypointPosition);
+
+    mGraph.clearSearchStartVertices();
   }
+
+  mGraph.clearSearchEndVertices();
 }
 
 bool World::handleEvent(const sf::Event& event)
