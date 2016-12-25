@@ -4,6 +4,7 @@ Current:
 -improving pathfinding
 	-with two enemies, A* algorithm terminates on exception because all
 	vertices end up resolved but the goal somehow isn't reached
+		-FOUND error: end vertices aren't set for second enemy
 		-make at least three unit tests (include edge cases)
 		involving sending multiple
 		enemies to a target, and check correctness of each path (allows

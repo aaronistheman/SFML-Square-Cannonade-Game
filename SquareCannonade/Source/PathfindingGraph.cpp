@@ -135,6 +135,9 @@ void PathfindingGraph::setSearchEnd(sf::Vector2f entityCenterPosition,
  */
 unsigned int PathfindingGraph::performAStarSearch()
 {
+  assert(mSearchStartVertices.size() > 0);
+  assert(mSearchEndVertices.size() > 0);
+
   setUpAStarSearch();
 
   // One vertex is resolved per iteration
