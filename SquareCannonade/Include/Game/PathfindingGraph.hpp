@@ -108,7 +108,8 @@ public:
   // of the designated start vertices in the A* search.)
   // Each vertex is represented by its index
   // in the container of vertices.
-  std::vector<unsigned int> * generatePath(int pathEndingVertexId);
+  std::unique_ptr<std::vector<unsigned int>> generatePath(
+    int pathEndingVertexId);
 
 
 

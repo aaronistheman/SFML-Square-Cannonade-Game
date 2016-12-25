@@ -172,7 +172,8 @@ unsigned int PathfindingGraph::performAStarSearch()
 
 
 
-std::vector<unsigned int> * PathfindingGraph::generatePath(int pathEndingVertexId)
+std::unique_ptr<std::vector<unsigned int>> PathfindingGraph::generatePath(
+  int pathEndingVertexId)
 {
   // Setup
   std::stack<unsigned int> reversedPath;
@@ -196,7 +197,7 @@ std::vector<unsigned int> * PathfindingGraph::generatePath(int pathEndingVertexI
     reversedPath.pop();
   }
 
-  return path;
+  return std::unique_ptr<std::vector<unsigned int>>(path);
 } // generatePath()
 
 

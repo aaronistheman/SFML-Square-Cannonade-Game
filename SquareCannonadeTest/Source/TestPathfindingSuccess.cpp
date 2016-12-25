@@ -218,7 +218,7 @@ TEST_CASE("Correct path end #7")
  * Tests for finding the correct path with pathfinding algorithm
  */
 
-std::vector<unsigned int> * setupGeneratePathTests(
+auto setupGeneratePathTests(
   int caseNum, std::vector<Tile::Ptr>& tileGrid)
 {
   // The test cases are handled in this method, which means performAStarSearch()
