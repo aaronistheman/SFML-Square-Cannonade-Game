@@ -16,7 +16,9 @@ public:
   Tile(int left, int top, int width, int height, TileType type, int penalty);
   virtual ~Tile();
 
+  // Returns top-left position
   sf::Vector2i getPosition() const;
+
   int getLength() const;
   sf::IntRect getRect() const;
   TileType getType() const;

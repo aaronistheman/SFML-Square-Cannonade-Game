@@ -7,27 +7,68 @@
 
 #include <iostream>
 
-const int World::TileLength = 30;
+
+const int World::WorldWidthInTiles = 40;
+const int World::WorldHeightInTiles = 20;
+
 const float World::BorderWidth = 10.f;
 
-World::World(sf::RenderWindow &window, const TextureHolder &textures)
+const sf::Time World::TimePerPathfindingUpdate = sf::seconds(5);
+
+
+World::World(sf::RenderWindow &window)
   : mWindow(window)
   , mIsPaused(false)
+  , mTextures()   // ignore the passed in texture holder
   , mBackgroundSprite()
   , mPlayer()
   , mCoin1()
   , mCoin2()
+  , mEnemies()
+  , mTileLength()
   , mTileGrid()
+  , mWallTiles()
+  , mGraph()
+  , mTimeSinceLastPathfinding(TimePerPathfindingUpdate) // So pathfinding gets
+                                                // updated on first frame.
 {
   sf::Vector2u windowSize = mWindow.getSize();
 
-  // Ensure window can be completely divided into equally-sized tiles
-  assert(windowSize.x % TileLength == 0);
-  assert(windowSize.y % TileLength == 0);
+  // Ensure window can be completely divided into *square* tiles
+  assert(windowSize.x % WorldWidthInTiles == 0);
+  assert(windowSize.y % WorldHeightInTiles == 0);
+  assert(windowSize.x / WorldWidthInTiles == windowSize.y / WorldHeightInTiles);
+
+  mTileLength = windowSize.x / WorldWidthInTiles;
 
   loadTextures();
 
   mPlayer.setPosition(sf::Vector2f(windowSize.x / 2, windowSize.y / 2));
+  setUpBackgroundTexture(mPlayer);
+
+  mCoin1.setPosition(sf::Vector2f(30, 30));
+  mCoin2.setPosition(sf::Vector2f(85, 20));
+
+  setUpEnemies();
+
+  createJunkWallTiles();
+  mGraph = PathfindingGraph(mTileGrid);
+} // World()
+
+void World::setUpEnemies()
+{
+  // For now, just create two junk enemies
+  Hunter* enemy1 = new Hunter();
+  enemy1->setPosition(sf::Vector2f(180, 320));
+  mEnemies.push_back(std::unique_ptr<Hunter>(enemy1));
+  Hunter* enemy2 = new Hunter();
+  enemy2->setPosition(sf::Vector2f(40, 40));
+  mEnemies.push_back(std::unique_ptr<Hunter>(enemy2));
+}
+
+void World::setUpBackgroundTexture(const Player& player)
+{
+  sf::Vector2u windowSize = mWindow.getSize();
 
   // Set up background texture to repeat
   sf::Texture& backgroundTexture = mTextures.get(Textures::Background);
@@ -36,15 +77,8 @@ World::World(sf::RenderWindow &window, const TextureHolder &textures)
   mBackgroundSprite.setTextureRect(
     sf::IntRect(0, 0, windowSize.x, windowSize.y));
   centerOrigin(mBackgroundSprite);
-  mBackgroundSprite.setPosition(mPlayer.getPosition());
-
-  mCoin1.setPosition(sf::Vector2f(30, 30));
-  mCoin2.setPosition(sf::Vector2f(85, 20));
-
-  mEnemy1.setPosition(sf::Vector2f(180, 320));
-
-  createJunkWallTiles();
-} // World()
+  mBackgroundSprite.setPosition(player.getPosition());
+}
 
 /*
 const std::vector<WallTile::Ptr>& World::getWallTiles() const
@@ -66,7 +100,10 @@ void World::draw()
   mWindow.draw(mPlayer);
   mWindow.draw(mCoin1);
   mWindow.draw(mCoin2);
-  mWindow.draw(mEnemy1);
+
+  // Draw each enemy
+  for (const auto& enemy : mEnemies)
+    mWindow.draw(*enemy);
 }
 
 void World::update(sf::Time dt)
@@ -75,8 +112,51 @@ void World::update(sf::Time dt)
 
   mBackgroundSprite.setPosition(mPlayer.getPosition());
 
-  mEnemy1.setWaypoint(mPlayer.getPosition());
-  mEnemy1.update(dt);
+  // Determine whether to reset enemies' paths
+  mTimeSinceLastPathfinding += dt;
+  bool shouldResetPaths = false;
+  if (mTimeSinceLastPathfinding >= TimePerPathfindingUpdate)
+  {
+    mTimeSinceLastPathfinding -= TimePerPathfindingUpdate;
+    shouldResetPaths = true;
+  }
+
+  updateEnemiesPathfinding(shouldResetPaths);
+
+  // Update each enemy
+  for (auto &enemy : mEnemies)
+    enemy->update(dt);
+}
+
+void World::updateEnemiesPathfinding(bool resetPaths)
+{
+  if (resetPaths)
+    mGraph.setSearchEnd(mPlayer.getPosition(), (int) mPlayer.getLength());
+
+  // For each enemy, set the start point(s) on the graph and run
+  // the pathfinding algorithm. Retrieve the path, and store that
+  // path with the enemy.
+  for (auto &enemy : mEnemies)
+  {
+    if (resetPaths)
+    {
+      // Generate a new path and give it to the enemy
+      mGraph.setSearchStart(enemy->getPosition(), enemy->getLength());
+      int pathEndingVertexId = mGraph.performAStarSearch();
+      enemy->setPath(mGraph.generatePath(pathEndingVertexId));
+
+      mGraph.clearSearchStartVertices();
+    }
+
+    // Aim enemy at its current waypoint
+    auto nextVertexIndex = enemy->getNextPathIndex();
+    auto waypointPosition =
+      mGraph.getVertex(nextVertexIndex)->getCenterPosition();
+    enemy->setWaypoint(waypointPosition);
+  }
+
+  if (resetPaths)
+    mGraph.clearSearchEndVertices();
 }
 
 bool World::handleEvent(const sf::Event& event)
@@ -160,8 +240,97 @@ void World::loadTextures()
 void World::createJunkWallTiles()
 {
   // Poor quality code, since this is just for quick test
-  auto area = sf::IntRect(0, 0, 300, 30);
-  std::string tileMap = "0000w000w0";
+  auto area = sf::IntRect(0, 0, mWindow.getSize().x, mWindow.getSize().y);
 
-  World::createGrid(mTileGrid, area, TileLength, tileMap, mWallTiles);
+  /*
+  std::string tileMap = "";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+
+  std::string tileMap = "";
+  tileMap += "00000000000000000000w0000000000000000000";
+  tileMap += "0000000000000000000w0w000000000000000000";
+  tileMap += "000000000000000000w000w00000000000000000";
+  tileMap += "00000000000000000w00000w0000000000000000";
+  tileMap += "0000000000000000w0000000w000000000000000";
+  tileMap += "000000000000000w000000000w00000000000000";
+  tileMap += "00000000000000w00000000000w0000000000000";
+  tileMap += "0000000000000w0000000000000w000000000000";
+  tileMap += "000000000000w000000000000000w00000000000";
+  tileMap += "00000000000w00000000000000000w0000000000";
+  tileMap += "0000000000w0000000000000000000w000000000";
+  tileMap += "000000000w000000000000000000000w00000000";
+  tileMap += "00000000w00000000000000000000000w0000000";
+  tileMap += "0000000w0000000000000000000000000w000000";
+  tileMap += "0000000000000000000000000000000000w00000";
+  tileMap += "00000000000000000000000000000000000w0000";
+  tileMap += "000000000000000000000000000000000000w000";
+  tileMap += "0000000000000000000000000000000000000w00";
+  tileMap += "00000000000000000000000000000000000000w0";
+  tileMap += "000000000000000000000000000000000000000w";
+
+  std::string tileMap = "";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000w00000000000000000000";
+  tileMap += "0000000000000000000w00000000000000000000";
+  tileMap += "0000000000000000000w00000000000000000000";
+  tileMap += "0000000000000000000w00000000000000000000";
+  tileMap += "0000000000000000000w00000000000000000000";
+  tileMap += "0000000000000000000w00000000000000000000";
+  tileMap += "0000000000000000000w00000000000000000000";
+  tileMap += "0000000000000000000w00000000000000000000";
+  tileMap += "0000000000000000000w00000000000000000000";
+  tileMap += "0000000000000000000w00000000000000000000";
+  tileMap += "0000000000000000000w00000000000000000000";
+  tileMap += "0000000000000000000w00000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  */
+
+  std::string tileMap = "";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000w00000000000000000000";
+  tileMap += "wwwwwwwwwww0wwwwwwww00000000000000000000";
+  tileMap += "0000000000w0w000000w00000000000000000000";
+  tileMap += "0000000000w0w000000w00000000000000000000";
+  tileMap += "0000000000w0w000000w00000000000000000000";
+  tileMap += "0000000000000000000w00000000000000000000";
+  tileMap += "0000000000000000000w00000000000000000000";
+  tileMap += "0000000000000000000w00000000000000000000";
+  tileMap += "0000000000000000000wwwwwwwww000000000000";
+  tileMap += "0000000000000000000w00000000000000000000";
+  tileMap += "0000000000000000000w00000000000000000000";
+  tileMap += "0000000000000000000w00000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+
+  World::createGrid(mTileGrid, area, mTileLength, tileMap, mWallTiles);
 }

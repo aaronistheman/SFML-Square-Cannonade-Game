@@ -24,6 +24,10 @@ PossibleAStarEdgeSelection::PossibleAStarEdgeSelection(
 
 
 
+PathfindingGraph::PathfindingGraph()
+{
+}
+
 PathfindingGraph::PathfindingGraph(const std::vector<Tile::Ptr> &tileGrid)
   : mVertices()
   , mNumEdges(0)
@@ -49,7 +53,15 @@ unsigned int PathfindingGraph::getNumEdges() const
   return mNumEdges;
 }
 
-PGVertex * PathfindingGraph::getVertex(sf::Vector2i position)
+PGVertex * PathfindingGraph::getVertex(size_t index) const
+{
+  assert(0 <= index);
+  assert(index < mVertices.size());
+
+  return mVertices.at(index).get();
+}
+
+PGVertex * PathfindingGraph::getVertex(sf::Vector2i position) const
 {
   for (auto & vertex : mVertices)
   {
@@ -96,6 +108,18 @@ void PathfindingGraph::setSearchEnd(sf::Vector2f entityCenterPosition,
   setSearchStartOrEnd(false, entityCenterPosition, entityWidth, entityHeight);
 }
 
+void PathfindingGraph::clearSearchStartVertices()
+{
+  mSearchStartVertices.clear();
+  assert(mSearchStartVertices.size() == 0);
+}
+
+void PathfindingGraph::clearSearchEndVertices()
+{
+  mSearchEndVertices.clear();
+  assert(mSearchEndVertices.size() == 0);
+}
+
 
 void PathfindingGraph::setSearchStart(sf::Vector2f entityCenterPosition,
   int entityLength)
@@ -123,6 +147,9 @@ void PathfindingGraph::setSearchEnd(sf::Vector2f entityCenterPosition,
  */
 unsigned int PathfindingGraph::performAStarSearch()
 {
+  assert(mSearchStartVertices.size() > 0);
+  assert(mSearchEndVertices.size() > 0);
+
   setUpAStarSearch();
 
   // One vertex is resolved per iteration
@@ -137,12 +164,12 @@ unsigned int PathfindingGraph::performAStarSearch()
     vertex->previousVertexIndex = selectedEdge.vertexToComeFromIndex;
     vertex->movementCost = selectedEdge.movementCost;
     vertex->estimatedMovementCost = selectedEdge.estimatedMovementCost;
+    assert(vertex->resolutionStatus != PGVertex::ResolutionStatus::Resolved);
     vertex->resolutionStatus = PGVertex::ResolutionStatus::Resolved;
 
     // if reached the goal, abandon the search
     if (isGoalVertex(vertex))
     {
-      clearVerticesSets();
       return getIndex(vertex);
     }
 
@@ -159,7 +186,8 @@ unsigned int PathfindingGraph::performAStarSearch()
 
 
 
-std::vector<unsigned int> * PathfindingGraph::generatePath(int pathEndingVertexId)
+std::unique_ptr<std::vector<unsigned int>> PathfindingGraph::generatePath(
+  int pathEndingVertexId)
 {
   // Setup
   std::stack<unsigned int> reversedPath;
@@ -183,7 +211,7 @@ std::vector<unsigned int> * PathfindingGraph::generatePath(int pathEndingVertexI
     reversedPath.pop();
   }
 
-  return path;
+  return std::unique_ptr<std::vector<unsigned int>>(path);
 } // generatePath()
 
 
@@ -454,12 +482,13 @@ void PathfindingGraph::setUpAStarSearch()
 
 
 
-
+/*
 void PathfindingGraph::clearVerticesSets()
 {
   mSearchStartVertices.clear();
   mSearchEndVertices.clear();
 } // clearVerticesSets()
+*/
 
 
 

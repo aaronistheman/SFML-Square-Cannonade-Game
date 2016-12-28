@@ -8,21 +8,34 @@
 #include <Tile/Tile.hpp>
 #include <Tile/WallTile.hpp>
 
+#include <Game/PathfindingGraph.hpp>
+
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
 #include <vector>
 
+
+
 class World
 {
 public:
-  World(sf::RenderWindow &window, const TextureHolder &textures);
+  World(sf::RenderWindow &window);
+
+  void setUpEnemies();
+  
+  void setUpBackgroundTexture(const Player& player);
 
   // const std::vector<WallTile::Ptr>& getWallTiles() const;
 
   virtual void draw();
   virtual void update(sf::Time dt);
+
+  // Set resetPaths to true to determine new paths for the enemies
+  // (by running the pathfinding algorithm).
+  virtual void updateEnemiesPathfinding(bool resetPaths);
+
   virtual bool handleEvent(const sf::Event& event);
   virtual void handleRealTimeInput();
 
@@ -44,27 +57,38 @@ private:
   void createJunkWallTiles();
 
 private:
-  static const int TileLength;
+
+  static const int WorldWidthInTiles;
+  static const int WorldHeightInTiles;
 
   // Visible width of the holes/edges surrounding the play area
   static const float BorderWidth;
+
+
+  static const sf::Time TimePerPathfindingUpdate;
 
 
 private:
   sf::RenderWindow&   mWindow;
   bool mIsPaused;
 
+  // This class's own texture holder. Not shared with an external class
+  // (e.g. Application, GameState).
   TextureHolder mTextures;
 
   sf::Sprite mBackgroundSprite;
 
   Player mPlayer;
 
-  // These should eventually be placed in a container
   Coin mCoin1;
   Coin mCoin2;
-  Hunter mEnemy1;
 
+  std::vector<std::unique_ptr<Hunter>> mEnemies;
+
+  int mTileLength;
   std::vector<Tile::Ptr> mTileGrid;
   std::vector<WallTile*> mWallTiles;
+  PathfindingGraph mGraph;
+
+  sf::Time    mTimeSinceLastPathfinding;
 };

@@ -113,7 +113,7 @@ std::unique_ptr<PathfindingGraph> setupPathfindingEndTests(
   std::unique_ptr<PathfindingGraph> pg =
     std::unique_ptr<PathfindingGraph>(new PathfindingGraph(tileGrid));
 
-  // Set search and end
+  // Set search start and end
   switch (caseNum)
   {
   case 1:
@@ -218,7 +218,7 @@ TEST_CASE("Correct path end #7")
  * Tests for finding the correct path with pathfinding algorithm
  */
 
-std::vector<unsigned int> * setupGeneratePathTests(
+auto setupGeneratePathTests(
   int caseNum, std::vector<Tile::Ptr>& tileGrid)
 {
   // The test cases are handled in this method, which means performAStarSearch()

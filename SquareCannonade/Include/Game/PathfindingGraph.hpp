@@ -53,16 +53,21 @@ struct ComparePossibleAStarEdgeSelections
 class PathfindingGraph
 {
 public:
+  PathfindingGraph();    // junk default constructor to make program compile
   explicit PathfindingGraph(const std::vector<Tile::Ptr> &tileGrid);
 
   size_t getNumVertices() const;
   unsigned int getNumEdges() const;
 
 
+
+  PGVertex* getVertex(size_t index) const;
+
+
   // Takes slow O(N) time, where N is number of vertices.
   // Takes top-left position as argument for finding vertex.
   // Returns nullptr if fails to find vertex.
-  PGVertex* getVertex(sf::Vector2i position);
+  PGVertex* getVertex(sf::Vector2i position) const;
 
 
 
@@ -84,6 +89,12 @@ public:
   void    setSearchEnd(sf::Vector2f entityCenterPosition,
                        int entityWidth, int entityHeight);
 
+
+  void    clearSearchStartVertices();
+  void    clearSearchEndVertices();
+
+
+
   // If width=height, can use these instead of the above
   void    setSearchStart(sf::Vector2f entityCenterPosition, int entityLength);
   void    setSearchEnd(sf::Vector2f entityCenterPosition, int entityLength);
@@ -93,6 +104,9 @@ public:
   // Returns index of the path ending vertex (with which the path can
   // be generated) in mVertices.
   // REQUIRES that a valid path exist.
+  // NOTE OF CAUTION for repeated use: it is the caller's responsibility
+  // to clear search start and end vertices by calling the designated
+  // methods.
   unsigned int performAStarSearch();
 
 
@@ -103,7 +117,8 @@ public:
   // of the designated start vertices in the A* search.)
   // Each vertex is represented by its index
   // in the container of vertices.
-  std::vector<unsigned int> * generatePath(int pathEndingVertexId);
+  std::unique_ptr<std::vector<unsigned int>> generatePath(
+    int pathEndingVertexId);
 
 
 
@@ -158,7 +173,6 @@ private:
 
 
   void setUpAStarSearch();
-  void clearVerticesSets();
 
 
   // Returns true if given vertex could end the pathfinding algorithm
