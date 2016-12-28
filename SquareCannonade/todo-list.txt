@@ -7,8 +7,6 @@ Current:
 			-if enemy reaches the targeted point of his path, he should be set
 			to target the next point; reset the currently targeted point when the
 			path is reset
-				-start index at 0, not 1
-				-check for null path, since enemy has that at start?
 				-set update interval higher/lower?
 
 	-program crashes if enemy touches player
@@ -27,6 +25,9 @@ Current:
 		-don't delete the code; just save it
 
 	-implement walls and collision detection
+		-this will resolve the bug of there sometimes being no search end
+		points, which occurs when the player is in walls, since walls
+		don't have corresponding graph vertices
 -speed up graph creation
 	-find some way to measure the speed of the graph creation
 	-could also put up some load screen to show the user
@@ -67,6 +68,8 @@ does the World class set it? or the Hunter class?)
 Entity could have mSprite and getLength(), perhaps
 -review class hierarchy based on notes
 -somewhere, enforce that an enemy can't be bigger than a tile
+-what to do for enemy's AI if enemy touches player?
+	-should a new path for the enemy be found?
 -use Visual Studio project filters and folder organization
 to make the project more organized
 	-e.g. folder for Enemies, because it took me a while to see that Hunters

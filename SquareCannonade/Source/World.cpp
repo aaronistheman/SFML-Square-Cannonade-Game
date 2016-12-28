@@ -13,7 +13,7 @@ const int World::WorldHeightInTiles = 20;
 
 const float World::BorderWidth = 10.f;
 
-const sf::Time World::TimePerPathfindingUpdate = sf::seconds(15);
+const sf::Time World::TimePerPathfindingUpdate = sf::seconds(5);
 
 
 World::World(sf::RenderWindow &window)
@@ -140,15 +140,15 @@ void World::updateEnemiesPathfinding(bool resetPaths)
   {
     if (resetPaths)
     {
+      // Generate a new path and give it to the enemy
       mGraph.setSearchStart(enemy->getPosition(), enemy->getLength());
-
       int pathEndingVertexId = mGraph.performAStarSearch();
       enemy->setPath(mGraph.generatePath(pathEndingVertexId));
 
       mGraph.clearSearchStartVertices();
     }
 
-    // Aim enemy at is current waypoint
+    // Aim enemy at its current waypoint
     auto nextVertexIndex = enemy->getNextPathIndex();
     auto waypointPosition =
       mGraph.getVertex(nextVertexIndex)->getCenterPosition();

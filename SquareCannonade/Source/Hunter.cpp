@@ -31,7 +31,7 @@ float Hunter::getLength() const
 void Hunter::setPath(std::unique_ptr<std::vector<unsigned int>>& path)
 {
   mCurrentPath = std::move(path);
-  mCurrentPathIndex = 1;    // start at beginning of new path
+  mCurrentPathIndex = 0;    // start at beginning of new path
 }
 
 void Hunter::update(sf::Time dt)
@@ -47,6 +47,8 @@ void Hunter::drawSprite(sf::RenderTarget& target, sf::RenderStates states) const
 
 unsigned int Hunter::getNextPathIndex() const
 {
+  assert(mCurrentPath);
+  assert(mCurrentPath->size() > 0);
   return mCurrentPath->at(mCurrentPathIndex);
 }
 
