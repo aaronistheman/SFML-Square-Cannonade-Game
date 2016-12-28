@@ -9,6 +9,18 @@
 
 
 
+/**
+ * IMPORTANT NOTE: This is an unfinished test set. It was meant
+ * to help me find the cause of a bug, but then I happened to
+ * find the bug's cause while writing the tests. I left the
+ * tests unfinished because I don't think they add much value
+ * (They practically just test the simple clean-up lines
+ * used between calls to the A* methods.). The test cases
+ * are commented out.
+ */
+
+
+
 
 
 /**
@@ -16,15 +28,19 @@
  * with MULTIPLE consecutive searches (i.e. multiple enemies)
  */
 
-std::unique_ptr<PathfindingGraph> setupMultiplePathfindingTests(
-  int caseNum, std::vector<Tile::Ptr>& tileGrid)
+auto setupMultiplePathfindingTests(
+  int caseNum, std::vector<Tile::Ptr>& tileGrid) // ,
+  // std::vector<std::vector<unsigned int>>& paths)
 {
-  // Set tile and enemy length
-  int tileLength = 0, enemyLength = 0;
+  // Set tile and entity length
+  int tileLength = 0, entityLength = 0;
   switch (caseNum)
   {
   default:
-    tileLength = enemyLength = 10;
+    // Have entityLength smaller than tileLength. This isn't crucial;
+    // it just affects the start/end points of the test case.
+    tileLength = 10;
+    entityLength = 4;
   }
 
 
@@ -102,22 +118,22 @@ std::unique_ptr<PathfindingGraph> setupMultiplePathfindingTests(
   switch (caseNum)
   {
   case 1:
-    pg->setSearchEnd(sf::Vector2f(25, 5), enemyLength);
+    pg->setSearchEnd(sf::Vector2f(25, 5), entityLength);
     break;
   case 2:
-    pg->setSearchEnd(sf::Vector2f(5, 5), enemyLength);
+    pg->setSearchEnd(sf::Vector2f(5, 5), entityLength);
     break;
   case 3:
-    pg->setSearchEnd(sf::Vector2f(5, 5), enemyLength);
+    pg->setSearchEnd(sf::Vector2f(5, 5), entityLength);
     break;
   case 4:
-    pg->setSearchEnd(sf::Vector2f(35, 25), enemyLength);
+    pg->setSearchEnd(sf::Vector2f(35, 25), entityLength);
     break;
   case 5:
-    pg->setSearchEnd(sf::Vector2f(75, 45), enemyLength);
+    pg->setSearchEnd(sf::Vector2f(75, 45), entityLength);
     break;
   case 6:
-    pg->setSearchEnd(sf::Vector2f(70, 40), enemyLength);
+    pg->setSearchEnd(sf::Vector2f(70, 40), entityLength);
     break;
   default:
     std::cerr << "Invalid case number\n";
@@ -125,21 +141,58 @@ std::unique_ptr<PathfindingGraph> setupMultiplePathfindingTests(
   }
 
 
-  // Remainder of setup occurs outside of this method
-  return pg;
+  // For the specified test case, set the start points, run
+  // the algorithm, and store the paths.
+  // The paths are stored
+  // as a reference to a set of references to paths.
+  std::unique_ptr<std::vector<std::unique_ptr<std::vector<unsigned int>>>> paths
+    = std::unique_ptr<std::vector<std::unique_ptr<std::vector<unsigned int>>>>();
+  switch (caseNum)
+  {
+  case 1:
+    pg->setSearchStart(sf::Vector2f(5, 5), entityLength);
+    paths->push_back(pg->generatePath(pg->performAStarSearch()));
+
+    pg->setSearchStart(sf::Vector2f(5, 5), entityLength);
+    paths->push_back(pg->generatePath(pg->performAStarSearch()));
+
+    break;
+  case 2: case 3: // both cases have same start points
+    pg->setSearchStart(sf::Vector2f(25, 5), entityLength);
+    paths->push_back(pg->generatePath(pg->performAStarSearch()));
+
+    pg->setSearchStart(sf::Vector2f(5, 25), entityLength);
+    paths->push_back(pg->generatePath(pg->performAStarSearch()));
+
+    pg->setSearchStart(sf::Vector2f(25, 25), entityLength);
+    paths->push_back(pg->generatePath(pg->performAStarSearch()));
+
+    break;
+  case 4:
+    // pg->set
+
+    break;
+  case 5:
+
+    break;
+  case 6:
+
+    break;
+  default:
+    assert(false);
+  }
+
+
+  return paths;
 } // setupMultiplePathfindingTests()
 
+/*
 TEST_CASE("Corret paths #1")
 {
   std::vector<Tile::Ptr> tileGrid;
-  auto pg = setupMultiplePathfindingTests(1, tileGrid);
-
-  // Set up two start points
-
-
-  // Run the algorithm
-
-
+  // std::vector<std::vector<unsigned int>> paths;
+  // auto pg = setupMultiplePathfindingTests(1, tileGrid, paths);
+  
   // Test results
 
 }
@@ -147,7 +200,8 @@ TEST_CASE("Corret paths #1")
 TEST_CASE("Correct paths #2")
 {
   std::vector<Tile::Ptr> tileGrid;
-  auto pg = setupMultiplePathfindingTests(2, tileGrid);
+  std::vector<std::vector<unsigned int>> paths;
+  auto pg = setupMultiplePathfindingTests(2, tileGrid, paths);
 
 
 }
@@ -155,7 +209,8 @@ TEST_CASE("Correct paths #2")
 TEST_CASE("Correct paths #3")
 {
   std::vector<Tile::Ptr> tileGrid;
-  auto pg = setupMultiplePathfindingTests(3, tileGrid);
+  std::vector<std::vector<unsigned int>> paths;
+  auto pg = setupMultiplePathfindingTests(3, tileGrid, paths);
 
 
 }
@@ -163,7 +218,8 @@ TEST_CASE("Correct paths #3")
 TEST_CASE("Correct paths #4")
 {
   std::vector<Tile::Ptr> tileGrid;
-  auto pg = setupMultiplePathfindingTests(4, tileGrid);
+  std::vector<std::vector<unsigned int>> paths;
+  auto pg = setupMultiplePathfindingTests(4, tileGrid, paths);
 
 
 }
@@ -171,15 +227,18 @@ TEST_CASE("Correct paths #4")
 TEST_CASE("Correct paths #5")
 {
   std::vector<Tile::Ptr> tileGrid;
-  auto pg = setupMultiplePathfindingTests(5, tileGrid);
+  std::vector<std::vector<unsigned int>> paths;
+  auto pg = setupMultiplePathfindingTests(5, tileGrid, paths);
 
 
 }
 
-TEST_CASE("Correct paths #5")
+TEST_CASE("Correct paths #6")
 {
   std::vector<Tile::Ptr> tileGrid;
-  auto pg = setupMultiplePathfindingTests(6, tileGrid);
+  std::vector<std::vector<unsigned int>> paths;
+  auto pg = setupMultiplePathfindingTests(6, tileGrid, paths);
 
 
 }
+*/

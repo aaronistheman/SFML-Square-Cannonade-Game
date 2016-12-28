@@ -145,6 +145,7 @@
     <ClCompile Include="Source\TestPathfindingGraphCreation.cpp" />
     <ClCompile Include="Source\TestTileSet.cpp" />
     <ClCompile Include="Source\TestWorldGridCreation.cpp" />
+    <ClCompile Include="TestPathfindingMultipleSuccesses.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Catch\Catch.hpp" />

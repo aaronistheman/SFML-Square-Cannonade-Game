@@ -91,6 +91,8 @@ void Hunter::updateCurrentPathIndex()
     // Don't update path index if end of path reached already
     if ((mCurrentPathIndex + 1) != mCurrentPath->size())
       ++mCurrentPathIndex;
+
+    assert((mCurrentPathIndex + 1) <= mCurrentPath->size());
   }
 }
 

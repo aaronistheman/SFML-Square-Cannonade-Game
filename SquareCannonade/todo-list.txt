@@ -1,38 +1,15 @@
 Current:
 --------
 
--improving pathfinding
-	-using the full path
-		-implementing
-			-if enemy reaches the targeted point of his path, he should be set
-			to target the next point; reset the currently targeted point when the
-			path is reset
-				-set update interval higher/lower?
-
-	-program crashes if enemy touches player
-		-perhaps add a test for the start and end points of the pathfinding
-		search being the same
-		-FOUND REASON: enemy touching player makes path of one, but we try
-		to get the second element of the path
-	-what to do about the tests-inprogress?; options:
-		-perhaps still write them? or does this waste time?
-			-make at least three unit tests (include edge cases)
-			involving sending multiple
-			enemies to a target, and check correctness of each path (allows
-			me to use a small, more easily debuggable world)
-				-implement the tests (make sure they can fail by commenting out
-				certain lines in the A* implementation)
-		-don't delete the code; just save it
-
-	-implement walls and collision detection
-		-this will resolve the bug of there sometimes being no search end
-		points, which occurs when the player is in walls, since walls
-		don't have corresponding graph vertices
--speed up graph creation
-	-find some way to measure the speed of the graph creation
-	-could also put up some load screen to show the user
+-implement walls and collision detection
+	-this will resolve the bug of there sometimes being no search end
+	points, which occurs when the player is in walls, since walls
+	don't have corresponding graph vertices
+	-if player can't fit easily between two walls, decrease player's size
+	(also perhaps consider this for enemies too)
 -speed up my A* algorithm implementation
-	-find some way to measure the speed of the algorithm
+	-find some way to measure the speed of the algorithm?
+		-use an SFML timing class
 	-things to speed up:
 		-determination of the index to return when the goal vertex is reached
 			-instead of storing pointers to the vertices in those four
@@ -54,7 +31,11 @@ Current:
 		it's resolved anyway. More specifically, I don't think there's any
 		reason to update the data of the *not yet resolved* neighbors.
 		-etc. (look for some things)
--speed up my A* algorithm application
+-speed up graph creation
+	-find some way to measure the speed of the graph creation
+		-use an SFML timing class
+	-could also put up some load screen to show the user
+-speed up my application of the A* algorithm to the World class
 	-think of things
 
 -properly pick the next tasks from the below (including the "Eventually"
@@ -105,6 +86,8 @@ to make the project more organized
 Eventually:
 -----------
 
+-finalize the A* settings (e.g. target tolerance)
+	-perhaps move them to their own file
 -put for-each loop in World::draw()
 -why is the TextureHolder passed to the World class?
 -remove unused/stub files; e.g.:
