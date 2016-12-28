@@ -9,12 +9,14 @@ Current:
 			path is reset
 			(this change would mean the enemies should initially be set
 			to the first coordinate on their respective paths)
-				-next, update the index when appropriate
-			-make sure enemy doesn't keep going back and forth across the
-			tile it's supposed to be headed to, due to the game's not knowing the
-			enemy officially "reached" the tile (may need some epsilon value)
-		-this change may make it more permissable to run
-		the pathfinding algorithm less often
+				-each enemy should update its own waypoint in its update() method
+				-update the index when appropriate (i.e. when target tile reached)
+					-make sure enemy doesn't keep going back and forth across the
+					tile it's supposed to be headed to, due to the game's not knowing the
+					enemy officially "reached" the tile (may need some epsilon value)
+					-don't increment index if at end of path (though at this point,
+					the player should be taking damage)
+				-set update interval higher
 
 	-program crashes if enemy touches player
 		-perhaps add a test for the start and end points of the pathfinding
