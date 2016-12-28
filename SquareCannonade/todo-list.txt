@@ -2,6 +2,25 @@ Current:
 --------
 
 -improving pathfinding
+	-using the full path
+		-implementing
+			-if enemy reaches the targeted point of his path, he should be set
+			to target the next point; reset the currently targeted point when the
+			path is reset
+			(this change would mean the enemies should initially be set
+			to the first coordinate on their respective paths)
+				-next, update the index when appropriate
+			-make sure enemy doesn't keep going back and forth across the
+			tile it's supposed to be headed to, due to the game's not knowing the
+			enemy officially "reached" the tile (may need some epsilon value)
+		-this change may make it more permissable to run
+		the pathfinding algorithm less often
+
+	-program crashes if enemy touches player
+		-perhaps add a test for the start and end points of the pathfinding
+		search being the same
+		-FOUND REASON: enemy touching player makes path of one, but we try
+		to get the second element of the path
 	-what to do about the tests-inprogress?; options:
 		-perhaps still write them? or does this waste time?
 			-make at least three unit tests (include edge cases)
@@ -11,23 +30,8 @@ Current:
 				-implement the tests (make sure they can fail by commenting out
 				certain lines in the A* implementation)
 		-don't delete the code; just save it
-	-program crashes if enemy touches player
-		-perhaps add a test for the start and end points of the pathfinding
-		search being the same
-	-if enemy reaches the targeted point of his path, he should be set
-	to target the next point; reset the currently targeted point when the
-	path is reset; this change may make it more permissable to run
-	the pathfinding algorithm less often
-		-implementing
-			-make sure enemy doesn't keep going back and forth across the
-			tile it's supposed to be headed to, due to the game's not knowing the
-			enemy officially "reached" the tile (may need some epsilon value)
-		-also, this change would mean the enemies should initially be set
-		to the first coordinate on their respective paths
-	-determine why the program ends up crashing from a "run out of memory" error
-		-is there a memory leak in my A* implementation?
-	-implement walls and collision detection
 
+	-implement walls and collision detection
 -speed up graph creation
 	-find some way to measure the speed of the graph creation
 	-could also put up some load screen to show the user
@@ -61,6 +65,7 @@ Current:
 section)
 -use OOP/inheritance better; Hunter.hpp and Player.hpp have duplication;
 Entity could have mSprite and getLength(), perhaps
+-review class hierarchy based on notes
 -somewhere, enforce that an enemy can't be bigger than a tile
 -use Visual Studio project filters and folder organization
 to make the project more organized
