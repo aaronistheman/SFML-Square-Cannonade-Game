@@ -13,7 +13,7 @@ const int World::WorldHeightInTiles = 20;
 
 const float World::BorderWidth = 10.f;
 
-const sf::Time World::TimePerPathfindingUpdate = sf::seconds(2);
+const sf::Time World::TimePerPathfindingUpdate = sf::seconds(15);
 
 
 World::World(sf::RenderWindow &window)
@@ -112,42 +112,51 @@ void World::update(sf::Time dt)
 
   mBackgroundSprite.setPosition(mPlayer.getPosition());
 
-  // update enemies' pathfinding pursuit if enough time passed
+  // Determine whether to reset enemies' paths
   mTimeSinceLastPathfinding += dt;
+  bool shouldResetPaths = false;
   if (mTimeSinceLastPathfinding >= TimePerPathfindingUpdate)
   {
     mTimeSinceLastPathfinding -= TimePerPathfindingUpdate;
-    updateEnemiesPathfinding();
+    shouldResetPaths = true;
   }
+
+  updateEnemiesPathfinding(shouldResetPaths);
 
   // Update each enemy
   for (auto &enemy : mEnemies)
     enemy->update(dt);
 }
 
-void World::updateEnemiesPathfinding()
+void World::updateEnemiesPathfinding(bool resetPaths)
 {
-  mGraph.setSearchEnd(mPlayer.getPosition(), (int) mPlayer.getLength());
+  if (resetPaths)
+    mGraph.setSearchEnd(mPlayer.getPosition(), (int) mPlayer.getLength());
 
   // For each enemy, set the start point(s) on the graph and run
   // the pathfinding algorithm. Retrieve the path, and store that
   // path with the enemy.
   for (auto &enemy : mEnemies)
   {
-    mGraph.setSearchStart(enemy->getPosition(), enemy->getLength());
+    if (resetPaths)
+    {
+      mGraph.setSearchStart(enemy->getPosition(), enemy->getLength());
 
-    int pathEndingVertexId = mGraph.performAStarSearch();
-    enemy->setPath(mGraph.generatePath(pathEndingVertexId));
+      int pathEndingVertexId = mGraph.performAStarSearch();
+      enemy->setPath(mGraph.generatePath(pathEndingVertexId));
 
+      mGraph.clearSearchStartVertices();
+    }
+
+    // Aim enemy at is current waypoint
     auto nextVertexIndex = enemy->getNextPathIndex();
     auto waypointPosition =
       mGraph.getVertex(nextVertexIndex)->getCenterPosition();
     enemy->setWaypoint(waypointPosition);
-
-    mGraph.clearSearchStartVertices();
   }
 
-  mGraph.clearSearchEndVertices();
+  if (resetPaths)
+    mGraph.clearSearchEndVertices();
 }
 
 bool World::handleEvent(const sf::Event& event)

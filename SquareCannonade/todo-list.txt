@@ -7,11 +7,6 @@ Current:
 			-if enemy reaches the targeted point of his path, he should be set
 			to target the next point; reset the currently targeted point when the
 			path is reset
-				-find a way to still end up setting the enemy's waypoint
-				-AT THIS POINT: enemy motion should be fluid
-				-each enemy should update its own waypoint in its update() method?
-					-but then each enemy would need access to the graph, which
-					is fine
 				-start index at 0, not 1
 				-check for null path, since enemy has that at start?
 				-set update interval higher/lower?
@@ -65,6 +60,9 @@ Current:
 section)
 -straighten out how I want to go about the waypoint system (more specifically,
 does the World class set it? or the Hunter class?)
+	-each enemy should update its own waypoint in its update() method?
+		-but then each enemy would need access to the graph, which
+		is fine
 -use OOP/inheritance better; Hunter.hpp and Player.hpp have duplication;
 Entity could have mSprite and getLength(), perhaps
 -review class hierarchy based on notes

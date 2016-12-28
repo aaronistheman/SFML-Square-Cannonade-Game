@@ -32,7 +32,9 @@ public:
   virtual void draw();
   virtual void update(sf::Time dt);
 
-  virtual void updateEnemiesPathfinding();
+  // Set resetPaths to true to determine new paths for the enemies
+  // (by running the pathfinding algorithm).
+  virtual void updateEnemiesPathfinding(bool resetPaths);
 
   virtual bool handleEvent(const sf::Event& event);
   virtual void handleRealTimeInput();
