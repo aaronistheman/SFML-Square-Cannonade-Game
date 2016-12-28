@@ -7,16 +7,14 @@ Current:
 			-if enemy reaches the targeted point of his path, he should be set
 			to target the next point; reset the currently targeted point when the
 			path is reset
-			(this change would mean the enemies should initially be set
-			to the first coordinate on their respective paths)
-				-each enemy should update its own waypoint in its update() method
-				-update the index when appropriate (i.e. when target tile reached)
-					-make sure enemy doesn't keep going back and forth across the
-					tile it's supposed to be headed to, due to the game's not knowing the
-					enemy officially "reached" the tile (may need some epsilon value)
-					-don't increment index if at end of path (though at this point,
-					the player should be taking damage)
-				-set update interval higher
+				-find a way to still end up setting the enemy's waypoint
+				-AT THIS POINT: enemy motion should be fluid
+				-each enemy should update its own waypoint in its update() method?
+					-but then each enemy would need access to the graph, which
+					is fine
+				-start index at 0, not 1
+				-check for null path, since enemy has that at start?
+				-set update interval higher/lower?
 
 	-program crashes if enemy touches player
 		-perhaps add a test for the start and end points of the pathfinding
@@ -65,6 +63,8 @@ Current:
 
 -properly pick the next tasks from the below (including the "Eventually"
 section)
+-straighten out how I want to go about the waypoint system (more specifically,
+does the World class set it? or the Hunter class?)
 -use OOP/inheritance better; Hunter.hpp and Player.hpp have duplication;
 Entity could have mSprite and getLength(), perhaps
 -review class hierarchy based on notes
@@ -148,6 +148,16 @@ avoid walls
 	-instead, make the background switch between scrolling left, up, right,
 	and down (based on how far it scrolls out) rather than following player
 -edit the tests to separate the setup out of the cases, for reusability
+
+List of Regrets (to be put in this project's webpage entry on my
+personal website):
+---------------------------------------
+
+-not having a strict, consistent, determined order for public methods,
+public static variables,
+private methods, private member variables, and private static variables
+-some test sets might've taken more time to write than they were worth
+(e.g. setting start and end vertices)
 
 OOP Classes (incomplete):
 ------------------------
