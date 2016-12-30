@@ -2,9 +2,34 @@ Current:
 --------
 
 -implement collision detection (just for the player)
-	-implementing
-		-just do what I did in the Tanks game: if player intersects a wall,
-		prevent him from moving further into it
+	-IMPLEMENT #3
+	-just do what I did in the Tanks game: if player intersects a wall,
+	prevent him from moving further into it
+	-ideas regarding implementation:
+		-1) check each wall tile, compare with player
+			-PROBLEM regarding efficiency: would I be checking each wall tile?
+			or should I implement each wall's being a tile set?
+		-2) perhaps try to map the player to the graph, and then we know
+		there's a wall if there wasn't a vertex found (see
+		PathfindingGraph::setSearchStartOrEnd() for inspiration)
+			-doesn't this still require checking each wall tile, in worst case?
+		-***3) somehow group wall tiles into wall tile sets to reduce the number
+		of checks
+			-PROBLEM: how to do this grouping? would I have to change how
+			I do the tile mapping? uh-oh
+			-POSSIBLE SOLUTION: have a less detailed set of info about the level
+			(e.g. placement of blocks, kind of like the Tanks game), and then
+			from this detailed set, GENERATE the tile map
+				-create three tests
+				-will have to check for:
+					-alignment of blocks with the tiles' boundaries
+					-no collision between wall and any entity (i.e. coin/player start)
+					-etc. (make it easy to add checks)
+				-***for now, just have some container of wall data
+				in World class and generate the tile map from this.
+				Then, after tile map is generated, make Walls (tile sets)
+				based on the wall data.
+
 	-after implementation
 		-this will resolve the bug of there sometimes being no search end
 		points, which occurs when the player is in walls, since walls
