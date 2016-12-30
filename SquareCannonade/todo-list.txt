@@ -1,12 +1,16 @@
 Current:
 --------
 
--implement walls and collision detection
-	-this will resolve the bug of there sometimes being no search end
-	points, which occurs when the player is in walls, since walls
-	don't have corresponding graph vertices
-	-if player can't fit easily between two walls, decrease player's size
-	(also perhaps consider this for enemies too)
+-implement collision detection (just for the player)
+	-implementing
+		-just do what I did in the Tanks game: if player intersects a wall,
+		prevent him from moving further into it
+	-after implementation
+		-this will resolve the bug of there sometimes being no search end
+		points, which occurs when the player is in walls, since walls
+		don't have corresponding graph vertices
+		-if player can't fit easily between two walls, decrease player's size
+		(also perhaps consider this for enemies too)
 -speed up my A* algorithm implementation
 	-find some way to measure the speed of the algorithm?
 		-use an SFML timing class

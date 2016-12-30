@@ -108,24 +108,10 @@ void World::draw()
 
 void World::update(sf::Time dt)
 {
-  mPlayer.update(dt);
+  // handle collisions
 
-  mBackgroundSprite.setPosition(mPlayer.getPosition());
-
-  // Determine whether to reset enemies' paths
-  mTimeSinceLastPathfinding += dt;
-  bool shouldResetPaths = false;
-  if (mTimeSinceLastPathfinding >= TimePerPathfindingUpdate)
-  {
-    mTimeSinceLastPathfinding -= TimePerPathfindingUpdate;
-    shouldResetPaths = true;
-  }
-
-  updateEnemiesPathfinding(shouldResetPaths);
-
-  // Update each enemy
-  for (auto &enemy : mEnemies)
-    enemy->update(dt);
+  updateEntities(dt);
+  // mBackgroundSprite.setPosition(mPlayer.getPosition());
 }
 
 void World::updateEnemiesPathfinding(bool resetPaths)
@@ -333,4 +319,28 @@ void World::createJunkWallTiles()
   tileMap += "0000000000000000000000000000000000000000";
 
   World::createGrid(mTileGrid, area, mTileLength, tileMap, mWallTiles);
+}
+
+void World::updateEnemies(sf::Time dt)
+{
+  // Determine whether to reset enemies' paths
+  mTimeSinceLastPathfinding += dt;
+  bool shouldResetPaths = false;
+  if (mTimeSinceLastPathfinding >= TimePerPathfindingUpdate)
+  {
+    mTimeSinceLastPathfinding -= TimePerPathfindingUpdate;
+    shouldResetPaths = true;
+  }
+
+  updateEnemiesPathfinding(shouldResetPaths);
+
+  // Update each enemy individually
+  for (auto &enemy : mEnemies)
+    enemy->update(dt);
+}
+
+void World::updateEntities(sf::Time dt)
+{
+  mPlayer.update(dt);
+  updateEnemies(dt);
 }

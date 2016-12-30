@@ -50,13 +50,16 @@ public: // Public static methods
     const std::string &tileMap,
     std::vector<WallTile*> &wallTiles);
 
-private:
+private: // Private methods
   void loadTextures();
 
   // For testing
   void createJunkWallTiles();
 
-private:
+  void updateEnemies(sf::Time dt);
+  void updateEntities(sf::Time dt);
+
+private: // Private static variables
 
   static const int WorldWidthInTiles;
   static const int WorldHeightInTiles;
@@ -68,7 +71,7 @@ private:
   static const sf::Time TimePerPathfindingUpdate;
 
 
-private:
+private: // Private member variables
   sf::RenderWindow&   mWindow;
   bool mIsPaused;
 
