@@ -2,6 +2,7 @@
 #include <Utility/Utility.hpp>
 #include <Tile/TileMapConstants.hpp>
 #include <Tile/DefaultTile.hpp>
+#include <Game/Wall.hpp>
 
 #include <SFML/Window/Event.hpp>
 
@@ -355,12 +356,14 @@ void World::handleCollisions()
 
 void World::checkCollisionsWithWalls()
 {
+  sf::IntRect intersectionRect;
 
   // For each wall, check if player collides with it, and if so,
   // store related data.
   for (const auto& wall : mWalls)
   {
-    if (wall->entityCollidesWithWall(mPlayer.getBoundingRect()))
-      mPlayer.addWallCollisionData(wall->getBoundingRect());
+    if (wall->entityCollidesWithWall(
+      mPlayer.getBoundingRect(), intersectionRect))
+      mPlayer.addWallIntersectionData(intersectionRect);
   }
 }

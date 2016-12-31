@@ -2,16 +2,16 @@ Current:
 --------
 
 -implement collision detection (just for the player and walls)
-	-collision detection
-		-if player intersects a wall, prevent him from moving further into it
+	-collision detection; ideas on how:
+		-1) if player intersects a wall, prevent him from moving further into it
 			-be able to detect which movement of the player to prevent,
 			and prevent it
-				REALLY WRITE ON PAPER AND CONSULT TANKS CODE
-				-store data on intersections instead (to match Tanks)
 				-stop left movement if appropriate
 				-stop right movement if appropriate
 				-stop up if...
 				-stop down if...
+		-2) instead, check if the player's movement would cause him to
+		enter a wall, and stop the movement if so
 	-possible safeguards
 		-when updating tile map from wall data, check:
 			-no collision between wall and any entity (i.e. coin/player start)

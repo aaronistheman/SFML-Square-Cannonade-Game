@@ -31,7 +31,7 @@ public:
   void drawSprite(sf::RenderTarget& target, sf::RenderStates states)
     const;
 
-  void addWallCollisionData(sf::IntRect wallRect);
+  void addWallIntersectionData(sf::IntRect intersectionRect);
 
 private: // private methods
 
@@ -59,5 +59,5 @@ private:
   bool mCanMoveUp;
 
   // Contains data on unresolved collisions with walls.
-  std::vector<sf::IntRect>   mWallCollisionData;
+  std::vector<sf::IntRect>   mIntersectionsWithWalls;
 };

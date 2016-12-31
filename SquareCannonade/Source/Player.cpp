@@ -13,6 +13,7 @@ const float Player::PlayerSpeed = 100.f;
 Player::Player()
   : mSprite(sf::RectangleShape(sf::Vector2f(PlayerLength, PlayerLength)))
   // the eight movement booleans are initialized in the constructor's body
+  , mIntersectionsWithWalls()
 {
   mIsMovingDown = mIsMovingLeft = mIsMovingRight = mIsMovingUp = false;
   mCanMoveLeft = mCanMoveRight = mCanMoveDown = mCanMoveUp = true;
@@ -94,9 +95,9 @@ void Player::drawSprite(sf::RenderTarget& target, sf::RenderStates states) const
   target.draw(mSprite, states);
 }
 
-void Player::addWallCollisionData(sf::IntRect wallRect)
+void Player::addWallIntersectionData(sf::IntRect intersectionRect)
 {
-  mWallCollisionData.push_back(wallRect);
+  mIntersectionsWithWalls.push_back(intersectionRect);
 }
 
 void Player::removeMovementRestrictions()
@@ -104,18 +105,27 @@ void Player::removeMovementRestrictions()
   mCanMoveLeft = mCanMoveRight = mCanMoveDown = mCanMoveUp = true;
 }
 
+#include <iostream>
 void Player::resolveWallCollisions()
 {
-  auto boundingRect = getBoundingRect();
+  auto playerRect = getBoundingRect();
 
   // For each wall-collision-to-resolve, apply the correct restriction
   // on the player's movement.
-  for (const auto& wc : mWallCollisionData)
+
+  std::cout << mIntersectionsWithWalls.size() << '\n';
+  mIntersectionsWithWalls.clear();
+  return;
+  for (const auto& wc : mIntersectionsWithWalls)
   {
-    
+    /**
+     * The following code is based on code from my Tanks game from just
+     * over two years ago.
+     */
+
   }
 
-  mWallCollisionData.clear();
+  mIntersectionsWithWalls.clear();
 }
 
 void Player::movePlayer(sf::Time dt)

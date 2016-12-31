@@ -11,7 +11,8 @@ sf::IntRect Wall::getBoundingRect() const
   return mRect;
 }
 
-bool Wall::entityCollidesWithWall(sf::IntRect entityRect)
+bool Wall::entityCollidesWithWall(sf::IntRect entityRect,
+  sf::IntRect &intersectionRect)
 {
-  return mRect.intersects(entityRect);
+  return mRect.intersects(entityRect, intersectionRect);
 }
