@@ -10,7 +10,7 @@
  * Set of tests for World::addWallsToTileMap
  */
 
-const int NumTestCases = 2;
+const int NumTestCases = 3;
 
 // This function is effectively meant to have two return values:
 // returnedTileMap and goalTileMap
@@ -29,7 +29,7 @@ void setupAddWallsToTileMapTests(int caseNum,
   case 1:
     area = sf::IntRect(0, 0, 2 * tileLength, 2 * tileLength);
     break;
-  case 2:
+  case 2: case 3:
     area = sf::IntRect(0, 0, 4 * tileLength, 5 * tileLength);
     break;
   }
@@ -47,23 +47,44 @@ void setupAddWallsToTileMapTests(int caseNum,
     wallData.push_back(sf::IntRect(1 * tileLength,
       1 * tileLength, tileLength, tileLength));
     break;
-  case 2:
+
+  case 2: // a tall, vertical wall with a small wall on each side
+    // tall vertical wall
     wallData.push_back(sf::IntRect(2 * tileLength,
-      1 * tileLength, tileLength, tileLength));
+      1 * tileLength, tileLength, 3 * tileLength));
+
+    // two small walls
     wallData.push_back(sf::IntRect(1 * tileLength,
-      2 * tileLength, tileLength, tileLength));
-    wallData.push_back(sf::IntRect(2 * tileLength,
       2 * tileLength, tileLength, tileLength));
     wallData.push_back(sf::IntRect(3 * tileLength,
       2 * tileLength, tileLength, tileLength));
+
+    break;
+
+  case 3: // two intersecting big walls
+    // vertical wall
     wallData.push_back(sf::IntRect(2 * tileLength,
-      3 * tileLength, tileLength, tileLength));
+      1 * tileLength, tileLength, 3 * tileLength));
+
+    // horizontal wall
+    wallData.push_back(sf::IntRect(1 * tileLength,
+      2 * tileLength, 3 * tileLength, 1 * tileLength));
     break;
   }
   assert(wallData.size() > 0);
+
+  // Determine number of tiles per row
+  int numTilesPerRow = 0;
+  switch (caseNum)
+  {
+  case 1:         numTilesPerRow = 2; break;
+  case 2: case 3: numTilesPerRow = 4; break;
+  }
+  assert(numTilesPerRow != 0);
   
   // Run method on the initial tile map
-  World::addWallsToTileMap(returnedTileMap, wallData, tileLength);
+  World::addWallsToTileMap(returnedTileMap, numTilesPerRow,
+    wallData, tileLength);
 
   // Create goal tile map
   assert(goalTileMap == "");
@@ -73,7 +94,7 @@ void setupAddWallsToTileMapTests(int caseNum,
     goalTileMap += "00";
     goalTileMap += "0w";
     break;
-  case 2:
+  case 2: case 3:
     goalTileMap += "0000";
     goalTileMap += "00w0";
     goalTileMap += "0www";
@@ -99,6 +120,16 @@ TEST_CASE("Correct tile map #2")
   std::string returnedTileMap = "";
   std::string goalTileMap = "";
   setupAddWallsToTileMapTests(2, returnedTileMap, goalTileMap);
+
+  REQUIRE(returnedTileMap == goalTileMap);
+}
+
+// case #2 with overlapping walls
+TEST_CASE("Correct tile map #3")
+{
+  std::string returnedTileMap = "";
+  std::string goalTileMap = "";
+  setupAddWallsToTileMapTests(3, returnedTileMap, goalTileMap);
 
   REQUIRE(returnedTileMap == goalTileMap);
 }

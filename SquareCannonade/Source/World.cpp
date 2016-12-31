@@ -219,10 +219,44 @@ void World::createGrid(std::vector<Tile::Ptr> &tileGrid,
 } // createGrid()
 
 
-void World::addWallsToTileMap(std::string & tileMap,
+void World::addWallsToTileMap(std::string & tileMap, int numTilesPerRow,
   const std::vector<sf::IntRect> &wallData, int tileLength)
 {
-  return;
+  for (const auto& wd : wallData)
+  {
+    // Assert that the wall can be perfectly "snapped" onto the tile map
+    assert ((wd.left % tileLength == 0)
+      && (wd.top % tileLength == 0)
+      && (wd.width % tileLength == 0)
+      && (wd.height % tileLength == 0));
+
+    const int widthOfWallInTiles = wd.width / tileLength;
+    const int heightOfWallInTiles = wd.height / tileLength;
+
+    // To help locate initial spot of tile map string to edit
+    const int initialColIndex = wd.left / tileLength;
+    const int initialRowIndex = wd.top / tileLength;
+    
+    // Map the wall data to appropriate tile(s), editing the
+    // tile map accordingly. Since the wall is rectangular,
+    // we can traverse it as if it were a 2d array.
+    for (int rowIndexOffset = 0; rowIndexOffset < heightOfWallInTiles;
+      ++rowIndexOffset)
+    {
+      for (int colIndexOffset = 0; colIndexOffset < widthOfWallInTiles;
+        ++colIndexOffset)
+      {
+        // Determine which part of the tile map to edit
+        int effectiveRowIndex = initialRowIndex + rowIndexOffset;
+        int effectiveColIndex = initialColIndex + colIndexOffset;
+        int effectiveIndexToEdit =
+          (effectiveRowIndex * numTilesPerRow) + effectiveColIndex;
+
+        // Edit the tile map
+        tileMap.at(effectiveIndexToEdit) = 'w';
+      } // for each col
+    } // for each row
+  } // for each wall data
 } // addWallsToTileMap()
 
 
