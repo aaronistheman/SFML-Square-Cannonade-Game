@@ -2,33 +2,26 @@ Current:
 --------
 
 -implement collision detection (just for the player)
-	-just do what I did in the Tanks game: if player intersects a wall,
-	prevent him from moving further into it
-	-regarding implementation:
-		-somehow group wall tiles into wall tile sets to reduce the number
-		of checks
-			-PROBLEM: how to do this grouping? would I have to change how
-			I do the tile mapping? uh-oh
-			-POSSIBLE SOLUTION: have a less detailed set of info about the level
-			(e.g. placement of blocks, kind of like the Tanks game), and then
-			from this detailed set, GENERATE the tile map
-				-create three tests
-				-will have to check for:
-					-alignment of blocks with the tiles' boundaries
-					-no collision between wall and any entity (i.e. coin/player start)
-					-etc. (make it easy to add checks)
-				-***for now, just have some container of wall data
-				in World class and generate the tile map from this.
-				Then, after tile map is generated, make Walls (tile sets)
-				based on the wall data.
-		-4) #1, but with a quadtree
-
+	-collision detection
+		-if player intersects a wall, prevent him from moving further into it
+			-be able to detect the collision
+			-be able to detect which movement of the player to prevent,
+			and prevent it
+	-possible safeguards
+		-when updating tile map from wall data, check:
+			-no collision between wall and any entity (i.e. coin/player start)
 	-after implementation
 		-this will resolve the bug of there sometimes being no search end
 		points, which occurs when the player is in walls, since walls
 		don't have corresponding graph vertices
 		-if player can't fit easily between two walls, decrease player's size
 		(also perhaps consider this for enemies too)
+-before dealing with A*, tidy up the class structure, based on notes way below
+
+-can I eliminate wall tiles? They seem to serve no purpose
+	-would have to switch to drawing walls by using the Wall class, rather
+	than the WallTile class
+
 -speed up my A* algorithm implementation
 	-find some way to measure the speed of the algorithm?
 		-use an SFML timing class

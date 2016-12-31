@@ -5,6 +5,7 @@
 #include <Game/Player.hpp>
 #include <Game/Coin.hpp>
 #include <Game/Hunter.hpp>
+#include <Game/Wall.hpp>
 #include <Tile/Tile.hpp>
 #include <Tile/WallTile.hpp>
 
@@ -65,6 +66,10 @@ public: // Public static methods
 private: // Private methods
   void loadTextures();
 
+  // Each sf::IntRect in wallData represents the data of a
+  // respective wall in UNITS OF NUMBER OF TILES.
+  void createWalls(const std::vector<sf::IntRect> &wallData);
+
   // For testing
   void createJunkWallTiles();
 
@@ -99,6 +104,7 @@ private: // Private member variables
   Coin mCoin2;
 
   std::vector<std::unique_ptr<Hunter>> mEnemies;
+  std::vector<std::unique_ptr<Wall>> mWalls;
 
   int mTileLength;
   std::vector<Tile::Ptr> mTileGrid;

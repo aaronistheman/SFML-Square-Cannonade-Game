@@ -252,6 +252,18 @@ void World::loadTextures()
   mTextures.load(Textures::Background, "Media/background.jpg");
 }
 
+void World::createWalls(const std::vector<sf::IntRect> &wallData)
+{
+  // For each wall data, create a corresponding wall object
+  for (const auto& wd : wallData)
+  {
+    mWalls.push_back(std::unique_ptr<Wall>(
+      new Wall(wd.left * mTileLength,
+        wd.top * mTileLength, wd.width * mTileLength,
+        wd.height * mTileLength)));
+  }
+}
+
 void World::createJunkWallTiles()
 {
   // Poor quality code, since this is just for quick test
@@ -372,9 +384,9 @@ void World::createJunkWallTiles()
   std::vector<sf::IntRect> wallData;
   wallData.push_back(sf::IntRect(5, 3, 2, 4));
   wallData.push_back(sf::IntRect(20, 2, 1, 16));
+  createWalls(wallData);
 
   World::addWallsToTileMap(tileMap, WorldWidthInTiles, wallData, mTileLength);
-
   World::createGrid(mTileGrid, area, mTileLength, tileMap, mWallTiles);
 }
 
