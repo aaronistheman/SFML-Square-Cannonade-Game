@@ -6,6 +6,8 @@ Current:
 		-if player intersects a wall, prevent him from moving further into it
 			-be able to detect which movement of the player to prevent,
 			and prevent it
+				REALLY WRITE ON PAPER AND CONSULT TANKS CODE
+				-store data on intersections instead (to match Tanks)
 				-stop left movement if appropriate
 				-stop right movement if appropriate
 				-stop up if...

@@ -38,6 +38,7 @@ sf::IntRect Player::getBoundingRect() const
     PlayerLength);
 }
 
+
 void Player::setIsMovingLeft(bool b)
 {
   mIsMovingLeft = b;
@@ -58,6 +59,7 @@ void Player::setIsMovingDown(bool b)
   mIsMovingDown = b;
 }
 
+/*
 void Player::setCanMoveLeft(bool b)
 {
   mCanMoveLeft = b;
@@ -77,8 +79,46 @@ void Player::setCanMoveUp(bool b)
 {
   mCanMoveUp = b;
 }
+*/
 
 void Player::update(sf::Time dt)
+{
+  removeMovementRestrictions();
+  resolveWallCollisions();
+
+  movePlayer(dt);
+}
+
+void Player::drawSprite(sf::RenderTarget& target, sf::RenderStates states) const
+{
+  target.draw(mSprite, states);
+}
+
+void Player::addWallCollisionData(sf::IntRect wallRect)
+{
+  mWallCollisionData.push_back(wallRect);
+}
+
+void Player::removeMovementRestrictions()
+{
+  mCanMoveLeft = mCanMoveRight = mCanMoveDown = mCanMoveUp = true;
+}
+
+void Player::resolveWallCollisions()
+{
+  auto boundingRect = getBoundingRect();
+
+  // For each wall-collision-to-resolve, apply the correct restriction
+  // on the player's movement.
+  for (const auto& wc : mWallCollisionData)
+  {
+    
+  }
+
+  mWallCollisionData.clear();
+}
+
+void Player::movePlayer(sf::Time dt)
 {
   sf::Vector2f movement;
   if (mIsMovingLeft && mCanMoveLeft)
@@ -90,14 +130,4 @@ void Player::update(sf::Time dt)
   if (mIsMovingDown && mCanMoveDown)
     movement.y += PlayerSpeed;
   move(movement * dt.asSeconds());
-}
-
-void Player::drawSprite(sf::RenderTarget& target, sf::RenderStates states) const
-{
-  target.draw(mSprite, states);
-}
-
-void Player::addWallCollisionData(sf::IntRect wallRect)
-{
-  mWallCollisionData.push_back(wallRect);
 }

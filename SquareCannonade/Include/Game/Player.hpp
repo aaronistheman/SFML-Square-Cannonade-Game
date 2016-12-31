@@ -20,16 +20,27 @@ public:
   void setIsMovingUp(bool b);
   void setIsMovingDown(bool b);
 
+  /*
   void setCanMoveLeft(bool b);
   void setCanMoveRight(bool b);
   void setCanMoveDown(bool b);
   void setCanMoveUp(bool b);
+  */
 
-  virtual void update(sf::Time dt);
-  virtual void drawSprite(sf::RenderTarget& target, sf::RenderStates states)
+  void update(sf::Time dt);
+  void drawSprite(sf::RenderTarget& target, sf::RenderStates states)
     const;
 
   void addWallCollisionData(sf::IntRect wallRect);
+
+private: // private methods
+
+  // Removes all restrictions regarding the directions in which the player
+  // can move.
+  void    removeMovementRestrictions();
+
+  void    resolveWallCollisions();
+  void    movePlayer(sf::Time dt);
 
 private:
   static const float PlayerLength;

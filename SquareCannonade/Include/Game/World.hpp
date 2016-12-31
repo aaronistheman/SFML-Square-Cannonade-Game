@@ -78,7 +78,6 @@ private: // Private methods
 
   void handleCollisions();
   void checkCollisionsWithWalls();
-  void resolveCollisionsWithWalls();
 
 private: // Private static variables
 
