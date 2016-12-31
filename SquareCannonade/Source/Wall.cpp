@@ -6,7 +6,7 @@ Wall::Wall(int left, int top, int width, int height)
 {
 }
 
-auto Wall::getBoundingRect() const
+sf::IntRect Wall::getBoundingRect() const
 {
   return mRect;
 }

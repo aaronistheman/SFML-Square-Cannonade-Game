@@ -12,9 +12,10 @@ const float Player::PlayerSpeed = 100.f;
 
 Player::Player()
   : mSprite(sf::RectangleShape(sf::Vector2f(PlayerLength, PlayerLength)))
-  // the four movement booleans are initialized in the constructor's body
+  // the eight movement booleans are initialized in the constructor's body
 {
   mIsMovingDown = mIsMovingLeft = mIsMovingRight = mIsMovingUp = false;
+  mCanMoveLeft = mCanMoveRight = mCanMoveDown = mCanMoveUp = true;
 
   centerOrigin(mSprite);
   mSprite.setFillColor(sf::Color::Blue);
@@ -57,16 +58,36 @@ void Player::setIsMovingDown(bool b)
   mIsMovingDown = b;
 }
 
+void Player::setCanMoveLeft(bool b)
+{
+  mCanMoveLeft = b;
+}
+
+void Player::setCanMoveRight(bool b)
+{
+  mCanMoveRight = b;
+}
+
+void Player::setCanMoveDown(bool b)
+{
+  mCanMoveDown = b;
+}
+
+void Player::setCanMoveUp(bool b)
+{
+  mCanMoveUp = b;
+}
+
 void Player::update(sf::Time dt)
 {
   sf::Vector2f movement;
-  if (mIsMovingLeft)
+  if (mIsMovingLeft && mCanMoveLeft)
     movement.x -= PlayerSpeed;
-  if (mIsMovingRight)
+  if (mIsMovingRight && mCanMoveRight)
     movement.x += PlayerSpeed;
-  if (mIsMovingUp)
+  if (mIsMovingUp && mCanMoveUp)
     movement.y -= PlayerSpeed;
-  if (mIsMovingDown)
+  if (mIsMovingDown && mCanMoveDown)
     movement.y += PlayerSpeed;
   move(movement * dt.asSeconds());
 }

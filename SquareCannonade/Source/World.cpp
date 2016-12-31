@@ -350,9 +350,8 @@ void World::updateEntities(sf::Time dt)
 
 void World::handleCollisions()
 {
-  // check if player is colliding with wall
   checkCollisionsWithWalls();
-
+  resolveCollisionsWithWalls();
 } // handleCollisions()
 
 void World::checkCollisionsWithWalls()
@@ -365,4 +364,10 @@ void World::checkCollisionsWithWalls()
     if (wall->entityCollidesWithWall(mPlayer.getBoundingRect()))
       mPlayer.addWallCollisionData(wall->getBoundingRect());
   }
+}
+
+void World::resolveCollisionsWithWalls()
+{
+  // for now, cancel player's rightward movement
+  mPlayer.setCanMoveRight(false);
 }

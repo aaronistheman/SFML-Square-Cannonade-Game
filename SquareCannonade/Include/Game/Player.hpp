@@ -20,6 +20,11 @@ public:
   void setIsMovingUp(bool b);
   void setIsMovingDown(bool b);
 
+  void setCanMoveLeft(bool b);
+  void setCanMoveRight(bool b);
+  void setCanMoveDown(bool b);
+  void setCanMoveUp(bool b);
+
   virtual void update(sf::Time dt);
   virtual void drawSprite(sf::RenderTarget& target, sf::RenderStates states)
     const;
@@ -36,6 +41,11 @@ private:
   bool mIsMovingRight;
   bool mIsMovingDown;
   bool mIsMovingUp;
+
+  bool mCanMoveLeft;
+  bool mCanMoveRight;
+  bool mCanMoveDown;
+  bool mCanMoveUp;
 
   // Contains data on unresolved collisions with walls.
   std::vector<sf::IntRect>   mWallCollisionData;
