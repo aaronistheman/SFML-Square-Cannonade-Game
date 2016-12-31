@@ -44,31 +44,25 @@ void setupAddWallsToTileMapTests(int caseNum,
   switch (caseNum)
   {
   case 1:
-    wallData.push_back(sf::IntRect(1 * tileLength,
-      1 * tileLength, tileLength, tileLength));
+    wallData.push_back(sf::IntRect(1, 1, 1, 1));
     break;
 
   case 2: // a tall, vertical wall with a small wall on each side
     // tall vertical wall
-    wallData.push_back(sf::IntRect(2 * tileLength,
-      1 * tileLength, tileLength, 3 * tileLength));
+    wallData.push_back(sf::IntRect(2, 1, 1, 3));
 
     // two small walls
-    wallData.push_back(sf::IntRect(1 * tileLength,
-      2 * tileLength, tileLength, tileLength));
-    wallData.push_back(sf::IntRect(3 * tileLength,
-      2 * tileLength, tileLength, tileLength));
+    wallData.push_back(sf::IntRect(1, 2, 1, 1));
+    wallData.push_back(sf::IntRect(3, 2, 1, 1));
 
     break;
 
   case 3: // two intersecting big walls
     // vertical wall
-    wallData.push_back(sf::IntRect(2 * tileLength,
-      1 * tileLength, tileLength, 3 * tileLength));
+    wallData.push_back(sf::IntRect(2, 1, 1, 3));
 
     // horizontal wall
-    wallData.push_back(sf::IntRect(1 * tileLength,
-      2 * tileLength, 3 * tileLength, 1 * tileLength));
+    wallData.push_back(sf::IntRect(1, 2, 3, 1));
     break;
   }
   assert(wallData.size() > 0);

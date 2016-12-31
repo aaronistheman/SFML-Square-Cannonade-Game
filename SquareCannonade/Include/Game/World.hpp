@@ -54,6 +54,9 @@ public: // Public static methods
   /**
    * Fails if at least one of the following occur:
    * 1) At least one wall doesn't align with tile boundaries.
+   *
+   * wallData is a vector of sf::IntRect instances, where the sf::IntRect
+   * represents the location of the wall in units of NUMBER OF TILES.
    */
   static void addWallsToTileMap(std::string &tileMap, int numTilesPerRow,
     const std::vector<sf::IntRect> &wallData, int tileLength);

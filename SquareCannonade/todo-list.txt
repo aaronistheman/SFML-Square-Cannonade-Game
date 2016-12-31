@@ -2,20 +2,10 @@ Current:
 --------
 
 -implement collision detection (just for the player)
-	-IMPLEMENT #3
-		-can I "deflate" the wall data so it isn't wastefully multiplied by tile
-		length?
 	-just do what I did in the Tanks game: if player intersects a wall,
 	prevent him from moving further into it
-	-ideas regarding implementation:
-		-1) check each wall tile, compare with player
-			-PROBLEM regarding efficiency: would I be checking each wall tile?
-			or should I implement each wall's being a tile set?
-		-2) perhaps try to map the player to the graph, and then we know
-		there's a wall if there wasn't a vertex found (see
-		PathfindingGraph::setSearchStartOrEnd() for inspiration)
-			-doesn't this still require checking each wall tile, in worst case?
-		-***3) somehow group wall tiles into wall tile sets to reduce the number
+	-regarding implementation:
+		-somehow group wall tiles into wall tile sets to reduce the number
 		of checks
 			-PROBLEM: how to do this grouping? would I have to change how
 			I do the tile mapping? uh-oh

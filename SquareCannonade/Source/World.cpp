@@ -223,32 +223,19 @@ void World::addWallsToTileMap(std::string & tileMap, int numTilesPerRow,
   const std::vector<sf::IntRect> &wallData, int tileLength)
 {
   for (const auto& wd : wallData)
-  {
-    // Assert that the wall can be perfectly "snapped" onto the tile map
-    assert ((wd.left % tileLength == 0)
-      && (wd.top % tileLength == 0)
-      && (wd.width % tileLength == 0)
-      && (wd.height % tileLength == 0));
-
-    const int widthOfWallInTiles = wd.width / tileLength;
-    const int heightOfWallInTiles = wd.height / tileLength;
-
-    // To help locate initial spot of tile map string to edit
-    const int initialColIndex = wd.left / tileLength;
-    const int initialRowIndex = wd.top / tileLength;
-    
+  {    
     // Map the wall data to appropriate tile(s), editing the
     // tile map accordingly. Since the wall is rectangular,
     // we can traverse it as if it were a 2d array.
-    for (int rowIndexOffset = 0; rowIndexOffset < heightOfWallInTiles;
+    for (int rowIndexOffset = 0; rowIndexOffset < wd.height;
       ++rowIndexOffset)
     {
-      for (int colIndexOffset = 0; colIndexOffset < widthOfWallInTiles;
+      for (int colIndexOffset = 0; colIndexOffset < wd.width;
         ++colIndexOffset)
       {
         // Determine which part of the tile map to edit
-        int effectiveRowIndex = initialRowIndex + rowIndexOffset;
-        int effectiveColIndex = initialColIndex + colIndexOffset;
+        int effectiveRowIndex = wd.top + rowIndexOffset;
+        int effectiveColIndex = wd.left + colIndexOffset;
         int effectiveIndexToEdit =
           (effectiveRowIndex * numTilesPerRow) + effectiveColIndex;
 
@@ -383,10 +370,8 @@ void World::createJunkWallTiles()
   tileMap += "0000000000000000000000000000000000000000";
 
   std::vector<sf::IntRect> wallData;
-  wallData.push_back(sf::IntRect(5 * mTileLength, 3 * mTileLength,
-    2 * mTileLength, 4 * mTileLength));
-  wallData.push_back(sf::IntRect(20 * mTileLength, 2 * mTileLength,
-    1 * mTileLength, 16 * mTileLength));
+  wallData.push_back(sf::IntRect(5, 3, 2, 4));
+  wallData.push_back(sf::IntRect(20, 2, 1, 16));
 
   World::addWallsToTileMap(tileMap, WorldWidthInTiles, wallData, mTileLength);
 
