@@ -12,6 +12,7 @@ public:
   Player();
 
   float getLength() const;
+  sf::IntRect   getBoundingRect() const;
 
   // The parameter name was pretty hard to come up with, admittedly :-)
   void setIsMovingLeft(bool b);

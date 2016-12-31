@@ -76,6 +76,9 @@ private: // Private methods
   void updateEnemies(sf::Time dt);
   void updateEntities(sf::Time dt);
 
+  void handleCollisions();
+  void checkCollisionsWithWalls();
+
 private: // Private static variables
 
   static const int WorldWidthInTiles;

@@ -26,6 +26,17 @@ float Player::getLength() const
   return mSprite.getSize().x;
 }
 
+sf::IntRect Player::getBoundingRect() const
+{
+  // Position is centered because centerOrigin() is called in constructor
+  sf::Vector2f centeredPosition = getPosition();
+
+  return sf::IntRect(centeredPosition.x - PlayerLength / 2,
+    centeredPosition.y - PlayerLength / 2,
+    PlayerLength,
+    PlayerLength);
+}
+
 void Player::setIsMovingLeft(bool b)
 {
   mIsMovingLeft = b;

@@ -143,6 +143,7 @@
     <ClCompile Include="Source\TileSet.cpp" />
     <ClCompile Include="Source\TitleState.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
+    <ClCompile Include="Source\Wall.cpp" />
     <ClCompile Include="Source\WallTile.cpp" />
     <ClCompile Include="Source\World.cpp" />
   </ItemGroup>
@@ -154,6 +155,7 @@
     <ClInclude Include="Include\Game\PathfindingGraph.hpp" />
     <ClInclude Include="Include\Game\PathfindingGraphVertex.hpp" />
     <ClInclude Include="Include\Game\Player.hpp" />
+    <ClInclude Include="Include\Game\Wall.hpp" />
     <ClInclude Include="Include\Game\World.hpp" />
     <ClInclude Include="Include\States\GameState.hpp" />
     <ClInclude Include="Include\States\State.hpp" />

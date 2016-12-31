@@ -108,7 +108,7 @@ void World::draw()
 
 void World::update(sf::Time dt)
 {
-  // handle collisions
+  handleCollisions();
 
   updateEntities(dt);
   // mBackgroundSprite.setPosition(mPlayer.getPosition());
@@ -412,4 +412,28 @@ void World::updateEntities(sf::Time dt)
 {
   mPlayer.update(dt);
   updateEnemies(dt);
+}
+
+void World::handleCollisions()
+{
+  // check if player is colliding with wall
+  checkCollisionsWithWalls();
+
+} // handleCollisions()
+
+void World::checkCollisionsWithWalls()
+{
+  bool isCollision = false;
+
+  // For each wall, check if player collides with it
+  for (const auto& wall : mWalls)
+  {
+    if (wall->entityCollidesWithWall(mPlayer.getBoundingRect()))
+      isCollision = true;
+  }
+
+  if (isCollision)
+    std::cout << "Collision\n";
+  else
+    std::cout << "No collision\n";
 }
