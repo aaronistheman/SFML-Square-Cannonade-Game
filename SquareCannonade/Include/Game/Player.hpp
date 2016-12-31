@@ -24,6 +24,8 @@ public:
   virtual void drawSprite(sf::RenderTarget& target, sf::RenderStates states)
     const;
 
+  void addWallCollisionData(sf::IntRect wallRect);
+
 private:
   static const float PlayerLength;
   static const float PlayerSpeed;
@@ -34,4 +36,7 @@ private:
   bool mIsMovingRight;
   bool mIsMovingDown;
   bool mIsMovingUp;
+
+  // Contains data on unresolved collisions with walls.
+  std::vector<sf::IntRect>   mWallCollisionData;
 };

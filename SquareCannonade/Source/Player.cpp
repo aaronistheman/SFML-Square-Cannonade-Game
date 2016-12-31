@@ -75,3 +75,8 @@ void Player::drawSprite(sf::RenderTarget& target, sf::RenderStates states) const
 {
   target.draw(mSprite, states);
 }
+
+void Player::addWallCollisionData(sf::IntRect wallRect)
+{
+  mWallCollisionData.push_back(wallRect);
+}

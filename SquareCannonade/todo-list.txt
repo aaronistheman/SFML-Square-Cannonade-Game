@@ -6,6 +6,11 @@ Current:
 		-if player intersects a wall, prevent him from moving further into it
 			-be able to detect which movement of the player to prevent,
 			and prevent it
+				-make a method for this
+				-stop left movement if appropriate
+				-stop right movement if appropriate
+				-stop up if...
+				-stop down if...
 	-possible safeguards
 		-when updating tile map from wall data, check:
 			-no collision between wall and any entity (i.e. coin/player start)
