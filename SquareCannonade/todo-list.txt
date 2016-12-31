@@ -3,8 +3,8 @@ Current:
 
 -implement collision detection (just for the player)
 	-IMPLEMENT #3
-		-put some junk wall data in World class and generate tile map from it;
-		should be able to visually see that the method worked
+		-can I "deflate" the wall data so it isn't wastefully multiplied by tile
+		length?
 	-just do what I did in the Tanks game: if player intersects a wall,
 	prevent him from moving further into it
 	-ideas regarding implementation:
