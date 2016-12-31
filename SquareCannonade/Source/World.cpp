@@ -218,6 +218,14 @@ void World::createGrid(std::vector<Tile::Ptr> &tileGrid,
   } // for each row of the grid
 } // createGrid()
 
+
+void World::addWallsToTileMap(std::string & tileMap,
+  const std::vector<sf::IntRect> &wallData, int tileLength)
+{
+  return;
+} // addWallsToTileMap()
+
+
 void World::loadTextures()
 {
   mTextures.load(Textures::Background, "Media/background.jpg");

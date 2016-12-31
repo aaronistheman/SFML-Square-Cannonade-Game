@@ -139,13 +139,13 @@
     <ClCompile Include="..\SquareCannonade\Source\World.cpp" />
     <ClCompile Include="Source\GeneralHelpersForTests.cpp" />
     <ClCompile Include="Source\Setup.cpp" />
+    <ClCompile Include="Source\TestAddWallsToTileMap.cpp" />
     <ClCompile Include="Source\TestHeuristicHorizontalDistance.cpp" />
     <ClCompile Include="Source\TestPathfindingSetup.cpp" />
     <ClCompile Include="Source\TestPathfindingSuccess.cpp" />
     <ClCompile Include="Source\TestPathfindingGraphCreation.cpp" />
     <ClCompile Include="Source\TestTileSet.cpp" />
     <ClCompile Include="Source\TestWorldGridCreation.cpp" />
-    <ClCompile Include="TestPathfindingMultipleSuccesses.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Catch\Catch.hpp" />

@@ -50,6 +50,16 @@ public: // Public static methods
     const std::string &tileMap,
     std::vector<WallTile*> &wallTiles);
 
+
+  /**
+   * Throws exception if at least one of the following occur:
+   * 1) At least one wall doesn't align with tile boundaries.
+   * 2) At least one wall overlaps with another wall.
+   */
+  static void addWallsToTileMap(std::string &tileMap,
+    const std::vector<sf::IntRect> &wallData, int tileLength);
+
+
 private: // Private methods
   void loadTextures();
 

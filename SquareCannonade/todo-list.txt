@@ -3,6 +3,9 @@ Current:
 
 -implement collision detection (just for the player)
 	-IMPLEMENT #3
+		-implement addWallsToTileMap() (10 minutes)
+		-put some junk wall data in World class and generate tile map from it;
+		should be able to visually see that the method worked (5 minutes)
 	-just do what I did in the Tanks game: if player intersects a wall,
 	prevent him from moving further into it
 	-ideas regarding implementation:
@@ -29,6 +32,7 @@ Current:
 				in World class and generate the tile map from this.
 				Then, after tile map is generated, make Walls (tile sets)
 				based on the wall data.
+		-4) #1, but with a quadtree
 
 	-after implementation
 		-this will resolve the bug of there sometimes being no search end
