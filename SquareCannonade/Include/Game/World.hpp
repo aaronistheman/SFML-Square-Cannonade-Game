@@ -5,6 +5,7 @@
 #include <Game/Player.hpp>
 #include <Game/Coin.hpp>
 #include <Game/Hunter.hpp>
+#include <Game/Wall.hpp>
 #include <Tile/Tile.hpp>
 #include <Tile/WallTile.hpp>
 
@@ -50,13 +51,35 @@ public: // Public static methods
     const std::string &tileMap,
     std::vector<WallTile*> &wallTiles);
 
-private:
+
+  /**
+   * Fails if at least one of the following occur:
+   * 1) At least one wall doesn't align with tile boundaries.
+   *
+   * wallData is a vector of sf::IntRect instances, where the sf::IntRect
+   * represents the location of the wall in units of NUMBER OF TILES.
+   */
+  static void addWallsToTileMap(std::string &tileMap, int numTilesPerRow,
+    const std::vector<sf::IntRect> &wallData, int tileLength);
+
+
+private: // Private methods
   void loadTextures();
+
+  // Each sf::IntRect in wallData represents the data of a
+  // respective wall in UNITS OF NUMBER OF TILES.
+  void createWalls(const std::vector<sf::IntRect> &wallData);
 
   // For testing
   void createJunkWallTiles();
 
-private:
+  void updateEnemies(sf::Time dt);
+  void updateEntities(sf::Time dt);
+
+  void handleCollisions();
+  void checkCollisionsWithWalls();
+
+private: // Private static variables
 
   static const int WorldWidthInTiles;
   static const int WorldHeightInTiles;
@@ -68,7 +91,7 @@ private:
   static const sf::Time TimePerPathfindingUpdate;
 
 
-private:
+private: // Private member variables
   sf::RenderWindow&   mWindow;
   bool mIsPaused;
 
@@ -84,6 +107,7 @@ private:
   Coin mCoin2;
 
   std::vector<std::unique_ptr<Hunter>> mEnemies;
+  std::vector<std::unique_ptr<Wall>> mWalls;
 
   int mTileLength;
   std::vector<Tile::Ptr> mTileGrid;

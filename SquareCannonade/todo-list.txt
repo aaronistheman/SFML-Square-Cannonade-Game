@@ -1,12 +1,14 @@
 Current:
 --------
 
--implement walls and collision detection
-	-this will resolve the bug of there sometimes being no search end
-	points, which occurs when the player is in walls, since walls
-	don't have corresponding graph vertices
-	-if player can't fit easily between two walls, decrease player's size
-	(also perhaps consider this for enemies too)
+-reorganize todo list (focus on the essentials, due to limited time)
+
+-before dealing with A*, tidy up the class structure, based on notes way below
+
+-can I eliminate wall tiles? They seem to serve no purpose
+	-would have to switch to drawing walls by using the Wall class, rather
+	than the WallTile class
+
 -speed up my A* algorithm implementation
 	-find some way to measure the speed of the algorithm?
 		-use an SFML timing class
@@ -56,6 +58,8 @@ to make the project more organized
 	-e.g. folder for Enemies, because it took me a while to see that Hunters
 	had currently been the only enemy
 -deal with compiler warnings
+-when updating tile map from wall data, check:
+	-no collision between wall and any entity (i.e. coin/player start)
 
 -set up good tile map for World?
 -(not necessarily complete) basic classes for Cannon, EnemySquare, etc.

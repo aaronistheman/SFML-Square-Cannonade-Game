@@ -90,7 +90,7 @@
     <ClCompile Include="Source\TestHeuristicHorizontalDistance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TestPathfindingMultipleSuccesses.cpp">
+    <ClCompile Include="Source\TestAddWallsToTileMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

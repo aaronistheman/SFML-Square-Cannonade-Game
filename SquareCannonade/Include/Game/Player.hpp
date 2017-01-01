@@ -12,6 +12,7 @@ public:
   Player();
 
   float getLength() const;
+  sf::IntRect   getBoundingRect() const;
 
   // The parameter name was pretty hard to come up with, admittedly :-)
   void setIsMovingLeft(bool b);
@@ -19,9 +20,27 @@ public:
   void setIsMovingUp(bool b);
   void setIsMovingDown(bool b);
 
-  virtual void update(sf::Time dt);
-  virtual void drawSprite(sf::RenderTarget& target, sf::RenderStates states)
+  /*
+  void setCanMoveLeft(bool b);
+  void setCanMoveRight(bool b);
+  void setCanMoveDown(bool b);
+  void setCanMoveUp(bool b);
+  */
+
+  void update(sf::Time dt);
+  void drawSprite(sf::RenderTarget& target, sf::RenderStates states)
     const;
+
+  void addWallIntersectionData(sf::IntRect intersectionRect);
+
+private: // private methods
+
+  // Removes all restrictions regarding the directions in which the player
+  // can move.
+  void    removeMovementRestrictions();
+
+  void    resolveWallCollisions();
+  void    movePlayer(sf::Time dt);
 
 private:
   static const float PlayerLength;
@@ -33,4 +52,12 @@ private:
   bool mIsMovingRight;
   bool mIsMovingDown;
   bool mIsMovingUp;
+
+  bool mCanMoveLeft;
+  bool mCanMoveRight;
+  bool mCanMoveDown;
+  bool mCanMoveUp;
+
+  // Contains data on unresolved collisions with walls.
+  std::vector<sf::IntRect>   mIntersectionsWithWalls;
 };

@@ -2,6 +2,7 @@
 #include <Utility/Utility.hpp>
 #include <Tile/TileMapConstants.hpp>
 #include <Tile/DefaultTile.hpp>
+#include <Game/Wall.hpp>
 
 #include <SFML/Window/Event.hpp>
 
@@ -108,24 +109,10 @@ void World::draw()
 
 void World::update(sf::Time dt)
 {
-  mPlayer.update(dt);
+  handleCollisions();
 
-  mBackgroundSprite.setPosition(mPlayer.getPosition());
-
-  // Determine whether to reset enemies' paths
-  mTimeSinceLastPathfinding += dt;
-  bool shouldResetPaths = false;
-  if (mTimeSinceLastPathfinding >= TimePerPathfindingUpdate)
-  {
-    mTimeSinceLastPathfinding -= TimePerPathfindingUpdate;
-    shouldResetPaths = true;
-  }
-
-  updateEnemiesPathfinding(shouldResetPaths);
-
-  // Update each enemy
-  for (auto &enemy : mEnemies)
-    enemy->update(dt);
+  updateEntities(dt);
+  // mBackgroundSprite.setPosition(mPlayer.getPosition());
 }
 
 void World::updateEnemiesPathfinding(bool resetPaths)
@@ -232,9 +219,50 @@ void World::createGrid(std::vector<Tile::Ptr> &tileGrid,
   } // for each row of the grid
 } // createGrid()
 
+
+void World::addWallsToTileMap(std::string & tileMap, int numTilesPerRow,
+  const std::vector<sf::IntRect> &wallData, int tileLength)
+{
+  for (const auto& wd : wallData)
+  {    
+    // Map the wall data to appropriate tile(s), editing the
+    // tile map accordingly. Since the wall is rectangular,
+    // we can traverse it as if it were a 2d array.
+    for (int rowIndexOffset = 0; rowIndexOffset < wd.height;
+      ++rowIndexOffset)
+    {
+      for (int colIndexOffset = 0; colIndexOffset < wd.width;
+        ++colIndexOffset)
+      {
+        // Determine which part of the tile map to edit
+        int effectiveRowIndex = wd.top + rowIndexOffset;
+        int effectiveColIndex = wd.left + colIndexOffset;
+        int effectiveIndexToEdit =
+          (effectiveRowIndex * numTilesPerRow) + effectiveColIndex;
+
+        // Edit the tile map
+        tileMap.at(effectiveIndexToEdit) = 'w';
+      } // for each col
+    } // for each row
+  } // for each wall data
+} // addWallsToTileMap()
+
+
 void World::loadTextures()
 {
   mTextures.load(Textures::Background, "Media/background.jpg");
+}
+
+void World::createWalls(const std::vector<sf::IntRect> &wallData)
+{
+  // For each wall data, create a corresponding wall object
+  for (const auto& wd : wallData)
+  {
+    mWalls.push_back(std::unique_ptr<Wall>(
+      new Wall(wd.left * mTileLength,
+        wd.top * mTileLength, wd.width * mTileLength,
+        wd.height * mTileLength)));
+  }
 }
 
 void World::createJunkWallTiles()
@@ -243,73 +271,6 @@ void World::createJunkWallTiles()
   auto area = sf::IntRect(0, 0, mWindow.getSize().x, mWindow.getSize().y);
 
   /*
-  std::string tileMap = "";
-  tileMap += "0000000000000000000000000000000000000000";
-  tileMap += "0000000000000000000000000000000000000000";
-  tileMap += "0000000000000000000000000000000000000000";
-  tileMap += "0000000000000000000000000000000000000000";
-  tileMap += "0000000000000000000000000000000000000000";
-  tileMap += "0000000000000000000000000000000000000000";
-  tileMap += "0000000000000000000000000000000000000000";
-  tileMap += "0000000000000000000000000000000000000000";
-  tileMap += "0000000000000000000000000000000000000000";
-  tileMap += "0000000000000000000000000000000000000000";
-  tileMap += "0000000000000000000000000000000000000000";
-  tileMap += "0000000000000000000000000000000000000000";
-  tileMap += "0000000000000000000000000000000000000000";
-  tileMap += "0000000000000000000000000000000000000000";
-  tileMap += "0000000000000000000000000000000000000000";
-  tileMap += "0000000000000000000000000000000000000000";
-  tileMap += "0000000000000000000000000000000000000000";
-  tileMap += "0000000000000000000000000000000000000000";
-  tileMap += "0000000000000000000000000000000000000000";
-  tileMap += "0000000000000000000000000000000000000000";
-
-  std::string tileMap = "";
-  tileMap += "00000000000000000000w0000000000000000000";
-  tileMap += "0000000000000000000w0w000000000000000000";
-  tileMap += "000000000000000000w000w00000000000000000";
-  tileMap += "00000000000000000w00000w0000000000000000";
-  tileMap += "0000000000000000w0000000w000000000000000";
-  tileMap += "000000000000000w000000000w00000000000000";
-  tileMap += "00000000000000w00000000000w0000000000000";
-  tileMap += "0000000000000w0000000000000w000000000000";
-  tileMap += "000000000000w000000000000000w00000000000";
-  tileMap += "00000000000w00000000000000000w0000000000";
-  tileMap += "0000000000w0000000000000000000w000000000";
-  tileMap += "000000000w000000000000000000000w00000000";
-  tileMap += "00000000w00000000000000000000000w0000000";
-  tileMap += "0000000w0000000000000000000000000w000000";
-  tileMap += "0000000000000000000000000000000000w00000";
-  tileMap += "00000000000000000000000000000000000w0000";
-  tileMap += "000000000000000000000000000000000000w000";
-  tileMap += "0000000000000000000000000000000000000w00";
-  tileMap += "00000000000000000000000000000000000000w0";
-  tileMap += "000000000000000000000000000000000000000w";
-
-  std::string tileMap = "";
-  tileMap += "0000000000000000000000000000000000000000";
-  tileMap += "0000000000000000000000000000000000000000";
-  tileMap += "0000000000000000000000000000000000000000";
-  tileMap += "0000000000000000000000000000000000000000";
-  tileMap += "0000000000000000000w00000000000000000000";
-  tileMap += "0000000000000000000w00000000000000000000";
-  tileMap += "0000000000000000000w00000000000000000000";
-  tileMap += "0000000000000000000w00000000000000000000";
-  tileMap += "0000000000000000000w00000000000000000000";
-  tileMap += "0000000000000000000w00000000000000000000";
-  tileMap += "0000000000000000000w00000000000000000000";
-  tileMap += "0000000000000000000w00000000000000000000";
-  tileMap += "0000000000000000000w00000000000000000000";
-  tileMap += "0000000000000000000w00000000000000000000";
-  tileMap += "0000000000000000000w00000000000000000000";
-  tileMap += "0000000000000000000w00000000000000000000";
-  tileMap += "0000000000000000000000000000000000000000";
-  tileMap += "0000000000000000000000000000000000000000";
-  tileMap += "0000000000000000000000000000000000000000";
-  tileMap += "0000000000000000000000000000000000000000";
-  */
-
   std::string tileMap = "";
   tileMap += "0000000000000000000000000000000000000000";
   tileMap += "0000000000000000000000000000000000000000";
@@ -331,6 +292,79 @@ void World::createJunkWallTiles()
   tileMap += "0000000000000000000000000000000000000000";
   tileMap += "0000000000000000000000000000000000000000";
   tileMap += "0000000000000000000000000000000000000000";
+  */
 
+  std::string tileMap = "";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+  tileMap += "0000000000000000000000000000000000000000";
+
+  std::vector<sf::IntRect> wallData;
+  wallData.push_back(sf::IntRect(5, 3, 2, 4));
+  wallData.push_back(sf::IntRect(20, 2, 1, 16));
+  wallData.push_back(sf::IntRect(18, 2, 1, 7));
+  createWalls(wallData);
+
+  World::addWallsToTileMap(tileMap, WorldWidthInTiles, wallData, mTileLength);
   World::createGrid(mTileGrid, area, mTileLength, tileMap, mWallTiles);
+}
+
+void World::updateEnemies(sf::Time dt)
+{
+  // Determine whether to reset enemies' paths
+  mTimeSinceLastPathfinding += dt;
+  bool shouldResetPaths = false;
+  if (mTimeSinceLastPathfinding >= TimePerPathfindingUpdate)
+  {
+    mTimeSinceLastPathfinding -= TimePerPathfindingUpdate;
+    shouldResetPaths = true;
+  }
+
+  updateEnemiesPathfinding(shouldResetPaths);
+
+  // Update each enemy individually
+  for (auto &enemy : mEnemies)
+    enemy->update(dt);
+}
+
+void World::updateEntities(sf::Time dt)
+{
+  mPlayer.update(dt);
+  updateEnemies(dt);
+}
+
+void World::handleCollisions()
+{
+  checkCollisionsWithWalls();
+} // handleCollisions()
+
+void World::checkCollisionsWithWalls()
+{
+  sf::IntRect intersectionRect;
+
+  // For each wall, check if player collides with it, and if so,
+  // store related data.
+  for (const auto& wall : mWalls)
+  {
+    if (wall->entityCollidesWithWall(
+      mPlayer.getBoundingRect(), intersectionRect))
+      mPlayer.addWallIntersectionData(intersectionRect);
+  }
 }
