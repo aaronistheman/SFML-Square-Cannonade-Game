@@ -1,26 +1,8 @@
 Current:
 --------
 
--implement collision detection (just for the player and walls)
-	-collision detection; ideas on how:
-		-1) if player intersects a wall, prevent him from moving further into it
-			-be able to detect which movement of the player to prevent,
-			and prevent it
-				-stop left movement if appropriate
-				-stop right movement if appropriate
-				-stop up if...
-				-stop down if...
-		-2) instead, check if the player's movement would cause him to
-		enter a wall, and stop the movement if so
-	-possible safeguards
-		-when updating tile map from wall data, check:
-			-no collision between wall and any entity (i.e. coin/player start)
-	-after implementation
-		-this will resolve the bug of there sometimes being no search end
-		points, which occurs when the player is in walls, since walls
-		don't have corresponding graph vertices
-		-if player can't fit easily between two walls, decrease player's size
-		(also perhaps consider this for enemies too)
+-reorganize todo list (focus on the essentials, due to limited time)
+
 -before dealing with A*, tidy up the class structure, based on notes way below
 
 -can I eliminate wall tiles? They seem to serve no purpose
@@ -76,6 +58,8 @@ to make the project more organized
 	-e.g. folder for Enemies, because it took me a while to see that Hunters
 	had currently been the only enemy
 -deal with compiler warnings
+-when updating tile map from wall data, check:
+	-no collision between wall and any entity (i.e. coin/player start)
 
 -set up good tile map for World?
 -(not necessarily complete) basic classes for Cannon, EnemySquare, etc.

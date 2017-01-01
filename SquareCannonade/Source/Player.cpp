@@ -105,25 +105,55 @@ void Player::removeMovementRestrictions()
   mCanMoveLeft = mCanMoveRight = mCanMoveDown = mCanMoveUp = true;
 }
 
-#include <iostream>
 void Player::resolveWallCollisions()
 {
   auto playerRect = getBoundingRect();
 
   // For each wall-collision-to-resolve, apply the correct restriction
   // on the player's movement.
-
-  std::cout << mIntersectionsWithWalls.size() << '\n';
-  mIntersectionsWithWalls.clear();
-  return;
-  for (const auto& wc : mIntersectionsWithWalls)
+  for (const auto& intersection : mIntersectionsWithWalls)
   {
     /**
      * The following code is based on code from my Tanks game from just
      * over two years ago.
      */
 
-  }
+    // If all of the following hold:
+    // 1) player's bottom is south of intersection's top
+    // 2) player's top is north of intersection's bottom
+    // 3) intersection rectangle is taller than wide
+    if ((playerRect.top + playerRect.height) > intersection.top
+      && playerRect.top < (intersection.top + intersection.height)
+      && intersection.height > intersection.width)
+    {
+      // if the player's left side "dictates" the intersection
+      if (playerRect.left == intersection.left)
+        mCanMoveLeft = false;
+
+      // if the player's right side "dictates" the intersection
+      if ((playerRect.left + playerRect.width)
+        == (intersection.left + intersection.width))
+        mCanMoveRight = false;
+    }
+
+    // If all of the following hold:
+    // 1) player's right is to right of intersection's left
+    // 2) player's left is to left of intersection's right
+    // 3) intersection rectangle is wider than tall
+    if ((playerRect.left + playerRect.width) > intersection.left
+      && playerRect.left < (intersection.left + intersection.width)
+      && intersection.width > intersection.height)
+    {
+      // if the player's top side "dictates" the intersection
+      if (playerRect.top == intersection.top)
+        mCanMoveUp = false;
+
+      // if the player's bottom side "dictates" the intersection
+      if ((playerRect.top + playerRect.height)
+        == (intersection.top + intersection.height))
+        mCanMoveDown = false;
+    }
+  } // for each intersection
 
   mIntersectionsWithWalls.clear();
 }

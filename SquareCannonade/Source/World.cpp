@@ -319,6 +319,7 @@ void World::createJunkWallTiles()
   std::vector<sf::IntRect> wallData;
   wallData.push_back(sf::IntRect(5, 3, 2, 4));
   wallData.push_back(sf::IntRect(20, 2, 1, 16));
+  wallData.push_back(sf::IntRect(18, 2, 1, 7));
   createWalls(wallData);
 
   World::addWallsToTileMap(tileMap, WorldWidthInTiles, wallData, mTileLength);
